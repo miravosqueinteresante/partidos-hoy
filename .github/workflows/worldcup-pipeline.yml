@@ -34,12 +34,12 @@ jobs:
           import pandas as pd
           from src.models.elo_predictor import EloPredictor
 
-          with open('data/fixtures_wc2026.json') as f:
+          with open('data/fixtures_wc2026.json', encoding='utf-8') as f:
               fixtures = json.load(f)
           df = pd.DataFrame(fixtures)
           predictor = EloPredictor('data/team_ratings.json')
           output = predictor.generate(df)
-          with open('predictions/latest.json', 'w') as f:
+          with open('predictions/latest.json', 'w', encoding='utf-8') as f:
               f.write(output)
           parsed = json.loads(output)
           print(f'World Cup predictions generated: {len(parsed[\"matches\"])} matches')
