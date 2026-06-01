@@ -1,9 +1,10 @@
 import json
 import hashlib
-import math
 import os
+import re
+import unicodedata
 from datetime import datetime, timezone
-from typing import Dict, List, Optional
+from typing import Dict, Optional
 
 import pandas as pd
 
@@ -13,11 +14,18 @@ class EloPredictor:
         self.home_advantage = 100
         self.ratings: Dict[str, float] = {}
         if ratings_path and os.path.exists(ratings_path):
-            with open(ratings_path) as f:
+            with open(ratings_path, encoding="utf-8") as f:
                 raw = json.load(f)
             for team, info in raw.items():
                 self.ratings[team] = info.get("elo", 1500)
         self._load_fallback()
+
+    def _normalize(self, name: str) -> str:
+        if not name:
+            return ""
+        nfkd = unicodedata.normalize("NFKD", name)
+        ascii_text = nfkd.encode("ascii", "ignore").decode("ascii")
+        return ascii_text
 
     def _load_fallback(self):
         if not self.ratings:
@@ -38,7 +46,16 @@ class EloPredictor:
             }
 
     def get_rating(self, team: str) -> float:
-        return self.ratings.get(team, 1500.0)
+        if not team:
+            return 0.0
+        rating = self.ratings.get(team)
+        if rating is not None:
+            return rating
+        normalized = self._normalize(team)
+        for key, val in self.ratings.items():
+            if self._normalize(key) == normalized:
+                return val
+        return 1500.0
 
     def expected_score(self, rating_a: float, rating_b: float) -> float:
         diff = rating_a - rating_b + self.home_advantage
@@ -70,26 +87,39 @@ class EloPredictor:
     def generate(self, upcoming_matches: pd.DataFrame) -> str:
         matches_list = []
         for _, match in upcoming_matches.iterrows():
+            home = match["home_team"]
+            away = match["away_team"]
+            if not home or not away:
+                matches_list.append({
+                    "id": hashlib.md5(f"tbd-{match.get('date', '')}".encode()).hexdigest()[:8],
+                    "home": None,
+                    "away": None,
+                    "league": match.get("league", ""),
+                    "date": str(match.get("date", "")),
+                    "stage": match.get("stage", ""),
+                    "status": "TBD",
+                })
+                continue
             match_id = hashlib.md5(
-                f"{match['home_team']}-{match['away_team']}-{match.get('date', '')}".encode()
+                f"{home}-{away}-{match.get('date', '')}".encode()
             ).hexdigest()[:8]
-            probs = self.predict_proba(match["home_team"], match["away_team"])
+            probs = self.predict_proba(home, away)
             home_xg = probs["home"] * 2.5 + probs["draw"] * 1.0
             away_xg = probs["away"] * 2.5 + probs["draw"] * 1.0
-            entries = {
+            matches_list.append({
                 "id": match_id,
-                "home": match["home_team"],
-                "away": match["away_team"],
+                "home": home,
+                "away": away,
                 "league": match.get("league", ""),
                 "date": str(match.get("date", "")),
+                "stage": match.get("stage", ""),
                 "probabilities": probs,
                 "expected_goals": {
                     "home": round(home_xg, 2),
                     "away": round(away_xg, 2),
                 },
                 "model": "elo",
-            }
-            matches_list.append(entries)
+            })
         output = {
             "generated_at": datetime.now(timezone.utc).isoformat(),
             "model_version": "1.0.0-elo",

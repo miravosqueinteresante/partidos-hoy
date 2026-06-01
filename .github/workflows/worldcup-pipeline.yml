@@ -11,8 +11,6 @@ permissions:
 
 env:
   PYTHON_VERSION: "3.12"
-  API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
-  FOOTBALL_DATA_ORG_KEY: ${{ secrets.FOOTBALL_DATA_ORG_KEY }}
 
 jobs:
   worldcup-predictions:
@@ -28,120 +26,6 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
-
-      - name: Create predictions directory
-        run: |
-          mkdir -p predictions
-
-      - name: DIAGNOSTIC - Check API-Football season 2026 access
-        run: |
-          python -c "
-          import json, os, requests
-
-          key = os.environ.get('API_FOOTBALL_KEY', '')
-          print(f'API key present: {bool(key)}')
-          print(f'API key length: {len(key)}')
-
-          # 1) Check leagues coverage for season=2026
-          headers = {'x-apisports-key': key}
-          r = requests.get('https://v3.football.api-sports.io/leagues?id=1&season=2026', headers=headers)
-          print(f'\n=== LEAGUES coverage (id=1, season=2026) ===')
-          print(f'Status: {r.status_code}')
-          data = r.json()
-          print(f'Errors: {data.get(\"errors\", {})}')
-          results = data.get('response', [])
-          if results:
-              seasons = results[0].get('seasons', [])
-              for s in seasons:
-                  print(f'Season: {s.get(\"year\")}, coverage: {json.dumps(s.get(\"coverage\", {}), indent=2)}')
-              print(f'League name: {results[0].get(\"league\", {}).get(\"name\")}')
-              print(f'Available seasons: {[s.get(\"year\") for s in seasons]}')
-          else:
-              print('NO RESULTS - season=2026 may not be available on this plan')
-
-          # 2) Try fixtures
-          print(f'\n=== FIXTURES (league=1, season=2026) ===')
-          r2 = requests.get('https://v3.football.api-sports.io/fixtures?league=1&season=2026', headers=headers)
-          print(f'Status: {r2.status_code}')
-          data2 = r2.json()
-          print(f'Errors: {data2.get(\"errors\", {})}')
-          fixtures = data2.get('response', [])
-          print(f'Fixtures count: {len(fixtures)}')
-          if fixtures:
-              for f in fixtures[:5]:
-                  home = f['teams']['home']['name']
-                  away = f['teams']['away']['name']
-                  date = f['fixture']['date']
-                  status = f['fixture']['status']['long']
-                  print(f'  {home} vs {away} - {date} ({status})')
-              if len(fixtures) > 5:
-                  print(f'  ... and {len(fixtures)-5} more')
-
-          # 3) Save diagnostic output
-          diag = {
-              'leagues_status': r.status_code,
-              'leagues_errors': data.get('errors', {}),
-              'leagues_results': len(results),
-              'available_seasons': [s.get('year') for s in (seasons if results else [])],
-              'fixtures_status': r2.status_code,
-              'fixtures_errors': data2.get('errors', {}),
-              'fixtures_count': len(fixtures),
-          }
-          with open('predictions/api_diagnostic.json', 'w') as f:
-              json.dump(diag, f, indent=2)
-          print(f'\nDiagnostic saved to predictions/api_diagnostic.json')
-          "
-
-      - name: Fetch World Cup data via cascade
-        run: |
-          python -c "
-          import json
-          from src.data.data_cascade import DataCascade
-          cascade = DataCascade()
-          status = cascade.quota_status()
-          print('Cascade status:', json.dumps(status, indent=2))
-
-          fixtures = cascade.get_worldcup_fixtures()
-          print(f'Fixtures found: {len(fixtures)}')
-
-          standings = cascade.get_worldcup_standings()
-          print(f'Standings loaded: {len(standings)}')
-
-          elo = cascade.get_elo_ratings()
-          print(f'ELO ratings: {len(elo)} teams')
-
-          with open('predictions/cascade_status.json', 'w') as f:
-              json.dump({'fixtures': len(fixtures), 'standings': len(standings), 'elo': len(elo), 'status': status}, f)
-          "
-
-      - name: Fetch API predictions as baseline
-        run: |
-          python -c "
-          import json
-          from src.data.api_football_client import APIFootballClient
-
-          api_preds = {}
-          try:
-              client = APIFootballClient()
-              fixtures = client.fetch_worldcup_fixtures()
-              for f in fixtures[:10]:
-                  fid = f['fixture']['id']
-                  pred = client.fetch_prediction(fid)
-                  if pred and 'predictions' in pred:
-                      home = f['teams']['home']['name']
-                      pct = pred['predictions']['percent']
-                      api_preds[home] = {
-                          'home': pct['home'] / 100,
-                          'draw': pct['draw'] / 100,
-                          'away': pct['away'] / 100,
-                      }
-          except Exception as e:
-              print(f'API predictions baseline unavailable: {e}')
-
-          with open('predictions/api_baseline.json', 'w') as f:
-              json.dump(api_preds, f)
-          print(f'API predictions baseline: {len(api_preds)} matches')
-          "
 
       - name: Generate predictions JSON (ELO-based)
         run: |
@@ -160,10 +44,16 @@ jobs:
           parsed = json.loads(output)
           print(f'World Cup predictions generated: {len(parsed[\"matches\"])} matches')
           print(f'Model: {parsed[\"model\"]}')
+          total_preds = sum(1 for m in parsed['matches'] if m.get('model') == 'elo')
+          total_tbd = sum(1 for m in parsed['matches'] if m.get('status') == 'TBD')
+          print(f'Predictions: {total_preds}, TBD (knockout): {total_tbd}')
           for m in parsed['matches'][:5]:
-              p = m['probabilities']
-              print(f'  {m[\"home\"]:20s} vs {m[\"away\"]:20s}  '
-                    f'1: {p[\"home\"]*100:5.1f}%  X: {p[\"draw\"]*100:5.1f}%  2: {p[\"away\"]*100:5.1f}%')
+              if 'probabilities' in m:
+                  p = m['probabilities']
+                  print(f'  {m[\"home\"]:20s} vs {m[\"away\"]:20s}  '
+                        f'1: {p[\"home\"]*100:5.1f}%  X: {p[\"draw\"]*100:5.1f}%  2: {p[\"away\"]*100:5.1f}%')
+              else:
+                  print(f'  TBD ({m[\"stage\"]}) - {m[\"date\"]}')
           "
 
       - name: Deploy to gh-pages
@@ -176,12 +66,3 @@ jobs:
           git add latest.json
           git commit -m 'deploy: worldcup predictions $(date +%Y-%m-%d_%H:%M)'
           git push origin gh-pages --force
-
-      - name: Log cascade status
-        run: |
-          python -c "
-          from src.data.data_cascade import DataCascade
-          import json
-          cascade = DataCascade()
-          print(json.dumps(cascade.quota_status(), indent=2))
-          "

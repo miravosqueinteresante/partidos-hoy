@@ -1,0 +1,1776 @@
+{
+  "generated_at": "2026-06-01T08:11:00.243966+00:00",
+  "model_version": "1.0.0-elo",
+  "model": "World Football Elo Ratings (eloratings.net)",
+  "notes": "Predicciones basadas en Elo ratings de selecciones nacionales.",
+  "matches": [
+    {
+      "id": "ee93b14a",
+      "home": "Mexico",
+      "away": "South Africa",
+      "league": "World Cup 2026",
+      "date": "2026-06-11",
+      "probabilities": {
+        "home": 0.7331,
+        "draw": 0.2122,
+        "away": 0.0547
+      },
+      "expected_goals": {
+        "home": 2.04,
+        "away": 0.35
+      },
+      "model": "elo"
+    },
+    {
+      "id": "408a814d",
+      "home": "Korea Republic",
+      "away": "Czechia",
+      "league": "World Cup 2026",
+      "date": "2026-06-11",
+      "probabilities": {
+        "home": 0.4728,
+        "draw": 0.2943,
+        "away": 0.2329
+      },
+      "expected_goals": {
+        "home": 1.48,
+        "away": 0.88
+      },
+      "model": "elo"
+    },
+    {
+      "id": "a12288f1",
+      "home": "Canada",
+      "away": "Bosnia and Herzegovina",
+      "league": "World Cup 2026",
+      "date": "2026-06-12",
+      "probabilities": {
+        "home": 0.6314,
+        "draw": 0.2517,
+        "away": 0.1169
+      },
+      "expected_goals": {
+        "home": 1.83,
+        "away": 0.54
+      },
+      "model": "elo"
+    },
+    {
+      "id": "bfae229c",
+      "home": "USA",
+      "away": "Paraguay",
+      "league": "World Cup 2026",
+      "date": "2026-06-12",
+      "probabilities": {
+        "home": 0.3625,
+        "draw": 0.275,
+        "away": 0.3625
+      },
+      "expected_goals": {
+        "home": 1.18,
+        "away": 1.18
+      },
+      "model": "elo"
+    },
+    {
+      "id": "e66b8cac",
+      "home": "Haiti",
+      "away": "Scotland",
+      "league": "World Cup 2026",
+      "date": "2026-06-13",
+      "probabilities": {
+        "home": 0.2364,
+        "draw": 0.2405,
+        "away": 0.5231
+      },
+      "expected_goals": {
+        "home": 0.83,
+        "away": 1.55
+      },
+      "model": "elo"
+    },
+    {
+      "id": "a8da6cfc",
+      "home": "Australia",
+      "away": "Türkiye",
+      "league": "World Cup 2026",
+      "date": "2026-06-13",
+      "probabilities": {
+        "home": 0.6892,
+        "draw": 0.2312,
+        "away": 0.0796
+      },
+      "expected_goals": {
+        "home": 1.95,
+        "away": 0.43
+      },
+      "model": "elo"
+    },
+    {
+      "id": "40ada528",
+      "home": "Brazil",
+      "away": "Morocco",
+      "league": "World Cup 2026",
+      "date": "2026-06-13",
+      "probabilities": {
+        "home": 0.6096,
+        "draw": 0.2585,
+        "away": 0.1319
+      },
+      "expected_goals": {
+        "home": 1.78,
+        "away": 0.59
+      },
+      "model": "elo"
+    },
+    {
+      "id": "81b6d122",
+      "home": "Qatar",
+      "away": "Switzerland",
+      "league": "World Cup 2026",
+      "date": "2026-06-13",
+      "probabilities": {
+        "home": 0.0864,
+        "draw": 0.1822,
+        "away": 0.7313
+      },
+      "expected_goals": {
+        "home": 0.4,
+        "away": 2.01
+      },
+      "model": "elo"
+    },
+    {
+      "id": "283da27e",
+      "home": "Côte d'Ivoire",
+      "away": "Ecuador",
+      "league": "World Cup 2026",
+      "date": "2026-06-14",
+      "probabilities": {
+        "home": 0.1027,
+        "draw": 0.1912,
+        "away": 0.7061
+      },
+      "expected_goals": {
+        "home": 0.45,
+        "away": 1.96
+      },
+      "model": "elo"
+    },
+    {
+      "id": "bd9eb89d",
+      "home": "Germany",
+      "away": "Curaçao",
+      "league": "World Cup 2026",
+      "date": "2026-06-14",
+      "probabilities": {
+        "home": 0.7593,
+        "draw": 0.1913,
+        "away": 0.0494
+      },
+      "expected_goals": {
+        "home": 2.09,
+        "away": 0.31
+      },
+      "model": "elo"
+    },
+    {
+      "id": "811282d7",
+      "home": "Netherlands",
+      "away": "Japan",
+      "league": "World Cup 2026",
+      "date": "2026-06-14",
+      "probabilities": {
+        "home": 0.5063,
+        "draw": 0.2863,
+        "away": 0.2074
+      },
+      "expected_goals": {
+        "home": 1.55,
+        "away": 0.8
+      },
+      "model": "elo"
+    },
+    {
+      "id": "2a246d53",
+      "home": "Sweden",
+      "away": "Tunisia",
+      "league": "World Cup 2026",
+      "date": "2026-06-14",
+      "probabilities": {
+        "home": 0.5344,
+        "draw": 0.2792,
+        "away": 0.1864
+      },
+      "expected_goals": {
+        "home": 1.62,
+        "away": 0.75
+      },
+      "model": "elo"
+    },
+    {
+      "id": "cdcce868",
+      "home": "Saudi Arabia",
+      "away": "Uruguay",
+      "league": "World Cup 2026",
+      "date": "2026-06-15",
+      "probabilities": {
+        "home": 0.1672,
+        "draw": 0.2185,
+        "away": 0.6143
+      },
+      "expected_goals": {
+        "home": 0.64,
+        "away": 1.75
+      },
+      "model": "elo"
+    },
+    {
+      "id": "409c3a4f",
+      "home": "Spain",
+      "away": "Cabo Verde",
+      "league": "World Cup 2026",
+      "date": "2026-06-15",
+      "probabilities": {
+        "home": 0.804,
+        "draw": 0.1477,
+        "away": 0.0483
+      },
+      "expected_goals": {
+        "home": 2.16,
+        "away": 0.27
+      },
+      "model": "elo"
+    },
+    {
+      "id": "8c9c3f5e",
+      "home": "IR Iran",
+      "away": "New Zealand",
+      "league": "World Cup 2026",
+      "date": "2026-06-15",
+      "probabilities": {
+        "home": 0.6203,
+        "draw": 0.2552,
+        "away": 0.1245
+      },
+      "expected_goals": {
+        "home": 1.81,
+        "away": 0.57
+      },
+      "model": "elo"
+    },
+    {
+      "id": "98b924e2",
+      "home": "Belgium",
+      "away": "Egypt",
+      "league": "World Cup 2026",
+      "date": "2026-06-15",
+      "probabilities": {
+        "home": 0.6113,
+        "draw": 0.258,
+        "away": 0.1307
+      },
+      "expected_goals": {
+        "home": 1.79,
+        "away": 0.58
+      },
+      "model": "elo"
+    },
+    {
+      "id": "5a024958",
+      "home": "France",
+      "away": "Senegal",
+      "league": "World Cup 2026",
+      "date": "2026-06-16",
+      "probabilities": {
+        "home": 0.648,
+        "draw": 0.2462,
+        "away": 0.1057
+      },
+      "expected_goals": {
+        "home": 1.87,
+        "away": 0.51
+      },
+      "model": "elo"
+    },
+    {
+      "id": "b170583e",
+      "home": "Iraq",
+      "away": "Norway",
+      "league": "World Cup 2026",
+      "date": "2026-06-16",
+      "probabilities": {
+        "home": 0.1832,
+        "draw": 0.224,
+        "away": 0.5928
+      },
+      "expected_goals": {
+        "home": 0.68,
+        "away": 1.71
+      },
+      "model": "elo"
+    },
+    {
+      "id": "e373d688",
+      "home": "Argentina",
+      "away": "Algeria",
+      "league": "World Cup 2026",
+      "date": "2026-06-16",
+      "probabilities": {
+        "home": 0.7426,
+        "draw": 0.2074,
+        "away": 0.05
+      },
+      "expected_goals": {
+        "home": 2.06,
+        "away": 0.33
+      },
+      "model": "elo"
+    },
+    {
+      "id": "7cafa39f",
+      "home": "Austria",
+      "away": "Jordan",
+      "league": "World Cup 2026",
+      "date": "2026-06-16",
+      "probabilities": {
+        "home": 0.5892,
+        "draw": 0.2645,
+        "away": 0.1463
+      },
+      "expected_goals": {
+        "home": 1.74,
+        "away": 0.63
+      },
+      "model": "elo"
+    },
+    {
+      "id": "b592d683",
+      "home": "Ghana",
+      "away": "Panama",
+      "league": "World Cup 2026",
+      "date": "2026-06-17",
+      "probabilities": {
+        "home": 0.2433,
+        "draw": 0.2425,
+        "away": 0.5142
+      },
+      "expected_goals": {
+        "home": 0.85,
+        "away": 1.53
+      },
+      "model": "elo"
+    },
+    {
+      "id": "b9a56e5d",
+      "home": "England",
+      "away": "Croatia",
+      "league": "World Cup 2026",
+      "date": "2026-06-17",
+      "probabilities": {
+        "home": 0.5412,
+        "draw": 0.2775,
+        "away": 0.1813
+      },
+      "expected_goals": {
+        "home": 1.63,
+        "away": 0.73
+      },
+      "model": "elo"
+    },
+    {
+      "id": "aa56b227",
+      "home": "Portugal",
+      "away": "Congo DR",
+      "league": "World Cup 2026",
+      "date": "2026-06-17",
+      "probabilities": {
+        "home": 0.8509,
+        "draw": 0.1013,
+        "away": 0.0479
+      },
+      "expected_goals": {
+        "home": 2.23,
+        "away": 0.22
+      },
+      "model": "elo"
+    },
+    {
+      "id": "a575aad0",
+      "home": "Uzbekistan",
+      "away": "Colombia",
+      "league": "World Cup 2026",
+      "date": "2026-06-17",
+      "probabilities": {
+        "home": 0.2279,
+        "draw": 0.238,
+        "away": 0.5341
+      },
+      "expected_goals": {
+        "home": 0.81,
+        "away": 1.57
+      },
+      "model": "elo"
+    },
+    {
+      "id": "182b9282",
+      "home": "Czechia",
+      "away": "South Africa",
+      "league": "World Cup 2026",
+      "date": "2026-06-18",
+      "probabilities": {
+        "home": 0.6488,
+        "draw": 0.246,
+        "away": 0.1052
+      },
+      "expected_goals": {
+        "home": 1.87,
+        "away": 0.51
+      },
+      "model": "elo"
+    },
+    {
+      "id": "4ae66343",
+      "home": "Switzerland",
+      "away": "Bosnia and Herzegovina",
+      "league": "World Cup 2026",
+      "date": "2026-06-18",
+      "probabilities": {
+        "home": 0.7063,
+        "draw": 0.2243,
+        "away": 0.0694
+      },
+      "expected_goals": {
+        "home": 1.99,
+        "away": 0.4
+      },
+      "model": "elo"
+    },
+    {
+      "id": "d2c20c32",
+      "home": "Canada",
+      "away": "Qatar",
+      "league": "World Cup 2026",
+      "date": "2026-06-18",
+      "probabilities": {
+        "home": 0.7383,
+        "draw": 0.2097,
+        "away": 0.052
+      },
+      "expected_goals": {
+        "home": 2.06,
+        "away": 0.34
+      },
+      "model": "elo"
+    },
+    {
+      "id": "59d43d37",
+      "home": "Mexico",
+      "away": "Korea Republic",
+      "league": "World Cup 2026",
+      "date": "2026-06-18",
+      "probabilities": {
+        "home": 0.5621,
+        "draw": 0.272,
+        "away": 0.1659
+      },
+      "expected_goals": {
+        "home": 1.68,
+        "away": 0.69
+      },
+      "model": "elo"
+    },
+    {
+      "id": "9def23cf",
+      "home": "Brazil",
+      "away": "Haiti",
+      "league": "World Cup 2026",
+      "date": "2026-06-19",
+      "probabilities": {
+        "home": 0.7682,
+        "draw": 0.1827,
+        "away": 0.0491
+      },
+      "expected_goals": {
+        "home": 2.1,
+        "away": 0.31
+      },
+      "model": "elo"
+    },
+    {
+      "id": "471234fa",
+      "home": "Scotland",
+      "away": "Morocco",
+      "league": "World Cup 2026",
+      "date": "2026-06-19",
+      "probabilities": {
+        "home": 0.4054,
+        "draw": 0.287,
+        "away": 0.3076
+      },
+      "expected_goals": {
+        "home": 1.3,
+        "away": 1.06
+      },
+      "model": "elo"
+    },
+    {
+      "id": "28ce6cea",
+      "home": "Türkiye",
+      "away": "Paraguay",
+      "league": "World Cup 2026",
+      "date": "2026-06-19",
+      "probabilities": {
+        "home": 0.1624,
+        "draw": 0.2167,
+        "away": 0.6209
+      },
+      "expected_goals": {
+        "home": 0.62,
+        "away": 1.77
+      },
+      "model": "elo"
+    },
+    {
+      "id": "601274b9",
+      "home": "USA",
+      "away": "Australia",
+      "league": "World Cup 2026",
+      "date": "2026-06-19",
+      "probabilities": {
+        "home": 0.414,
+        "draw": 0.2895,
+        "away": 0.2965
+      },
+      "expected_goals": {
+        "home": 1.32,
+        "away": 1.03
+      },
+      "model": "elo"
+    },
+    {
+      "id": "fc809d9d",
+      "home": "Germany",
+      "away": "Côte d'Ivoire",
+      "league": "World Cup 2026",
+      "date": "2026-06-20",
+      "probabilities": {
+        "home": 0.7593,
+        "draw": 0.1913,
+        "away": 0.0494
+      },
+      "expected_goals": {
+        "home": 2.09,
+        "away": 0.31
+      },
+      "model": "elo"
+    },
+    {
+      "id": "f4965042",
+      "home": "Ecuador",
+      "away": "Curaçao",
+      "league": "World Cup 2026",
+      "date": "2026-06-20",
+      "probabilities": {
+        "home": 0.7622,
+        "draw": 0.1885,
+        "away": 0.0493
+      },
+      "expected_goals": {
+        "home": 2.09,
+        "away": 0.31
+      },
+      "model": "elo"
+    },
+    {
+      "id": "143bb18f",
+      "home": "Netherlands",
+      "away": "Sweden",
+      "league": "World Cup 2026",
+      "date": "2026-06-20",
+      "probabilities": {
+        "home": 0.6673,
+        "draw": 0.2395,
+        "away": 0.0932
+      },
+      "expected_goals": {
+        "home": 1.91,
+        "away": 0.47
+      },
+      "model": "elo"
+    },
+    {
+      "id": "04cdc021",
+      "home": "Tunisia",
+      "away": "Japan",
+      "league": "World Cup 2026",
+      "date": "2026-06-20",
+      "probabilities": {
+        "home": 0.2097,
+        "draw": 0.2325,
+        "away": 0.5578
+      },
+      "expected_goals": {
+        "home": 0.76,
+        "away": 1.63
+      },
+      "model": "elo"
+    },
+    {
+      "id": "d18b137c",
+      "home": "Uruguay",
+      "away": "Cabo Verde",
+      "league": "World Cup 2026",
+      "date": "2026-06-21",
+      "probabilities": {
+        "home": 0.7139,
+        "draw": 0.221,
+        "away": 0.0651
+      },
+      "expected_goals": {
+        "home": 2.01,
+        "away": 0.38
+      },
+      "model": "elo"
+    },
+    {
+      "id": "79660de1",
+      "home": "Spain",
+      "away": "Saudi Arabia",
+      "league": "World Cup 2026",
+      "date": "2026-06-21",
+      "probabilities": {
+        "home": 0.8065,
+        "draw": 0.1452,
+        "away": 0.0483
+      },
+      "expected_goals": {
+        "home": 2.16,
+        "away": 0.27
+      },
+      "model": "elo"
+    },
+    {
+      "id": "956d7ddc",
+      "home": "Belgium",
+      "away": "IR Iran",
+      "league": "World Cup 2026",
+      "date": "2026-06-21",
+      "probabilities": {
+        "home": 0.5537,
+        "draw": 0.2742,
+        "away": 0.1721
+      },
+      "expected_goals": {
+        "home": 1.66,
+        "away": 0.7
+      },
+      "model": "elo"
+    },
+    {
+      "id": "dbe9a141",
+      "home": "New Zealand",
+      "away": "Egypt",
+      "league": "World Cup 2026",
+      "date": "2026-06-21",
+      "probabilities": {
+        "home": 0.3496,
+        "draw": 0.2715,
+        "away": 0.3789
+      },
+      "expected_goals": {
+        "home": 1.15,
+        "away": 1.22
+      },
+      "model": "elo"
+    },
+    {
+      "id": "14e41cfa",
+      "home": "Norway",
+      "away": "Senegal",
+      "league": "World Cup 2026",
+      "date": "2026-06-22",
+      "probabilities": {
+        "home": 0.497,
+        "draw": 0.2885,
+        "away": 0.2145
+      },
+      "expected_goals": {
+        "home": 1.53,
+        "away": 0.82
+      },
+      "model": "elo"
+    },
+    {
+      "id": "6a37f51d",
+      "home": "France",
+      "away": "Iraq",
+      "league": "World Cup 2026",
+      "date": "2026-06-22",
+      "probabilities": {
+        "home": 0.773,
+        "draw": 0.178,
+        "away": 0.049
+      },
+      "expected_goals": {
+        "home": 2.11,
+        "away": 0.3
+      },
+      "model": "elo"
+    },
+    {
+      "id": "70a1c03c",
+      "home": "Argentina",
+      "away": "Austria",
+      "league": "World Cup 2026",
+      "date": "2026-06-22",
+      "probabilities": {
+        "home": 0.6961,
+        "draw": 0.2285,
+        "away": 0.0754
+      },
+      "expected_goals": {
+        "home": 1.97,
+        "away": 0.42
+      },
+      "model": "elo"
+    },
+    {
+      "id": "744ad709",
+      "home": "Jordan",
+      "away": "Algeria",
+      "league": "World Cup 2026",
+      "date": "2026-06-22",
+      "probabilities": {
+        "home": 0.4002,
+        "draw": 0.2855,
+        "away": 0.3143
+      },
+      "expected_goals": {
+        "home": 1.29,
+        "away": 1.07
+      },
+      "model": "elo"
+    },
+    {
+      "id": "6643f911",
+      "home": "England",
+      "away": "Ghana",
+      "league": "World Cup 2026",
+      "date": "2026-06-23",
+      "probabilities": {
+        "home": 0.785,
+        "draw": 0.1663,
+        "away": 0.0487
+      },
+      "expected_goals": {
+        "home": 2.13,
+        "away": 0.29
+      },
+      "model": "elo"
+    },
+    {
+      "id": "926ede13",
+      "home": "Panama",
+      "away": "Croatia",
+      "league": "World Cup 2026",
+      "date": "2026-06-23",
+      "probabilities": {
+        "home": 0.2727,
+        "draw": 0.2507,
+        "away": 0.4766
+      },
+      "expected_goals": {
+        "home": 0.93,
+        "away": 1.44
+      },
+      "model": "elo"
+    },
+    {
+      "id": "ceb85d2a",
+      "home": "Portugal",
+      "away": "Uzbekistan",
+      "league": "World Cup 2026",
+      "date": "2026-06-23",
+      "probabilities": {
+        "home": 0.6775,
+        "draw": 0.2357,
+        "away": 0.0868
+      },
+      "expected_goals": {
+        "home": 1.93,
+        "away": 0.45
+      },
+      "model": "elo"
+    },
+    {
+      "id": "adc6929f",
+      "home": "Colombia",
+      "away": "Congo DR",
+      "league": "World Cup 2026",
+      "date": "2026-06-23",
+      "probabilities": {
+        "home": 0.8487,
+        "draw": 0.1034,
+        "away": 0.0479
+      },
+      "expected_goals": {
+        "home": 2.23,
+        "away": 0.22
+      },
+      "model": "elo"
+    },
+    {
+      "id": "a27203df",
+      "home": "Scotland",
+      "away": "Brazil",
+      "league": "World Cup 2026",
+      "date": "2026-06-24",
+      "probabilities": {
+        "home": 0.2538,
+        "draw": 0.2455,
+        "away": 0.5007
+      },
+      "expected_goals": {
+        "home": 0.88,
+        "away": 1.5
+      },
+      "model": "elo"
+    },
+    {
+      "id": "32e2772d",
+      "home": "Morocco",
+      "away": "Haiti",
+      "league": "World Cup 2026",
+      "date": "2026-06-24",
+      "probabilities": {
+        "home": 0.6985,
+        "draw": 0.2275,
+        "away": 0.074
+      },
+      "expected_goals": {
+        "home": 1.97,
+        "away": 0.41
+      },
+      "model": "elo"
+    },
+    {
+      "id": "ce8586c3",
+      "home": "Switzerland",
+      "away": "Canada",
+      "league": "World Cup 2026",
+      "date": "2026-06-24",
+      "probabilities": {
+        "home": 0.5602,
+        "draw": 0.2725,
+        "away": 0.1673
+      },
+      "expected_goals": {
+        "home": 1.67,
+        "away": 0.69
+      },
+      "model": "elo"
+    },
+    {
+      "id": "20ac5bee",
+      "home": "Bosnia and Herzegovina",
+      "away": "Qatar",
+      "league": "World Cup 2026",
+      "date": "2026-06-24",
+      "probabilities": {
+        "home": 0.6113,
+        "draw": 0.258,
+        "away": 0.1307
+      },
+      "expected_goals": {
+        "home": 1.79,
+        "away": 0.58
+      },
+      "model": "elo"
+    },
+    {
+      "id": "41069e4f",
+      "home": "Czechia",
+      "away": "Mexico",
+      "league": "World Cup 2026",
+      "date": "2026-06-24",
+      "probabilities": {
+        "home": 0.33,
+        "draw": 0.2662,
+        "away": 0.4037
+      },
+      "expected_goals": {
+        "home": 1.09,
+        "away": 1.28
+      },
+      "model": "elo"
+    },
+    {
+      "id": "0fd0491a",
+      "home": "South Africa",
+      "away": "Korea Republic",
+      "league": "World Cup 2026",
+      "date": "2026-06-24",
+      "probabilities": {
+        "home": 0.2355,
+        "draw": 0.2402,
+        "away": 0.5242
+      },
+      "expected_goals": {
+        "home": 0.83,
+        "away": 1.55
+      },
+      "model": "elo"
+    },
+    {
+      "id": "4366c565",
+      "home": "Curaçao",
+      "away": "Côte d'Ivoire",
+      "league": "World Cup 2026",
+      "date": "2026-06-25",
+      "probabilities": {
+        "home": 0.448,
+        "draw": 0.3,
+        "away": 0.252
+      },
+      "expected_goals": {
+        "home": 1.42,
+        "away": 0.93
+      },
+      "model": "elo"
+    },
+    {
+      "id": "66688528",
+      "home": "Ecuador",
+      "away": "Germany",
+      "league": "World Cup 2026",
+      "date": "2026-06-25",
+      "probabilities": {
+        "home": 0.4589,
+        "draw": 0.2975,
+        "away": 0.2436
+      },
+      "expected_goals": {
+        "home": 1.44,
+        "away": 0.91
+      },
+      "model": "elo"
+    },
+    {
+      "id": "e2e81e71",
+      "home": "Japan",
+      "away": "Sweden",
+      "league": "World Cup 2026",
+      "date": "2026-06-25",
+      "probabilities": {
+        "home": 0.6267,
+        "draw": 0.2532,
+        "away": 0.1201
+      },
+      "expected_goals": {
+        "home": 1.82,
+        "away": 0.55
+      },
+      "model": "elo"
+    },
+    {
+      "id": "028072e4",
+      "home": "Tunisia",
+      "away": "Netherlands",
+      "league": "World Cup 2026",
+      "date": "2026-06-25",
+      "probabilities": {
+        "home": 0.1679,
+        "draw": 0.2188,
+        "away": 0.6133
+      },
+      "expected_goals": {
+        "home": 0.64,
+        "away": 1.75
+      },
+      "model": "elo"
+    },
+    {
+      "id": "60ab5a81",
+      "home": "Türkiye",
+      "away": "USA",
+      "league": "World Cup 2026",
+      "date": "2026-06-25",
+      "probabilities": {
+        "home": 0.2407,
+        "draw": 0.2417,
+        "away": 0.5176
+      },
+      "expected_goals": {
+        "home": 0.84,
+        "away": 1.54
+      },
+      "model": "elo"
+    },
+    {
+      "id": "a519503b",
+      "home": "Paraguay",
+      "away": "Australia",
+      "league": "World Cup 2026",
+      "date": "2026-06-25",
+      "probabilities": {
+        "home": 0.5094,
+        "draw": 0.2855,
+        "away": 0.2051
+      },
+      "expected_goals": {
+        "home": 1.56,
+        "away": 0.8
+      },
+      "model": "elo"
+    },
+    {
+      "id": "c8225e57",
+      "home": "Norway",
+      "away": "France",
+      "league": "World Cup 2026",
+      "date": "2026-06-26",
+      "probabilities": {
+        "home": 0.2984,
+        "draw": 0.2577,
+        "away": 0.4439
+      },
+      "expected_goals": {
+        "home": 1.0,
+        "away": 1.37
+      },
+      "model": "elo"
+    },
+    {
+      "id": "b5bb68f8",
+      "home": "Senegal",
+      "away": "Iraq",
+      "league": "World Cup 2026",
+      "date": "2026-06-26",
+      "probabilities": {
+        "home": 0.6781,
+        "draw": 0.2355,
+        "away": 0.0864
+      },
+      "expected_goals": {
+        "home": 1.93,
+        "away": 0.45
+      },
+      "model": "elo"
+    },
+    {
+      "id": "a7993baf",
+      "home": "Egypt",
+      "away": "IR Iran",
+      "league": "World Cup 2026",
+      "date": "2026-06-26",
+      "probabilities": {
+        "home": 0.3941,
+        "draw": 0.2838,
+        "away": 0.3222
+      },
+      "expected_goals": {
+        "home": 1.27,
+        "away": 1.09
+      },
+      "model": "elo"
+    },
+    {
+      "id": "339d2ed2",
+      "home": "New Zealand",
+      "away": "Belgium",
+      "league": "World Cup 2026",
+      "date": "2026-06-26",
+      "probabilities": {
+        "home": 0.2001,
+        "draw": 0.2295,
+        "away": 0.5704
+      },
+      "expected_goals": {
+        "home": 0.73,
+        "away": 1.66
+      },
+      "model": "elo"
+    },
+    {
+      "id": "898ce521",
+      "home": "Cabo Verde",
+      "away": "Saudi Arabia",
+      "league": "World Cup 2026",
+      "date": "2026-06-26",
+      "probabilities": {
+        "home": 0.4589,
+        "draw": 0.2975,
+        "away": 0.2436
+      },
+      "expected_goals": {
+        "home": 1.44,
+        "away": 0.91
+      },
+      "model": "elo"
+    },
+    {
+      "id": "7de5b7ed",
+      "home": "Uruguay",
+      "away": "Spain",
+      "league": "World Cup 2026",
+      "date": "2026-06-26",
+      "probabilities": {
+        "home": 0.2072,
+        "draw": 0.2317,
+        "away": 0.561
+      },
+      "expected_goals": {
+        "home": 0.75,
+        "away": 1.63
+      },
+      "model": "elo"
+    },
+    {
+      "id": "324e029d",
+      "home": "Panama",
+      "away": "England",
+      "league": "World Cup 2026",
+      "date": "2026-06-27",
+      "probabilities": {
+        "home": 0.1962,
+        "draw": 0.2283,
+        "away": 0.5756
+      },
+      "expected_goals": {
+        "home": 0.72,
+        "away": 1.67
+      },
+      "model": "elo"
+    },
+    {
+      "id": "7be827e0",
+      "home": "Croatia",
+      "away": "Ghana",
+      "league": "World Cup 2026",
+      "date": "2026-06-27",
+      "probabilities": {
+        "home": 0.7599,
+        "draw": 0.1908,
+        "away": 0.0494
+      },
+      "expected_goals": {
+        "home": 2.09,
+        "away": 0.31
+      },
+      "model": "elo"
+    },
+    {
+      "id": "7d1526e1",
+      "home": "Algeria",
+      "away": "Austria",
+      "league": "World Cup 2026",
+      "date": "2026-06-27",
+      "probabilities": {
+        "home": 0.3771,
+        "draw": 0.279,
+        "away": 0.3439
+      },
+      "expected_goals": {
+        "home": 1.22,
+        "away": 1.14
+      },
+      "model": "elo"
+    },
+    {
+      "id": "e635048a",
+      "home": "Jordan",
+      "away": "Argentina",
+      "league": "World Cup 2026",
+      "date": "2026-06-27",
+      "probabilities": {
+        "home": 0.1061,
+        "draw": 0.193,
+        "away": 0.7009
+      },
+      "expected_goals": {
+        "home": 0.46,
+        "away": 1.95
+      },
+      "model": "elo"
+    },
+    {
+      "id": "7bcdfcce",
+      "home": "Colombia",
+      "away": "Portugal",
+      "league": "World Cup 2026",
+      "date": "2026-06-27",
+      "probabilities": {
+        "home": 0.441,
+        "draw": 0.2978,
+        "away": 0.2612
+      },
+      "expected_goals": {
+        "home": 1.4,
+        "away": 0.95
+      },
+      "model": "elo"
+    },
+    {
+      "id": "21e05636",
+      "home": "Congo DR",
+      "away": "Uzbekistan",
+      "league": "World Cup 2026",
+      "date": "2026-06-27",
+      "probabilities": {
+        "home": 0.0679,
+        "draw": 0.17,
+        "away": 0.7621
+      },
+      "expected_goals": {
+        "home": 0.34,
+        "away": 2.08
+      },
+      "model": "elo"
+    },
+    {
+      "id": "daf1cfed",
+      "home": null,
+      "away": null,
+      "league": "World Cup 2026",
+      "date": "2026-06-28",
+      "probabilities": {
+        "home": 0.448,
+        "draw": 0.3,
+        "away": 0.252
+      },
+      "expected_goals": {
+        "home": 1.42,
+        "away": 0.93
+      },
+      "model": "elo"
+    },
+    {
+      "id": "daf1cfed",
+      "home": null,
+      "away": null,
+      "league": "World Cup 2026",
+      "date": "2026-06-28",
+      "probabilities": {
+        "home": 0.448,
+        "draw": 0.3,
+        "away": 0.252
+      },
+      "expected_goals": {
+        "home": 1.42,
+        "away": 0.93
+      },
+      "model": "elo"
+    },
+    {
+      "id": "daf1cfed",
+      "home": null,
+      "away": null,
+      "league": "World Cup 2026",
+      "date": "2026-06-28",
+      "probabilities": {
+        "home": 0.448,
+        "draw": 0.3,
+        "away": 0.252
+      },
+      "expected_goals": {
+        "home": 1.42,
+        "away": 0.93
+      },
+      "model": "elo"
+    },
+    {
+      "id": "ce7609fa",
+      "home": null,
+      "away": null,
+      "league": "World Cup 2026",
+      "date": "2026-06-29",
+      "probabilities": {
+        "home": 0.448,
+        "draw": 0.3,
+        "away": 0.252
+      },
+      "expected_goals": {
+        "home": 1.42,
+        "away": 0.93
+      },
+      "model": "elo"
+    },
+    {
+      "id": "ce7609fa",
+      "home": null,
+      "away": null,
+      "league": "World Cup 2026",
+      "date": "2026-06-29",
+      "probabilities": {
+        "home": 0.448,
+        "draw": 0.3,
+        "away": 0.252
+      },
+      "expected_goals": {
+        "home": 1.42,
+        "away": 0.93
+      },
+      "model": "elo"
+    },
+    {
+      "id": "ce7609fa",
+      "home": null,
+      "away": null,
+      "league": "World Cup 2026",
+      "date": "2026-06-29",
+      "probabilities": {
+        "home": 0.448,
+        "draw": 0.3,
+        "away": 0.252
+      },
+      "expected_goals": {
+        "home": 1.42,
+        "away": 0.93
+      },
+      "model": "elo"
+    },
+    {
+      "id": "7e16e7d4",
+      "home": null,
+      "away": null,
+      "league": "World Cup 2026",
+      "date": "2026-06-30",
+      "probabilities": {
+        "home": 0.448,
+        "draw": 0.3,
+        "away": 0.252
+      },
+      "expected_goals": {
+        "home": 1.42,
+        "away": 0.93
+      },
+      "model": "elo"
+    },
+    {
+      "id": "7e16e7d4",
+      "home": null,
+      "away": null,
+      "league": "World Cup 2026",
+      "date": "2026-06-30",
+      "probabilities": {
+        "home": 0.448,
+        "draw": 0.3,
+        "away": 0.252
+      },
+      "expected_goals": {
+        "home": 1.42,
+        "away": 0.93
+      },
+      "model": "elo"
+    },
+    {
+      "id": "7e16e7d4",
+      "home": null,
+      "away": null,
+      "league": "World Cup 2026",
+      "date": "2026-06-30",
+      "probabilities": {
+        "home": 0.448,
+        "draw": 0.3,
+        "away": 0.252
+      },
+      "expected_goals": {
+        "home": 1.42,
+        "away": 0.93
+      },
+      "model": "elo"
+    },
+    {
+      "id": "e0ad6b02",
+      "home": null,
+      "away": null,
+      "league": "World Cup 2026",
+      "date": "2026-07-01",
+      "probabilities": {
+        "home": 0.448,
+        "draw": 0.3,
+        "away": 0.252
+      },
+      "expected_goals": {
+        "home": 1.42,
+        "away": 0.93
+      },
+      "model": "elo"
+    },
+    {
+      "id": "e0ad6b02",
+      "home": null,
+      "away": null,
+      "league": "World Cup 2026",
+      "date": "2026-07-01",
+      "probabilities": {
+        "home": 0.448,
+        "draw": 0.3,
+        "away": 0.252
+      },
+      "expected_goals": {
+        "home": 1.42,
+        "away": 0.93
+      },
+      "model": "elo"
+    },
+    {
+      "id": "e0ad6b02",
+      "home": null,
+      "away": null,
+      "league": "World Cup 2026",
+      "date": "2026-07-01",
+      "probabilities": {
+        "home": 0.448,
+        "draw": 0.3,
+        "away": 0.252
+      },
+      "expected_goals": {
+        "home": 1.42,
+        "away": 0.93
+      },
+      "model": "elo"
+    },
+    {
+      "id": "db0ee146",
+      "home": null,
+      "away": null,
+      "league": "World Cup 2026",
+      "date": "2026-07-02",
+      "probabilities": {
+        "home": 0.448,
+        "draw": 0.3,
+        "away": 0.252
+      },
+      "expected_goals": {
+        "home": 1.42,
+        "away": 0.93
+      },
+      "model": "elo"
+    },
+    {
+      "id": "db0ee146",
+      "home": null,
+      "away": null,
+      "league": "World Cup 2026",
+      "date": "2026-07-02",
+      "probabilities": {
+        "home": 0.448,
+        "draw": 0.3,
+        "away": 0.252
+      },
+      "expected_goals": {
+        "home": 1.42,
+        "away": 0.93
+      },
+      "model": "elo"
+    },
+    {
+      "id": "db0ee146",
+      "home": null,
+      "away": null,
+      "league": "World Cup 2026",
+      "date": "2026-07-02",
+      "probabilities": {
+        "home": 0.448,
+        "draw": 0.3,
+        "away": 0.252
+      },
+      "expected_goals": {
+        "home": 1.42,
+        "away": 0.93
+      },
+      "model": "elo"
+    },
+    {
+      "id": "fc45a423",
+      "home": null,
+      "away": null,
+      "league": "World Cup 2026",
+      "date": "2026-07-03",
+      "probabilities": {
+        "home": 0.448,
+        "draw": 0.3,
+        "away": 0.252
+      },
+      "expected_goals": {
+        "home": 1.42,
+        "away": 0.93
+      },
+      "model": "elo"
+    },
+    {
+      "id": "a57060c7",
+      "home": null,
+      "away": null,
+      "league": "World Cup 2026",
+      "date": "2026-07-04",
+      "probabilities": {
+        "home": 0.448,
+        "draw": 0.3,
+        "away": 0.252
+      },
+      "expected_goals": {
+        "home": 1.42,
+        "away": 0.93
+      },
+      "model": "elo"
+    },
+    {
+      "id": "a57060c7",
+      "home": null,
+      "away": null,
+      "league": "World Cup 2026",
+      "date": "2026-07-04",
+      "probabilities": {
+        "home": 0.448,
+        "draw": 0.3,
+        "away": 0.252
+      },
+      "expected_goals": {
+        "home": 1.42,
+        "away": 0.93
+      },
+      "model": "elo"
+    },
+    {
+      "id": "a15f1f4a",
+      "home": null,
+      "away": null,
+      "league": "World Cup 2026",
+      "date": "2026-07-05",
+      "probabilities": {
+        "home": 0.448,
+        "draw": 0.3,
+        "away": 0.252
+      },
+      "expected_goals": {
+        "home": 1.42,
+        "away": 0.93
+      },
+      "model": "elo"
+    },
+    {
+      "id": "a15f1f4a",
+      "home": null,
+      "away": null,
+      "league": "World Cup 2026",
+      "date": "2026-07-05",
+      "probabilities": {
+        "home": 0.448,
+        "draw": 0.3,
+        "away": 0.252
+      },
+      "expected_goals": {
+        "home": 1.42,
+        "away": 0.93
+      },
+      "model": "elo"
+    },
+    {
+      "id": "ac28a97f",
+      "home": null,
+      "away": null,
+      "league": "World Cup 2026",
+      "date": "2026-07-06",
+      "probabilities": {
+        "home": 0.448,
+        "draw": 0.3,
+        "away": 0.252
+      },
+      "expected_goals": {
+        "home": 1.42,
+        "away": 0.93
+      },
+      "model": "elo"
+    },
+    {
+      "id": "ac28a97f",
+      "home": null,
+      "away": null,
+      "league": "World Cup 2026",
+      "date": "2026-07-06",
+      "probabilities": {
+        "home": 0.448,
+        "draw": 0.3,
+        "away": 0.252
+      },
+      "expected_goals": {
+        "home": 1.42,
+        "away": 0.93
+      },
+      "model": "elo"
+    },
+    {
+      "id": "e1c169bf",
+      "home": null,
+      "away": null,
+      "league": "World Cup 2026",
+      "date": "2026-07-07",
+      "probabilities": {
+        "home": 0.448,
+        "draw": 0.3,
+        "away": 0.252
+      },
+      "expected_goals": {
+        "home": 1.42,
+        "away": 0.93
+      },
+      "model": "elo"
+    },
+    {
+      "id": "e1c169bf",
+      "home": null,
+      "away": null,
+      "league": "World Cup 2026",
+      "date": "2026-07-07",
+      "probabilities": {
+        "home": 0.448,
+        "draw": 0.3,
+        "away": 0.252
+      },
+      "expected_goals": {
+        "home": 1.42,
+        "away": 0.93
+      },
+      "model": "elo"
+    },
+    {
+      "id": "a45a5600",
+      "home": null,
+      "away": null,
+      "league": "World Cup 2026",
+      "date": "2026-07-09",
+      "probabilities": {
+        "home": 0.448,
+        "draw": 0.3,
+        "away": 0.252
+      },
+      "expected_goals": {
+        "home": 1.42,
+        "away": 0.93
+      },
+      "model": "elo"
+    },
+    {
+      "id": "9425d838",
+      "home": null,
+      "away": null,
+      "league": "World Cup 2026",
+      "date": "2026-07-10",
+      "probabilities": {
+        "home": 0.448,
+        "draw": 0.3,
+        "away": 0.252
+      },
+      "expected_goals": {
+        "home": 1.42,
+        "away": 0.93
+      },
+      "model": "elo"
+    },
+    {
+      "id": "aa625773",
+      "home": null,
+      "away": null,
+      "league": "World Cup 2026",
+      "date": "2026-07-11",
+      "probabilities": {
+        "home": 0.448,
+        "draw": 0.3,
+        "away": 0.252
+      },
+      "expected_goals": {
+        "home": 1.42,
+        "away": 0.93
+      },
+      "model": "elo"
+    },
+    {
+      "id": "7c960d7d",
+      "home": null,
+      "away": null,
+      "league": "World Cup 2026",
+      "date": "2026-07-12",
+      "probabilities": {
+        "home": 0.448,
+        "draw": 0.3,
+        "away": 0.252
+      },
+      "expected_goals": {
+        "home": 1.42,
+        "away": 0.93
+      },
+      "model": "elo"
+    },
+    {
+      "id": "132df035",
+      "home": null,
+      "away": null,
+      "league": "World Cup 2026",
+      "date": "2026-07-14",
+      "probabilities": {
+        "home": 0.448,
+        "draw": 0.3,
+        "away": 0.252
+      },
+      "expected_goals": {
+        "home": 1.42,
+        "away": 0.93
+      },
+      "model": "elo"
+    },
+    {
+      "id": "cf90950e",
+      "home": null,
+      "away": null,
+      "league": "World Cup 2026",
+      "date": "2026-07-15",
+      "probabilities": {
+        "home": 0.448,
+        "draw": 0.3,
+        "away": 0.252
+      },
+      "expected_goals": {
+        "home": 1.42,
+        "away": 0.93
+      },
+      "model": "elo"
+    },
+    {
+      "id": "20f6e880",
+      "home": null,
+      "away": null,
+      "league": "World Cup 2026",
+      "date": "2026-07-18",
+      "probabilities": {
+        "home": 0.448,
+        "draw": 0.3,
+        "away": 0.252
+      },
+      "expected_goals": {
+        "home": 1.42,
+        "away": 0.93
+      },
+      "model": "elo"
+    },
+    {
+      "id": "be5f111f",
+      "home": null,
+      "away": null,
+      "league": "World Cup 2026",
+      "date": "2026-07-19",
+      "probabilities": {
+        "home": 0.448,
+        "draw": 0.3,
+        "away": 0.252
+      },
+      "expected_goals": {
+        "home": 1.42,
+        "away": 0.93
+      },
+      "model": "elo"
+    }
+  ]
+}
