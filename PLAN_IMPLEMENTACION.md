@@ -845,6 +845,23 @@ Fixtures: data/fixtures_wc2026.json (hardcodeado)
 - ✅ Timeline realista para llegar al Mundial (11 junio)
 - ✅ Acentos normalizados (Côte d'Ivoire, Türkiye, Curaçao → lookup correcto)
 - ✅ Knockout stages marcados como `status: TBD` en vez de NaN
+- ✅ Banner de fecha + estadio en cada tarjeta (venue agregado a fixtures_wc2026.json)
+- ✅ News sentiment con Tavily (web search) + Groq (Llama 3.3 70B) — reemplazo de Gemini API
+
+## Feature: Banner de Fecha + Estadio en Tarjetas
+
+**Implementado**: Jun 2026. Cada tarjeta de partido ahora muestra un banner superior oscuro con:
+- 🗓️ Fecha formateada (`11 jun 2026`)
+- 📍 Estadio y ciudad (`SoFi Stadium, Inglewood, CA`)
+
+**Datos**: El campo `venue` fue agregado a `data/fixtures_wc2026.json` para los 48 partidos de grupos. Los 56 partidos de eliminación (round_of_32 hasta final) tienen `venue: "TBD"` hasta que se definan los emparejamientos.
+
+**Stack visual**:
+- Banner azul oscuro (`#1e3a5f`) en la parte superior de cada `.ph-card`
+- Tarjeta usa `padding: 0` con elementos internos con `padding: 20px`
+- Accordion de noticias usa `margin-top: 12px` (sin márgenes negativos)
+
+**Equipos sin grupo definido** (TBD knockout): El banner no se muestra si `venue === 'TBD'`.
 
 **Arquitectura final (v1.0):**
 ```

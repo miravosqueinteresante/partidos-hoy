@@ -22,7 +22,21 @@ class PH_Data_Client {
     }
 
     private function fetch_predictions() {
-        $response = wp_remote_get($this->predictions_url, array(
+        $url = $this->predictions_url;
+
+        if (preg_match('/^[\/~]|^\/|^[A-Z]:/i', $url) || strpos($url, 'localhost') !== false) {
+            $local_path = preg_replace('/^~\//', dirname(__FILE__) . '/../../', $url);
+            if (file_exists($local_path)) {
+                $body = file_get_contents($local_path);
+                $data = json_decode($body, true);
+                if (json_last_error() === JSON_ERROR_NONE && isset($data['matches'])) {
+                    set_transient($this->cache_key, $data, $this->cache_ttl);
+                    return $data;
+                }
+            }
+        }
+
+        $response = wp_remote_get($url, array(
             'timeout' => 15,
             'headers' => array('Accept' => 'application/json'),
         ));

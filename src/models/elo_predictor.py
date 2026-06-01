@@ -97,6 +97,7 @@ class EloPredictor:
                     "league": match.get("league", ""),
                     "date": str(match.get("date", "")),
                     "stage": match.get("stage", ""),
+                    "venue": str(match.get("venue", "")) if not pd.isna(match.get("venue")) else "",
                     "status": "TBD",
                 })
                 continue
@@ -113,6 +114,7 @@ class EloPredictor:
                 "league": match.get("league", ""),
                 "date": str(match.get("date", "")),
                 "stage": match.get("stage", ""),
+                "venue": str(match.get("venue", "")) if not pd.isna(match.get("venue")) else "",
                 "probabilities": probs,
                 "expected_goals": {
                     "home": round(home_xg, 2),

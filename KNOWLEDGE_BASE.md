@@ -75,12 +75,12 @@
 │  └─────────────────────────────────────────────────────────────┘ │
 │                          ↓                                       │
 │  ┌─────────────────────────────────────────────────────────────┐ │
-│  │  News Sentiment (Gemini API)                                │ │
-│  │  google-genai + Google Search Grounding                     │ │
-│  │  → Resumen de 3 oraciones por partido                      │ │
+│  │  News Sentiment (Tavily + Groq)                              │ │
+│  │  tavily-python → web search → Groq (llama-3.3-70b-versatile) │ │
+│  │  → Resumen en español (3 oraciones) por partido              │ │
 │  │  → Fuentes reales (ESPN, BBC, Goal, etc.)                   │ │
 │  │  → Solo equipos definidos (no TBD)                          │ │
-│  │  → API Key desde GEMINI_API_KEY (GitHub Secret)             │ │
+│  │  → API Keys: TAVILY_API_KEY + GROQ_API_KEY (GitHub Secrets) │ │
 │  └─────────────────────────────────────────────────────────────┘ │
 │                          ↓                                       │
 │  predictions/latest.json (104 matches, prob 1X2, xG, news)       │
@@ -94,15 +94,16 @@
 │                                                                  │
 │  Lee el JSON desde GitHub Pages (URL pública)                    │
 │  Muestra en el sitio web:                                        │
-│  ┌─────────────┬──────┬──────┬──────┬──────────────┬──────────┐ │
-│  │ Partido     │  1   │  X   │  2   │  Goles Esp.  │  🗞️     │ │
-│  ├─────────────┼──────┼──────┼──────┼──────────────┼──────────┤ │
-│  │ México      │ 73%  │ 21%  │  6%  │  2.04-0.35   │ ver más ▾│ │
-│  │ vs Sudáfrica│      │      │      │              │          │ │
-│  └─────────────┴──────┴──────┴──────┴──────────────┴──────────┘ │
+│  ┌─────────────┬──────┬──────┬──────┬──────────────┬──────────┬────────────┐ │
+│  │ Partido     │  1   │  X   │  2   │  Goles Esp.  │  Fecha   │  Estadio   │ │
+│  ├─────────────┼──────┼──────┼──────┼──────────────┼──────────┼────────────┤ │
+│  │ México      │ 73%  │ 21%  │  6%  │  2.04-0.35   │ 11 jun   │ SoFi, LA  │ │
+│  │ vs Sudáfrica│      │      │      │              │          │            │ │
+│  └─────────────┴──────┴──────┴──────┴──────────────┴──────────┴────────────┘ │
 │  + Detalles: expected_goals por equipo                           │
-│  + Flags emoji para cada selección (48 equipos)                  │
-│  + Acordeón de noticias con análisis Gemini                      │
+│  + Flags emoji para cada selección (48 equipos)                   │
+│  + Fecha + Estadio en banner superior de cada tarjeta             │
+│  + Acordeón de noticias con análisis Groq                        │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -113,12 +114,12 @@
 2. **Lee fixtures hardcodeados** de `data/fixtures_wc2026.json` (104 partidos)
 3. **Carga ELO ratings** de `data/team_ratings.json` (48 selecciones, scrapeado de eloratings.net)
 4. **Genera predicciones con fórmula ELO** (home advantage +100, K=400 → probabilidades 1X2 + xG)
-5. **Enriquece con análisis de noticias** vía Gemini API (Google Search Grounding, gratis) — resumen de 3 oraciones + fuentes reales
+5. **Enriquece con análisis de noticias** vía Tavily (búsqueda web) + Groq (resumen IA con Llama 3.3 70B, 3 oraciones en español) + fuentes reales
 6. **Publica `latest.json`** en GitHub Pages para que WordPress lo consuma
-7. **El plugin de WordPress** lee ese JSON y lo muestra en el sitio web con flags emoji, barras de probabilidad, y acordeón de noticias
-8. **API Key de Gemini** almacenada como GitHub Secret (`GEMINI_API_KEY`), nunca en código
+7. **El plugin de WordPress** lee ese JSON y lo muestra en el sitio web con banner de fecha/estadio, flags emoji, barras de probabilidad, y acordeón de noticias
+8. **API Keys de Tavily + Groq** almacenadas como GitHub Secrets (`TAVILY_API_KEY`, `GROQ_API_KEY`), nunca en código
 
-**Caso de uso típico**: Durante un Mundial, el workflow de Actions se ejecuta cada 6 horas. Calcula probabilidades ELO para cada partido basándose en el rating histórico de cada selección (eloratings.net). Luego, para los partidos con equipos definidos, consulta Gemini API para obtener un resumen de noticias recientes con enlaces a fuentes reales. El JSON enriquecido se despliega a gh-pages. El plugin de WordPress las muestra automáticamente en tarjetas premium con acordeón de noticias expandible.
+**Caso de uso típico**: Durante un Mundial, el workflow de Actions se ejecuta cada 6 horas. Calcula probabilidades ELO para cada partido basándose en el rating histórico de cada selección (eloratings.net). Luego, para los partidos con equipos definidos, consulta Tavily (búsqueda web) y Groq (resumen IA en español) para generar resúmenes con fuentes reales. El JSON enriquecido se despliega a gh-pages. El plugin de WordPress las muestra automáticamente en tarjetas premium con banner de fecha/estadio y acordeón de noticias expandible.
 
 ### ⚠️ Nota sobre fuentes de datos
 
@@ -128,8 +129,8 @@ El plan original contemplaba 3 fuentes en cascada (API-Football → FBref → fo
 - **football-data.org free**: ❌ No incluye World Cup
 - **ClubElo (soccerdata)**: ❌ Solo clubes, no selecciones nacionales
 - **eloratings.net/World.tsv**: ✅ Scraping libre, sin rate limit, 244 equipos nacionales
-- **Fixtures hardcodeados**: ✅ 104 partidos del calendario oficial
-- **Gemini API (google-genai)**: ✅ API gratuita de Google con Google Search Grounding. Sin rate limit en free tier. Usada para enriquecer predicciones con resumen de noticias y fuentes reales. API key almacenada como GitHub Secret (`GEMINI_API_KEY`), nunca en código.
+- **Fixtures hardcodeados**: ✅ 104 partidos del calendario oficial, con venue para cada partido
+- **Tavily (web search) + Groq (LLM)**: ✅ Búsqueda web gratuita (1000 searches/mes) + resumen IA gratuito (30 req/min, modelo llama-3.3-70b-versatile). Tavily busca noticias recientes y Groq genera resúmenes en español. API keys almacenadas como GitHub Secrets (`TAVILY_API_KEY`, `GROQ_API_KEY`), nunca en código.
 
 La arquitectura real v1.0 usa las fuentes que ✅ funcionan.
 
@@ -145,7 +146,8 @@ La arquitectura real v1.0 usa las fuentes que ✅ funcionan.
 |--------|---------------|----------------------|------------|-------------|
 | **API-Football** | $0 (Free) | 1226 ligas, **pero season=2026 NO disponible en free tier** | 100 req/día | ❌ Para WC 2026 |
 | **eloratings.net** | **$0** (scraping) | **World Football Elo Ratings de TODAS las selecciones** | Sin límite | 🥇 Primaria |
-| **Gemini API (google-genai)** | **$0** (Free) | **Google Search Grounding** — búsqueda web en tiempo real | Generoso en free tier | 🥈 News Sentiment |
+| **Tavily (web search)** | **$0** (Free) | **1000 searches/mes** — búsqueda web para noticias de fútbol | 1000/mes | 🥈 News search |
+| **Groq (LLM)** | **$0** (Free) | **30 req/min** — modelo llama-3.3-70b-versatile | 30/min | 🥉 AI summaries |
 | **FBref (vía soccerdata)** | **$0** (scraping) | Mundial 2026 **aún no disponible** (Jun 2026) | Sin límite | ❌ Hoy, 🔒 Post-torneo |
 | **ClubElo (vía soccerdata)** | **$0** | Solo clubes, NO selecciones nacionales | Sin límite | ❌ |
 | **football-data.org** | €0 (Free) | 12 competiciones top, **sin Mundial en free** | 10 req/min | ❌ |
@@ -179,7 +181,7 @@ La arquitectura real v1.0 usa las fuentes que ✅ funcionan.
 
 ### 4.4 Stack de Datos v1.0 (Real)
 
-`eloratings.net` (scraping World.tsv) + `Gemini API` (google-genai + Google Search Grounding) + `data/fixtures_wc2026.json` (hardcodeado) + `EloPredictor` (fórmula ELO clásica)
+`eloratings.net` (scraping World.tsv) + `Tavily` (web search) + `Groq` (llama-3.3-70b-versatile) + `data/fixtures_wc2026.json` (104 partidos con venue) + `EloPredictor` (fórmula ELO clásica)
 
 **Para v2.0 (post-Mundial):** `soccerdata` + `API-Football Free` + `mplsoccer` + datasets Kaggle/GitHub + `football-data.co.uk`
 
@@ -187,22 +189,23 @@ La arquitectura real v1.0 usa las fuentes que ✅ funcionan.
 
 ## 5. Seguridad y uso de APIs
 
-### 5.1 Gemini API (google-genai)
+### 5.1 Tavily + Groq (News Sentiment)
 
-- **Clave de API**: Se almacena como GitHub Secret (`GEMINI_API_KEY`) y nunca se sube a código
-- **Desarrollo local**: Se lee de `.env` (gitignored) para pruebas
-- **GitHub Actions**: Se inyecta desde `secrets.GEMINI_API_KEY` al entorno del workflow
-- **Uso responsable**: 
+- **Claves de API**: Se almacenan como GitHub Secrets (`TAVILY_API_KEY`, `GROQ_API_KEY`) y nunca se suben a código
+- **Desarrollo local**: Se leen de `.env` (gitignored) para pruebas
+- **GitHub Actions**: Se inyectan desde `secrets.TAVILY_API_KEY` y `secrets.GROQ_API_KEY` al entorno del workflow
+- **Uso responsable**:
   - Solo se usa para enriquecer partidos con equipos definidos (no TBD)
   - Máximo 3 fuentes reales por respuesta
   - Resumen de exactamente 3 oraciones en español
-  - No se redistribuyen datos crudos de eloratings.net ni Gemini
-  - Costo: Gratis (free tier) para el volumen esperado (<100 llamadas/día)
+  - No se redistribuyen datos crudos de eloratings.net, Tavily ni Groq
+  - Costo: Gratis (Tavily 1000 searches/mes, Groq 30 req/min) para el volumen esperado (<100 llamadas/día)
 
 ### 5.2 Protección legal
 
-La integración con Gemini API cumple con:
-- **TOS de Gemini**: Uso permitido en aplicaciones no comerciales y comerciales bajo free tier
+La integración con Tavily + Groq cumple con:
+- **TOS de Tavily**: Uso permitido en aplicaciones no comerciales y comerciales bajo free tier
+- **TOS de Groq**: Uso permitido bajo free tier con modelo llama-3.3-70b-versatile
 - **Fair use**: Solo resúmenes y enlaces, no reproducción completa de contenido
 - **Atribución implícita**: Los enlaces dirigen a las fuentes originales
 

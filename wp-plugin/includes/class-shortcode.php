@@ -32,7 +32,22 @@ class PH_Shortcode {
         ?>
         <div class="ph-grid">
             <?php foreach ($matches as $match): ?>
+            <?php
+                $date_str = isset($match['date']) ? $match['date'] : '';
+                $formatted_date = $date_str ? date_i18n('d M Y', strtotime($date_str)) : '';
+                $venue = isset($match['venue']) ? $match['venue'] : '';
+            ?>
             <div class="ph-card">
+                <?php if ($formatted_date || $venue): ?>
+                <div class="ph-card-banner">
+                    <?php if ($formatted_date): ?>
+                        <span class="ph-banner-date">🗓️ <?php echo esc_html($formatted_date); ?></span>
+                    <?php endif; ?>
+                    <?php if ($venue && $venue !== 'TBD'): ?>
+                        <span class="ph-banner-venue">📍 <?php echo esc_html($venue); ?></span>
+                    <?php endif; ?>
+                </div>
+                <?php endif; ?>
                 <div class="ph-card-header">
                     <span class="ph-team ph-home"><?php echo $this->get_flag($match['home']) . esc_html($match['home']); ?></span>
                     <span class="ph-vs">vs</span>
@@ -104,10 +119,23 @@ class PH_Shortcode {
             return '<p>' . esc_html__('Partido no encontrado.', 'partidos-hoy') . '</p>';
         }
 
+        $date_str = isset($match['date']) ? $match['date'] : '';
+        $formatted_date = $date_str ? date_i18n('d M Y', strtotime($date_str)) : '';
+        $venue = isset($match['venue']) ? $match['venue'] : '';
         $probs = $match['probabilities'];
         ob_start();
         ?>
         <div class="ph-single-card">
+            <?php if ($formatted_date || ($venue && $venue !== 'TBD')): ?>
+            <div class="ph-card-banner">
+                <?php if ($formatted_date): ?>
+                    <span class="ph-banner-date">🗓️ <?php echo esc_html($formatted_date); ?></span>
+                <?php endif; ?>
+                <?php if ($venue && $venue !== 'TBD'): ?>
+                    <span class="ph-banner-venue">📍 <?php echo esc_html($venue); ?></span>
+                <?php endif; ?>
+            </div>
+            <?php endif; ?>
             <div class="ph-card-header">
                 <span class="ph-team ph-home"><?php echo $this->get_flag($match['home']) . esc_html($match['home']); ?></span>
                 <span class="ph-vs">vs</span>
