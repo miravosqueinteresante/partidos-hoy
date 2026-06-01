@@ -152,10 +152,6 @@ La arquitectura real v1.0 usa solo las fuentes que ✅ funcionan.
 | **last30days** (v2.9.5) | `30 Dias/last30days-skill/SKILL.md` | Motor de investigación profunda cubriendo Reddit, X, YouTube, TikTok, HN, Polymarket, Bluesky, Truth Social. Útil para monitorear tendencias de fútbol y conversación social |
 | **last30days-free** (v1.2.0) | `30 Dias/last30days-skill/SKILL_FREE.md`, `Web Pulso Paraguay/SKILL_FREE.txt`, `Web Pulso Paraguay/Frigomás/SKILL_FREE.txt` | Versión gratuita con 4 fases: Research, Strategy, Generation, QC. Sin dependencias de pago |
 
-### Skills de Terceros (node_modules)
-
-- `playwright-core` contiene `SKILL.md` y `cli-client/skill/SKILL.md` (no relevantes para predicción)
-
 ### Skills de Sistema (OpenCode)
 
 Skills disponibles globalmente a través del sistema superpowers: brainstorming, web-research, dispatching-parallel-agents, systematic-debugging, test-driven-development, writing-plans, etc.
