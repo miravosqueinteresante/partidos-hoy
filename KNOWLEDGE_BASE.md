@@ -499,7 +499,7 @@ El único plugin WordPress gratuito que genera predicciones con un modelo. Cread
 4. Incorpore **odds reales del mercado** para detección de value
 5. Se **actualice automáticamente** sin intervención manual (pipeline CI/CD)
 
-**Nuestra ventaja competitiva**: Combinamos un motor de predicción potente (XGBoost + múltiples fuentes) con un pipeline autónomo (GitHub Actions) y lo servimos a WordPress de forma simple (JSON → shortcode). Todo gratis, todo open-source.
+**Nuestra ventaja**: Combinamos un motor de predicción ELO con un pipeline autónomo (GitHub Actions) y lo servimos a WordPress de forma simple (JSON → shortcode). Todo gratis, para uso personal.
 
 ---
 
@@ -838,9 +838,9 @@ La API tiene los datos en planes de pago. El free tier solo cubre temporadas 202
 |---|-------|-------------|
 | 1 | GPL-compatible license | Nuestro plugin usará GPLv2+ (compatible con WordPress) |
 | 4 | Código human-readable | Sin ofuscación. PHP puro con namespaces |
-| 5 | Trialware no permitido | La versión gratuita de WP.org no puede tener features bloqueadas. Freemius maneja la separación free/premium con single codebase |
-| 6 | SaaS sí permitido | Nuestro plugin consume JSON remoto → es SaaS, permitido |
-| 7 | No tracking sin consentimiento | El opt-in de Freemius requiere consentimiento explícito |
+| 5 | Uso personal | Plugin no publicado en WP.org, solo uso en nuestro sitio |
+| 6 | SaaS sí permitido | Consume JSON remoto → es SaaS, permitido |
+| 7 | No tracking | Sin tracking de usuarios, sin analytics externos |
 | 8 | No código ejecutable vía terceros | Solo consumimos JSON estático de GitHub Pages (seguro) |
 | 13 | Usar librerías de WordPress | No incluir jQuery, SimplePie, etc. Usar las de WP |
 
@@ -901,77 +901,19 @@ Estructura del plugin:
 - **Premium components** reciben menos escrutinio = más riesgo (lección: debemos ser aún más rigurosos)
 - Atacantes weaponizan vulnerabilidades en **horas**
 
-### 12.4 Plataforma Freemius 2026
-
-#### Comisiones
-
-| Componente | Porcentaje |
-|------------|-----------|
-| Comisión base (rev-share progresiva) | 4.7% en primeros $50K/mes |
-| WordPress surcharge | +2.3% |
-| Gateway fees | ~3% + $0.30 por transacción exitosa |
-| **Total por venta de $29** | **~$2.03 + $0.87 + $0.30 = ~$3.20** |
-| **Neto por venta de $29** | **~$25.80** |
-
-La comisión base baja progresivamente con el revenue mensual:
-| Revenue mensual | Comisión base |
-|----------------|--------------|
-| $0 - $50,000 | 4.7% |
-| $50,000 - $60,000 | 4.5% |
-| $60,000 - $70,000 | 4.0% |
-| $70,000 - $80,000 | 3.0% |
-| $80,000 - $90,000 | 2.0% |
-| $90,000 - $100,000 | 1.0% |
-| $100,000+ | 0.5% |
-
-#### Características Incluidas
-
-- ✅ Gestión de licencias (activación, desactivación, validación)
-- ✅ Actualizaciones automáticas de plugins
-- ✅ Release management con staged rollouts y beta versions
-- ✅ Single sign-on con WordPress Admin
-- ✅ Analytics de audiencia y revenue en tiempo real
-- ✅ Deactivation feedback (cuando un usuario desinstala)
-- ✅ WP.org GPL SDK (genera versión gratuita automática quitando código premium)
-- ✅ WP.org review automation
-- ✅ Manejo automatizado de VAT/sales tax (EU, UK, otros)
-- ✅ Fraude protection
-- ✅ Payouts vía wire transfer (sin importar el país, incluye Paraguay)
-- ✅ Soporte multi-idioma
-
-#### Integración Técnica
-
-```
-1. Crear cuenta en Freemius → "Add Product"
-2. Configurar planes de pricing (Free + Premium)
-3. Descargar Freemius WordPress SDK (última versión: 2.13.1)
-4. Colocar SDK en /vendor/freemius/ del plugin
-5. Copiar snippet auto-generado en el archivo principal del plugin
-6. Envolver código premium con condiciones Freemius:
-   if ( fs_can_access_premium_code() ) { ... código pago ... }
-7. Freemius despliega automáticamente versión free a WP.org
-```
-
-#### Payouts para Paraguay
-
-- Freemius paga vía wire transfer a cualquier país
-- Mínimo para payout: $100
-- Frecuencia: mensual (o cuando se alcanza el mínimo)
-- Freemius maneja VAT (no necesitamos registrarnos en cada país UE)
-- Para impuestos locales de Paraguay: consultar con contador local (esto es responsabilidad nuestra)
-
-### 12.5 EU Cyber Resilience Act (CRA) — CRÍTICO para el Plugin
+### 12.5 EU Cyber Resilience Act (CRA) — Referencia
 
 #### ¿Aplica a nuestro proyecto?
 
-**SÍ.** Vendemos un plugin comercial (vía Freemius) que estará disponible en la UE. El CRA no discrimina por ubicación del desarrollador — si tu software se vende en la UE, estás en alcance.
+**NO.** El plugin es para uso personal en nuestro sitio web. No se vende ni distribuye comercialmente, por lo que CRA no aplica.
 
-#### Timeline de Cumplimiento
+#### Buenas prácticas aplicadas (sin obligación CRA)
 
-| Fecha | Obligación | Estado |
-|------|-----------|--------|
-| **11 Septiembre 2026** | Coordinated Vulnerability Disclosure (CVD) + incident reporting | ⚠️ URGENTE |
-| 11 Diciembre 2027 | Full compliance: CE marking, SBOM, EU Rep, security-by-design docs | En progreso |
+| Práctica | Estado |
+|----------|--------|
+| Coordinated Vulnerability Disclosure (CVD) + security.txt | ✅ Implementado |
+| Dependabot para actualizaciones de seguridad | ✅ Implementado |
+| Nonces, capability checks, sanitize/escape en WordPress | ✅ Implementado |
 
 #### Requisitos para Septiembre 2026
 
@@ -988,14 +930,12 @@ La comisión base baja progresivamente con el revenue mensual:
 #### Sanciones por Incumplimiento
 
 - Hasta **€15 millones** o **2.5% del volumen de negocio anual global**
-- **Remoción del plugin** de plataformas accesibles desde la UE (WordPress.org, Freemius)
-- Para un plugin pequeño: el riesgo real es bajo si demostramos buena fe, pero el requisito es obligatorio
+- **Remoción del plugin** si se detectan vulnerabilidades críticas
 
 #### Buenas Noticias
 
-- Los plugins WordPress caen en categoría **"Default" (bajo riesgo)** → autoevaluación permitida, sin auditoría externa
-- Freemius ya maneja VAT/sales tax compliance (eso nos ayuda pero no cubre CRA)
-- La CRA aplica solo a actividad comercial — pero nosotros SÍ tenemos actividad comercial (Freemius)
+- Uso personal: sin obligaciones CRA, GDPR ni fiscales
+- Buenas prácticas de seguridad aplicadas igualmente
 
 #### Costos de Cumplimiento
 
@@ -1044,16 +984,12 @@ La tendencia 2026 muestra interés real en plugins de predicción con IA/ML para
 
 | # | Riesgo | Probabilidad | Impacto | Mitigación |
 |---|--------|-------------|---------|------------|
-| 1 | API-Football 100 req/día insuficiente | Media | Alto | Optimizar requests (60-75/día). Upgrade a Pro ($19/mes) cuando haya revenue. Combinar con fuentes gratuitas ilimitadas (football-data.co.uk, Understat). |
-| 2 | CRA compliance Sep 2026 no alcanzado | Baja | Alto (legal) | Empezar YA con security.txt + VDP. Esfuerzo estimado: 2-3 días. Costo: $0. |
-| 3 | Modelo no logra accuracy > 55% | Media | Medio | Baseline Poisson ya da 45-50%. Calibración mejora ROI aunque accuracy no suba. Value detection funciona incluso con modelos modestos. |
-| 4 | GitHub Actions timeout (>6h) | Baja | Medio | Split pipeline en jobs paralelos. Dataset actual pequeño (~50K partidos, < 2h entrenamiento). |
-| 5 | Bandwidth GitHub Pages excedido | Baja | Medio | 100 GB/mes gratis. 1 MB/día de JSON = 30 MB/mes. Factor de seguridad: 3,000x. |
-| 6 | Competidor clona features | Media | Medio | Ventaja de ejecución: nosotros empezamos ahora. ML pipeline es difícil de replicar bien. |
-| 7 | Ingresos insuficientes para cubrir API-Football Pro | Media | Bajo | El pipeline funciona con el free tier. Pro solo se necesita para escalar. |
-| 8 | EU Authorized Representative requerido (Dec 2027) | Alta | Bajo (costo) | ~€200-500/año. Presupuestar para 2027. |
-| 9 | WordPress.org guidelines cambian | Baja | Medio | Freemius SDK se actualiza automáticamente para cumplir. Monitorear. |
-| 10 | Paraguay tax implications no claras | Media | Medio | Consultar contador local ANTES de recibir pagos de Freemius. |
+| 1 | API-Football 100 req/día insuficiente | Media | Bajo | No usamos API-Football. Fuente ELO no requiere API. |
+| 2 | CRA compliance | Baja | Bajo | Uso personal, sin comercialización. Buenas prácticas aplicadas. |
+| 3 | Modelo ELO no preciso | Media | Bajo | ELO clásico da baseline. Mejorable en v2.0 con más datos. |
+| 4 | GitHub Actions timeout | Baja | Medio | Pipeline simple (1 script), < 1 minuto de ejecución. |
+| 5 | Bandwidth GitHub Pages excedido | Baja | Medio | 100 GB/mes gratis. JSON ~2KB/request. Factor de seguridad: enorme. |
+| 6 | eloratings.net cambia formato | Baja | Medio | Scraping de World.tsv. Si cambia, adaptar script. |
 
 ### 12.8 Decisión Final: Proyecto VIABLE
 
@@ -1064,31 +1000,21 @@ La tendencia 2026 muestra interés real en plugins de predicción con IA/ML para
 │                                                                │
 │  ✅ TÉCNICO: Viable                                            │
 │     • GitHub Actions (repo público) → cómputo $0 ilimitado     │
-│     • API-Football free tier (100 req/día) suficiente para MVP │
-│     • XGBoost/CatBoost entrena en < 2h en runner standard       │
+│     • Scraping eloratings.net + fixtures hardcodeados          │
+│     • ELO predictor corre en < 10 segundos                      │
 │     • JSON estático en gh-pages sin servidor                   │
 │                                                                │
-│  ✅ SEGURIDAD: Viable con requisitos claros                     │
+│  ✅ SEGURIDAD: Buenas prácticas aplicadas                       │
 │     • WordPress: sanitize + escape + nonces + capabilities      │
-│     • GitHub: secrets, Dependabot, sin credenciales en código   │
-│     • Plugin sigue WP Coding Standards + PHPStan ≥ 6           │
+│     • GitHub: Dependabot, sin credenciales en código            │
+│     • Plugin sigue WP Coding Standards                         │
 │                                                                │
-│  ⚠️  CRA (Sep 2026): Obligatorio pero alcanzable               │
-│     • security.txt + VDP: esfuerzo 2-3 días, costo $0          │
-│     • SBOM + dependency monitoring: esfuerzo 1 día, costo $0   │
-│     • No hay blocker, solo hay que HACERLO antes de la fecha   │
+│  ✅ USO PERSONAL: Sin comercialización                          │
+│     • Plugin para nuestro sitio web (partidoshoy.futbol)       │
+│     • Sin Freemius, sin ventas, sin WP.org                     │
+│     • Sin obligaciones CRA, GDPR, fiscales                     │
 │                                                                │
-│  ✅ COMERCIAL: Viable                                           │
-│     • Competencia débil (GoalGorithm: Poisson, 5 ligas, free)  │
-│     • Diferenciación clara: ML + calibración + más ligas       │
-│     • Freemius a 7% + gateway, sin mensualidades               │
-│     • $29/año es precio estándar de mercado                     │
-│     • ~4 ventas/mes = ~$100/mes neto                           │
-│                                                                │
-│  ✅ SIN BLOQUERS: No hay razón para no empezar                  │
-│                                                                │
-│  PRÓXIMO PASO: Diseñar arquitectura detallada y escribir       │
-│  plan de implementación con writing-plans skill                │
+│  ✅ SIN BLOQUERS                                               │
 │                                                                │
 └────────────────────────────────────────────────────────────────┘
 ```
@@ -1097,12 +1023,7 @@ La tendencia 2026 muestra interés real en plugins de predicción con IA/ML para
 
 ## 13. Referencias Agregadas en Validación 2026
 
-### Freemius
-- Pricing (2026): https://freemius.com/pricing/
-- WordPress Solution Pricing: https://freemius.com/wordpress/pricing/
-- SDK Integration Guide: https://freemius.com/help/documentation/wordpress-sdk/integrating-freemius-sdk/
-- WordPress SDK Docs: https://freemius.com/help/documentation/wordpress-sdk/
-- SDK Releases (GitHub): https://github.com/Freemius/wordpress-sdk/releases
+
 
 ### Seguridad WordPress 2026
 - Detailed Plugin Guidelines: https://developer.wordpress.org/plugins/wordpress.org/detailed-plugin-guidelines/
@@ -1194,7 +1115,7 @@ FIFA tiene **98+ marcas registradas en US**, **300+ en México** para el Mundial
 #### Paraguay — Sin Riesgos Legales Específicos
 - No hay leyes que regulen plugins/software específicamente
 - Sistema tributario territorial: **0%** sobre ingresos de fuente extranjera
-- IVA 10% manejado por el procesador de pagos (Freemius)
+- Sin IVA ni impuestos de ventas (uso personal, no comercial)
 - No hay regulación de gambling que afecte predicciones informativas
 - Recomendado: registrar RUC en SET y documentar ingresos extranjeros
 

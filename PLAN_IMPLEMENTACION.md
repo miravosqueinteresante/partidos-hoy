@@ -4,11 +4,11 @@
 > 
 > **v1.0 = Copa del Mundo 2026 (104 partidos, 48 selecciones).** Después del 19 de julio se expandirá a más ligas bajo la marca Partidos Hoy.
 
-**Goal:** v1.0 enfocada exclusivamente en la **Copa del Mundo 2026**. Pipeline Python en GitHub Actions genera predicciones ELO desde fixtures hardcodeados (`data/fixtures_wc2026.json`) + ratings de eloratings.net (`data/team_ratings.json`). Plugin WordPress consume el JSON vía shortcode con Freemius. Producto: **Partidos Hoy - Pronósticos de Fútbol**, alojado en partidoshoy.futbol.
+**Goal:** v1.0 enfocada exclusivamente en la **Copa del Mundo 2026**. Pipeline Python en GitHub Actions genera predicciones ELO desde fixtures hardcodeados (`data/fixtures_wc2026.json`) + ratings de eloratings.net (`data/team_ratings.json`). Plugin WordPress consume el JSON vía shortcode para nuestro sitio. Producto: **Partidos Hoy - Pronósticos de Fútbol**, alojado en partidoshoy.futbol.
 
 **Architecture:** Fuente única de datos: fixtures hardcodeados en `data/fixtures_wc2026.json` (104 partidos del Mundial). Ratings ELO de selecciones desde eloratings.net (scraping de `World.tsv`, 244 equipos). Predictor ELO con fórmula clásica (home advantage +100, K=400) genera probabilidades 1X2 y expected goals. Sin dependencias de APIs externas ni rate limits. Sin ML. v2.0 post-Mundial añadirá XGBoost con datos históricos de ligas regulares.
 
-**Tech Stack:** Python 3.12, pandas, numpy, requests (scraping eloratings.net), GitHub Actions, PHP 8.x, WordPress 6.x, Freemius SDK
+**Tech Stack:** Python 3.12, pandas, numpy, requests (scraping eloratings.net), GitHub Actions, PHP 8.x, WordPress 6.x
 
 **Estructura del repositorio:**
 ```
@@ -40,7 +40,7 @@ partidos-hoy/
 │   ├── assets/
 │   │   └── css/
 │   │       └── frontend.css           # Estilos del shortcode
-│   ├── vendor/freemius/               # Freemius SDK
+
 │   └── readme.txt                     # WordPress.org readme
 ├── requirements.txt                    # pandas, numpy, requests, pytest
 ├── .gitignore
@@ -2861,113 +2861,6 @@ git commit -m "feat: shortcode renderer with table and single-match card views"
 
 ---
 
-### Task 16: Integración Freemius SDK
-
-**Files:**
-- Modify: `wp-plugin/partidos-hoy.php`
-
-- [ ] **Step 1: Descargar Freemius SDK**
-
-```bash
-cd wp-plugin
-composer require freemius/wordpress-sdk
-```
-
-(Nota: Si no se usa Composer, descargar manual de https://github.com/Freemius/wordpress-sdk y renombrar carpeta a `freemius` dentro de `wp-plugin/vendor/`)
-
-- [ ] **Step 2: Integrar SDK en el plugin principal**
-
-```php
-<?php
-/**
- * Plugin Name:     Partidos Hoy
- * Plugin URI:       https://github.com/tuusuario/partidos-hoy
- * Description:      Predicciones de partidos de fútbol con ML (XGBoost)
- * Version:          1.0.0
- * Requires PHP:     7.4
- * Requires at least: 5.0
- * Author:           Tu Nombre
- * License:          GPL v2 or later
- * Text Domain:      partidos-hoy
- * Domain Path:      /languages
- */
-
-defined('ABSPATH') || exit;
-
-if ( ! defined( 'ABSPATH' ) ) {
-    exit;
-}
-
-require_once dirname( __FILE__ ) . '/vendor/freemius/start.php';
-
-function ph_freemius() {
-    $freemius = fs_dynamic_init( array(
-        'id'                  => 'YOUR_PRODUCT_ID',
-        'slug'                => 'partidos-hoy',
-        'type'                => 'plugin',
-        'public_key'          => 'pk_YOUR_PUBLIC_KEY',
-        'is_premium'          => false,
-        'premium_suffix'      => ' (Premium)',
-        'has_addons'          => false,
-        'has_paid_plans'      => true,
-        'trial'               => array(
-            'days'               => 7,
-            'is_require_payment' => false,
-        ),
-        'menu'                => array(
-            'slug'           => 'partidos-hoy',
-            'support'        => false,
-            'parent'         => array(
-                'slug' => 'options-general.php',
-            ),
-        ),
-    ) );
-    return $freemius;
-}
-ph_freemius();
-
-define('PH_VERSION', '1.0.0');
-define('PH_PLUGIN_DIR', plugin_dir_path(__FILE__));
-define('PH_PLUGIN_URL', plugin_dir_url(__FILE__));
-
-require_once PH_PLUGIN_DIR . 'includes/class-data-client.php';
-require_once PH_PLUGIN_DIR . 'includes/class-shortcode.php';
-
-function ph_init_premium() {
-    $data_client = new PH_Data_Client();
-    new PH_Shortcode($data_client);
-
-    if (is_admin()) {
-        require_once PH_PLUGIN_DIR . 'includes/class-admin.php';
-        new PH_Admin($data_client);
-    }
-}
-
-if (ph_freemius()->can_use_premium_code()) {
-    define('PH_IS_PREMIUM', true);
-    // Mostrar TODAS las ligas
-    add_filter('ph_league_limit', function() { return 50; });
-} else {
-    define('PH_IS_PREMIUM', false);
-    // Mostrar solo 5 ligas en versión free
-    add_filter('ph_league_limit', function() { return 5; });
-}
-
-add_action('plugins_loaded', 'ph_init_premium');
-```
-
-- [ ] **Step 3: Verificar**
-
-Run: `php -l wp-plugin/partidos-hoy.php`
-Expected: No syntax errors detected
-
-- [ ] **Step 4: Commit**
-
-```bash
-git add wp-plugin/
-git commit -m "feat: integrate Freemius SDK with free/premium tiers"
-```
-
 ---
 
 ## Fase 4: CRA Compliance (EU Cyber Resilience Act)
@@ -3076,7 +2969,7 @@ git commit -m "chore: CRA compliance - security.txt, VDP, Dependabot"
 | 3 | **EloPredictor (fórmula ELO clásica)** | ✅ | Home advantage +100, K=400 → 1X2 + expected_goals |
 | 4 | 104 fixtures hardcodeados | ✅ | `data/fixtures_wc2026.json` — 72 grupo + 32 KO |
 | 5 | Workflow GHA (cada 6h) | ✅ | Sin steps de diagnóstico, sin API keys |
-| 6 | Plugin WordPress | ✅ | Freemius, shortcodes, admin, data client |
+| 6 | Plugin WordPress | ✅ | Shortcodes, admin, data client |
 | 7 | CRA compliance | ✅ | security.txt + VDP + Dependabot |
 
 **Código legacy eliminado** (existía en el plan original pero NO en producción):
@@ -3146,7 +3039,7 @@ Fixtures: data/fixtures_wc2026.json (hardcodeado)
 - ✅ **Fuente única de datos**: eloratings.net (scraping) + fixtures hardcodeados
 - ✅ GitHub Actions CI/CD (1 workflow: worldcup-pipeline cada 6h, sin API keys)
 - ✅ Plugin WordPress con shortcode y admin
-- ✅ Freemius integración free/premium
+- ✅ Plugin funcional para uso personal
 - ✅ CRA compliance (security.txt + VDP + Dependabot)
 - ✅ Seguridad WordPress (nonces, capability checks, sanitize, escape)
 - ✅ Protección legal FIFA (branding sin marcas, disclaimers, checklists)
@@ -3175,7 +3068,7 @@ data/team_ratings.json ────────↕              (104 matches, pr
 - [ ] **Tags (readme.txt)**: sin `fifa`, `world cup`, `mundial`. Tags seguros: `football`, `soccer`, `predictions`, `ml`, `analytics`
 - [ ] **Disclaimers**: agregar en admin/footer del plugin: "For informational and entertainment purposes only. Not affiliated with FIFA or any football federation."
 - [ ] **readme.txt**: incluir disclaimer legal en la descripción
-- [ ] **Privacy Policy**: crear página (necesaria para GDPR + Freemius)
+- [ ] **Privacy Policy**: página estándar en el sitio
 - [ ] **Términos y Condiciones**: crear página (18+, "as is", sin garantía)
 - [ ] **Responsible Gambling**: link a GambleAware o equivalente en el shortcode output
 - [ ] **Datos**: NO vender JSON crudo de API-Football — solo predicciones derivadas
