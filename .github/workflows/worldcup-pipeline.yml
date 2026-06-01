@@ -56,17 +56,12 @@ jobs:
                   print(f'  TBD ({m[\"stage\"]}) - {m[\"date\"]}')
           "
 
-      - name: Enrich predictions with news sentiment (Tavily AI)
+      - name: Enrich predictions with news sentiment (Tavily + Groq)
         env:
           TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
         run: |
           # Calcular date_from según la fecha actual (UTC)
-          # Wave 1: antes del 14 Jun → procesar desde 11 Jun
-          # Wave 2: antes del 17 Jun → procesar desde 14 Jun
-          # Wave 3: antes del 20 Jun → procesar desde 17 Jun
-          # Wave 4: antes del 23 Jun → procesar desde 20 Jun
-          # Wave 5: antes del 26 Jun → procesar desde 23 Jun
-          # Wave 6: 26 Jun en adelante → procesar desde 26 Jun
           CURRENT_DATE=$(date -u +%Y-%m-%d)
           if [[ "$CURRENT_DATE" < "2026-06-14" ]]; then
             DATE_FROM="2026-06-11"
