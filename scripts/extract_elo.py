@@ -62,5 +62,5 @@ print()
 for t in sorted(wc_teams, key=lambda x: elo_map.get(x, 0), reverse=True):
     r = elo_map.get(t, "N/A")
     print(f"  {t:30s} -> ELO: {r}")
-with open("data/wc_elo_ratings.json", "w") as f:
+with open("data/wc_elo_ratings.json", "w", encoding="utf-8") as f:
     json.dump(elo_map, f, indent=2)

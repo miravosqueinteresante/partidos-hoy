@@ -59,7 +59,7 @@ for fixture_name, search_name in wc_teams_map.items():
     else:
         print(f"MISSING: {fixture_name} -> {search_name}")
 
-with open("data/team_ratings.json", "w") as f:
+with open("data/team_ratings.json", "w", encoding="utf-8") as f:
     json.dump(result, f, indent=2)
 
 print(f"\nSaved {len(result)} teams to data/team_ratings.json")
