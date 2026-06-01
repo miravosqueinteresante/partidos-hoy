@@ -314,12 +314,13 @@ Separación de fuerza en 4 componentes: pi_att_home, pi_def_home, pi_att_away, p
 >
 > **v1.0 = SOLO Mundial 2026.** Las fuentes están priorizadas en cascada: API-Football (primary) → FBref/soccerdata (fallback 1) → football-data.org (fallback 2). Las fuentes de ligas regulares se integrarán en v2.0.
 
-| API | Costo/mes Real | Cobertura (plan free) | Rate Limit | Rol en v1.0 |
-|-----|---------------|----------------------|------------|-------------|
-| **API-Football** | $0 (Free) | 1226 ligas, Mundial incluido (league=1) | 100 req/día | 🥇 Primaria |
-| **FBref (vía soccerdata)** | **$0** (scraping) | Mundial 2026 completo, selecciones | Sin límite | 🥈 Fallback 1 |
-| **ClubElo (vía soccerdata)** | **$0** | ELO ratings históricos de selecciones | Sin límite | 🥈 Fallback 1 |
-| **football-data.org** | €0 (Free) | 12 competiciones top (Mundial parcial) | 10 req/min | 🥉 Fallback 2 |
+| Fuente | Costo/mes Real | Cobertura (plan free) | Rate Limit | Rol en v1.0 |
+|--------|---------------|----------------------|------------|-------------|
+| **API-Football** | $0 (Free) | 1226 ligas, **pero season=2026 NO disponible en free tier** | 100 req/día | ❌ Para WC 2026 |
+| **eloratings.net** | **$0** (scraping) | **World Football Elo Ratings de TODAS las selecciones** | Sin límite | 🥇 Primaria |
+| **FBref (vía soccerdata)** | **$0** (scraping) | Mundial 2026 **aún no disponible** (Jun 2026) | Sin límite | ❌ Hoy, 🔒 Post-torneo |
+| **ClubElo (vía soccerdata)** | **$0** | Solo clubes, NO selecciones nacionales | Sin límite | ❌ |
+| **football-data.org** | €0 (Free) | 12 competiciones top, **sin Mundial en free** | 10 req/min | ❌ |
 | **football-data.co.uk** | **$0** | 22 divisiones, odds desde 1993 | CSV semanal | 📊 Histórico |
 | **StatsBomb Open Data** | **$0** | Eventos detallados selectos | GitHub | 📊 Validación |
 | **OpenLigaDB** | **$0** | Ligas alemanas | Sin límite | 🔒 Post-v1.0 |
@@ -648,11 +649,13 @@ Esta skill es directamente aplicable para la fase de monitoreo de tendencias y a
 | Plugin | WordPress (PHP puro) | $0 | No |
 
 **Stack de datos gratuito definitivo (v1.0: Mundial 2026):**
-- `API-Football Free` (100 req/día, primary) — $0
-- `soccerdata.FBref` (scraping FBref, fallback 1) — $0
-- `soccerdata.ClubElo` (ELO ratings de selecciones) — $0
-- `football-data.org` (10 req/min, fallback 2) — $0
-- `football-data.co.uk` (resultados históricos + odds, CSV) — $0
+- `eloratings.net/World.tsv` (World Football Elo Ratings, scraping) — $0 ✅ FUNCIONA
+- `data/fixtures_wc2026.json` (104 fixtures hardcodeados del calendario) — $0 ✅ FUNCIONA
+- `football-data.co.uk` (resultados históricos + odds, CSV) — $0 🔒 Post-v1.0
+- ~~`API-Football Free` (100 req/día, primary) — season=2026 NO disponible en free~~ ❌
+- ~~`soccerdata.FBref` (scraping FBref, fallback 1) — WC 2026 no disponible aún~~ ❌
+- ~~`soccerdata.ClubElo` (ELO ratings de selecciones) — solo clubes~~ ❌
+- ~~`football-data.org` (10 req/min, fallback 2) — sin Mundial en free~~ ❌
 
 **Pendientes para v2.0 (post-Mundial):**
 - `soccerdata` (FBref/Understat/ClubElo para ligas regulares)
@@ -742,7 +745,11 @@ Esta skill es directamente aplicable para la fase de monitoreo de tendencias y a
 
 #### Mundial 2026 en API-Football (league=1, season=2026)
 
-La guía oficial de API-Football (abril 2026) confirma cobertura completa del Mundial:
+> ⚠️ **ADVERTENCIA VERIFICADA**: La guía oficial de API-Football (abril 2026) describe cobertura completa del Mundial. **PERO EL FREE TIER NO TIENE ACCESO A SEASON=2026.** Error real: `Free plans do not have access to this season, try from 2022 to 2024.` Verificado el 1 de junio de 2026.
+
+La API tiene los datos en planes de pago. El free tier solo cubre temporadas 2022-2024.
+
+**Solución implementada**: Los fixtures se cargan desde `data/fixtures_wc2026.json` (104 partidos hardcodeados del calendario oficial). Las predicciones se generan con World Football Elo Ratings (eloratings.net) en vez de API-Football.
 
 | Aspecto | Detalle |
 |---------|---------|
@@ -751,29 +758,22 @@ La guía oficial de API-Football (abril 2026) confirma cobertura completa del Mu
 | **Formato** | 48 selecciones, 12 grupos de 4, 104 partidos |
 | **Fechas** | 11 junio - 19 julio 2026 |
 | **Sedes** | Canadá, México, Estados Unidos (16 estadios) |
-| **Datos disponibles** | Ya están cargados (abril 2026). Schedule, equipos, grupos disponibles |
-| **Cobertura** | fixtures.events ✅, lineups ✅, statistics ✅, standings ✅, predictions ✅, odds ✅, injuries ✅ |
+| **Datos disponibles** | En planes de pago. Free tier: ❌ |
+| **Alternativa real** | `data/fixtures_wc2026.json` + eloratings.net |
 
-**Endpoints clave para el Mundial:**
-| Endpoint | Parámetros | Uso |
-|----------|-----------|-----|
-| `/fixtures?league=1&season=2026` | league=1, season=2026 | Los 104 partidos del torneo |
-| `/fixtures?league=1&season=2026&round=Group%20stage` | round filter | Filtrar por fase |
-| `/fixtures?ids=ID1-ID2-ID3` | hasta 20 IDs | Batch query de fixtures |
-| `/standings?league=1&season=2026` | - | Tabla de 12 grupos |
-| `/predictions?fixture=FIXTURE_ID` | fixture ID | Predicción built-in (baseline) |
-| `/odds?fixture=FIXTURE_ID` | fixture ID | Odds de últimos 7 días |
-| `/odds/live?fixture=FIXTURE_ID` | fixture ID | Odds en vivo |
-| `/fixtures/headtohead?h2h=TEAM_A-TEAM_B` | team IDs separados por - | Historial H2H entre selecciones |
-| `/teams?league=1&season=2026` | - | Las 48 selecciones |
-| `/fixtures/rounds?league=1&season=2026` | - | Lista de rondas (Group stage, Round of 32, etc.) |
-| `/coachs?team=TEAM_ID` | team ID | Entrenador de cada selección |
+**Endpoints (documentados para referencia, pero NO disponibles en free tier):**
+| Endpoint | Parámetros | Disponible en free |
+|----------|-----------|-------------------|
+| `/fixtures?league=1&season=2026` | league=1, season=2026 | ❌ |
+| `/standings?league=1&season=2026` | - | ❌ |
+| `/predictions?fixture=FIXTURE_ID` | fixture ID | ❌ |
+| `/odds?fixture=FIXTURE_ID` | fixture ID | ❌ |
 
 **Convención de season parameter**: 
 - Torneos por año calendario (Mundial, MLS, J.League): `season=2026`
 - Torneos por temporada (Premier 2025/2026): `season=2025` (año de inicio)
 
-**Implicación**: El Mundial 2026 es el caso de uso ideal para lanzar el plugin. Los datos ya están disponibles. Podemos generar predicciones desde el día 1.
+**Implicación**: Para v1.0 (Mundial 2026), el pipeline usa datos hardcodeados + Elo en vez de API-Football. Para ligas regulares (v2.0), API-Football free tier SÍ funciona con seasons 2022-2024.
 
 #### Fuentes Secundarias (complementarias, sin límite diario)
 

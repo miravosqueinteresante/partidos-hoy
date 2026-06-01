@@ -3092,26 +3092,26 @@ git commit -m "chore: CRA compliance - security.txt, VDP, Dependabot"
 
 | # | Task | Archivos | Estado |
 |---|------|----------|--------|
-| 1 | Config WC-only + fallback sources | 5 files | Pendiente |
-| 2 | Rate limiter | 2 files | Pendiente |
-| 3 | **API-Football client (fuente primaria)** | 2 files | Pendiente |
-| 3b | **FBref scraper vía soccerdata (fallback 1)** | 2 files | Pendiente |
-| 3c | **football-data.org client (fallback 2)** | 2 files | Pendiente |
-| 3d | **DataCascade orquestador (3 fuentes)** | 2 files | Pendiente |
-| 4 | Historical data parser | 2 files | Pendiente |
-| 5 | ELO ratings | 2 files | Pendiente |
-| 6 | Rolling stats | 2 files | Pendiente |
-| 7 | Feature builder | 2 files | Pendiente |
-| 8 | XGBoost trainer | 2 files | Pendiente |
-| 9 | Probability calibrator | 2 files | Pendiente |
-| 10 | Prediction generator (+api_prediction) | 2 files | Pendiente |
-| 11 | Integration test | 1 file | Pendiente |
-| 12 | **Workflow Mundial 2026 (único, cada 6h)** | 1 file | Pendiente |
-| 13 | Plugin base | 2 files | Pendiente |
-| 14 | Data client + admin | 3 files | Pendiente |
-| 15 | Shortcode + CSS | 3 files | Pendiente |
-| 16 | Freemius SDK | 1 file | Pendiente |
-| 17 | CRA compliance | 3 files | Pendiente |
+| 1 | Config WC-only + fallback sources | 5 files | ✅ |
+| 2 | Rate limiter | 2 files | ✅ |
+| 3 | **API-Football client (fuente primaria)** | 2 files | ✅ |
+| 3b | **FBref scraper vía soccerdata (fallback 1)** | 2 files | ✅ |
+| 3c | **football-data.org client (fallback 2)** | 2 files | ✅ |
+| 3d | **DataCascade orquestador (3 fuentes)** | 2 files | ✅ |
+| 4 | Historical data parser | 2 files | ✅ |
+| 5 | ELO ratings | 2 files | ✅ |
+| 6 | Rolling stats | 2 files | ✅ |
+| 7 | Feature builder | 2 files | ✅ |
+| 8 | XGBoost trainer | 2 files | ✅ |
+| 9 | Probability calibrator | 2 files | ✅ |
+| 10 | Prediction generator (+api_prediction) | 2 files | ✅ |
+| 11 | Integration test | 1 file | ✅ |
+| 12 | **Workflow Mundial 2026 (único, cada 6h)** | 1 file | ✅ |
+| 13 | Plugin base | 2 files | ✅ |
+| 14 | Data client + admin | 3 files | ✅ |
+| 15 | Shortcode + CSS | 3 files | ✅ |
+| 16 | Freemius SDK | 1 file | ✅ |
+| 17 | CRA compliance | 3 files | ✅ |
 
 ### Hit de tiempo: Copa del Mundo 2026
 
@@ -3128,7 +3128,51 @@ La Copa del Mundo arranca el **11 de junio de 2026**. v1.0 solo cubre la Copa. P
 
 ---
 
-## Autoevaluación del Plan
+---
+
+## 🔴 REALITY CHECK: Lo que el plan asumió vs. la realidad
+
+Este plan se escribió con suposiciones que NO se cumplieron. Aquí está la verdad:
+
+### Suposiciones Fallidas
+
+| Suposición del Plan | Realidad | Impacto |
+|---------------------|----------|---------|
+| API-Football free tier tiene season=2026 | ❌ `Free plans do not have access to this season, try from 2022 to 2024.` | Fuente primaria INSERVIBLE |
+| FBref vía soccerdata tendrá fixtures del Mundial 2026 | ❌ `is_worldcup_available() = False` | Fallback 1 vacío |
+| ClubElo tiene ratings de selecciones nacionales | ❌ ClubElo es solo para clubes, no selecciones | ELO de selecciones no disponible |
+| football-data.org tiene World Cup en free tier | ❌ Solo 12 competiciones top, sin Mundial | Fallback 2 vacío |
+| XGBoost puede entrenarse con datos históricos de selecciones | ❌ No hay dataset histórico de selecciones accesible gratis | Modelo ML sin entrenar |
+
+### Lo que SÍ funciona
+
+| Recurso | Estado | Cómo se usa |
+|---------|--------|-------------|
+| **eloratings.net/World.tsv** | ✅ **Scraping libre, sin rate limit** | ELO ratings de TODAS las selecciones nacionales |
+| **data/fixtures_wc2026.json** | ✅ 104 partidos del Mundial | Fixtures hardcodeados desde el calendario oficial |
+| **ELO formula** | ✅ Probabilidades 1X2 reales | `EloPredictor` usa ELO + home advantage → 3-way |
+| **data/team_ratings.json** | ✅ 48 selecciones con ELO | Scrapeado de eloratings el 1 Jun 2026 |
+| **Plugin WordPress** | ✅ Consume JSON desde gh-pages | Sin cambios, mismo formato de `latest.json` |
+
+### Arquitectura Real (v1.0)
+
+```
+Fixtures: data/fixtures_wc2026.json (hardcodeado)
+  + Ratings: eloratings.net scrape → data/team_ratings.json
+  + Modelo: ELO formula (sin entrenamiento)
+  → predictions/latest.json (104 partidos con probabilidades)
+  → gh-pages deploy
+  → WordPress consume JSON
+```
+
+### Lo que queda para v2.0 (post-Mundial)
+
+- XGBoost/CatBoost con datos históricos de ligas (football-data.co.uk, soccerdata)
+- API-Football para ligas regulares (season=2024-2025 sí funciona en free tier)
+- Actualización ELO automática post-partido
+- Value detection vs odds del mercado
+
+---
 
 **Cobertura del spec:**
 - ✅ **v1.0 enfocado exclusivamente en Copa del Mundo 2026** 
