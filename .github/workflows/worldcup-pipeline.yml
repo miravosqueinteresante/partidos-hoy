@@ -33,6 +33,65 @@ jobs:
         run: |
           mkdir -p predictions
 
+      - name: DIAGNOSTIC - Check API-Football season 2026 access
+        run: |
+          python -c "
+          import json, os, requests
+
+          key = os.environ.get('API_FOOTBALL_KEY', '')
+          print(f'API key present: {bool(key)}')
+          print(f'API key length: {len(key)}')
+
+          # 1) Check leagues coverage for season=2026
+          headers = {'x-apisports-key': key}
+          r = requests.get('https://v3.football.api-sports.io/leagues?id=1&season=2026', headers=headers)
+          print(f'\n=== LEAGUES coverage (id=1, season=2026) ===')
+          print(f'Status: {r.status_code}')
+          data = r.json()
+          print(f'Errors: {data.get(\"errors\", {})}')
+          results = data.get('response', [])
+          if results:
+              seasons = results[0].get('seasons', [])
+              for s in seasons:
+                  print(f'Season: {s.get(\"year\")}, coverage: {json.dumps(s.get(\"coverage\", {}), indent=2)}')
+              print(f'League name: {results[0].get(\"league\", {}).get(\"name\")}')
+              print(f'Available seasons: {[s.get(\"year\") for s in seasons]}')
+          else:
+              print('NO RESULTS - season=2026 may not be available on this plan')
+
+          # 2) Try fixtures
+          print(f'\n=== FIXTURES (league=1, season=2026) ===')
+          r2 = requests.get('https://v3.football.api-sports.io/fixtures?league=1&season=2026', headers=headers)
+          print(f'Status: {r2.status_code}')
+          data2 = r2.json()
+          print(f'Errors: {data2.get(\"errors\", {})}')
+          fixtures = data2.get('response', [])
+          print(f'Fixtures count: {len(fixtures)}')
+          if fixtures:
+              for f in fixtures[:5]:
+                  home = f['teams']['home']['name']
+                  away = f['teams']['away']['name']
+                  date = f['fixture']['date']
+                  status = f['fixture']['status']['long']
+                  print(f'  {home} vs {away} - {date} ({status})')
+              if len(fixtures) > 5:
+                  print(f'  ... and {len(fixtures)-5} more')
+
+          # 3) Save diagnostic output
+          diag = {
+              'leagues_status': r.status_code,
+              'leagues_errors': data.get('errors', {}),
+              'leagues_results': len(results),
+              'available_seasons': [s.get('year') for s in (seasons if results else [])],
+              'fixtures_status': r2.status_code,
+              'fixtures_errors': data2.get('errors', {}),
+              'fixtures_count': len(fixtures),
+          }
+          with open('predictions/api_diagnostic.json', 'w') as f:
+              json.dump(diag, f, indent=2)
+          print(f'\nDiagnostic saved to predictions/api_diagnostic.json')
+          "
+
       - name: Fetch World Cup data via cascade
         run: |
           python -c "
