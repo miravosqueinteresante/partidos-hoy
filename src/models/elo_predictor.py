@@ -89,7 +89,7 @@ class EloPredictor:
         for _, match in upcoming_matches.iterrows():
             home = match["home_team"]
             away = match["away_team"]
-            if not home or not away:
+            if pd.isna(home) or pd.isna(away) or not home or not away:
                 matches_list.append({
                     "id": hashlib.md5(f"tbd-{match.get('date', '')}".encode()).hexdigest()[:8],
                     "home": None,
