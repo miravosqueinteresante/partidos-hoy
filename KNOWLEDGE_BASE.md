@@ -152,16 +152,6 @@ La arquitectura real v1.0 usa solo las fuentes que ✅ funcionan.
 | **last30days** (v2.9.5) | `30 Dias/last30days-skill/SKILL.md` | Motor de investigación profunda cubriendo Reddit, X, YouTube, TikTok, HN, Polymarket, Bluesky, Truth Social. Útil para monitorear tendencias de fútbol y conversación social |
 | **last30days-free** (v1.2.0) | `30 Dias/last30days-skill/SKILL_FREE.md`, `Web Pulso Paraguay/SKILL_FREE.txt`, `Web Pulso Paraguay/Frigomás/SKILL_FREE.txt` | Versión gratuita con 4 fases: Research, Strategy, Generation, QC. Sin dependencias de pago |
 
-### Skills de Video/AI (FireRed-Core)
-
-| Skill | Ubicación | Propósito |
-|-------|-----------|-----------|
-| **openstoryline-use** | `Videos IA/FireRed-Core/.claude/skills/openstoryline-use/SKILL.md` | Uso de storyline para videos |
-| **openstoryline-install** | `Videos IA/FireRed-Core/.claude/skills/openstoryline-install/SKILL.md` | Instalación de storyline |
-| subtitle_imitation_skill | `FireRed-Core/.storyline/skills/` | Imitación de subtítulos |
-| speech_rough_cut_skill | `FireRed-Core/.storyline/skills/` | Corte de audio |
-| create_profile_style_skill | `FireRed-Core/.storyline/skills/` | Estilo de perfil |
-
 ### Skills de Terceros (node_modules)
 
 - `playwright-core` contiene `SKILL.md` y `cli-client/skill/SKILL.md` (no relevantes para predicción)
