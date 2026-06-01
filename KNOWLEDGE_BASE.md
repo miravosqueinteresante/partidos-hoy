@@ -55,8 +55,6 @@
 │                    GITHUB ACTIONS                                │
 │  Pipeline automático (cada 6h durante Mundial) — $0              │
 │                                                                  │
-│  DATOS: FUENTE ÚNICA (sin APIs externas)                         │
-│                                                                  │
 │  ┌─────────────────────────────────────────────────────────────┐ │
 │  │  Fixtures hardcodeados (data/fixtures_wc2026.json)          │ │
 │  │  104 partidos: 72 grupo + 32 KO                             │ │
@@ -76,7 +74,16 @@
 │  │  → Acentos normalizados (Côte → Cote, Türkiye → Turkiye)   │ │
 │  └─────────────────────────────────────────────────────────────┘ │
 │                          ↓                                       │
-│  predictions/latest.json (104 matches, prob 1X2, xG)             │
+│  ┌─────────────────────────────────────────────────────────────┐ │
+│  │  News Sentiment (Gemini API)                                │ │
+│  │  google-genai + Google Search Grounding                     │ │
+│  │  → Resumen de 3 oraciones por partido                      │ │
+│  │  → Fuentes reales (ESPN, BBC, Goal, etc.)                   │ │
+│  │  → Solo equipos definidos (no TBD)                          │ │
+│  │  → API Key desde GEMINI_API_KEY (GitHub Secret)             │ │
+│  └─────────────────────────────────────────────────────────────┘ │
+│                          ↓                                       │
+│  predictions/latest.json (104 matches, prob 1X2, xG, news)       │
 │     → gh-pages deploy automático                                 │
 └──────────────────────────┬──────────────────────────────────────┘
                            │  URL pública del JSON
@@ -87,13 +94,15 @@
 │                                                                  │
 │  Lee el JSON desde GitHub Pages (URL pública)                    │
 │  Muestra en el sitio web:                                        │
-│  ┌─────────────┬──────┬──────┬──────┬──────────────┐            │
-│  │ Partido     │  1   │  X   │  2   │  Goles Esp.  │            │
-│  ├─────────────┼──────┼──────┼──────┼──────────────┤            │
-│  │ México      │ 73%  │ 21%  │  6%  │  2.04-0.35   │            │
-│  │ vs Sudáfrica│      │      │      │              │            │
-│  └─────────────┴──────┴──────┴──────┴──────────────┘            │
+│  ┌─────────────┬──────┬──────┬──────┬──────────────┬──────────┐ │
+│  │ Partido     │  1   │  X   │  2   │  Goles Esp.  │  🗞️     │ │
+│  ├─────────────┼──────┼──────┼──────┼──────────────┼──────────┤ │
+│  │ México      │ 73%  │ 21%  │  6%  │  2.04-0.35   │ ver más ▾│ │
+│  │ vs Sudáfrica│      │      │      │              │          │ │
+│  └─────────────┴──────┴──────┴──────┴──────────────┴──────────┘ │
 │  + Detalles: expected_goals por equipo                           │
+│  + Flags emoji para cada selección (48 equipos)                  │
+│  + Acordeón de noticias con análisis Gemini                      │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -104,11 +113,12 @@
 2. **Lee fixtures hardcodeados** de `data/fixtures_wc2026.json` (104 partidos)
 3. **Carga ELO ratings** de `data/team_ratings.json` (48 selecciones, scrapeado de eloratings.net)
 4. **Genera predicciones con fórmula ELO** (home advantage +100, K=400 → probabilidades 1X2 + xG)
-5. **Publica `latest.json`** en GitHub Pages para que WordPress lo consuma
-6. **El plugin de WordPress** lee ese JSON y lo muestra en el sitio web
-7. **No depende de APIs externas**: sin rate limits, sin API keys, sin costos
+5. **Enriquece con análisis de noticias** vía Gemini API (Google Search Grounding, gratis) — resumen de 3 oraciones + fuentes reales
+6. **Publica `latest.json`** en GitHub Pages para que WordPress lo consuma
+7. **El plugin de WordPress** lee ese JSON y lo muestra en el sitio web con flags emoji, barras de probabilidad, y acordeón de noticias
+8. **API Key de Gemini** almacenada como GitHub Secret (`GEMINI_API_KEY`), nunca en código
 
-**Caso de uso típico**: Durante un Mundial, el workflow de Actions se ejecuta cada 6 horas. Calcula probabilidades ELO para cada partido basándose en el rating histórico de cada selección (eloratings.net). Los partidos de eliminatorias aparecen como "TBD" hasta que se definan los clasificados. El plugin de WordPress las muestra automáticamente en tu sitio.
+**Caso de uso típico**: Durante un Mundial, el workflow de Actions se ejecuta cada 6 horas. Calcula probabilidades ELO para cada partido basándose en el rating histórico de cada selección (eloratings.net). Luego, para los partidos con equipos definidos, consulta Gemini API para obtener un resumen de noticias recientes con enlaces a fuentes reales. El JSON enriquecido se despliega a gh-pages. El plugin de WordPress las muestra automáticamente en tarjetas premium con acordeón de noticias expandible.
 
 ### ⚠️ Nota sobre fuentes de datos
 
@@ -119,8 +129,9 @@ El plan original contemplaba 3 fuentes en cascada (API-Football → FBref → fo
 - **ClubElo (soccerdata)**: ❌ Solo clubes, no selecciones nacionales
 - **eloratings.net/World.tsv**: ✅ Scraping libre, sin rate limit, 244 equipos nacionales
 - **Fixtures hardcodeados**: ✅ 104 partidos del calendario oficial
+- **Gemini API (google-genai)**: ✅ API gratuita de Google con Google Search Grounding. Sin rate limit en free tier. Usada para enriquecer predicciones con resumen de noticias y fuentes reales. API key almacenada como GitHub Secret (`GEMINI_API_KEY`), nunca en código.
 
-La arquitectura real v1.0 usa solo las fuentes que ✅ funcionan.
+La arquitectura real v1.0 usa las fuentes que ✅ funcionan.
 
 ## 4. APIs, Datos y Librerías
 
@@ -134,6 +145,7 @@ La arquitectura real v1.0 usa solo las fuentes que ✅ funcionan.
 |--------|---------------|----------------------|------------|-------------|
 | **API-Football** | $0 (Free) | 1226 ligas, **pero season=2026 NO disponible en free tier** | 100 req/día | ❌ Para WC 2026 |
 | **eloratings.net** | **$0** (scraping) | **World Football Elo Ratings de TODAS las selecciones** | Sin límite | 🥇 Primaria |
+| **Gemini API (google-genai)** | **$0** (Free) | **Google Search Grounding** — búsqueda web en tiempo real | Generoso en free tier | 🥈 News Sentiment |
 | **FBref (vía soccerdata)** | **$0** (scraping) | Mundial 2026 **aún no disponible** (Jun 2026) | Sin límite | ❌ Hoy, 🔒 Post-torneo |
 | **ClubElo (vía soccerdata)** | **$0** | Solo clubes, NO selecciones nacionales | Sin límite | ❌ |
 | **football-data.org** | €0 (Free) | 12 competiciones top, **sin Mundial en free** | 10 req/min | ❌ |
@@ -167,11 +179,32 @@ La arquitectura real v1.0 usa solo las fuentes que ✅ funcionan.
 
 ### 4.4 Stack de Datos v1.0 (Real)
 
-`eloratings.net` (scraping World.tsv) + `data/fixtures_wc2026.json` (hardcodeado) + `EloPredictor` (fórmula ELO clásica)
+`eloratings.net` (scraping World.tsv) + `Gemini API` (google-genai + Google Search Grounding) + `data/fixtures_wc2026.json` (hardcodeado) + `EloPredictor` (fórmula ELO clásica)
 
 **Para v2.0 (post-Mundial):** `soccerdata` + `API-Football Free` + `mplsoccer` + datasets Kaggle/GitHub + `football-data.co.uk`
 
 ---
+
+## 5. Seguridad y uso de APIs
+
+### 5.1 Gemini API (google-genai)
+
+- **Clave de API**: Se almacena como GitHub Secret (`GEMINI_API_KEY`) y nunca se sube a código
+- **Desarrollo local**: Se lee de `.env` (gitignored) para pruebas
+- **GitHub Actions**: Se inyecta desde `secrets.GEMINI_API_KEY` al entorno del workflow
+- **Uso responsable**: 
+  - Solo se usa para enriquecer partidos con equipos definidos (no TBD)
+  - Máximo 3 fuentes reales por respuesta
+  - Resumen de exactamente 3 oraciones en español
+  - No se redistribuyen datos crudos de eloratings.net ni Gemini
+  - Costo: Gratis (free tier) para el volumen esperado (<100 llamadas/día)
+
+### 5.2 Protección legal
+
+La integración con Gemini API cumple con:
+- **TOS de Gemini**: Uso permitido en aplicaciones no comerciales y comerciales bajo free tier
+- **Fair use**: Solo resúmenes y enlaces, no reproducción completa de contenido
+- **Atribución implícita**: Los enlaces dirigen a las fuentes originales
 
 ## 14. Investigación Legal FIFA
 

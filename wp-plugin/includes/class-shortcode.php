@@ -34,25 +34,25 @@ class PH_Shortcode {
             <?php foreach ($matches as $match): ?>
             <div class="ph-card">
                 <div class="ph-card-header">
-                    <span class="ph-team ph-home"><?php echo esc_html($match['home']); ?></span>
+                    <span class="ph-team ph-home"><?php echo $this->get_flag($match['home']) . esc_html($match['home']); ?></span>
                     <span class="ph-vs">vs</span>
-                    <span class="ph-team ph-away"><?php echo esc_html($match['away']); ?></span>
+                    <span class="ph-team ph-away"><?php echo $this->get_flag($match['away']) . esc_html($match['away']); ?></span>
                 </div>
                 
                 <div class="ph-card-bars">
                     <div class="ph-bar-container" title="<?php esc_attr_e('Local', 'partidos-hoy'); ?>">
                         <div class="ph-bar ph-bar-home" style="width: <?php echo $match['probabilities']['home'] * 100; ?>%">
-                            <?php echo $this->format_prob($match['probabilities']['home']); ?>
+                            <?php echo trim($this->get_flag($match['home'])) . ' ' . $this->format_prob($match['probabilities']['home']); ?>
                         </div>
                     </div>
                     <div class="ph-bar-container" title="<?php esc_attr_e('Empate', 'partidos-hoy'); ?>">
                         <div class="ph-bar ph-bar-draw" style="width: <?php echo $match['probabilities']['draw'] * 100; ?>%">
-                            <?php echo $this->format_prob($match['probabilities']['draw']); ?>
+                            🤝 <?php echo $this->format_prob($match['probabilities']['draw']); ?>
                         </div>
                     </div>
                     <div class="ph-bar-container" title="<?php esc_attr_e('Visitante', 'partidos-hoy'); ?>">
                         <div class="ph-bar ph-bar-away" style="width: <?php echo $match['probabilities']['away'] * 100; ?>%">
-                            <?php echo $this->format_prob($match['probabilities']['away']); ?>
+                            <?php echo trim($this->get_flag($match['away'])) . ' ' . $this->format_prob($match['probabilities']['away']); ?>
                         </div>
                     </div>
                 </div>
@@ -61,8 +61,23 @@ class PH_Shortcode {
                     <div class="ph-xg">
                         xG: <?php echo isset($match['expected_goals']) ? esc_html($match['expected_goals']['home'] . ' - ' . $match['expected_goals']['away']) : 'N/A'; ?>
                     </div>
-                    <div class="ph-date"><?php echo esc_html($match['date'] ?? 'TBD'); ?></div>
                 </div>
+
+                <?php if (!empty($match['news_sentiment'])): ?>
+                <details class="ph-news-accordion">
+                    <summary>🗞️ Análisis de Noticias</summary>
+                    <div class="ph-news-content">
+                        <p class="ph-news-text"><?php echo esc_html($match['news_sentiment']); ?></p>
+                        <?php if (!empty($match['news_sources']) && is_array($match['news_sources'])): ?>
+                            <div class="ph-news-sources">
+                                <?php foreach($match['news_sources'] as $idx => $source): ?>
+                                    <a href="<?php echo esc_url($source); ?>" target="_blank" rel="noopener noreferrer" class="ph-source-chip">Fuente <?php echo $idx + 1; ?></a>
+                                <?php endforeach; ?>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </details>
+                <?php endif; ?>
             </div>
             <?php endforeach; ?>
         </div>
@@ -94,25 +109,25 @@ class PH_Shortcode {
         ?>
         <div class="ph-single-card">
             <div class="ph-card-header">
-                <span class="ph-team ph-home"><?php echo esc_html($match['home']); ?></span>
+                <span class="ph-team ph-home"><?php echo $this->get_flag($match['home']) . esc_html($match['home']); ?></span>
                 <span class="ph-vs">vs</span>
-                <span class="ph-team ph-away"><?php echo esc_html($match['away']); ?></span>
+                <span class="ph-team ph-away"><?php echo $this->get_flag($match['away']) . esc_html($match['away']); ?></span>
             </div>
             
             <div class="ph-card-bars">
                 <div class="ph-bar-container" title="<?php esc_attr_e('Local', 'partidos-hoy'); ?>">
                     <div class="ph-bar ph-bar-home" style="width: <?php echo $probs['home'] * 100; ?>%">
-                        <?php echo $this->format_prob($probs['home']); ?>
+                        <?php echo trim($this->get_flag($match['home'])) . ' ' . $this->format_prob($probs['home']); ?>
                     </div>
                 </div>
                 <div class="ph-bar-container" title="<?php esc_attr_e('Empate', 'partidos-hoy'); ?>">
                     <div class="ph-bar ph-bar-draw" style="width: <?php echo $probs['draw'] * 100; ?>%">
-                        <?php echo $this->format_prob($probs['draw']); ?>
+                        🤝 <?php echo $this->format_prob($probs['draw']); ?>
                     </div>
                 </div>
                 <div class="ph-bar-container" title="<?php esc_attr_e('Visitante', 'partidos-hoy'); ?>">
                     <div class="ph-bar ph-bar-away" style="width: <?php echo $probs['away'] * 100; ?>%">
-                        <?php echo $this->format_prob($probs['away']); ?>
+                        <?php echo trim($this->get_flag($match['away'])) . ' ' . $this->format_prob($probs['away']); ?>
                     </div>
                 </div>
             </div>
@@ -121,8 +136,23 @@ class PH_Shortcode {
                 <div class="ph-xg">
                     xG: <?php echo isset($match['expected_goals']) ? esc_html($match['expected_goals']['home'] . ' - ' . $match['expected_goals']['away']) : 'N/A'; ?>
                 </div>
-                <div class="ph-date"><?php echo esc_html($match['date'] ?? 'TBD'); ?></div>
             </div>
+
+            <?php if (!empty($match['news_sentiment'])): ?>
+            <details class="ph-news-accordion">
+                <summary>🗞️ Análisis de Noticias</summary>
+                <div class="ph-news-content">
+                    <p class="ph-news-text"><?php echo esc_html($match['news_sentiment']); ?></p>
+                    <?php if (!empty($match['news_sources']) && is_array($match['news_sources'])): ?>
+                        <div class="ph-news-sources">
+                            <?php foreach($match['news_sources'] as $idx => $source): ?>
+                                <a href="<?php echo esc_url($source); ?>" target="_blank" rel="noopener noreferrer" class="ph-source-chip">Fuente <?php echo $idx + 1; ?></a>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </details>
+            <?php endif; ?>
         </div>
         <?php
         return ob_get_clean();
@@ -136,5 +166,23 @@ class PH_Shortcode {
         $values = array('home' => $probs['home'], 'draw' => $probs['draw'], 'away' => $probs['away']);
         arsort($values);
         return (array_key_first($values) === $key) ? 'yes' : 'no';
+    }
+
+    private function get_flag($team_name) {
+        $flags = array(
+            'Mexico' => '🇲🇽', 'South Africa' => '🇿🇦', 'Korea Republic' => '🇰🇷', 'Czechia' => '🇨🇿',
+            'Canada' => '🇨🇦', 'Bosnia and Herzegovina' => '🇧🇦', 'USA' => '🇺🇸', 'Paraguay' => '🇵🇾',
+            'Haiti' => '🇭🇹', 'Scotland' => '🏴󠁧󠁢󠁳󠁣󠁴󠁿', 'Australia' => '🇦🇺', 'Türkiye' => '🇹🇷',
+            'Brazil' => '🇧🇷', 'Morocco' => '🇲🇦', 'Qatar' => '🇶🇦', 'Switzerland' => '🇨🇭',
+            "Côte d'Ivoire" => '🇨🇮', 'Ecuador' => '🇪🇨', 'Germany' => '🇩🇪', 'Curaçao' => '🇨🇼',
+            'Netherlands' => '🇳🇱', 'Japan' => '🇯🇵', 'Sweden' => '🇸🇪', 'Tunisia' => '🇹🇳',
+            'Saudi Arabia' => '🇸🇦', 'Uruguay' => '🇺🇾', 'Spain' => '🇪🇸', 'Cabo Verde' => '🇨🇻',
+            'IR Iran' => '🇮🇷', 'New Zealand' => '🇳🇿', 'Belgium' => '🇧🇪', 'Egypt' => '🇪🇬',
+            'France' => '🇫🇷', 'Senegal' => '🇸🇳', 'Iraq' => '🇮🇶', 'Norway' => '🇳🇴',
+            'Argentina' => '🇦🇷', 'Algeria' => '🇩🇿', 'Austria' => '🇦🇹', 'Jordan' => '🇯🇴',
+            'Ghana' => '🇬🇭', 'Panama' => '🇵🇦', 'England' => '🏴󠁧󠁢󠁥󠁮󠁧󠁿', 'Croatia' => '🇭🇷',
+            'Portugal' => '🇵🇹', 'Congo DR' => '🇨🇩', 'Uzbekistan' => '🇺🇿', 'Colombia' => '🇨🇴'
+        );
+        return isset($flags[$team_name]) ? $flags[$team_name] . ' ' : '';
     }
 }

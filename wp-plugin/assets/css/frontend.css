@@ -141,29 +141,93 @@
     margin-top: 24px;
 }
 
-/* Dark Mode */
-@media (prefers-color-scheme: dark) {
-    .ph-card, .ph-single-card {
-        background: var(--ph-bg-dark);
-        border: 1px solid var(--ph-border-dark);
-        box-shadow: var(--ph-shadow-dark);
-        color: var(--ph-text-dark);
-    }
-    
-    .ph-card:hover, .ph-single-card:hover {
-        box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
-    }
-    
-    .ph-bar-container {
-        background: rgba(255, 255, 255, 0.1);
-    }
-    
-    .ph-card-footer {
-        border-top: 1px solid rgba(255,255,255,0.1);
-        color: #aaa;
-    }
-    
-    .ph-vs {
-        color: #aaa;
-    }
+/* Dark mode removed — plugin always uses light theme */
+
+/* =============================================
+   News Accordion — Styles
+   ============================================= */
+.ph-news-accordion {
+    background: rgba(0, 0, 0, 0.03);
+    border-top: 1px dashed rgba(0,0,0,0.12);
+    border-radius: 0 0 12px 12px;
+    /* Extend to card edges */
+    margin: 12px -20px -20px;
+    padding: 14px 20px 16px;
+}
+
+.ph-news-accordion summary {
+    list-style: none;
+    font-size: 0.82rem;
+    font-weight: 700;
+    cursor: pointer;
+    color: #1e293b;
+    outline: none;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    letter-spacing: 0.02em;
+}
+
+.ph-news-accordion summary::after {
+    content: '▾';
+    margin-left: auto;
+    transition: transform 0.2s ease;
+    font-size: 0.9rem;
+    color: #64748b;
+}
+
+.ph-news-accordion[open] summary::after {
+    transform: rotate(-180deg);
+}
+
+.ph-news-content {
+    margin-top: 12px;
+    animation: ph-fadeIn 0.25s ease;
+}
+
+.ph-news-text {
+    font-size: 0.84rem;
+    line-height: 1.55;
+    margin: 0 0 14px 0;
+    color: #334155;
+    border-left: 3px solid var(--ph-color-home);
+    padding-left: 10px;
+}
+
+.ph-news-sources {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.ph-source-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    background: rgba(37, 99, 235, 0.08);
+    border: 1px solid rgba(37, 99, 235, 0.25);
+    padding: 5px 12px;
+    border-radius: 20px;
+    text-decoration: none;
+    color: #1d4ed8;
+    transition: all 0.2s ease;
+}
+
+.ph-source-chip::before {
+    content: '🔗';
+    font-size: 0.7rem;
+}
+
+.ph-source-chip:hover {
+    background: rgba(37, 99, 235, 0.18);
+    border-color: rgba(37, 99, 235, 0.5);
+    transform: translateY(-1px);
+}
+
+@keyframes ph-fadeIn {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
