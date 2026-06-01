@@ -26,21 +26,30 @@ jobs:
         run: |
           pip install -r requirements.txt
 
+      - name: Create predictions directory
+        run: |
+          mkdir -p predictions
+
       - name: Fetch World Cup data via cascade
         run: |
           python -c "
+          import json
           from src.data.data_cascade import DataCascade
           cascade = DataCascade()
-          print('Cascade status:', cascade.quota_status())
+          status = cascade.quota_status()
+          print('Cascade status:', json.dumps(status, indent=2))
 
           fixtures = cascade.get_worldcup_fixtures()
           print(f'Fixtures found: {len(fixtures)}')
 
           standings = cascade.get_worldcup_standings()
-          print(f'Standings loaded: {len(standings)} groups')
+          print(f'Standings loaded: {len(standings)}')
 
           elo = cascade.get_elo_ratings()
           print(f'ELO ratings: {len(elo)} teams')
+
+          with open('predictions/cascade_status.json', 'w') as f:
+              json.dump({'fixtures': len(fixtures), 'standings': len(standings), 'elo': len(elo), 'status': status}, f)
           "
 
       - name: Fetch API predictions as baseline
@@ -48,11 +57,10 @@ jobs:
           python -c "
           import json
           from src.data.api_football_client import APIFootballClient
-          from src.config import config
 
-          client = APIFootballClient()
           api_preds = {}
           try:
+              client = APIFootballClient()
               fixtures = client.fetch_worldcup_fixtures()
               for f in fixtures[:10]:
                   fid = f['fixture']['id']
@@ -66,21 +74,18 @@ jobs:
                           'away': pct['away'] / 100,
                       }
           except Exception as e:
-              print(f'API predictions unavailable: {e}')
+              print(f'API predictions baseline unavailable: {e}')
 
           with open('predictions/api_baseline.json', 'w') as f:
               json.dump(api_preds, f)
           print(f'API predictions baseline: {len(api_preds)} matches')
           "
 
-      - name: Generate predictions
+      - name: Generate predictions JSON
         run: |
           python -c "
           import json
           import pandas as pd
-          from src.features.build_features import FeatureBuilder
-          from src.models.trainer import ModelTrainer, FEATURE_COLS
-          from src.models.calibrator import ProbabilityCalibrator
           from src.models.predictor import PredictionGenerator
 
           try:
@@ -94,7 +99,7 @@ jobs:
           output = generator.generate(df, api_predictions=api_preds, use_xgboost=False)
           with open('predictions/latest.json', 'w') as f:
               f.write(output)
-          print('World Cup predictions generated')
+          print('World Cup predictions JSON generated')
           "
 
       - name: Deploy to gh-pages
