@@ -1,6 +1,5 @@
 import numpy as np
 from sklearn.isotonic import IsotonicRegression
-from sklearn.preprocessing import LabelBinarizer
 
 
 class ProbabilityCalibrator:
@@ -9,7 +8,8 @@ class ProbabilityCalibrator:
 
     def fit(self, predicted_probs: np.ndarray, y_true: np.ndarray):
         n_classes = predicted_probs.shape[1]
-        y_bin = LabelBinarizer().fit_transform(y_true)
+        y_bin = np.zeros((len(y_true), n_classes))
+        y_bin[np.arange(len(y_true)), y_true.astype(int)] = 1
         self.calibrators = []
         for i in range(n_classes):
             iso_reg = IsotonicRegression(out_of_bounds="clip")
