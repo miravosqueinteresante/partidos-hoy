@@ -7,7 +7,7 @@ class PH_Data_Client {
     private $cache_ttl = 21600;
 
     public function __construct() {
-        $this->predictions_url = 'https://tuusuario.github.io/partidos-hoy/latest.json';
+        $this->predictions_url = 'https://miravosqueinteresante.github.io/partidos-hoy/latest.json';
     }
 
     public function get_predictions() {
