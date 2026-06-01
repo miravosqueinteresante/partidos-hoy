@@ -1,0 +1,938 @@
+[
+  {
+    "id": 1,
+    "date": "2026-06-11",
+    "home_team": "Mexico",
+    "away_team": "South Africa",
+    "group": "A",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 2,
+    "date": "2026-06-11",
+    "home_team": "Korea Republic",
+    "away_team": "Czechia",
+    "group": "A",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 3,
+    "date": "2026-06-12",
+    "home_team": "Canada",
+    "away_team": "Bosnia and Herzegovina",
+    "group": "B",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 4,
+    "date": "2026-06-12",
+    "home_team": "USA",
+    "away_team": "Paraguay",
+    "group": "D",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 5,
+    "date": "2026-06-13",
+    "home_team": "Haiti",
+    "away_team": "Scotland",
+    "group": "C",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 6,
+    "date": "2026-06-13",
+    "home_team": "Australia",
+    "away_team": "Türkiye",
+    "group": "D",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 7,
+    "date": "2026-06-13",
+    "home_team": "Brazil",
+    "away_team": "Morocco",
+    "group": "C",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 8,
+    "date": "2026-06-13",
+    "home_team": "Qatar",
+    "away_team": "Switzerland",
+    "group": "B",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 9,
+    "date": "2026-06-14",
+    "home_team": "Côte d'Ivoire",
+    "away_team": "Ecuador",
+    "group": "E",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 10,
+    "date": "2026-06-14",
+    "home_team": "Germany",
+    "away_team": "Curaçao",
+    "group": "E",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 11,
+    "date": "2026-06-14",
+    "home_team": "Netherlands",
+    "away_team": "Japan",
+    "group": "F",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 12,
+    "date": "2026-06-14",
+    "home_team": "Sweden",
+    "away_team": "Tunisia",
+    "group": "F",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 13,
+    "date": "2026-06-15",
+    "home_team": "Saudi Arabia",
+    "away_team": "Uruguay",
+    "group": "H",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 14,
+    "date": "2026-06-15",
+    "home_team": "Spain",
+    "away_team": "Cabo Verde",
+    "group": "H",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 15,
+    "date": "2026-06-15",
+    "home_team": "IR Iran",
+    "away_team": "New Zealand",
+    "group": "G",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 16,
+    "date": "2026-06-15",
+    "home_team": "Belgium",
+    "away_team": "Egypt",
+    "group": "G",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 17,
+    "date": "2026-06-16",
+    "home_team": "France",
+    "away_team": "Senegal",
+    "group": "I",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 18,
+    "date": "2026-06-16",
+    "home_team": "Iraq",
+    "away_team": "Norway",
+    "group": "I",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 19,
+    "date": "2026-06-16",
+    "home_team": "Argentina",
+    "away_team": "Algeria",
+    "group": "J",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 20,
+    "date": "2026-06-16",
+    "home_team": "Austria",
+    "away_team": "Jordan",
+    "group": "J",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 21,
+    "date": "2026-06-17",
+    "home_team": "Ghana",
+    "away_team": "Panama",
+    "group": "L",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 22,
+    "date": "2026-06-17",
+    "home_team": "England",
+    "away_team": "Croatia",
+    "group": "L",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 23,
+    "date": "2026-06-17",
+    "home_team": "Portugal",
+    "away_team": "Congo DR",
+    "group": "K",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 24,
+    "date": "2026-06-17",
+    "home_team": "Uzbekistan",
+    "away_team": "Colombia",
+    "group": "K",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 25,
+    "date": "2026-06-18",
+    "home_team": "Czechia",
+    "away_team": "South Africa",
+    "group": "A",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 26,
+    "date": "2026-06-18",
+    "home_team": "Switzerland",
+    "away_team": "Bosnia and Herzegovina",
+    "group": "B",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 27,
+    "date": "2026-06-18",
+    "home_team": "Canada",
+    "away_team": "Qatar",
+    "group": "B",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 28,
+    "date": "2026-06-18",
+    "home_team": "Mexico",
+    "away_team": "Korea Republic",
+    "group": "A",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 29,
+    "date": "2026-06-19",
+    "home_team": "Brazil",
+    "away_team": "Haiti",
+    "group": "C",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 30,
+    "date": "2026-06-19",
+    "home_team": "Scotland",
+    "away_team": "Morocco",
+    "group": "C",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 31,
+    "date": "2026-06-19",
+    "home_team": "Türkiye",
+    "away_team": "Paraguay",
+    "group": "D",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 32,
+    "date": "2026-06-19",
+    "home_team": "USA",
+    "away_team": "Australia",
+    "group": "D",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 33,
+    "date": "2026-06-20",
+    "home_team": "Germany",
+    "away_team": "Côte d'Ivoire",
+    "group": "E",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 34,
+    "date": "2026-06-20",
+    "home_team": "Ecuador",
+    "away_team": "Curaçao",
+    "group": "E",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 35,
+    "date": "2026-06-20",
+    "home_team": "Netherlands",
+    "away_team": "Sweden",
+    "group": "F",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 36,
+    "date": "2026-06-20",
+    "home_team": "Tunisia",
+    "away_team": "Japan",
+    "group": "F",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 37,
+    "date": "2026-06-21",
+    "home_team": "Uruguay",
+    "away_team": "Cabo Verde",
+    "group": "H",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 38,
+    "date": "2026-06-21",
+    "home_team": "Spain",
+    "away_team": "Saudi Arabia",
+    "group": "H",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 39,
+    "date": "2026-06-21",
+    "home_team": "Belgium",
+    "away_team": "IR Iran",
+    "group": "G",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 40,
+    "date": "2026-06-21",
+    "home_team": "New Zealand",
+    "away_team": "Egypt",
+    "group": "G",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 41,
+    "date": "2026-06-22",
+    "home_team": "Norway",
+    "away_team": "Senegal",
+    "group": "I",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 42,
+    "date": "2026-06-22",
+    "home_team": "France",
+    "away_team": "Iraq",
+    "group": "I",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 43,
+    "date": "2026-06-22",
+    "home_team": "Argentina",
+    "away_team": "Austria",
+    "group": "J",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 44,
+    "date": "2026-06-22",
+    "home_team": "Jordan",
+    "away_team": "Algeria",
+    "group": "J",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 45,
+    "date": "2026-06-23",
+    "home_team": "England",
+    "away_team": "Ghana",
+    "group": "L",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 46,
+    "date": "2026-06-23",
+    "home_team": "Panama",
+    "away_team": "Croatia",
+    "group": "L",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 47,
+    "date": "2026-06-23",
+    "home_team": "Portugal",
+    "away_team": "Uzbekistan",
+    "group": "K",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 48,
+    "date": "2026-06-23",
+    "home_team": "Colombia",
+    "away_team": "Congo DR",
+    "group": "K",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 49,
+    "date": "2026-06-24",
+    "home_team": "Scotland",
+    "away_team": "Brazil",
+    "group": "C",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 50,
+    "date": "2026-06-24",
+    "home_team": "Morocco",
+    "away_team": "Haiti",
+    "group": "C",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 51,
+    "date": "2026-06-24",
+    "home_team": "Switzerland",
+    "away_team": "Canada",
+    "group": "B",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 52,
+    "date": "2026-06-24",
+    "home_team": "Bosnia and Herzegovina",
+    "away_team": "Qatar",
+    "group": "B",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 53,
+    "date": "2026-06-24",
+    "home_team": "Czechia",
+    "away_team": "Mexico",
+    "group": "A",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 54,
+    "date": "2026-06-24",
+    "home_team": "South Africa",
+    "away_team": "Korea Republic",
+    "group": "A",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 55,
+    "date": "2026-06-25",
+    "home_team": "Curaçao",
+    "away_team": "Côte d'Ivoire",
+    "group": "E",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 56,
+    "date": "2026-06-25",
+    "home_team": "Ecuador",
+    "away_team": "Germany",
+    "group": "E",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 57,
+    "date": "2026-06-25",
+    "home_team": "Japan",
+    "away_team": "Sweden",
+    "group": "F",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 58,
+    "date": "2026-06-25",
+    "home_team": "Tunisia",
+    "away_team": "Netherlands",
+    "group": "F",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 59,
+    "date": "2026-06-25",
+    "home_team": "Türkiye",
+    "away_team": "USA",
+    "group": "D",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 60,
+    "date": "2026-06-25",
+    "home_team": "Paraguay",
+    "away_team": "Australia",
+    "group": "D",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 61,
+    "date": "2026-06-26",
+    "home_team": "Norway",
+    "away_team": "France",
+    "group": "I",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 62,
+    "date": "2026-06-26",
+    "home_team": "Senegal",
+    "away_team": "Iraq",
+    "group": "I",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 63,
+    "date": "2026-06-26",
+    "home_team": "Egypt",
+    "away_team": "IR Iran",
+    "group": "G",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 64,
+    "date": "2026-06-26",
+    "home_team": "New Zealand",
+    "away_team": "Belgium",
+    "group": "G",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 65,
+    "date": "2026-06-26",
+    "home_team": "Cabo Verde",
+    "away_team": "Saudi Arabia",
+    "group": "H",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 66,
+    "date": "2026-06-26",
+    "home_team": "Uruguay",
+    "away_team": "Spain",
+    "group": "H",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 67,
+    "date": "2026-06-27",
+    "home_team": "Panama",
+    "away_team": "England",
+    "group": "L",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 68,
+    "date": "2026-06-27",
+    "home_team": "Croatia",
+    "away_team": "Ghana",
+    "group": "L",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 69,
+    "date": "2026-06-27",
+    "home_team": "Algeria",
+    "away_team": "Austria",
+    "group": "J",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 70,
+    "date": "2026-06-27",
+    "home_team": "Jordan",
+    "away_team": "Argentina",
+    "group": "J",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 71,
+    "date": "2026-06-27",
+    "home_team": "Colombia",
+    "away_team": "Portugal",
+    "group": "K",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 72,
+    "date": "2026-06-27",
+    "home_team": "Congo DR",
+    "away_team": "Uzbekistan",
+    "group": "K",
+    "stage": "group",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 73,
+    "date": "2026-06-28",
+    "home_team": null,
+    "away_team": null,
+    "group": null,
+    "stage": "round_of_32",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 74,
+    "date": "2026-06-28",
+    "home_team": null,
+    "away_team": null,
+    "group": null,
+    "stage": "round_of_32",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 75,
+    "date": "2026-06-28",
+    "home_team": null,
+    "away_team": null,
+    "group": null,
+    "stage": "round_of_32",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 76,
+    "date": "2026-06-29",
+    "home_team": null,
+    "away_team": null,
+    "group": null,
+    "stage": "round_of_32",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 77,
+    "date": "2026-06-29",
+    "home_team": null,
+    "away_team": null,
+    "group": null,
+    "stage": "round_of_32",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 78,
+    "date": "2026-06-29",
+    "home_team": null,
+    "away_team": null,
+    "group": null,
+    "stage": "round_of_32",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 79,
+    "date": "2026-06-30",
+    "home_team": null,
+    "away_team": null,
+    "group": null,
+    "stage": "round_of_32",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 80,
+    "date": "2026-06-30",
+    "home_team": null,
+    "away_team": null,
+    "group": null,
+    "stage": "round_of_32",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 81,
+    "date": "2026-06-30",
+    "home_team": null,
+    "away_team": null,
+    "group": null,
+    "stage": "round_of_32",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 82,
+    "date": "2026-07-01",
+    "home_team": null,
+    "away_team": null,
+    "group": null,
+    "stage": "round_of_32",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 83,
+    "date": "2026-07-01",
+    "home_team": null,
+    "away_team": null,
+    "group": null,
+    "stage": "round_of_32",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 84,
+    "date": "2026-07-01",
+    "home_team": null,
+    "away_team": null,
+    "group": null,
+    "stage": "round_of_32",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 85,
+    "date": "2026-07-02",
+    "home_team": null,
+    "away_team": null,
+    "group": null,
+    "stage": "round_of_32",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 86,
+    "date": "2026-07-02",
+    "home_team": null,
+    "away_team": null,
+    "group": null,
+    "stage": "round_of_32",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 87,
+    "date": "2026-07-02",
+    "home_team": null,
+    "away_team": null,
+    "group": null,
+    "stage": "round_of_32",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 88,
+    "date": "2026-07-03",
+    "home_team": null,
+    "away_team": null,
+    "group": null,
+    "stage": "round_of_32",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 89,
+    "date": "2026-07-04",
+    "home_team": null,
+    "away_team": null,
+    "group": null,
+    "stage": "round_of_16",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 90,
+    "date": "2026-07-04",
+    "home_team": null,
+    "away_team": null,
+    "group": null,
+    "stage": "round_of_16",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 91,
+    "date": "2026-07-05",
+    "home_team": null,
+    "away_team": null,
+    "group": null,
+    "stage": "round_of_16",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 92,
+    "date": "2026-07-05",
+    "home_team": null,
+    "away_team": null,
+    "group": null,
+    "stage": "round_of_16",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 93,
+    "date": "2026-07-06",
+    "home_team": null,
+    "away_team": null,
+    "group": null,
+    "stage": "round_of_16",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 94,
+    "date": "2026-07-06",
+    "home_team": null,
+    "away_team": null,
+    "group": null,
+    "stage": "round_of_16",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 95,
+    "date": "2026-07-07",
+    "home_team": null,
+    "away_team": null,
+    "group": null,
+    "stage": "round_of_16",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 96,
+    "date": "2026-07-07",
+    "home_team": null,
+    "away_team": null,
+    "group": null,
+    "stage": "round_of_16",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 97,
+    "date": "2026-07-09",
+    "home_team": null,
+    "away_team": null,
+    "group": null,
+    "stage": "quarter_final",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 98,
+    "date": "2026-07-10",
+    "home_team": null,
+    "away_team": null,
+    "group": null,
+    "stage": "quarter_final",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 99,
+    "date": "2026-07-11",
+    "home_team": null,
+    "away_team": null,
+    "group": null,
+    "stage": "quarter_final",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 100,
+    "date": "2026-07-12",
+    "home_team": null,
+    "away_team": null,
+    "group": null,
+    "stage": "quarter_final",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 101,
+    "date": "2026-07-14",
+    "home_team": null,
+    "away_team": null,
+    "group": null,
+    "stage": "semi_final",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 102,
+    "date": "2026-07-15",
+    "home_team": null,
+    "away_team": null,
+    "group": null,
+    "stage": "semi_final",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 103,
+    "date": "2026-07-18",
+    "home_team": null,
+    "away_team": null,
+    "group": null,
+    "stage": "bronze_final",
+    "league": "World Cup 2026"
+  },
+  {
+    "id": 104,
+    "date": "2026-07-19",
+    "home_team": null,
+    "away_team": null,
+    "group": null,
+    "stage": "final",
+    "league": "World Cup 2026"
+  }
+]

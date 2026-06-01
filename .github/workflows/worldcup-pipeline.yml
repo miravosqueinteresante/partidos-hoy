@@ -97,12 +97,14 @@ jobs:
           except FileNotFoundError:
               api_preds = None
 
-          df = pd.DataFrame({'home_team': [], 'away_team': []})
+          with open('data/fixtures_wc2026.json') as f:
+              fixtures = json.load(f)
+          df = pd.DataFrame(fixtures)
           generator = PredictionGenerator()
           output = generator.generate(df, api_predictions=api_preds, use_xgboost=False)
           with open('predictions/latest.json', 'w') as f:
               f.write(output)
-          print('World Cup predictions JSON generated')
+          print(f'World Cup predictions JSON generated: {len(df)} matches')
           "
 
       - name: Deploy to gh-pages
