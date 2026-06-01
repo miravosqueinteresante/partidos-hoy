@@ -25,6 +25,18 @@
 
 ---
 
+## 🔒 POLÍTICA DE FUENTES OFICIALES VERIFICADAS (MÁXIMA CRÍTICA)
+
+**MÁXIMA CRÍTICA: Todos los datos factuales (sedes, fixtures, fechas, resultados, alineaciones) deben provenir exclusivamente de fuentes oficiales verificadas (FIFA, federaciones nacionales, Wikipedia citando fuentes primarias de FIFA). Nunca inventar, estimar ni calcular datos con algoritmos heurísticos.**
+
+- **Fuente primaria para fixtures y sedes del Mundial 2026:** Wikipedia (en.wikipedia.org/wiki/2026_FIFA_World_Cup_Group_*) — que cita documentos oficiales de FIFA como "FIFA World Cup 26 – Match Schedule" (PDF) y "FIFA World Cup 2026 Regulations" (PDF)
+- **Fuente para ratings ELO:** eloratings.net (World.tsv)
+- **Nunca** generar datos factuales con scripts algorítmicos de rotación (como el `add_venues.py` original que inventaba sedes)
+- **Antes de push:** todo dato factual debe estar verificado contra fuente oficial documentada en el commit o en este documento
+- **Si no hay fuente oficial disponible para un dato:** se marca como `TBD` y no se inventan valores
+
+---
+
 ## 🏠 PLATAFORMA ÚNICA: GITHUB + GITHUB ACTIONS
 
 **GitHub es la plataforma única para TODO el proyecto.** No se usa ninguna otra plataforma de orquestación, CI/CD o despliegue.

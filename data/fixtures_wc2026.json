@@ -7,7 +7,7 @@
     "group": "A",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "SoFi Stadium, Inglewood, CA"
+    "venue": "Estadio Azteca, Mexico City"
   },
   {
     "id": 2,
@@ -17,7 +17,7 @@
     "group": "A",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "Mercedes-Benz Stadium, Atlanta, GA"
+    "venue": "Estadio Akron, Zapopan"
   },
   {
     "id": 3,
@@ -27,7 +27,7 @@
     "group": "B",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "MetLife Stadium, East Rutherford, NJ"
+    "venue": "BMO Field, Toronto"
   },
   {
     "id": 4,
@@ -37,7 +37,7 @@
     "group": "D",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "AT&T Stadium, Arlington, TX"
+    "venue": "SoFi Stadium, Inglewood"
   },
   {
     "id": 5,
@@ -47,7 +47,7 @@
     "group": "C",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "NRG Stadium, Houston, TX"
+    "venue": "Gillette Stadium, Foxborough"
   },
   {
     "id": 6,
@@ -57,7 +57,7 @@
     "group": "D",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "NRG Stadium, Houston, TX"
+    "venue": "BC Place, Vancouver"
   },
   {
     "id": 7,
@@ -67,7 +67,7 @@
     "group": "C",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "Mercedes-Benz Stadium, Atlanta, GA"
+    "venue": "MetLife Stadium, East Rutherford"
   },
   {
     "id": 8,
@@ -77,7 +77,7 @@
     "group": "B",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "Toyota Stadium, Frisco, TX"
+    "venue": "Levi's Stadium, Santa Clara"
   },
   {
     "id": 9,
@@ -87,7 +87,7 @@
     "group": "E",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "Levi's Stadium, Santa Clara, CA"
+    "venue": "Lincoln Financial Field, Philadelphia"
   },
   {
     "id": 10,
@@ -97,7 +97,7 @@
     "group": "E",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "Hard Rock Stadium, Miami Gardens, FL"
+    "venue": "NRG Stadium, Houston"
   },
   {
     "id": 11,
@@ -107,7 +107,7 @@
     "group": "F",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "Lumen Field, Seattle, WA"
+    "venue": "AT&T Stadium, Arlington"
   },
   {
     "id": 12,
@@ -117,7 +117,7 @@
     "group": "F",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "Toyota Stadium, Frisco, TX"
+    "venue": "Estadio BBVA, Guadalupe"
   },
   {
     "id": 13,
@@ -127,7 +127,7 @@
     "group": "H",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "Hard Rock Stadium, Miami Gardens, FL"
+    "venue": "Hard Rock Stadium, Miami Gardens"
   },
   {
     "id": 14,
@@ -137,7 +137,7 @@
     "group": "H",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "Toyota Stadium, Frisco, TX"
+    "venue": "Mercedes-Benz Stadium, Atlanta"
   },
   {
     "id": 15,
@@ -147,7 +147,7 @@
     "group": "G",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "Mercedes-Benz Stadium, Atlanta, GA"
+    "venue": "SoFi Stadium, Inglewood"
   },
   {
     "id": 16,
@@ -157,7 +157,7 @@
     "group": "G",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "NRG Stadium, Houston, TX"
+    "venue": "Lumen Field, Seattle"
   },
   {
     "id": 17,
@@ -167,7 +167,7 @@
     "group": "I",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "Toyota Stadium, Frisco, TX"
+    "venue": "MetLife Stadium, East Rutherford"
   },
   {
     "id": 18,
@@ -177,7 +177,7 @@
     "group": "I",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "Lumen Field, Seattle, WA"
+    "venue": "Gillette Stadium, Foxborough"
   },
   {
     "id": 19,
@@ -187,7 +187,7 @@
     "group": "J",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "Arrowhead Stadium, Kansas City, MO"
+    "venue": "Arrowhead Stadium, Kansas City"
   },
   {
     "id": 20,
@@ -197,7 +197,7 @@
     "group": "J",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "Levi's Stadium, Santa Clara, CA"
+    "venue": "Levi's Stadium, Santa Clara"
   },
   {
     "id": 21,
@@ -207,7 +207,7 @@
     "group": "L",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "GEOD Stadium, La Mirada, CA"
+    "venue": "Toronto Stadium, Toronto"
   },
   {
     "id": 22,
@@ -217,7 +217,7 @@
     "group": "L",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "Lincoln Financial Field, Philadelphia, PA"
+    "venue": "AT&T Stadium, Arlington"
   },
   {
     "id": 23,
@@ -227,7 +227,7 @@
     "group": "K",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "Lincoln Financial Field, Philadelphia, PA"
+    "venue": "NRG Stadium, Houston"
   },
   {
     "id": 24,
@@ -237,7 +237,7 @@
     "group": "K",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "Hard Rock Stadium, Miami Gardens, FL"
+    "venue": "Estadio Azteca, Mexico City"
   },
   {
     "id": 25,
@@ -247,7 +247,7 @@
     "group": "A",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "SoFi Stadium, Inglewood, CA"
+    "venue": "Mercedes-Benz Stadium, Atlanta"
   },
   {
     "id": 26,
@@ -257,7 +257,7 @@
     "group": "B",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "MetLife Stadium, East Rutherford, NJ"
+    "venue": "SoFi Stadium, Inglewood"
   },
   {
     "id": 27,
@@ -267,7 +267,7 @@
     "group": "B",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "Toyota Stadium, Frisco, TX"
+    "venue": "BC Place, Vancouver"
   },
   {
     "id": 28,
@@ -277,7 +277,7 @@
     "group": "A",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "Mercedes-Benz Stadium, Atlanta, GA"
+    "venue": "Estadio Akron, Zapopan"
   },
   {
     "id": 29,
@@ -287,7 +287,7 @@
     "group": "C",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "NRG Stadium, Houston, TX"
+    "venue": "Lincoln Financial Field, Philadelphia"
   },
   {
     "id": 30,
@@ -297,7 +297,7 @@
     "group": "C",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "Mercedes-Benz Stadium, Atlanta, GA"
+    "venue": "Gillette Stadium, Foxborough"
   },
   {
     "id": 31,
@@ -307,7 +307,7 @@
     "group": "D",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "AT&T Stadium, Arlington, TX"
+    "venue": "Levi's Stadium, Santa Clara"
   },
   {
     "id": 32,
@@ -317,7 +317,7 @@
     "group": "D",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "NRG Stadium, Houston, TX"
+    "venue": "Lumen Field, Seattle"
   },
   {
     "id": 33,
@@ -327,7 +327,7 @@
     "group": "E",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "Levi's Stadium, Santa Clara, CA"
+    "venue": "BMO Field, Toronto"
   },
   {
     "id": 34,
@@ -337,7 +337,7 @@
     "group": "E",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "Hard Rock Stadium, Miami Gardens, FL"
+    "venue": "Arrowhead Stadium, Kansas City"
   },
   {
     "id": 35,
@@ -347,7 +347,7 @@
     "group": "F",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "Lumen Field, Seattle, WA"
+    "venue": "NRG Stadium, Houston"
   },
   {
     "id": 36,
@@ -357,7 +357,7 @@
     "group": "F",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "Toyota Stadium, Frisco, TX"
+    "venue": "Estadio BBVA, Guadalupe"
   },
   {
     "id": 37,
@@ -367,7 +367,7 @@
     "group": "H",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "Hard Rock Stadium, Miami Gardens, FL"
+    "venue": "Hard Rock Stadium, Miami Gardens"
   },
   {
     "id": 38,
@@ -377,7 +377,7 @@
     "group": "H",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "Toyota Stadium, Frisco, TX"
+    "venue": "Mercedes-Benz Stadium, Atlanta"
   },
   {
     "id": 39,
@@ -387,7 +387,7 @@
     "group": "G",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "Mercedes-Benz Stadium, Atlanta, GA"
+    "venue": "SoFi Stadium, Inglewood"
   },
   {
     "id": 40,
@@ -397,7 +397,7 @@
     "group": "G",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "NRG Stadium, Houston, TX"
+    "venue": "BC Place, Vancouver"
   },
   {
     "id": 41,
@@ -407,7 +407,7 @@
     "group": "I",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "Toyota Stadium, Frisco, TX"
+    "venue": "MetLife Stadium, East Rutherford"
   },
   {
     "id": 42,
@@ -417,7 +417,7 @@
     "group": "I",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "Lumen Field, Seattle, WA"
+    "venue": "Lincoln Financial Field, Philadelphia"
   },
   {
     "id": 43,
@@ -427,7 +427,7 @@
     "group": "J",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "Arrowhead Stadium, Kansas City, MO"
+    "venue": "AT&T Stadium, Arlington"
   },
   {
     "id": 44,
@@ -437,7 +437,7 @@
     "group": "J",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "Levi's Stadium, Santa Clara, CA"
+    "venue": "Levi's Stadium, Santa Clara"
   },
   {
     "id": 45,
@@ -447,7 +447,7 @@
     "group": "L",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "GEOD Stadium, La Mirada, CA"
+    "venue": "Gillette Stadium, Foxborough"
   },
   {
     "id": 46,
@@ -457,7 +457,7 @@
     "group": "L",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "Lincoln Financial Field, Philadelphia, PA"
+    "venue": "Toronto Stadium, Toronto"
   },
   {
     "id": 47,
@@ -467,7 +467,7 @@
     "group": "K",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "Lincoln Financial Field, Philadelphia, PA"
+    "venue": "NRG Stadium, Houston"
   },
   {
     "id": 48,
@@ -477,7 +477,7 @@
     "group": "K",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "Hard Rock Stadium, Miami Gardens, FL"
+    "venue": "Estadio Akron, Zapopan"
   },
   {
     "id": 49,
@@ -487,7 +487,7 @@
     "group": "C",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "NRG Stadium, Houston, TX"
+    "venue": "Hard Rock Stadium, Miami Gardens"
   },
   {
     "id": 50,
@@ -497,7 +497,7 @@
     "group": "C",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "Mercedes-Benz Stadium, Atlanta, GA"
+    "venue": "Mercedes-Benz Stadium, Atlanta"
   },
   {
     "id": 51,
@@ -507,7 +507,7 @@
     "group": "B",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "MetLife Stadium, East Rutherford, NJ"
+    "venue": "BC Place, Vancouver"
   },
   {
     "id": 52,
@@ -517,7 +517,7 @@
     "group": "B",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "Toyota Stadium, Frisco, TX"
+    "venue": "Lumen Field, Seattle"
   },
   {
     "id": 53,
@@ -527,7 +527,7 @@
     "group": "A",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "SoFi Stadium, Inglewood, CA"
+    "venue": "Estadio Azteca, Mexico City"
   },
   {
     "id": 54,
@@ -537,7 +537,7 @@
     "group": "A",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "Mercedes-Benz Stadium, Atlanta, GA"
+    "venue": "Estadio BBVA, Guadalupe"
   },
   {
     "id": 55,
@@ -547,7 +547,7 @@
     "group": "E",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "Levi's Stadium, Santa Clara, CA"
+    "venue": "Lincoln Financial Field, Philadelphia"
   },
   {
     "id": 56,
@@ -557,7 +557,7 @@
     "group": "E",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "Hard Rock Stadium, Miami Gardens, FL"
+    "venue": "MetLife Stadium, East Rutherford"
   },
   {
     "id": 57,
@@ -567,7 +567,7 @@
     "group": "F",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "Lumen Field, Seattle, WA"
+    "venue": "AT&T Stadium, Arlington"
   },
   {
     "id": 58,
@@ -577,7 +577,7 @@
     "group": "F",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "Toyota Stadium, Frisco, TX"
+    "venue": "Arrowhead Stadium, Kansas City"
   },
   {
     "id": 59,
@@ -587,7 +587,7 @@
     "group": "D",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "AT&T Stadium, Arlington, TX"
+    "venue": "SoFi Stadium, Inglewood"
   },
   {
     "id": 60,
@@ -597,7 +597,7 @@
     "group": "D",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "NRG Stadium, Houston, TX"
+    "venue": "Levi's Stadium, Santa Clara"
   },
   {
     "id": 61,
@@ -607,7 +607,7 @@
     "group": "I",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "Toyota Stadium, Frisco, TX"
+    "venue": "Gillette Stadium, Foxborough"
   },
   {
     "id": 62,
@@ -617,7 +617,7 @@
     "group": "I",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "Lumen Field, Seattle, WA"
+    "venue": "BMO Field, Toronto"
   },
   {
     "id": 63,
@@ -627,7 +627,7 @@
     "group": "G",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "Mercedes-Benz Stadium, Atlanta, GA"
+    "venue": "Lumen Field, Seattle"
   },
   {
     "id": 64,
@@ -637,7 +637,7 @@
     "group": "G",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "NRG Stadium, Houston, TX"
+    "venue": "BC Place, Vancouver"
   },
   {
     "id": 65,
@@ -647,7 +647,7 @@
     "group": "H",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "Hard Rock Stadium, Miami Gardens, FL"
+    "venue": "NRG Stadium, Houston"
   },
   {
     "id": 66,
@@ -657,7 +657,7 @@
     "group": "H",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "Toyota Stadium, Frisco, TX"
+    "venue": "Estadio Akron, Zapopan"
   },
   {
     "id": 67,
@@ -667,7 +667,7 @@
     "group": "L",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "GEOD Stadium, La Mirada, CA"
+    "venue": "MetLife Stadium, East Rutherford"
   },
   {
     "id": 68,
@@ -677,7 +677,7 @@
     "group": "L",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "Lincoln Financial Field, Philadelphia, PA"
+    "venue": "Lincoln Financial Field, Philadelphia"
   },
   {
     "id": 69,
@@ -687,7 +687,7 @@
     "group": "J",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "Arrowhead Stadium, Kansas City, MO"
+    "venue": "Arrowhead Stadium, Kansas City"
   },
   {
     "id": 70,
@@ -697,7 +697,7 @@
     "group": "J",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "Levi's Stadium, Santa Clara, CA"
+    "venue": "AT&T Stadium, Arlington"
   },
   {
     "id": 71,
@@ -707,7 +707,7 @@
     "group": "K",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "Lincoln Financial Field, Philadelphia, PA"
+    "venue": "Hard Rock Stadium, Miami Gardens"
   },
   {
     "id": 72,
@@ -717,7 +717,7 @@
     "group": "K",
     "stage": "group",
     "league": "World Cup 2026",
-    "venue": "Hard Rock Stadium, Miami Gardens, FL"
+    "venue": "Mercedes-Benz Stadium, Atlanta"
   },
   {
     "id": 73,

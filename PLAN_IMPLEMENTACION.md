@@ -8,6 +8,8 @@
 
 **Architecture:** Fuente única de datos: fixtures hardcodeados en `data/fixtures_wc2026.json` (104 partidos del Mundial). Ratings ELO de selecciones desde eloratings.net (scraping de `World.tsv`, 244 equipos). Predictor ELO con fórmula clásica (home advantage +100, K=400) genera probabilidades 1X2 y expected goals. Sin dependencias de APIs externas ni rate limits. Sin ML. v2.0 post-Mundial añadirá XGBoost con datos históricos de ligas regulares.
 
+**⚠️ POLÍTICA DE FUENTES OFICIALES VERIFICADAS:** Todos los datos factuales (sedes, fixtures, fechas) provienen exclusivamente de fuentes oficiales — **Wikipedia (citando FIFA primary sources)** para sedes del Mundial 2026, **eloratings.net** para ratings ELO. Nunca inventar datos algorítmicamente. Las sedes incorrectas en `fixtures_wc2026.json` fueron corregidas contra Wikipedia Groups A-L (mayo 2026).
+
 **Tech Stack:** Python 3.12, pandas, numpy, requests (scraping eloratings.net), GitHub Actions, PHP 8.x, WordPress 6.x
 
 **Estructura del repositorio:**
