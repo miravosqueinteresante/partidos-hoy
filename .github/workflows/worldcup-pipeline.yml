@@ -6,6 +6,9 @@ on:
     - cron: "0 0,6,12,18 * 7 *"
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 env:
   PYTHON_VERSION: "3.12"
   API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
@@ -106,8 +109,9 @@ jobs:
         run: |
           git config user.name 'github-actions'
           git config user.email 'actions@github.com'
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
           git checkout --orphan gh-pages 2>/dev/null || git checkout gh-pages
-          cp predictions/latest.json .
+          cp -r predictions/latest.json .
           git add latest.json
           git commit -m 'deploy: worldcup predictions $(date +%Y-%m-%d_%H:%M)'
           git push origin gh-pages --force
