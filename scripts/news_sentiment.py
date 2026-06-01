@@ -74,7 +74,7 @@ Reglas estrictas:
             messages=[
                 {
                     "role": "system",
-                    "content": "Eres un analista deportivo experto que siempre responde en español con exactamente 3 oraciones."
+                    "content": "Eres un analista deportivo experto que siempre responde en español con exactamente 3 oraciones. Responde SOLO con JSON con este formato: {\"news_sentiment\": \"...\", \"news_sources\": [\"url1\", \"url2\"]}"
                 },
                 {
                     "role": "user",
@@ -82,11 +82,11 @@ Reglas estrictas:
                 }
             ],
             temperature=0.3,
-            max_tokens=200,
-            response_format={"type": "json_object"}
+            max_tokens=300
         )
 
         raw_text = chat.choices[0].message.content.strip()
+        logging.info(f"Groq raw response: {raw_text[:200]}")
         raw_text = re.sub(r'^```(?:json)?\s*', '', raw_text)
         raw_text = re.sub(r'\s*```$', '', raw_text)
         result = json.loads(raw_text)
