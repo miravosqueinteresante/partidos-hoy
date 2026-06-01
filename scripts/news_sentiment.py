@@ -100,26 +100,39 @@ Reglas:
         return None
 
 
-def update_predictions_with_news(latest_json_path, max_matches=None):
+def update_predictions_with_news(latest_json_path, max_new_matches=None, date_from=None):
     """
     Lee el latest.json, agrega sentimiento de noticias a cada partido
-    que tenga equipos definidos, y guarda el resultado.
+    que tenga equipos definidos y aún no tenga news_sentiment.
+
+    Args:
+        latest_json_path: ruta al archivo latest.json
+        max_new_matches: máximo número de partidos nuevos a procesar (None = todos)
+        date_from: procesar solo partidos desde esta fecha inclusive (YYYY-MM-DD, None = todos)
     """
     with open(latest_json_path, 'r', encoding='utf-8') as f:
         data = json.load(f)
 
     matches = data.get("matches", [])
-    # Solo procesar partidos con equipos definidos (no TBD)
-    valid_matches = [m for m in matches if m.get("home") and m.get("away")]
+    # Solo partidos con equipos definidos (no TBD) y sin news_sentiment aún
+    valid_matches = [
+        m for m in matches
+        if m.get("home") and m.get("away") and not m.get("news_sentiment")
+    ]
 
-    if max_matches:
-        valid_matches = valid_matches[:max_matches]
+    # Filtrar por fecha si se especifica
+    if date_from:
+        valid_matches = [m for m in valid_matches if m.get("date", "") >= date_from]
+
+    if max_new_matches:
+        valid_matches = valid_matches[:max_new_matches]
 
     updated_count = 0
     for match in valid_matches:
         home = match["home"]
         away = match["away"]
-        logging.info(f"🔍 Investigando: {home} vs {away}...")
+        match_date = match.get("date", "unknown")
+        logging.info(f"🔍 [{match_date}] {home} vs {away}...")
 
         result = get_news_sentiment(home, away)
 
@@ -142,9 +155,15 @@ if __name__ == "__main__":
         os.path.dirname(os.path.dirname(__file__)),
         'predictions', 'latest.json'
     )
-    
-    # Por defecto procesamos solo 3 partidos para probar
-    max_matches = int(sys.argv[1]) if len(sys.argv) > 1 else 3
-    
-    logging.info(f"Procesando {max_matches} partidos...")
-    update_predictions_with_news(predictions_path, max_matches=max_matches)
+
+    # Argumentos: python -m scripts.news_sentiment [max_new_matches] [date_from]
+    #Ejemplo: python -m scripts.news_sentiment 8 2026-06-11
+    max_new_matches = int(sys.argv[1]) if len(sys.argv) > 1 else None
+    date_from = sys.argv[2] if len(sys.argv) > 2 else None
+
+    if date_from:
+        logging.info(f"Procesando hasta {max_new_matches or 'todos'} partidos desde {date_from}...")
+    else:
+        logging.info(f"Procesando hasta {max_new_matches or 'todos'} partidos (sin filtro de fecha)...")
+
+    update_predictions_with_news(predictions_path, max_new_matches=max_new_matches, date_from=date_from)

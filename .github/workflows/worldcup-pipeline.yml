@@ -60,7 +60,29 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
-          python -m scripts.news_sentiment 3
+          # Calcular date_from según la fecha actual (UTC)
+          # Wave 1: antes del 14 Jun → procesar desde 11 Jun
+          # Wave 2: antes del 17 Jun → procesar desde 14 Jun
+          # Wave 3: antes del 20 Jun → procesar desde 17 Jun
+          # Wave 4: antes del 23 Jun → procesar desde 20 Jun
+          # Wave 5: antes del 26 Jun → procesar desde 23 Jun
+          # Wave 6: 26 Jun en adelante → procesar desde 26 Jun
+          CURRENT_DATE=$(date -u +%Y-%m-%d)
+          if [[ "$CURRENT_DATE" < "2026-06-14" ]]; then
+            DATE_FROM="2026-06-11"
+          elif [[ "$CURRENT_DATE" < "2026-06-17" ]]; then
+            DATE_FROM="2026-06-14"
+          elif [[ "$CURRENT_DATE" < "2026-06-20" ]]; then
+            DATE_FROM="2026-06-17"
+          elif [[ "$CURRENT_DATE" < "2026-06-23" ]]; then
+            DATE_FROM="2026-06-20"
+          elif [[ "$CURRENT_DATE" < "2026-06-26" ]]; then
+            DATE_FROM="2026-06-23"
+          else
+            DATE_FROM="2026-06-26"
+          fi
+          echo "Fecha de inicio: $DATE_FROM"
+          python -m scripts.news_sentiment 8 "$DATE_FROM"
           echo "News sentiment enrichment complete"
 
       - name: Deploy to gh-pages
