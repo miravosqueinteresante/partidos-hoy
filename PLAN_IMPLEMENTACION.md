@@ -4,11 +4,11 @@
 > 
 > **v1.0 = Copa del Mundo 2026 (104 partidos, 48 selecciones).** Después del 19 de julio se expandirá a más ligas bajo la marca Partidos Hoy.
 
-**Goal:** v1.0 enfocada exclusivamente en la **Copa del Mundo 2026**. Pipeline Python en GitHub Actions extrae datos de múltiples fuentes en cascada (API-Football → FBref/soccerdata → football-data.org) y genera predicciones XGBoost calibradas en JSON. Plugin WordPress consume el JSON vía shortcode con Freemius. Producto: **Partidos Hoy - Pronósticos de Fútbol**, alojado en partidoshoy.futbol.
+**Goal:** v1.0 enfocada exclusivamente en la **Copa del Mundo 2026**. Pipeline Python en GitHub Actions genera predicciones ELO desde fixtures hardcodeados (`data/fixtures_wc2026.json`) + ratings de eloratings.net (`data/team_ratings.json`). Plugin WordPress consume el JSON vía shortcode con Freemius. Producto: **Partidos Hoy - Pronósticos de Fútbol**, alojado en partidoshoy.futbol.
 
-**Architecture:** Tres fuentes de datos en cascada con failover automático. Primary = API-Football free tier (60-75 req/día para WC). Fallback 1 = FBref vía soccerdata (scraping, ilimitado). Fallback 2 = football-data.org (10 req/min). Los datos convergen en un formato unificado. Pipeline entrena features (ELO, rolling stats de selecciones) y publica JSON calibrado en gh-pages.
+**Architecture:** Fuente única de datos: fixtures hardcodeados en `data/fixtures_wc2026.json` (104 partidos del Mundial). Ratings ELO de selecciones desde eloratings.net (scraping de `World.tsv`, 244 equipos). Predictor ELO con fórmula clásica (home advantage +100, K=400) genera probabilidades 1X2 y expected goals. Sin dependencias de APIs externas ni rate limits. Sin ML. v2.0 post-Mundial añadirá XGBoost con datos históricos de ligas regulares.
 
-**Tech Stack:** Python 3.12, XGBoost, scikit-learn, pandas, soccerdata, GitHub Actions, PHP 8.x, WordPress 6.x, Freemius SDK
+**Tech Stack:** Python 3.12, pandas, numpy, requests (scraping eloratings.net), GitHub Actions, PHP 8.x, WordPress 6.x, Freemius SDK
 
 **Estructura del repositorio:**
 ```
@@ -17,42 +17,22 @@ partidos-hoy/
 │   └── worldcup-pipeline.yml         # Único workflow: cada 6h durante Jun-Jul
 ├── src/
 │   ├── __init__.py
-│   ├── config.py                      # Config WC-only + fallback sources
-│   ├── data/
-│   │   ├── __init__.py
-│   │   ├── api_football_client.py     # Fuente primaria
-│   │   ├── fbref_scraper.py          # Fallback 1: FBref vía soccerdata
-│   │   ├── football_data_org.py      # Fallback 2: football-data.org API
-│   │   └── data_cascade.py           # Orquestador: prueba fuentes en orden
-│   ├── features/
-│   │   ├── __init__.py
-│   │   ├── elo_ratings.py            # ELO ratings (ClubElo vía soccerdata)
-│   │   ├── rolling_stats.py          # Rolling averages
-│   │   └── build_features.py         # Orquestador de features
-│   ├── models/
-│   │   ├── __init__.py
-│   │   ├── trainer.py                # Entrenamiento XGBoost
-│   │   ├── calibrator.py             # Isotonic Regression
-│   │   └── predictor.py              # Generar predicciones JSON
-│   └── utils/
+│   ├── config.py                      # Config ELO + rutas de datos
+│   └── models/
 │       ├── __init__.py
-│       └── rate_limiter.py           # Rate limiter para APIs
-├── tests/
-│   ├── __init__.py
-│   ├── test_api_football_client.py
-│   ├── test_fbref_scraper.py
-│   ├── test_football_data_org.py
-│   ├── test_data_cascade.py
-│   ├── test_historical_data.py
-│   ├── test_elo_ratings.py
-│   ├── test_rolling_stats.py
-│   ├── test_build_features.py
-│   ├── test_trainer.py
-│   ├── test_calibrator.py
-│   ├── test_predictor.py
-│   └── test_pipeline.py
+│       └── elo_predictor.py           # Predictor ELO (producción)
+├── data/
+│   ├── fixtures_wc2026.json           # 104 fixtures hardcodeados
+│   └── team_ratings.json              # ELO ratings de 48 selecciones
+├── scripts/
+│   ├── build_ratings.py               # Scrapea eloratings.net
+│   ├── extract_elo.py                 # Extrae ELO ratings
+│   ├── fix_ratings.py                 # Corrige nombres de equipos
+│   └── test_elo.py                    # Prueba local del predictor
+├── predictions/
+│   └── test_latest.json               # Output de prueba local
 ├── wp-plugin/
-│   ├── partidos-hoy.php        # Plugin principal
+│   ├── partidos-hoy.php               # Plugin principal
 │   ├── includes/
 │   │   ├── class-data-client.php      # Cliente HTTP para JSON
 │   │   ├── class-shortcode.php        # Shortcode y renderizado
@@ -60,10 +40,9 @@ partidos-hoy/
 │   ├── assets/
 │   │   └── css/
 │   │       └── frontend.css           # Estilos del shortcode
-│   ├── languages/                     # Traducciones
-│   │   └── partidos-hoy.pot
+│   ├── vendor/freemius/               # Freemius SDK
 │   └── readme.txt                     # WordPress.org readme
-├── requirements.txt
+├── requirements.txt                    # pandas, numpy, requests, pytest
 ├── .gitignore
 └── README.md
 ```
@@ -3088,43 +3067,28 @@ git commit -m "chore: CRA compliance - security.txt, VDP, Dependabot"
 
 ---
 
-## Resumen de Tareas (20 tasks, ~80 pasos)
+## Resumen de Tareas — v1.0 REAL (lo que realmente se implementó)
 
-| # | Task | Archivos | Estado |
-|---|------|----------|--------|
-| 1 | Config WC-only + fallback sources | 5 files | ✅ |
-| 2 | Rate limiter | 2 files | ✅ |
-| 3 | **API-Football client (fuente primaria)** | 2 files | ✅ |
-| 3b | **FBref scraper vía soccerdata (fallback 1)** | 2 files | ✅ |
-| 3c | **football-data.org client (fallback 2)** | 2 files | ✅ |
-| 3d | **DataCascade orquestador (3 fuentes)** | 2 files | ✅ |
-| 4 | Historical data parser | 2 files | ✅ |
-| 5 | ELO ratings | 2 files | ✅ |
-| 6 | Rolling stats | 2 files | ✅ |
-| 7 | Feature builder | 2 files | ✅ |
-| 8 | XGBoost trainer | 2 files | ✅ |
-| 9 | Probability calibrator | 2 files | ✅ |
-| 10 | Prediction generator (+api_prediction) | 2 files | ✅ |
-| 11 | Integration test | 1 file | ✅ |
-| 12 | **Workflow Mundial 2026 (único, cada 6h)** | 1 file | ✅ |
-| 13 | Plugin base | 2 files | ✅ |
-| 14 | Data client + admin | 3 files | ✅ |
-| 15 | Shortcode + CSS | 3 files | ✅ |
-| 16 | Freemius SDK | 1 file | ✅ |
-| 17 | CRA compliance | 3 files | ✅ |
+| # | Task | Estado | Notas |
+|---|------|--------|-------|
+| 1 | Config + fixtures hardcodeados | ✅ | `fixtures_wc2026.json` + `config.py` simplificado |
+| 2 | **eloratings.net scraper** | ✅ | Scraping de `World.tsv` → `team_ratings.json` (244 equipos) |
+| 3 | **EloPredictor (fórmula ELO clásica)** | ✅ | Home advantage +100, K=400 → 1X2 + expected_goals |
+| 4 | 104 fixtures hardcodeados | ✅ | `data/fixtures_wc2026.json` — 72 grupo + 32 KO |
+| 5 | Workflow GHA (cada 6h) | ✅ | Sin steps de diagnóstico, sin API keys |
+| 6 | Plugin WordPress | ✅ | Freemius, shortcodes, admin, data client |
+| 7 | CRA compliance | ✅ | security.txt + VDP + Dependabot |
 
-### Hit de tiempo: Copa del Mundo 2026
-
-La Copa del Mundo arranca el **11 de junio de 2026**. v1.0 solo cubre la Copa. Prioridades:
-
-| Período | Foco |
-|---------|------|
-| **1-7 Jun** | Tasks 1-11 (pipeline Python con cascada de 3 fuentes) |
-| **8-9 Jun** | Task 12 (workflow GHA + DataCascade) |
-| **10 Jun** | Tasks 13-15 (plugin WordPress básico) |
-| **11 Jun (🏆)** | Tasks 16-17 (Freemius + CRA + test final) |
-| **12 Jun - 19 Jul** | Monitoreo y ajustes durante la Copa |
-| **Post-19 Jul** | Expandir a ligas regulares (v2.0)
+**Código legacy eliminado** (existía en el plan original pero NO en producción):
+- API-Football client (free tier no tiene season 2026)
+- FBref scraper vía soccerdata (WC 2026 no disponible)
+- football-data.org client (sin World Cup en free tier)
+- DataCascade orquestador (todas las fuentes fallan)
+- XGBoost trainer, calibrator, predictor (para v2.0)
+- Rate limiter (ya no se usan APIs externas)
+- Historical data parser, feature builder, ELO ratings class, rolling stats
+- Tests legacy (14 archivos de módulos eliminados)
+- Research docs
 
 ---
 
@@ -3174,30 +3138,29 @@ Fixtures: data/fixtures_wc2026.json (hardcodeado)
 
 ---
 
-**Cobertura del spec:**
+**Cobertura del spec (v1.0 REAL):**
 - ✅ **v1.0 enfocado exclusivamente en Copa del Mundo 2026** 
 - ✅ **Producto: Partidos Hoy - Pronósticos de Fútbol** (partidoshoy.futbol)
 - ✅ **Branding sin marcas FIFA**: no usa "FIFA", "World Cup", "Mundial" ni "Copa del Mundo" en nombre del producto
-- ✅ Pipeline Python completo (data → features → model → JSON)
-- ✅ **Cascada de 3 fuentes de datos**: API-Football → FBref/soccerdata → football-data.org
-- ✅ API-Football predictions incluidas como baseline en JSON (`api_prediction`)
-- ✅ Coverage check para verificar disponibilidad de datos por liga
-- ✅ Batch queries (hasta 20 fixtures) y live match tracking
-- ✅ **DataCascade orquestador** con failover automático + logging
-- ✅ GitHub Actions CI/CD (1 workflow: worldcup-pipeline cada 6h)
+- ✅ Pipeline Python completo (fixtures JSON → EloPredictor → JSON → gh-pages)
+- ✅ **Fuente única de datos**: eloratings.net (scraping) + fixtures hardcodeados
+- ✅ GitHub Actions CI/CD (1 workflow: worldcup-pipeline cada 6h, sin API keys)
 - ✅ Plugin WordPress con shortcode y admin
 - ✅ Freemius integración free/premium
 - ✅ CRA compliance (security.txt + VDP + Dependabot)
 - ✅ Seguridad WordPress (nonces, capability checks, sanitize, escape)
 - ✅ Protección legal FIFA (branding sin marcas, disclaimers, checklists)
-- ✅ Presupuesto cero (3 fuentes gratuitas + GitHub repo público)
+- ✅ Presupuesto cero (solo GitHub repo público + scraping eloratings.net)
 - ✅ Timeline realista para llegar al Mundial (11 junio)
+- ✅ Acentos normalizados (Côte d'Ivoire, Türkiye, Curaçao → lookup correcto)
+- ✅ Knockout stages marcados como `status: TBD` en vez de NaN
 
-**Placeholder scan:** Sin placeholders. Todo paso tiene código completo.
-
-**Consistencia de tipos:** Las firmas de funciones coinciden entre tasks. `FEATURE_COLS` se define en `trainer.py` y se importa en `predictor.py`. Los tests usan las mismas columnas.
-
-**Sin placeholders:** Verificado. Cada paso tiene código real implementado.
+**Arquitectura final (v1.0):**
+```
+data/fixtures_wc2026.json ──→ EloPredictor ──→ predictions/latest.json ──→ gh-pages ──→ WordPress
+data/team_ratings.json ────────↕              (104 matches, prob 1X2, xG)
+(eloratings.net scrape)
+```
 
 ---
 

@@ -48,39 +48,36 @@
 
 ---
 
-## Visión General del Sistema
+## Visión General del Sistema (v1.0 REAL)
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                    GITHUB ACTIONS                                │
 │  Pipeline automático (cada 6h durante Mundial) — $0              │
 │                                                                  │
-│  DATOS: CASCADA DE 3 FUENTES CON FAILOVER                        │
+│  DATOS: FUENTE ÚNICA (sin APIs externas)                         │
 │                                                                  │
-│  ┌─ 1. API-Football Free (primary, 100 req/día) ─────────────┐  │
-│  │  league=1, season=2026. 60-75 req/día para el Mundial.    │  │
-│  │  Si falla o se agota la cuota →                            │  │
-│  └────────────────────────────────────────────────────────────┘  │
+│  ┌─────────────────────────────────────────────────────────────┐ │
+│  │  Fixtures hardcodeados (data/fixtures_wc2026.json)          │ │
+│  │  104 partidos: 72 grupo + 32 KO                             │ │
+│  └─────────────────────────────────────────────────────────────┘ │
 │                          ↓                                       │
-│  ┌─ 2. FBref vía soccerdata (fallback, scraping ilimitado) ──┐  │
-│  │  Sin API key. Sin rate limit. scrapea fbref.com directo.  │  │
-│  │  Si falla →                                                 │  │
-│  └────────────────────────────────────────────────────────────┘  │
+│  ┌─────────────────────────────────────────────────────────────┐ │
+│  │  ELO ratings (data/team_ratings.json)                       │ │
+│  │  Scrapeado de eloratings.net/World.tsv                      │ │
+│  │  244 equipos nacionales, 48 del WC encontrados              │ │
+│  └─────────────────────────────────────────────────────────────┘ │
 │                          ↓                                       │
-│  ┌─ 3. football-data.org (fallback terciario, 10 req/min) ───┐  │
-│  │  Free tier: 12 competiciones top. Cobertura limitada de   │  │
-│  │  Mundial, pero sirve como respaldo parcial.                │  │
-│  └────────────────────────────────────────────────────────────┘  │
-│         ↓                                                        │
-│  2. pandas / feature engineering                                 │
-│     → ELO (ClubElo vía soccerdata), rolling averages,            │
-│       forma, localía                                             │
-│         ↓                                                        │
-│  3. XGBoost / CatBoost + Regresión Logística baseline            │
-│     + Isotonic Regression (calibración)                          │
-│         ↓                                                        │
-│  4. JSON con predicciones calibradas                             │
-│     → Publicado en gh-pages como artifact del workflow           │
+│  ┌─────────────────────────────────────────────────────────────┐ │
+│  │  EloPredictor                                               │ │
+│  │  Fórmula ELO clásica: home advantage +100, K=400           │ │
+│  │  → probabilidades 1X2 + expected_goals                      │ │
+│  │  → Knockout TBD marcados como status: "TBD"                │ │
+│  │  → Acentos normalizados (Côte → Cote, Türkiye → Turkiye)   │ │
+│  └─────────────────────────────────────────────────────────────┘ │
+│                          ↓                                       │
+│  predictions/latest.json (104 matches, prob 1X2, xG)             │
+│     → gh-pages deploy automático                                 │
 └──────────────────────────┬──────────────────────────────────────┘
                            │  URL pública del JSON
                            ▼
@@ -90,13 +87,13 @@
 │                                                                  │
 │  Lee el JSON desde GitHub Pages (URL pública)                    │
 │  Muestra en el sitio web:                                        │
-│  ┌─────────────┬──────┬──────┬──────┬─────────────┐             │
-│  │ Partido     │  1   │  X   │  2   │  Confianza  │             │
-│  ├─────────────┼──────┼──────┼──────┼─────────────┤             │
-│  │ Argentina   │ 38%  │ 30%  │ 32%  │  Media      │             │
-│  │ vs Francia  │      │      │      │             │             │
-│  └─────────────┴──────┴──────┴──────┴─────────────┘             │
-│  + Detalles: goles esperados, BTTS, under/over                   │
+│  ┌─────────────┬──────┬──────┬──────┬──────────────┐            │
+│  │ Partido     │  1   │  X   │  2   │  Goles Esp.  │            │
+│  ├─────────────┼──────┼──────┼──────┼──────────────┤            │
+│  │ México      │ 73%  │ 21%  │  6%  │  2.04-0.35   │            │
+│  │ vs Sudáfrica│      │      │      │              │            │
+│  └─────────────┴──────┴──────┴──────┴──────────────┘            │
+│  + Detalles: expected_goals por equipo                           │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -104,14 +101,26 @@
 
 **¿Qué hace?** Un sistema de pronósticos 100% sobre GitHub + GitHub Actions, enfocado en la Copa del Mundo 2026:
 1. **Un workflow de GitHub Actions** se ejecuta cada 6 horas (durante Jun-Jul 2026)
-2. **Intenta 3 fuentes en cascada**: API-Football → FBref → football-data.org
-3. **Calcula features** (ELO de selecciones, forma reciente)
-4. **Entrena/actualiza el modelo** (XGBoost) y genera predicciones calibradas
-5. **Publica un JSON** en GitHub Pages para que WordPress lo consuma
+2. **Lee fixtures hardcodeados** de `data/fixtures_wc2026.json` (104 partidos)
+3. **Carga ELO ratings** de `data/team_ratings.json` (48 selecciones, scrapeado de eloratings.net)
+4. **Genera predicciones con fórmula ELO** (home advantage +100, K=400 → probabilidades 1X2 + xG)
+5. **Publica `latest.json`** en GitHub Pages para que WordPress lo consuma
 6. **El plugin de WordPress** lee ese JSON y lo muestra en el sitio web
-7. **Si la fuente primaria falla**, el DataCascade automáticamente prueba el fallback sin interrumpir el pipeline
+7. **No depende de APIs externas**: sin rate limits, sin API keys, sin costos
 
-**Caso de uso típico**: Durante un Mundial, el workflow de Actions se ejecuta días antes de cada fecha. Analiza datos históricos de todas las selecciones (incluso las sin jugadores en Europa, mediante rating Elo) y genera probabilidades. El plugin de WordPress las muestra automáticamente en tu sitio.
+**Caso de uso típico**: Durante un Mundial, el workflow de Actions se ejecuta cada 6 horas. Calcula probabilidades ELO para cada partido basándose en el rating histórico de cada selección (eloratings.net). Los partidos de eliminatorias aparecen como "TBD" hasta que se definan los clasificados. El plugin de WordPress las muestra automáticamente en tu sitio.
+
+### ⚠️ Nota sobre fuentes de datos
+
+El plan original contemplaba 3 fuentes en cascada (API-Football → FBref → football-data.org). En la práctica:
+- **API-Football free tier**: ❌ NO tiene season 2026 (`Free plans do not have access to this season`)
+- **FBref vía soccerdata**: ❌ WC 2026 no disponible aún (`is_worldcup_available() = False`)
+- **football-data.org free**: ❌ No incluye World Cup
+- **ClubElo (soccerdata)**: ❌ Solo clubes, no selecciones nacionales
+- **eloratings.net/World.tsv**: ✅ Scraping libre, sin rate limit, 244 equipos nacionales
+- **Fixtures hardcodeados**: ✅ 104 partidos del calendario oficial
+
+La arquitectura real v1.0 usa solo las fuentes que ✅ funcionan.
 
 ---
 
@@ -312,7 +321,7 @@ Separación de fuerza en 4 componentes: pi_att_home, pi_def_home, pi_att_away, p
 
 > **Filtro de presupuesto cero**: Solo las opciones marcadas como "GRATIS" o con plan free viable son aceptables. Sportmonks y planes de pago de otras APIs quedan descartados automáticamente.
 >
-> **v1.0 = SOLO Mundial 2026.** Las fuentes están priorizadas en cascada: API-Football (primary) → FBref/soccerdata (fallback 1) → football-data.org (fallback 2). Las fuentes de ligas regulares se integrarán en v2.0.
+> **v1.0 = SOLO Mundial 2026.** ⚠️ Realidad verificada: las 3 fuentes previstas (API-Football, FBref, football-data.org) **NO funcionan para WC 2026** en plan free. La fuente real es **eloratings.net** (scraping de World.tsv, 244 equipos) + fixtures hardcodeados en `data/fixtures_wc2026.json` (104 partidos). Las fuentes de ligas regulares se integrarán en v2.0 post-Mundial.
 
 | Fuente | Costo/mes Real | Cobertura (plan free) | Rate Limit | Rol en v1.0 |
 |--------|---------------|----------------------|------------|-------------|
@@ -349,9 +358,11 @@ Separación de fuerza en 4 componentes: pi_att_home, pi_def_home, pi_att_away, p
 | **football-data.co.uk** | CSV | 22 divisiones, desde 1993, odds 10 casas | Actualizado |
 | **StatsBomb Open Data** | JSON | Eventos detallados, xG, competiciones selectas | GitHub |
 
-### 4.4 Stack de Datos Recomendado (Inicio)
+### 4.4 Stack de Datos v1.0 (Real)
 
-`soccerdata` + `API-Football Free` + `mplsoccer` + datasets Kaggle/GitHub
+`eloratings.net` (scraping World.tsv) + `data/fixtures_wc2026.json` (hardcodeado) + `EloPredictor` (fórmula ELO clásica)
+
+**Para v2.0 (post-Mundial):** `soccerdata` + `API-Football Free` + `mplsoccer` + datasets Kaggle/GitHub + `football-data.co.uk`
 
 ---
 
