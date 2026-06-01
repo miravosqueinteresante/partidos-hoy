@@ -143,27 +143,27 @@ jobs:
           print(f'API predictions baseline: {len(api_preds)} matches')
           "
 
-      - name: Generate predictions JSON
+      - name: Generate predictions JSON (ELO-based)
         run: |
           python -c "
           import json
           import pandas as pd
-          from src.models.predictor import PredictionGenerator
-
-          try:
-              with open('predictions/api_baseline.json') as f:
-                  api_preds = json.load(f)
-          except FileNotFoundError:
-              api_preds = None
+          from src.models.elo_predictor import EloPredictor
 
           with open('data/fixtures_wc2026.json') as f:
               fixtures = json.load(f)
           df = pd.DataFrame(fixtures)
-          generator = PredictionGenerator()
-          output = generator.generate(df, api_predictions=api_preds, use_xgboost=False)
+          predictor = EloPredictor('data/team_ratings.json')
+          output = predictor.generate(df)
           with open('predictions/latest.json', 'w') as f:
               f.write(output)
-          print(f'World Cup predictions JSON generated: {len(df)} matches')
+          parsed = json.loads(output)
+          print(f'World Cup predictions generated: {len(parsed[\"matches\"])} matches')
+          print(f'Model: {parsed[\"model\"]}')
+          for m in parsed['matches'][:5]:
+              p = m['probabilities']
+              print(f'  {m[\"home\"]:20s} vs {m[\"away\"]:20s}  '
+                    f'1: {p[\"home\"]*100:5.1f}%  X: {p[\"draw\"]*100:5.1f}%  2: {p[\"away\"]*100:5.1f}%')
           "
 
       - name: Deploy to gh-pages

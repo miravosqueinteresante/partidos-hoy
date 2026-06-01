@@ -1,0 +1,194 @@
+{
+  "Mexico": {
+    "elo": 1868.0,
+    "eloratings_name": "Mexico"
+  },
+  "South Africa": {
+    "elo": 1517.0,
+    "eloratings_name": "South Africa"
+  },
+  "Czechia": {
+    "elo": 1733.0,
+    "eloratings_name": "Czechia"
+  },
+  "Canada": {
+    "elo": 1784.0,
+    "eloratings_name": "Canada"
+  },
+  "Qatar": {
+    "elo": 1423.0,
+    "eloratings_name": "Qatar"
+  },
+  "Switzerland": {
+    "elo": 1894.0,
+    "eloratings_name": "Switzerland"
+  },
+  "Brazil": {
+    "elo": 1988.0,
+    "eloratings_name": "Brazil"
+  },
+  "Morocco": {
+    "elo": 1822.0,
+    "eloratings_name": "Morocco"
+  },
+  "Haiti": {
+    "elo": 1532.0,
+    "eloratings_name": "Haiti"
+  },
+  "Scotland": {
+    "elo": 1770.0,
+    "eloratings_name": "Scotland"
+  },
+  "USA": {
+    "elo": 1733.0,
+    "eloratings_name": "United States"
+  },
+  "Paraguay": {
+    "elo": 1833.0,
+    "eloratings_name": "Paraguay"
+  },
+  "Australia": {
+    "elo": 1775.0,
+    "eloratings_name": "Australia"
+  },
+  "Turkiye": {
+    "elo": 1902.0,
+    "eloratings_name": "Turkey"
+  },
+  "Germany": {
+    "elo": 1925.0,
+    "eloratings_name": "Germany"
+  },
+  "Cote d'Ivoire": {
+    "elo": 1676.0,
+    "eloratings_name": "Ivory Coast"
+  },
+  "Ecuador": {
+    "elo": 1935.0,
+    "eloratings_name": "Ecuador"
+  },
+  "Netherlands": {
+    "elo": 1961.0,
+    "eloratings_name": "Netherlands"
+  },
+  "Japan": {
+    "elo": 1906.0,
+    "eloratings_name": "Japan"
+  },
+  "Sweden": {
+    "elo": 1719.0,
+    "eloratings_name": "Sweden"
+  },
+  "Tunisia": {
+    "elo": 1636.0,
+    "eloratings_name": "Tunisia"
+  },
+  "Belgium": {
+    "elo": 1867.0,
+    "eloratings_name": "Belgium"
+  },
+  "Egypt": {
+    "elo": 1699.0,
+    "eloratings_name": "Egypt"
+  },
+  "IR Iran": {
+    "elo": 1764.0,
+    "eloratings_name": "Iran"
+  },
+  "New Zealand": {
+    "elo": 1585.0,
+    "eloratings_name": "New Zealand"
+  },
+  "Spain": {
+    "elo": 2165.0,
+    "eloratings_name": "Spain"
+  },
+  "Cabo Verde": {
+    "elo": 1576.0,
+    "eloratings_name": "Cape Verde"
+  },
+  "Saudi Arabia": {
+    "elo": 1566.0,
+    "eloratings_name": "Saudi Arabia"
+  },
+  "Uruguay": {
+    "elo": 1892.0,
+    "eloratings_name": "Uruguay"
+  },
+  "France": {
+    "elo": 2081.0,
+    "eloratings_name": "France"
+  },
+  "Senegal": {
+    "elo": 1866.0,
+    "eloratings_name": "Senegal"
+  },
+  "Iraq": {
+    "elo": 1608.0,
+    "eloratings_name": "Iraq"
+  },
+  "Norway": {
+    "elo": 1912.0,
+    "eloratings_name": "Norway"
+  },
+  "Argentina": {
+    "elo": 2113.0,
+    "eloratings_name": "Argentina"
+  },
+  "Algeria": {
+    "elo": 1743.0,
+    "eloratings_name": "Algeria"
+  },
+  "Austria": {
+    "elo": 1827.0,
+    "eloratings_name": "Austria"
+  },
+  "Jordan": {
+    "elo": 1685.0,
+    "eloratings_name": "Jordan"
+  },
+  "Portugal": {
+    "elo": 1984.0,
+    "eloratings_name": "Portugal"
+  },
+  "Congo DR": {
+    "elo": 1207.0,
+    "eloratings_name": "Congo"
+  },
+  "Uzbekistan": {
+    "elo": 1727.0,
+    "eloratings_name": "Uzbekistan"
+  },
+  "Colombia": {
+    "elo": 1975.0,
+    "eloratings_name": "Colombia"
+  },
+  "England": {
+    "elo": 2020.0,
+    "eloratings_name": "England"
+  },
+  "Croatia": {
+    "elo": 1930.0,
+    "eloratings_name": "Croatia"
+  },
+  "Ghana": {
+    "elo": 1503.0,
+    "eloratings_name": "Ghana"
+  },
+  "Panama": {
+    "elo": 1733.0,
+    "eloratings_name": "Panama"
+  },
+  "Korea Republic": {
+    "elo": 1756.0,
+    "eloratings_name": "South Korea"
+  },
+  "Bosnia and Herzegovina": {
+    "elo": 1591.0,
+    "eloratings_name": "Bosnia and Herzegovina"
+  },
+  "Curacao": {
+    "elo": 1433.0,
+    "eloratings_name": "Cura\u00e7ao"
+  }
+}
