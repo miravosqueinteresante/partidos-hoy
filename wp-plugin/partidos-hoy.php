@@ -2,7 +2,7 @@
 /**
  * Plugin Name:     Partidos Hoy
  * Plugin URI:       https://github.com/miravosqueinteresante/partidos-hoy
- * Description:      Predicciones de fútbol para la Copa del Mundo 2026
+ * Description:      Pronósticos de fútbol con ranking ELO para el torneo 2026
  * Version:          1.0.0
  * Requires PHP:     7.4
  * Requires at least: 5.0

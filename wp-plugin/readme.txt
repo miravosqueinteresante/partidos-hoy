@@ -1,6 +1,6 @@
 === Partidos Hoy ===
-Contributors: tunombre
-Tags: football, soccer, predictions, ml, betting
+Contributors: partidoshoy
+Tags: football, soccer, predictions, analytics
 Requires at least: 5.0
 Tested up to: 6.5
 Requires PHP: 7.4
@@ -9,8 +9,8 @@ License: GPLv2 or later
 
 == Description ==
 
-Predicciones de partidos de fútbol generadas con machine learning (XGBoost).
-Las predicciones se actualizan automáticamente cada día.
+Pronósticos de fútbol generados con el sistema de ranking ELO.
+Las predicciones se actualizan automáticamente cada 6 horas.
 
 For informational and entertainment purposes only. Not affiliated with FIFA or any football federation.
 
@@ -23,10 +23,10 @@ For informational and entertainment purposes only. Not affiliated with FIFA or a
 == Frequently Asked Questions ==
 
 = How are predictions generated? =
-Using XGBoost with features including ELO ratings, team form, and historical data.
+Using the World Football ELO rating system, which evaluates team strength based on match results, goal differential, and competition importance.
 
 = How often are predictions updated? =
-Daily via automated pipeline.
+Every 6 hours via automated pipeline.
 
 = Are you affiliated with FIFA? =
 No. This plugin is not affiliated with FIFA or any football federation.
