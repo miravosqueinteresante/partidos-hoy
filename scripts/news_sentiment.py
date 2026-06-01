@@ -1,10 +1,10 @@
 """
 news_sentiment.py — Módulo de Análisis de Sentimiento de Noticias
-Usa la API gratuita de Gemini (Google) con Google Search Grounding
+Usa la API gratuita de Tavily (1000 searches/mes gratis) con búsqueda web
 para investigar noticias recientes de cada partido y generar un resumen.
 
 Seguridad:
-- La API key se lee de variable de entorno GEMINI_API_KEY
+- La API key se lee de variable de entorno TAVILY_API_KEY
 - En local: se carga desde .env (gitignored)
 - En GitHub Actions: se carga desde GitHub Secrets
 """
@@ -34,69 +34,106 @@ load_dotenv()
 
 def get_news_sentiment(home_team, away_team):
     """
-    Usa la API de Gemini para buscar noticias recientes sobre el partido
+    Usa la API de Tavily para buscar noticias recientes sobre el partido
     y generar un resumen de sentimiento + enlaces de fuentes.
     """
     try:
-        from google import genai
-        from google.genai import types
+        from tavily import TavilyClient
     except ImportError:
-        logging.error("Librería google-genai no instalada. Ejecuta: pip install google-genai")
+        logging.error("Librería tavily-python no instalada. Ejecuta: pip install tavily-python")
         return None
 
-    api_key = os.environ.get("GEMINI_API_KEY")
+    api_key = os.environ.get("TAVILY_API_KEY")
     if not api_key:
-        logging.error("GEMINI_API_KEY no encontrada en variables de entorno.")
+        logging.error("TAVILY_API_KEY no encontrada en variables de entorno.")
         return None
 
-    client = genai.Client(api_key=api_key)
+    client = TavilyClient(api_key=api_key)
 
-    prompt = f"""Eres un analista deportivo experto. Investiga las noticias más recientes 
-sobre el partido de fútbol del Mundial 2026: {home_team} vs {away_team}.
+    query = f"{home_team} vs {away_team} World Cup 2026"
 
-Responde ÚNICAMENTE con un JSON válido (sin markdown, sin backticks, sin texto extra) con este formato exacto:
+    try:
+        search_result = client.search(
+            query=query,
+            max_results=3,
+            search_depth="basic"
+        )
+
+        if not search_result or 'results' not in search_result or len(search_result['results']) == 0:
+            logging.warning(f"No se encontraron resultados para: {query}")
+            return None
+
+        sources = []
+        context_parts = []
+        for r in search_result['results'][:3]:
+            url = r.get('url', '')
+            title = r.get('title', '')
+            content = r.get('content', '')[:500]
+            if url:
+                sources.append(url)
+            if title and content:
+                context_parts.append(f"Título: {title}. Contenido: {content}")
+
+        if not context_parts:
+            return None
+
+        context = "\n\n".join(context_parts)
+
+        prompt = f"""Eres un analista deportivo experto. Basándote en estas noticias recientes sobre {home_team} vs {away_team} en el Mundial 2026, genera un resumen de exactamente 3 oraciones sobre:
+- Estado actual de ambos equipos
+- Lesiones clave si las hay
+- Forma reciente
+- Sentimiento general de la prensa deportiva
+
+NOTICIAS:
+{context}
+
+Responde ÚNICAMENTE con un JSON válido (sin markdown, sin backticks) con este formato exacto:
 {{
-  "news_sentiment": "Un resumen de exactamente 3 oraciones sobre el estado actual de ambos equipos, lesiones clave, forma reciente y el sentimiento general de la prensa deportiva.",
-  "news_sources": ["url_real_1", "url_real_2", "url_real_3"]
+  "news_sentiment": "Tu resumen de 3 oraciones en español.",
+  "news_sources": ["url1", "url2", "url3"]
 }}
 
 Reglas:
+- Las URLs deben ser exactamente las que aparecen en las noticias (máximo 3).
+- No inventes URLs ni información. Si no hay suficientes fuentes, usa las que tengas.
 - El resumen debe ser en español.
-- Las URLs deben ser de artículos reales y verificables.
-- Máximo 3 fuentes.
-- No inventes URLs. Si no encuentras fuentes reales, devuelve un array vacío.
 """
 
-    try:
-        response = client.models.generate_content(
-            model="gemini-2.0-flash",
-            contents=prompt,
-            config=types.GenerateContentConfig(
-                tools=[types.Tool(google_search=types.GoogleSearch())],
-                temperature=0.3,
-            )
-        )
+        # Intentar usar Anthropic si hay API key
+        claude_api_key = os.environ.get("ANTHROPIC_API_KEY")
+        news_sentiment = None
 
-        raw_text = response.text.strip()
-        # Limpiar posibles backticks de markdown
-        raw_text = re.sub(r'^```(?:json)?\s*', '', raw_text)
-        raw_text = re.sub(r'\s*```$', '', raw_text)
-        
-        result = json.loads(raw_text)
+        if claude_api_key:
+            try:
+                import anthropic
+                client_anthropic = anthropic.Anthropic(api_key=claude_api_key)
+                message = client_anthropic.messages.create(
+                    model="claude-sonnet-4-20250514",
+                    max_tokens=300,
+                    messages=[{"role": "user", "content": prompt}]
+                )
+                raw_text = message.content[0].text.strip()
+                raw_text = re.sub(r'^```(?:json)?\s*', '', raw_text)
+                raw_text = re.sub(r'\s*```$', '', raw_text)
+                result = json.loads(raw_text)
+                if "news_sentiment" in result and "news_sources" in result:
+                    news_sentiment = result["news_sentiment"]
+                    # Asegurar que las sources sean válidas
+                    result_sources = [s for s in result.get("news_sources", []) if s]
+                    if not result_sources:
+                        result_sources = sources[:3]
+                    logging.info(f"✅ Sentimiento generado para {home_team} vs {away_team}")
+                    return {"news_sentiment": news_sentiment, "news_sources": result_sources}
+            except Exception as e:
+                logging.warning(f"Anthropic no disponible, usando resumen básico: {e}")
 
-        # Validamos la estructura
-        if "news_sentiment" in result and "news_sources" in result:
-            logging.info(f"✅ Sentimiento generado para {home_team} vs {away_team}")
-            return result
-        else:
-            logging.warning(f"Respuesta de Gemini no tiene la estructura esperada: {raw_text[:200]}")
-            return None
+        # Fallback: retornar contexto directamente si no hay Anthropic
+        summary = f"Noticias recientes sobre {home_team} vs {away_team}: {context[:400]}..."
+        return {"news_sentiment": summary, "news_sources": sources[:3] if sources else []}
 
-    except json.JSONDecodeError as e:
-        logging.error(f"Error parseando JSON de Gemini: {e} — Respuesta: {raw_text[:300]}")
-        return None
     except Exception as e:
-        logging.error(f"Error llamando a Gemini API: {e}")
+        logging.error(f"Error buscando noticias con Tavily: {e}")
         return None
 
 
@@ -157,7 +194,7 @@ if __name__ == "__main__":
     )
 
     # Argumentos: python -m scripts.news_sentiment [max_new_matches] [date_from]
-    #Ejemplo: python -m scripts.news_sentiment 8 2026-06-11
+    # Ejemplo: python -m scripts.news_sentiment 8 2026-06-11
     max_new_matches = int(sys.argv[1]) if len(sys.argv) > 1 else None
     date_from = sys.argv[2] if len(sys.argv) > 2 else None
 

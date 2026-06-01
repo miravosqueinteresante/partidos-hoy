@@ -56,9 +56,9 @@ jobs:
                   print(f'  TBD ({m[\"stage\"]}) - {m[\"date\"]}')
           "
 
-      - name: Enrich predictions with news sentiment (Gemini AI)
+      - name: Enrich predictions with news sentiment (Tavily AI)
         env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
         run: |
           # Calcular date_from según la fecha actual (UTC)
           # Wave 1: antes del 14 Jun → procesar desde 11 Jun
