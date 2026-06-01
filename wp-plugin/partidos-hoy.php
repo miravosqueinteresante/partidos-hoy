@@ -14,33 +14,50 @@
 
 defined('ABSPATH') || exit;
 
-require_once dirname( __FILE__ ) . '/vendor/freemius/start.php';
+if ( ! function_exists( 'ph_fs' ) ) {
+    function ph_fs() {
+        $is_local = ( $_SERVER['REMOTE_ADDR'] ?? '' ) === '127.0.0.1'
+                 || ( $_SERVER['REMOTE_ADDR'] ?? '' ) === '::1'
+                 || ( $_SERVER['SERVER_NAME'] ?? '' ) === 'localhost'
+                 || ( $_SERVER['SERVER_NAME'] ?? '' ) === 'experimentos.test';
+        if ( $is_local ) {
+            return false;
+        }
 
-function ph_freemius() {
-    $freemius = fs_dynamic_init( array(
-        'id'                  => 'YOUR_PRODUCT_ID',
-        'slug'                => 'partidos-hoy',
-        'type'                => 'plugin',
-        'public_key'          => 'pk_YOUR_PUBLIC_KEY',
-        'is_premium'          => false,
-        'premium_suffix'      => ' (Premium)',
-        'has_addons'          => false,
-        'has_paid_plans'      => true,
-        'trial'               => array(
-            'days'               => 7,
-            'is_require_payment' => false,
-        ),
-        'menu'                => array(
-            'slug'           => 'partidos-hoy',
-            'support'        => false,
-            'parent'         => array(
-                'slug' => 'options-general.php',
-            ),
-        ),
-    ) );
-    return $freemius;
+        global $ph_fs;
+
+        if ( ! isset( $ph_fs ) ) {
+            require_once dirname( __FILE__ ) . '/vendor/freemius/start.php';
+
+            $ph_fs = fs_dynamic_init( array(
+                'id'                  => '30947',
+                'slug'                => 'partidos-hoy',
+                'type'                => 'plugin',
+                'public_key'          => 'pk_f94ef765415511b6c749099fb9843',
+                'is_premium'          => true,
+                'is_premium_only'     => true,
+                'has_addons'          => false,
+                'has_paid_plans'      => true,
+                'is_org_compliant'    => true,
+                'wp_org_gatekeeper'   => 'OA7#BoRiBNqdf52FvzEf!!074aRLPs8fspif$7K1#4u4Csys1fQlCecVcUTOs2mcpeVHi#C2j9d09fOTvbC0HloPT7fFee5WdS3G',
+                'trial'               => array(
+                    'days'               => 3,
+                    'is_require_payment' => false,
+                ),
+                'menu'                => array(
+                    'support'        => false,
+                ),
+            ) );
+        }
+
+        return $ph_fs;
+    }
+
+    if ( ph_fs() !== false ) {
+        ph_fs();
+        do_action( 'ph_fs_loaded' );
+    }
 }
-ph_freemius();
 
 define('PH_VERSION', '1.0.0');
 define('PH_PLUGIN_DIR', plugin_dir_path(__FILE__));
@@ -48,23 +65,13 @@ define('PH_PLUGIN_URL', plugin_dir_url(__FILE__));
 
 require_once PH_PLUGIN_DIR . 'includes/class-data-client.php';
 require_once PH_PLUGIN_DIR . 'includes/class-shortcode.php';
+require_once PH_PLUGIN_DIR . 'includes/class-admin.php';
 
-function ph_init_premium() {
+function ph_init() {
     $data_client = new PH_Data_Client();
     new PH_Shortcode($data_client);
-
     if (is_admin()) {
-        require_once PH_PLUGIN_DIR . 'includes/class-admin.php';
         new PH_Admin($data_client);
     }
 }
-
-if (ph_freemius()->can_use_premium_code()) {
-    define('PH_IS_PREMIUM', true);
-    add_filter('ph_league_limit', function() { return 50; });
-} else {
-    define('PH_IS_PREMIUM', false);
-    add_filter('ph_league_limit', function() { return 5; });
-}
-
-add_action('plugins_loaded', 'ph_init_premium');
+add_action('plugins_loaded', 'ph_init');
