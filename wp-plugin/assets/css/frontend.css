@@ -1,0 +1,112 @@
+.ph-table-wrapper {
+    overflow-x: auto;
+    margin: 1em 0;
+}
+
+.ph-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.ph-table th,
+.ph-table td {
+    padding: 8px 12px;
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.ph-table th {
+    background: #f5f5f5;
+    font-weight: 600;
+}
+
+.ph-match {
+    text-align: left !important;
+    white-space: nowrap;
+}
+
+.ph-team {
+    font-weight: 500;
+}
+
+.ph-vs {
+    margin: 0 6px;
+    color: #999;
+    font-size: 12px;
+}
+
+.ph-prob {
+    font-family: "Courier New", monospace;
+    font-weight: 600;
+}
+
+.ph-highlight-yes {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.ph-single-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+    max-width: 400px;
+}
+
+.ph-card-header {
+    text-align: center;
+    margin-bottom: 16px;
+    font-size: 16px;
+}
+
+.ph-card-team {
+    font-weight: 600;
+}
+
+.ph-card-vs {
+    margin: 0 10px;
+    color: #999;
+}
+
+.ph-bar-container {
+    height: 28px;
+    background: #f5f5f5;
+    border-radius: 4px;
+    margin-bottom: 6px;
+    overflow: hidden;
+}
+
+.ph-bar {
+    height: 100%;
+    line-height: 28px;
+    padding: 0 8px;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    transition: width 0.3s ease;
+}
+
+.ph-bar-home {
+    background: #1976d2;
+}
+
+.ph-bar-draw {
+    background: #757575;
+}
+
+.ph-bar-away {
+    background: #d32f2f;
+}
+
+.ph-xg {
+    text-align: center;
+    margin-top: 12px;
+    color: #666;
+    font-size: 13px;
+}
+
+.ph-footer {
+    font-size: 12px;
+    color: #999;
+    margin-top: 8px;
+}

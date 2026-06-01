@@ -1,0 +1,17 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA256
+
+# Security Policy for Partidos Hoy WordPress Plugin
+# https://github.com/tuusuario/partidos-hoy
+
+Contact: mailto:seguridad@tudominio.com
+Contact: https://tudominio.com/security
+Expires: 2027-06-01T00:00:00.000Z
+Preferred-Languages: es, en
+Encryption: https://tudominio.com/pgp-key.txt
+Policy: https://tudominio.com/.well-known/security.txt
+Canonical: https://tudominio.com/.well-known/security.txt
+-----BEGIN PGP SIGNATURE-----
+
+(Your PGP signature here)
+-----END PGP SIGNATURE-----
