@@ -30,52 +30,46 @@ class PH_Shortcode {
         $matches = array_slice($matches, 0, intval($atts['limit']));
         ob_start();
         ?>
-        <div class="ph-table-wrapper">
-            <table class="ph-table">
-                <thead>
-                    <tr>
-                        <th><?php esc_html_e('Partido', 'partidos-hoy'); ?></th>
-                        <th class="ph-prob">1</th>
-                        <th class="ph-prob">X</th>
-                        <th class="ph-prob">2</th>
-                        <th class="ph-prob">1X</th>
-                        <th class="ph-prob">12</th>
-                        <th class="ph-prob">X2</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($matches as $match): ?>
-                    <tr>
-                        <td class="ph-match">
-                            <span class="ph-team ph-home"><?php echo esc_html($match['home']); ?></span>
-                            <span class="ph-vs">vs</span>
-                            <span class="ph-team ph-away"><?php echo esc_html($match['away']); ?></span>
-                        </td>
-                        <td class="ph-prob ph-highlight-<?php
-                            echo $this->get_highlight_class($match['probabilities'], 'home');
-                        ?>"><?php echo $this->format_prob($match['probabilities']['home']); ?></td>
-                        <td class="ph-prob"><?php echo $this->format_prob($match['probabilities']['draw']); ?></td>
-                        <td class="ph-prob ph-highlight-<?php
-                            echo $this->get_highlight_class($match['probabilities'], 'away');
-                        ?>"><?php echo $this->format_prob($match['probabilities']['away']); ?></td>
-                        <td class="ph-prob"><?php
-                            echo $this->format_prob($match['probabilities']['home'] + $match['probabilities']['draw']);
-                        ?></td>
-                        <td class="ph-prob"><?php
-                            echo $this->format_prob($match['probabilities']['home'] + $match['probabilities']['away']);
-                        ?></td>
-                        <td class="ph-prob"><?php
-                            echo $this->format_prob($match['probabilities']['draw'] + $match['probabilities']['away']);
-                        ?></td>
-                    </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-            <p class="ph-footer">
-                <?php esc_html_e('Actualizado:', 'partidos-hoy'); ?>
-                <?php echo esc_html($this->data_client->get_predictions()['generated_at'] ?? ''); ?>
-            </p>
+        <div class="ph-grid">
+            <?php foreach ($matches as $match): ?>
+            <div class="ph-card">
+                <div class="ph-card-header">
+                    <span class="ph-team ph-home"><?php echo esc_html($match['home']); ?></span>
+                    <span class="ph-vs">vs</span>
+                    <span class="ph-team ph-away"><?php echo esc_html($match['away']); ?></span>
+                </div>
+                
+                <div class="ph-card-bars">
+                    <div class="ph-bar-container" title="<?php esc_attr_e('Local', 'partidos-hoy'); ?>">
+                        <div class="ph-bar ph-bar-home" style="width: <?php echo $match['probabilities']['home'] * 100; ?>%">
+                            <?php echo $this->format_prob($match['probabilities']['home']); ?>
+                        </div>
+                    </div>
+                    <div class="ph-bar-container" title="<?php esc_attr_e('Empate', 'partidos-hoy'); ?>">
+                        <div class="ph-bar ph-bar-draw" style="width: <?php echo $match['probabilities']['draw'] * 100; ?>%">
+                            <?php echo $this->format_prob($match['probabilities']['draw']); ?>
+                        </div>
+                    </div>
+                    <div class="ph-bar-container" title="<?php esc_attr_e('Visitante', 'partidos-hoy'); ?>">
+                        <div class="ph-bar ph-bar-away" style="width: <?php echo $match['probabilities']['away'] * 100; ?>%">
+                            <?php echo $this->format_prob($match['probabilities']['away']); ?>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ph-card-footer">
+                    <div class="ph-xg">
+                        xG: <?php echo isset($match['expected_goals']) ? esc_html($match['expected_goals']['home'] . ' - ' . $match['expected_goals']['away']) : 'N/A'; ?>
+                    </div>
+                    <div class="ph-date"><?php echo esc_html($match['date'] ?? 'TBD'); ?></div>
+                </div>
+            </div>
+            <?php endforeach; ?>
         </div>
+        <p class="ph-footer-info">
+            <?php esc_html_e('Actualizado:', 'partidos-hoy'); ?>
+            <?php echo esc_html($this->data_client->get_predictions()['generated_at'] ?? ''); ?>
+        </p>
         <?php
         return ob_get_clean();
     }
@@ -100,36 +94,35 @@ class PH_Shortcode {
         ?>
         <div class="ph-single-card">
             <div class="ph-card-header">
-                <span class="ph-card-team"><?php echo esc_html($match['home']); ?></span>
-                <span class="ph-card-vs">vs</span>
-                <span class="ph-card-team"><?php echo esc_html($match['away']); ?></span>
+                <span class="ph-team ph-home"><?php echo esc_html($match['home']); ?></span>
+                <span class="ph-vs">vs</span>
+                <span class="ph-team ph-away"><?php echo esc_html($match['away']); ?></span>
             </div>
+            
             <div class="ph-card-bars">
-                <div class="ph-bar-container">
+                <div class="ph-bar-container" title="<?php esc_attr_e('Local', 'partidos-hoy'); ?>">
                     <div class="ph-bar ph-bar-home" style="width: <?php echo $probs['home'] * 100; ?>%">
                         <?php echo $this->format_prob($probs['home']); ?>
                     </div>
                 </div>
-                <div class="ph-bar-container">
+                <div class="ph-bar-container" title="<?php esc_attr_e('Empate', 'partidos-hoy'); ?>">
                     <div class="ph-bar ph-bar-draw" style="width: <?php echo $probs['draw'] * 100; ?>%">
                         <?php echo $this->format_prob($probs['draw']); ?>
                     </div>
                 </div>
-                <div class="ph-bar-container">
+                <div class="ph-bar-container" title="<?php esc_attr_e('Visitante', 'partidos-hoy'); ?>">
                     <div class="ph-bar ph-bar-away" style="width: <?php echo $probs['away'] * 100; ?>%">
                         <?php echo $this->format_prob($probs['away']); ?>
                     </div>
                 </div>
             </div>
-            <?php if (isset($match['expected_goals'])): ?>
-            <div class="ph-xg">
-                <span>xG: <?php echo esc_html($match['home']); ?>
-                      <?php echo $match['expected_goals']['home']; ?></span>
-                <span> - </span>
-                <span><?php echo esc_html($match['away']); ?>
-                      <?php echo $match['expected_goals']['away']; ?></span>
+
+            <div class="ph-card-footer">
+                <div class="ph-xg">
+                    xG: <?php echo isset($match['expected_goals']) ? esc_html($match['expected_goals']['home'] . ' - ' . $match['expected_goals']['away']) : 'N/A'; ?>
+                </div>
+                <div class="ph-date"><?php echo esc_html($match['date'] ?? 'TBD'); ?></div>
             </div>
-            <?php endif; ?>
         </div>
         <?php
         return ob_get_clean();
