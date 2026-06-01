@@ -7,12 +7,15 @@ class PH_Data_Client {
     private $cache_ttl = 21600;
 
     public function __construct() {
-        $this->predictions_url = 'https://miravosqueinteresante.github.io/partidos-hoy/latest.json';
+        $url = get_option('ph_predictions_url', '');
+        $this->predictions_url = $url ?: 'https://miravosqueinteresante.github.io/partidos-hoy/latest.json';
+        $ttl = get_option('ph_cache_ttl', 21600);
+        $this->cache_ttl = max(300, absint($ttl));
     }
 
     public function get_predictions() {
         $cached = get_transient($this->cache_key);
-        if ($cached !== false) {
+        if ($cached !== false && !empty($cached['matches'])) {
             return $cached;
         }
         return $this->fetch_predictions();
