@@ -409,19 +409,62 @@ python scripts/build_historical_data.py
 Copy-Item data/historical_wc_data.json wp-plugin/data/
 ```
 
-### 15.5 Plugins actualizados en WordPress
+### 15.5 Normalización de nombres de equipos (histórico vs 2026)
+
+El AJAX handler en `partidos-hoy.php:35` usa `ph_get_team_variants()` para mapear nombres que difieren entre el dataset 2026 y el histórico de Fjelstul:
+
+| En 2026 | En históricos (Fjelstul) |
+|---------|-------------------------|
+| USA | United States |
+| Korea Republic | South Korea |
+| IR Iran | Iran |
+| Czechia | Czech Republic, Czechoslovakia |
+| Côte d'Ivoire | Ivory Coast |
+| Türkiye | Turkey |
+| Congo DR | Zaire |
+
+### 15.6 Formato de salida (texto condensado)
+
+El JS en `class-shortcode.php:399-428` renderiza cada partido como una línea de texto:
+```
+1938 (Quarter-finals): Brazil 1-1 Czechoslovakia — Leônidas 30'
+```
+
+En vez de la tabla HTML anterior. Se limpia el prefijo `"not applicable "` de los nombres de jugadores (dato crudo de Fjelstul DB, 96 ocurrencias).
+
+### 15.7 Plugins actualizados en WordPress
 
 | Feature | Archivos |
 |---------|----------|
 | Schema JSON-LD SportsEvent | `class-shortcode.php` (render + render_single) |
 | Open Graph + Twitter Cards | `class-shortcode.php` (add_og_meta_tags) |
 | Filtros grupo/fecha/equipo | `class-shortcode.php` + `class-data-client.php` |
-| Paginación + búsqueda | `class-shortcode.php` + `frontend.css` |
+| Paginación + búsqueda (desde GET) | `class-shortcode.php` (ph_page, $_GET['search']) |
 | Fallback endpoint | `class-data-client.php` + `class-admin.php` |
 | Acordeón histórico (JS + AJAX) | `class-shortcode.php` + `partidos-hoy.php` + `frontend.css` |
 | Healthchecks.io en pipeline | `worldcup-pipeline.yml` |
 | News sentiment cache + rate limit | `news_sentiment.py` + `data/news_cache.json` |
+| **Compartir (WhatsApp, X, copy link)** | `class-shortcode.php` + `frontend.css` |
+| **Normalización nombres equipos** | `partidos-hoy.php` (ph_get_team_variants) |
+
+## 16. Botón Compartir (v1.1)
+
+Agregado un botón "Compartir" en el footer de cada tarjeta, en la misma línea que xG (alineado a la derecha).
+
+### 16.1 Comportamiento
+
+1. **Mobile (con `navigator.share`):** abre el share sheet nativo del OS (WhatsApp, X, Telegram, etc.)
+2. **Desktop (sin native share):** al clickear "Compartir" se despliegan 3 botones debajo:
+   - **WhatsApp** → `wa.me/?text=Predicciones+{home}+vs+{away}+{URL}`
+   - **X** → `twitter.com/intent/tweet?text=...&url=...`
+   - **Copiar link** → clipboard API + feedback "¡Copiado!" (2 seg)
+
+### 16.2 Implementación
+
+- HTML en `class-shortcode.php` (render + render_single), dentro de `.ph-card-footer`
+- JS con event delegation + `navigator.share()` + fallback inline buttons
+- CSS en `frontend.css` (.ph-share, .ph-share-btn, .ph-share-fallback, .ph-share-link)
 
 ---
 
-*Documento actualizado el 2 de junio de 2026 con integración de datos históricos de Mundiales (Fjelstul DB, 964 partidos), schema.org, OG/Twitter, filtros, paginación, fallback endpoint, healthchecks.io y acordeón histórico.*
+*Documento actualizado el 2 de junio de 2026. Últimos cambios: botón compartir en footer, normalización de nombres de equipos en histórico, texto condensado de goleadores, paginación con ph_page, 3 queries por partido en news sentiment.*

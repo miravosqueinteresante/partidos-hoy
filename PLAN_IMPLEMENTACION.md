@@ -787,6 +787,13 @@ We consider security research conducted under this policy as:
 | 14 | **News sentiment cache** | ✅ | v1.1 — cache + rate limiting |
 | 15 | **Historial en Mundiales** | ✅ | v1.1 — 964 partidos 1930-2022 (Fjelstul DB) |
 | 16 | **AJAX endpoint histórico** | ✅ | v1.1 — admin-ajax.php + transient cache |
+| 17 | **Normalización nombres equipos (histórico)** | ✅ | v1.1 — ph_get_team_variants() mapea USA→United States, etc. |
+| 18 | **Texto condensado en histórico** | ✅ | v1.1 — tabla reemplazada por párrafo <br> por partido |
+| 19 | **Strip "not applicable" en goleadores** | ✅ | v1.1 — .replace(/^not applicable /, '') |
+| 20 | **Paginación: page → ph_page** | ✅ | v1.1 — evita conflicto con query var de WP |
+| 21 | **Search/pagination desde $_GET** | ✅ | v1.1 — lee search y ph_page de la URL |
+| 22 | **News: 3 queries por partido** | ✅ | v1.1 — home prep + away prep + matchup |
+| 23 | **Botón Compartir en tarjetas** | ✅ | v1.1 — WhatsApp, X, copy link (native share fallback) |
 
 **Código legacy eliminado** (existía en el plan original pero NO en producción):
 - API-Football client, FBref scraper, football-data.org client
@@ -876,6 +883,9 @@ Fixtures: data/fixtures_wc2026.json (hardcodeado)
 - [x] Prompt mejorado (no inventar resultados, temperatura 0.2)
 - [x] Rate limiting (time.sleep(1) entre llamadas Tavily)
 - [x] Cache de partidos procesados (news_cache.json)
+- [x] **3 queries por partido** (v1.1): home squad prep + away squad prep + matchup
+- [x] **Deduplicación** por URL entre las 3 queries
+- [x] **Prompt enfocado en plantel/preparación** en vez de resultados
 
 ### Task 21: Historial en Mundiales
 
@@ -895,6 +905,31 @@ Fixtures: data/fixtures_wc2026.json (hardcodeado)
 - [x] Cache via transients (24h)
 - [x] Acordeón en cada match card
 - [x] Tabla con año, fase, resultado, goleadores
+- [x] **Texto condensado** (v1.1): tabla reemplazada por párrafo `<br>` por partido
+- [x] **Strip "not applicable"** (v1.1): .replace(/^not applicable /, '') en goleadores
+- [x] **Normalización nombres** (v1.1): ph_get_team_variants() mapea USA, Korea Republic, IR Iran, Czechia, etc.
+
+### Task 22: Botón Compartir en Tarjetas
+
+**Files:**
+- Modified: `wp-plugin/includes/class-shortcode.php` (HTML + JS)
+- Modified: `wp-plugin/assets/css/frontend.css` (estilos)
+
+- [x] Botón "Compartir" en footer, misma línea que xG (alineado derecha)
+- [x] `navigator.share()` en mobile (share sheet nativo)
+- [x] Fallback desktop: WhatsApp, X, Copiar link
+- [x] Texto: "Predicciones {home} vs {away}" + URL
+- [x] Feedback "¡Copiado!" en clipboard por 2 segundos
+
+### Task 23: Bugfixes — Paginación + Histórico
+
+**Files:**
+- Modified: `wp-plugin/partidos-hoy.php` (ph_get_team_variants)
+- Modified: `wp-plugin/includes/class-shortcode.php` (ph_page, $_GET)
+
+- [x] `page` → `ph_page` para evitar conflicto con query var `page` de WordPress
+- [x] Lectura de `$_GET['search']` y `$_GET['ph_page']` en shortcode
+- [x] Normalización de nombres de equipos en AJAX handler
 
 ---
 
