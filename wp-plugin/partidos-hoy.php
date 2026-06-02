@@ -31,3 +31,42 @@ function ph_init() {
     }
 }
 add_action('plugins_loaded', 'ph_init');
+
+function ph_ajax_historical() {
+    $home = isset($_GET['home']) ? sanitize_text_field($_GET['home']) : '';
+    $away = isset($_GET['away']) ? sanitize_text_field($_GET['away']) : '';
+    if (empty($home) || empty($away)) {
+        wp_send_json_error(array('message' => 'Parámetros incompletos'));
+    }
+
+    $cache_key = 'ph_historical_all';
+    $all_matches = get_transient($cache_key);
+
+    if (false === $all_matches) {
+        $json_path = PH_PLUGIN_DIR . 'data/historical_wc_data.json';
+        if (!file_exists($json_path)) {
+            wp_send_json_error(array('message' => 'Datos históricos no disponibles'));
+        }
+        $json = file_get_contents($json_path);
+        $data = json_decode($json, true);
+        if (!is_array($data) || !isset($data['matches'])) {
+            wp_send_json_error(array('message' => 'Datos históricos inválidos'));
+        }
+        $all_matches = $data['matches'];
+        set_transient($cache_key, $all_matches, DAY_IN_SECONDS);
+    }
+
+    $matches = array();
+    foreach ($all_matches as $m) {
+        if (
+            (strcasecmp($m['home_team'], $home) === 0 && strcasecmp($m['away_team'], $away) === 0) ||
+            (strcasecmp($m['home_team'], $away) === 0 && strcasecmp($m['away_team'], $home) === 0)
+        ) {
+            $matches[] = $m;
+        }
+    }
+
+    wp_send_json_success($matches);
+}
+add_action('wp_ajax_ph_historical', 'ph_ajax_historical');
+add_action('wp_ajax_nopriv_ph_historical', 'ph_ajax_historical');

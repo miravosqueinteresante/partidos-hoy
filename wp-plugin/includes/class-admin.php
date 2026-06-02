@@ -23,6 +23,7 @@ class PH_Admin {
 
     public function register_settings() {
         register_setting('ph_settings_group', 'ph_predictions_url', 'esc_url_raw');
+        register_setting('ph_settings_group', 'ph_fallback_url', 'esc_url_raw');
         register_setting('ph_settings_group', 'ph_cache_ttl', 'absint');
     }
 
@@ -53,6 +54,18 @@ class PH_Admin {
                         <td>
                             <input type="url" id="ph_predictions_url" name="ph_predictions_url"
                                    value="<?php echo esc_attr(get_option('ph_predictions_url', '')); ?>"
+                                   class="regular-text" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            <label for="ph_fallback_url">
+                                <?php esc_html_e('URL de respaldo', 'partidos-hoy'); ?>
+                            </label>
+                        </th>
+                        <td>
+                            <input type="url" id="ph_fallback_url" name="ph_fallback_url"
+                                   value="<?php echo esc_attr(get_option('ph_fallback_url', '')); ?>"
                                    class="regular-text" />
                         </td>
                     </tr>

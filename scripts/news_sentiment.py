@@ -14,6 +14,7 @@ import json
 import logging
 import sys
 import re
+import time
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -65,7 +66,8 @@ Responde ÚNICAMENTE con un JSON válido (sin markdown, sin backticks) con este 
 Reglas estrictas:
 - Máximo 3 oraciones en español
 - Las URLs deben ser exactamente las proporcionadas
-- No inventar información"""
+- No inventar información
+- NO inventes resultados de partidos que aún no se han jugado. Si no hay noticias relevantes, di exactamente eso."""
 
     try:
         client = Groq(api_key=groq_api_key)
@@ -81,7 +83,7 @@ Reglas estrictas:
                     "content": prompt
                 }
             ],
-            temperature=0.3,
+            temperature=0.2,
             max_tokens=300
         )
 
@@ -144,6 +146,8 @@ def get_news_sentiment(home_team, away_team):
             if title and content:
                 context_parts.append(f"Noticia: {title}. {content}")
 
+        sources = [u for u in sources if 'example.com' not in u]
+
         if not context_parts:
             return None
 
@@ -167,7 +171,15 @@ def update_predictions_with_news(latest_json_path, max_new_matches=None, date_fr
     """
     Lee el latest.json, agrega sentimiento de noticias a cada partido
     que tenga equipos definidos y aún no tenga news_sentiment.
+    Guarda un cache en data/news_cache.json para evitar re-procesar partidos.
     """
+    cache_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data', 'news_cache.json')
+    if os.path.exists(cache_path):
+        with open(cache_path, 'r', encoding='utf-8') as f:
+            processed_ids = set(json.load(f))
+    else:
+        processed_ids = set()
+
     with open(latest_json_path, 'r', encoding='utf-8') as f:
         data = json.load(f)
 
@@ -175,6 +187,7 @@ def update_predictions_with_news(latest_json_path, max_new_matches=None, date_fr
     valid_matches = [
         m for m in matches
         if m.get("home") and m.get("away") and not m.get("news_sentiment")
+        and m.get("id") not in processed_ids
     ]
 
     if date_from:
@@ -184,11 +197,15 @@ def update_predictions_with_news(latest_json_path, max_new_matches=None, date_fr
         valid_matches = valid_matches[:max_new_matches]
 
     updated_count = 0
-    for match in valid_matches:
+    for i, match in enumerate(valid_matches):
         home = match["home"]
         away = match["away"]
         match_date = match.get("date", "unknown")
+        match_id = match.get("id")
         logging.info(f"🔍 [{match_date}] {home} vs {away}...")
+
+        if i > 0:
+            time.sleep(1)
 
         result = get_news_sentiment(home, away)
 
@@ -198,6 +215,12 @@ def update_predictions_with_news(latest_json_path, max_new_matches=None, date_fr
             updated_count += 1
         else:
             logging.warning(f"⚠️ Sin resultados para {home} vs {away}")
+
+        if match_id:
+            processed_ids.add(match_id)
+            os.makedirs(os.path.dirname(cache_path), exist_ok=True)
+            with open(cache_path, 'w', encoding='utf-8') as f:
+                json.dump(list(processed_ids), f)
 
     with open(latest_json_path, 'w', encoding='utf-8') as f:
         json.dump(data, f, indent=2, ensure_ascii=False)

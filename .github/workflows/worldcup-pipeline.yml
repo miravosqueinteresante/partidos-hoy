@@ -94,3 +94,14 @@ jobs:
           git add latest.json
           git commit -m 'deploy: worldcup predictions $(date +%Y-%m-%d_%H:%M)'
           git push origin gh-pages --force
+
+      # Healthchecks.io — ping de éxito/fallo
+      # Crea una cuenta GRATIS en https://healthchecks.io y crea un check.
+      # Reemplaza YOUR_HEALTHCHECKS_UUID con el UUID de tu check.
+      - name: Ping healthchecks.io (success)
+        if: success()
+        run: curl -fsS -m 10 --retry 5 "https://hc-ping.com/YOUR_HEALTHCHECKS_UUID"
+
+      - name: Ping healthchecks.io (failure)
+        if: failure()
+        run: curl -fsS -m 10 --retry 5 "https://hc-ping.com/YOUR_HEALTHCHECKS_UUID/fail"
