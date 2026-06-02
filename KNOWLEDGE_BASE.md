@@ -116,6 +116,12 @@
 │  + Flags emoji para cada selección (48 equipos)                   │
 │  + Fecha + Estadio en banner superior de cada tarjeta             │
 │  + Acordeón de noticias con análisis Groq                        │
+│  + Schema JSON-LD SportsEvent (rich snippets en Google)          │
+│  + Open Graph + Twitter Cards (sharing en redes)                 │
+│  + Filtros por grupo/fecha/equipo + búsqueda                     │
+│  + Paginación (navegación entre páginas)                         │
+│  + Fallback endpoint (raw.githubusercontent)                      │
+│  + 📊 Acordeón Historial en Mundiales (964 partidos 1930-2022)   │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -333,4 +339,89 @@ FIFA tiene **98+ marcas registradas en US**, **300+ en México** para el Mundial
 
 ---
 
-*Documento actualizado el 1 de junio de 2026 con validación completa de viabilidad técnica, seguridad, legal y comercial. Investigación multi-frente con 7 fuentes paralelas + 2 skills instalados (security-review, wordpress-plugin-core) + 1 investigación legal FIFA.*
+---
+
+## 15. Datos Históricos de Mundiales (v1.1)
+
+### 15.1 Fuente
+
+Se integró la **Fjelstul World Cup Database** (jfjelstul/worldcup, GitHub, CC0) — dataset oficial de todos los mundiales masculinos 1930-2022 con 964 partidos y 2.720 goles.
+
+| Métrica | Valor |
+|---------|-------|
+| Torneos cubiertos | 22 (1930-2022) |
+| Partidos totales | 964 |
+| Goles con jugadores | 2.720 |
+| Fuente | `data/worldcup_fjelstul.json` (35 MB, gitignored) |
+| Archivo de trabajo | `data/historical_wc_data.json` (907 KB) |
+| Script de conversión | `scripts/build_historical_data.py` |
+
+### 15.2 Arquitectura del Histórico en WordPress
+
+```
+PHP (class-shortcode.php)                JavaScript (navegador)
+         │                                        │
+         │ Renderiza accordion con                │
+         │ data-home / data-away                  │
+         │                                        ▼
+         │                             fetch(admin-ajax.php?action=ph_historical
+         │                                    &home=Mexico&away=Argentina)
+         │                                        │
+         │                                        ▼
+         │                             PHP (partidos-hoy.php)
+         │                               ├── Lee historical_wc_data.json
+         │                               ├── Cachea en transient (24h)
+         │                               ├── Filtra por equipos
+         │                               └── wp_send_json_success(matches)
+         │                                        │
+         ▼                                        ▼
+    Tabla HTML con año, fase, resultado, goleadores
+```
+
+### 15.3 Datos por partido histórico
+
+Cada partido en `historical_wc_data.json` contiene:
+
+| Campo | Ejemplo |
+|-------|---------|
+| `year` | 2018 |
+| `home_team` / `away_team` | Russia / Saudi Arabia |
+| `home_score` / `away_score` | 5 / 0 |
+| `stage` | group stage / round of 16 / quarter-final |
+| `group` | Group A |
+| `match_date` | 2018-06-14 |
+| `stadium_name` / `city_name` | Luzhniki Stadium / Moscow |
+| `extra_time` / `penalty_shootout` | true / false |
+| `scorers[]` | `[{player, minute, team, type}]` |
+| `result` | home team win |
+
+### 15.4 Actualización del dataset
+
+```bash
+# Descargar última versión del dataset Fjelstul
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/jfjelstul/worldcup/master/data-json/worldcup.json" `
+  -OutFile "data/worldcup_fjelstul.json"
+
+# Reconstruir historical_wc_data.json
+python scripts/build_historical_data.py
+
+# Copiar a WordPress
+Copy-Item data/historical_wc_data.json wp-plugin/data/
+```
+
+### 15.5 Plugins actualizados en WordPress
+
+| Feature | Archivos |
+|---------|----------|
+| Schema JSON-LD SportsEvent | `class-shortcode.php` (render + render_single) |
+| Open Graph + Twitter Cards | `class-shortcode.php` (add_og_meta_tags) |
+| Filtros grupo/fecha/equipo | `class-shortcode.php` + `class-data-client.php` |
+| Paginación + búsqueda | `class-shortcode.php` + `frontend.css` |
+| Fallback endpoint | `class-data-client.php` + `class-admin.php` |
+| Acordeón histórico (JS + AJAX) | `class-shortcode.php` + `partidos-hoy.php` + `frontend.css` |
+| Healthchecks.io en pipeline | `worldcup-pipeline.yml` |
+| News sentiment cache + rate limit | `news_sentiment.py` + `data/news_cache.json` |
+
+---
+
+*Documento actualizado el 2 de junio de 2026 con integración de datos históricos de Mundiales (Fjelstul DB, 964 partidos), schema.org, OG/Twitter, filtros, paginación, fallback endpoint, healthchecks.io y acordeón histórico.*

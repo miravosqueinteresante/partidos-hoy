@@ -778,6 +778,15 @@ We consider security research conducted under this policy as:
 | 5 | Workflow GHA (cada 6h) | ✅ | Sin steps de diagnóstico, sin API keys |
 | 6 | Plugin WordPress | ✅ | Shortcodes, admin, data client |
 | 7 | CRA compliance | ✅ | security.txt + VDP + Dependabot |
+| 8 | **Schema JSON-LD SportsEvent** | ✅ | v1.1 — rich snippets en Google |
+| 9 | **Open Graph + Twitter Cards** | ✅ | v1.1 — sharing en redes sociales |
+| 10 | **Filtros grupo/fecha/equipo** | ✅ | v1.1 — atributos en shortcode |
+| 11 | **Paginación + búsqueda** | ✅ | v1.1 — navegación entre páginas |
+| 12 | **Fallback endpoint** | ✅ | v1.1 — raw.githubusercontent como respaldo |
+| 13 | **Healthchecks.io** | ✅ | v1.1 — monitoreo de pipeline |
+| 14 | **News sentiment cache** | ✅ | v1.1 — cache + rate limiting |
+| 15 | **Historial en Mundiales** | ✅ | v1.1 — 964 partidos 1930-2022 (Fjelstul DB) |
+| 16 | **AJAX endpoint histórico** | ✅ | v1.1 — admin-ajax.php + transient cache |
 
 **Código legacy eliminado** (existía en el plan original pero NO en producción):
 - API-Football client, FBref scraper, football-data.org client
@@ -831,7 +840,65 @@ Fixtures: data/fixtures_wc2026.json (hardcodeado)
 
 ---
 
-**Cobertura del spec (v1.0 REAL):**
+---
+
+## Fase 5: Mejoras v1.1 — SEO, UX, Históricos (Jun 2026)
+
+### Task 18: Schema JSON-LD SportsEvent + Open Graph
+
+**Files:**
+- Modified: `wp-plugin/includes/class-shortcode.php`
+
+- [x] **Agregar JSON-LD SportsEvent** en cada match card (render + render_single)
+- [x] **Agregar OG/Twitter Cards** via wp_head con detección de shortcode
+- [x] Datos incluidos: nombre, fecha, sede, equipos, descripción ELO
+
+### Task 19: Filtros, Paginación y Búsqueda
+
+**Files:**
+- Modified: `wp-plugin/includes/class-shortcode.php`
+- Modified: `wp-plugin/includes/class-data-client.php`
+- Modified: `wp-plugin/assets/css/frontend.css`
+
+- [x] Atributos `group`, `date`, `team`, `search`, `page` en shortcode
+- [x] Métodos de filtrado en Data Client
+- [x] Input de búsqueda + paginación numérica
+- [x] Fallback endpoint configurable en admin
+
+### Task 20: Pipeline — Healthchecks + News Cache
+
+**Files:**
+- Modified: `.github/workflows/worldcup-pipeline.yml`
+- Modified: `scripts/news_sentiment.py`
+
+- [x] Healthchecks.io ping en workflow (éxito y fallo)
+- [x] Filtro de URLs example.com en news_sentiment
+- [x] Prompt mejorado (no inventar resultados, temperatura 0.2)
+- [x] Rate limiting (time.sleep(1) entre llamadas Tavily)
+- [x] Cache de partidos procesados (news_cache.json)
+
+### Task 21: Historial en Mundiales
+
+**Files:**
+- Created: `scripts/build_historical_data.py`
+- Created: `data/historical_wc_data.json` (964 matches, 2.720 goles)
+- Created: `data/worldcup_fjelstul.json` (35 MB, fuente original — gitignored)
+- Modified: `wp-plugin/partidos-hoy.php` (AJAX handler)
+- Modified: `wp-plugin/includes/class-shortcode.php` (JS fetch + tabla HTML)
+- Modified: `wp-plugin/assets/css/frontend.css` (estilos acordeón + tabla)
+
+- [x] Descargar Fjelstul World Cup Database (jfjelstul/worldcup)
+- [x] Script de conversión → formato propio
+- [x] 964 partidos de todos los mundiales 1930-2022
+- [x] 2.720 goles con jugadores, minutos, penales, own goals
+- [x] AJAX endpoint en WordPress (admin-ajax.php)
+- [x] Cache via transients (24h)
+- [x] Acordeón en cada match card
+- [x] Tabla con año, fase, resultado, goleadores
+
+---
+
+**Cobertura del spec (v1.1 REAL):**
 - ✅ **v1.0 enfocado exclusivamente en Copa del Mundo 2026** 
 - ✅ **Producto: Partidos Hoy - Pronósticos de Fútbol** (partidoshoy.futbol)
 - ✅ **Branding sin marcas FIFA**: no usa "FIFA", "World Cup", "Mundial" ni "Copa del Mundo" en nombre del producto
