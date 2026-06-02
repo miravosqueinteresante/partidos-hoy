@@ -32,6 +32,30 @@ function ph_init() {
 }
 add_action('plugins_loaded', 'ph_init');
 
+function ph_get_team_variants($name) {
+    $map = array(
+        'USA'                   => array('United States'),
+        'United States'         => array('USA'),
+        'Korea Republic'        => array('South Korea'),
+        'South Korea'           => array('Korea Republic'),
+        'IR Iran'               => array('Iran'),
+        'Iran'                  => array('IR Iran'),
+        'Czechia'               => array('Czech Republic', 'Czechoslovakia'),
+        'Czech Republic'        => array('Czechia'),
+        'Côte d\'Ivoire'        => array('Ivory Coast'),
+        'Ivory Coast'           => array('Côte d\'Ivoire'),
+        'Türkiye'               => array('Turkey'),
+        'Turkey'                => array('Türkiye'),
+        'Congo DR'              => array('Zaire'),
+        'Zaire'                 => array('Congo DR'),
+    );
+    $variants = array($name);
+    if (isset($map[$name])) {
+        $variants = array_merge($variants, $map[$name]);
+    }
+    return $variants;
+}
+
 function ph_ajax_historical() {
     $home = isset($_GET['home']) ? sanitize_text_field($_GET['home']) : '';
     $away = isset($_GET['away']) ? sanitize_text_field($_GET['away']) : '';
@@ -56,11 +80,17 @@ function ph_ajax_historical() {
         set_transient($cache_key, $all_matches, DAY_IN_SECONDS);
     }
 
+    $home_variants = ph_get_team_variants($home);
+    $away_variants = ph_get_team_variants($away);
+
     $matches = array();
     foreach ($all_matches as $m) {
+        $mh_v = ph_get_team_variants($m['home_team']);
+        $ma_v = ph_get_team_variants($m['away_team']);
+
         if (
-            (strcasecmp($m['home_team'], $home) === 0 && strcasecmp($m['away_team'], $away) === 0) ||
-            (strcasecmp($m['home_team'], $away) === 0 && strcasecmp($m['away_team'], $home) === 0)
+            (array_intersect($home_variants, $mh_v) && array_intersect($away_variants, $ma_v)) ||
+            (array_intersect($home_variants, $ma_v) && array_intersect($away_variants, $mh_v))
         ) {
             $matches[] = $m;
         }

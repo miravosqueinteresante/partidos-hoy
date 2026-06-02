@@ -49,10 +49,10 @@ def generate_summary_with_groq(home, away, context, sources):
         return None
 
     prompt = f"""Eres un analista deportivo experto. Basándote en estas noticias recientes sobre {home} vs {away} en el Mundial 2026, genera un resumen de exactamente 3 oraciones en español sobre:
-- Estado actual de ambos equipos
-- Lesiones clave si las hay
-- Forma reciente
-- Sentimiento general de la prensa deportiva
+- Novedades de cada selección (plantel, concentración, amistosos)
+- Jugadores convocados o lesionados
+- Preparación y expectativas
+No menciones resultados del partido si aún no se jugó.
 
 NOTICIAS:
 {context}
@@ -67,7 +67,7 @@ Reglas estrictas:
 - Máximo 3 oraciones en español
 - Las URLs deben ser exactamente las proporcionadas
 - No inventar información
-- NO inventes resultados de partidos que aún no se han jugado. Si no hay noticias relevantes, di exactamente eso."""
+- Si un equipo tiene varias noticias, priorizá las más relevantes sobre plantel y preparación."""
 
     try:
         client = Groq(api_key=groq_api_key)
@@ -76,7 +76,7 @@ Reglas estrictas:
             messages=[
                 {
                     "role": "system",
-                    "content": "Eres un analista deportivo experto que siempre responde en español con exactamente 3 oraciones. Responde SOLO con JSON con este formato: {\"news_sentiment\": \"...\", \"news_sources\": [\"url1\", \"url2\"]}"
+                    "content": "Eres un analista deportivo experto cubriendo la previa del Mundial 2026. Responde en español sobre preparación de selecciones, plantel y novedades. Exactamente 3 oraciones en JSON."
                 },
                 {
                     "role": "user",
@@ -105,10 +105,22 @@ Reglas estrictas:
     return None
 
 
+def tavily_search(client, query, max_results=5):
+    try:
+        result = client.search(query=query, max_results=max_results, search_depth="basic")
+        if result and 'results' in result:
+            return result['results']
+    except Exception as e:
+        logging.warning(f"Tavily falló para query '{query}': {e}")
+    return []
+
+
 def get_news_sentiment(home_team, away_team):
     """
-    Usa la API de Tavily para buscar noticias recientes sobre el partido
-    y genera un resumen con Groq.
+    Busca noticias con Tavily usando 3 queries complementarias:
+    1. Equipo local + Mundial 2026 (preparación, plantel)
+    2. Equipo visitante + Mundial 2026
+    3. El enfrentamiento específico
     """
     try:
         from tavily import TavilyClient
@@ -122,45 +134,44 @@ def get_news_sentiment(home_team, away_team):
         return None
 
     client = TavilyClient(api_key=tavily_key)
-    query = f"{home_team} vs {away_team} World Cup 2026"
 
     try:
-        search_result = client.search(
-            query=query,
-            max_results=3,
-            search_depth="basic"
-        )
-
-        if not search_result or 'results' not in search_result or len(search_result['results']) == 0:
-            logging.warning(f"No se encontraron resultados para: {query}")
-            return None
+        queries = [
+            f"{home_team} World Cup 2026 squad preparation",
+            f"{away_team} World Cup 2026 squad preparation",
+            f"{home_team} vs {away_team} World Cup 2026",
+        ]
 
         sources = []
         context_parts = []
-        for r in search_result['results'][:3]:
-            url = r.get('url', '')
-            title = r.get('title', '')
-            content = r.get('content', '')[:600]
-            if url:
-                sources.append(url)
-            if title and content:
-                context_parts.append(f"Noticia: {title}. {content}")
+        seen_urls = set()
 
-        sources = [u for u in sources if 'example.com' not in u]
+        for q in queries:
+            results = tavily_search(client, q, max_results=4)
+            for r in results:
+                url = r.get('url', '')
+                title = r.get('title', '')
+                content = r.get('content', '')[:600]
+                if url and url not in seen_urls and 'example.com' not in url:
+                    seen_urls.add(url)
+                    sources.append(url)
+                    if title and content:
+                        context_parts.append(f"[{home_team if queries.index(q) < 2 else 'Partido'}] {title}. {content}")
+
+            time.sleep(0.3)
 
         if not context_parts:
+            logging.warning(f"No se encontraron resultados para {home_team} vs {away_team}")
             return None
 
         context = "\n\n".join(context_parts)
 
-        # Intentar generar resumen con Groq
         groq_result = generate_summary_with_groq(home_team, away_team, context, sources)
         if groq_result:
             return groq_result
 
-        # Fallback: devolver contexto directo sin resumen LLM
-        summary = f"Noticias sobre {home_team} vs {away_team}: {context[:400]}..."
-        return {"news_sentiment": summary, "news_sources": sources[:3] if sources else []}
+        summary = f"Noticias sobre {home_team} vs {away_team}: {context[:500]}..."
+        return {"news_sentiment": summary, "news_sources": sources[:5] if sources else []}
 
     except Exception as e:
         logging.error(f"Error buscando noticias con Tavily: {e}")

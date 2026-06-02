@@ -29,6 +29,13 @@ class PH_Shortcode {
             'page' => 1,
         ), $atts, 'partidos-hoy');
 
+        if (isset($_GET['search'])) {
+            $atts['search'] = sanitize_text_field($_GET['search']);
+        }
+        if (isset($_GET['ph_page'])) {
+            $atts['page'] = max(1, intval($_GET['ph_page']));
+        }
+
         $matches = $this->data_client->get_matches_by_league($atts['league']);
 
         if (!empty($atts['group'])) {
@@ -169,13 +176,13 @@ class PH_Shortcode {
             </span>
             <div class="ph-page-links">
                 <?php if ($page > 1): ?>
-                    <a href="<?php echo esc_url(add_query_arg('page', $page - 1)); ?>" class="ph-page-link">&laquo; <?php esc_html_e('Anterior', 'partidos-hoy'); ?></a>
+                    <a href="<?php echo esc_url(add_query_arg('ph_page', $page - 1)); ?>" class="ph-page-link">&laquo; <?php esc_html_e('Anterior', 'partidos-hoy'); ?></a>
                 <?php endif; ?>
                 <?php for ($i = 1; $i <= $total_pages; $i++): ?>
-                    <a href="<?php echo esc_url(add_query_arg('page', $i)); ?>" class="ph-page-link<?php echo $i === $page ? ' ph-page-active' : ''; ?>"><?php echo $i; ?></a>
+                    <a href="<?php echo esc_url(add_query_arg('ph_page', $i)); ?>" class="ph-page-link<?php echo $i === $page ? ' ph-page-active' : ''; ?>"><?php echo $i; ?></a>
                 <?php endfor; ?>
                 <?php if ($page < $total_pages): ?>
-                    <a href="<?php echo esc_url(add_query_arg('page', $page + 1)); ?>" class="ph-page-link"><?php esc_html_e('Siguiente', 'partidos-hoy'); ?> &raquo;</a>
+                    <a href="<?php echo esc_url(add_query_arg('ph_page', $page + 1)); ?>" class="ph-page-link"><?php esc_html_e('Siguiente', 'partidos-hoy'); ?> &raquo;</a>
                 <?php endif; ?>
             </div>
         </div>
@@ -396,16 +403,17 @@ class PH_Shortcode {
                             container.innerHTML = '<p class="ph-historical-loading"><?php echo esc_js(__('No hay registros históricos de este enfrentamiento.', 'partidos-hoy')); ?></p>';
                             return;
                         }
-                        var html = '<table class="ph-historical-table"><thead><tr><th><?php echo esc_js(__('Año', 'partidos-hoy')); ?></th><th><?php echo esc_js(__('Fase', 'partidos-hoy')); ?></th><th><?php echo esc_js(__('Resultado', 'partidos-hoy')); ?></th><th><?php echo esc_js(__('Goleadores', 'partidos-hoy')); ?></th></tr></thead><tbody>';
+                        var lines = [];
                         matches.forEach(function(m) {
                             var score = m.home_score + '-' + m.away_score;
                             if (m.penalty_shootout && m.score_penalties) {
                                 score += ' (pen: ' + m.score_penalties + ')';
                             }
+                            var stage = m.stage ? m.stage.charAt(0).toUpperCase() + m.stage.slice(1) : '';
                             var scorers = '';
                             if (m.scorers && m.scorers.length > 0) {
                                 scorers = m.scorers.slice(0, 4).map(function(s) {
-                                    var text = s.player;
+                                    var text = s.player.replace(/^not applicable /, '');
                                     if (s.minute) text += ' ' + s.minute + '\'';
                                     if (s.type === 'penalty') text += ' (p)';
                                     if (s.type === 'own_goal') text += ' (og)';
@@ -413,10 +421,11 @@ class PH_Shortcode {
                                 }).join(', ');
                                 if (m.scorers.length > 4) scorers += '...';
                             }
-                            html += '<tr><td>' + m.year + '</td><td>' + (m.stage || '') + '</td><td>' + score + '</td><td>' + scorers + '</td></tr>';
+                            var line = m.year + ' (' + stage + '): ' + m.home_team + ' ' + score + ' ' + m.away_team;
+                            if (scorers) line += ' — ' + scorers;
+                            lines.push(line);
                         });
-                        html += '</tbody></table>';
-                        container.innerHTML = html;
+                        container.innerHTML = '<div class="ph-historical-lines">' + lines.join('<br>') + '</div>';
                     })
                     .catch(function() {
                         container.innerHTML = '<p class="ph-historical-loading"><?php echo esc_js(__('Error al cargar datos históricos.', 'partidos-hoy')); ?></p>';

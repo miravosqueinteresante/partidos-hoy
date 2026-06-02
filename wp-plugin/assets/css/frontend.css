@@ -416,31 +416,9 @@
     font-style: italic;
 }
 
-.ph-historical-table {
-    width: 100%;
-    border-collapse: collapse;
+.ph-historical-lines {
     font-size: 0.82rem;
-}
-
-.ph-historical-table th,
-.ph-historical-table td {
-    padding: 8px 10px;
-    text-align: left;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-}
-
-.ph-historical-table th {
-    font-weight: 700;
-    color: var(--ph-text-muted);
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-
-.ph-historical-table td {
+    line-height: 1.7;
     color: var(--ph-text-main);
-}
-
-.ph-historical-table tr:last-child td {
-    border-bottom: none;
+    letter-spacing: 0.01em;
 }
