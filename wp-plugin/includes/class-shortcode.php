@@ -125,6 +125,15 @@ class PH_Shortcode {
                     </div>
                 </div>
 
+                <div class="ph-share">
+                    <button type="button" class="ph-share-btn" data-home="<?php echo esc_attr($home_team); ?>" data-away="<?php echo esc_attr($away_team); ?>"><?php esc_html_e('Compartir', 'partidos-hoy'); ?></button>
+                    <div class="ph-share-fallback">
+                        <a href="#" class="ph-share-link ph-share-wa" data-action="whatsapp" target="_blank" rel="noopener">WhatsApp</a>
+                        <a href="#" class="ph-share-link ph-share-x" data-action="x" target="_blank" rel="noopener">X</a>
+                        <button type="button" class="ph-share-link ph-share-copy" data-action="copy"><?php esc_html_e('Copiar link', 'partidos-hoy'); ?></button>
+                    </div>
+                </div>
+
                 <?php if (!empty($match['news_sentiment'])): ?>
                 <details class="ph-news-accordion">
                     <summary>🗞️ Análisis de Noticias</summary>
@@ -270,6 +279,15 @@ class PH_Shortcode {
                 </div>
             </div>
 
+            <div class="ph-share">
+                <button type="button" class="ph-share-btn" data-home="<?php echo esc_attr($home_team); ?>" data-away="<?php echo esc_attr($away_team); ?>"><?php esc_html_e('Compartir', 'partidos-hoy'); ?></button>
+                <div class="ph-share-fallback">
+                    <a href="#" class="ph-share-link ph-share-wa" data-action="whatsapp" target="_blank" rel="noopener">WhatsApp</a>
+                    <a href="#" class="ph-share-link ph-share-x" data-action="x" target="_blank" rel="noopener">X</a>
+                    <button type="button" class="ph-share-link ph-share-copy" data-action="copy"><?php esc_html_e('Copiar link', 'partidos-hoy'); ?></button>
+                </div>
+            </div>
+
             <?php if (!empty($match['news_sentiment'])): ?>
             <details class="ph-news-accordion">
                 <summary>🗞️ Análisis de Noticias</summary>
@@ -381,11 +399,11 @@ class PH_Shortcode {
     }
 
     private function output_historical_js() {
-        static $historical_js_loaded = false;
-        if ($historical_js_loaded) {
+        static $js_loaded = false;
+        if ($js_loaded) {
             return;
         }
-        $historical_js_loaded = true;
+        $js_loaded = true;
         ?>
         <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -430,6 +448,39 @@ class PH_Shortcode {
                     .catch(function() {
                         container.innerHTML = '<p class="ph-historical-loading"><?php echo esc_js(__('Error al cargar datos históricos.', 'partidos-hoy')); ?></p>';
                     });
+            });
+
+            document.querySelectorAll('.ph-share-btn').forEach(function(btn) {
+                btn.addEventListener('click', function(e) {
+                    var home = btn.getAttribute('data-home');
+                    var away = btn.getAttribute('data-away');
+                    var text = '<?php echo esc_js(__('Predicciones', 'partidos-hoy')); ?> ' + home + ' vs ' + away;
+                    var url = window.location.href;
+
+                    if (navigator.share) {
+                        navigator.share({ title: text, text: text, url: url }).catch(function() {});
+                        return;
+                    }
+
+                    var fallback = btn.parentNode.querySelector('.ph-share-fallback');
+                    var isVisible = fallback.style.display !== 'none';
+                    fallback.style.display = isVisible ? 'none' : 'flex';
+
+                    if (!isVisible) {
+                        var wa = fallback.querySelector('.ph-share-wa');
+                        var x = fallback.querySelector('.ph-share-x');
+                        var copy = fallback.querySelector('.ph-share-copy');
+                        wa.href = 'https://wa.me/?text=' + encodeURIComponent(text + ' ' + url);
+                        x.href = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(url);
+                        copy.onclick = function(ce) {
+                            ce.preventDefault();
+                            navigator.clipboard.writeText(url).then(function() {
+                                copy.textContent = '<?php echo esc_js(__('¡Copiado!', 'partidos-hoy')); ?>';
+                                setTimeout(function() { copy.textContent = '<?php echo esc_js(__('Copiar link', 'partidos-hoy')); ?>'; }, 2000);
+                            });
+                        };
+                    }
+                });
             });
         });
         </script>

@@ -366,6 +366,73 @@
 }
 
 /* =============================================
+   Share
+   ============================================= */
+.ph-share {
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+}
+
+.ph-share-btn {
+    background: none;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 6px 14px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--ph-text-muted);
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    transition: all 0.2s ease;
+}
+
+.ph-share-btn:hover {
+    border-color: var(--ph-color-home);
+    color: var(--ph-color-home);
+}
+
+.ph-share-fallback {
+    display: none;
+    gap: 6px;
+}
+
+.ph-share-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    letter-spacing: 0.01em;
+    transition: all 0.2s ease;
+}
+
+.ph-share-wa {
+    background: #25d366;
+    color: #fff;
+}
+.ph-share-wa:hover { opacity: 0.85; }
+
+.ph-share-x {
+    background: #000;
+    color: #fff;
+}
+.ph-share-x:hover { opacity: 0.8; }
+
+.ph-share-copy {
+    background: rgba(0, 0, 0, 0.06);
+    color: var(--ph-text-main);
+}
+.ph-share-copy:hover { background: rgba(0, 0, 0, 0.12); }
+
+/* =============================================
    Historical Accordion
    ============================================= */
 .ph-historical-accordion {
