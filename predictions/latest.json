@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-02T00:23:52.066267+00:00",
+  "generated_at": "2026-06-02T15:00:31.931321+00:00",
   "model_version": "1.0.0-elo",
   "model": "World Football Elo Ratings (eloratings.net)",
   "notes": "Predicciones basadas en Elo ratings de selecciones nacionales.",
@@ -1373,7 +1373,7 @@
       "model": "elo"
     },
     {
-      "id": "c2a95c51",
+      "id": "a16dca5c",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
@@ -1383,7 +1383,7 @@
       "status": "TBD"
     },
     {
-      "id": "c2a95c51",
+      "id": "a0cdc9e2",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
@@ -1393,7 +1393,7 @@
       "status": "TBD"
     },
     {
-      "id": "c2a95c51",
+      "id": "033bbce8",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
@@ -1403,7 +1403,7 @@
       "status": "TBD"
     },
     {
-      "id": "387697a5",
+      "id": "265f609b",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
@@ -1413,7 +1413,7 @@
       "status": "TBD"
     },
     {
-      "id": "387697a5",
+      "id": "c167ff17",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
@@ -1423,7 +1423,7 @@
       "status": "TBD"
     },
     {
-      "id": "387697a5",
+      "id": "e7a1d94e",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
@@ -1433,7 +1433,7 @@
       "status": "TBD"
     },
     {
-      "id": "74e5ea51",
+      "id": "dcb0d987",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
@@ -1443,7 +1443,7 @@
       "status": "TBD"
     },
     {
-      "id": "74e5ea51",
+      "id": "efba34b6",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
@@ -1453,7 +1453,7 @@
       "status": "TBD"
     },
     {
-      "id": "74e5ea51",
+      "id": "ea1948df",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
@@ -1463,7 +1463,7 @@
       "status": "TBD"
     },
     {
-      "id": "74d24cf4",
+      "id": "67dcc974",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
@@ -1473,7 +1473,7 @@
       "status": "TBD"
     },
     {
-      "id": "74d24cf4",
+      "id": "0167fd0a",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
@@ -1483,7 +1483,7 @@
       "status": "TBD"
     },
     {
-      "id": "74d24cf4",
+      "id": "823b0e01",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
@@ -1493,7 +1493,7 @@
       "status": "TBD"
     },
     {
-      "id": "a7f97949",
+      "id": "17d2f0e6",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
@@ -1503,7 +1503,7 @@
       "status": "TBD"
     },
     {
-      "id": "a7f97949",
+      "id": "894e2957",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
@@ -1513,7 +1513,7 @@
       "status": "TBD"
     },
     {
-      "id": "a7f97949",
+      "id": "6d745344",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
@@ -1523,7 +1523,7 @@
       "status": "TBD"
     },
     {
-      "id": "2d0ed5e3",
+      "id": "46f54dfd",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
@@ -1533,7 +1533,7 @@
       "status": "TBD"
     },
     {
-      "id": "b946a51d",
+      "id": "5593200b",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
@@ -1543,7 +1543,7 @@
       "status": "TBD"
     },
     {
-      "id": "b946a51d",
+      "id": "1bbd239b",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
@@ -1553,7 +1553,7 @@
       "status": "TBD"
     },
     {
-      "id": "70228749",
+      "id": "45914123",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
@@ -1563,7 +1563,7 @@
       "status": "TBD"
     },
     {
-      "id": "70228749",
+      "id": "3b5c6e2a",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
@@ -1573,7 +1573,7 @@
       "status": "TBD"
     },
     {
-      "id": "6fec8b04",
+      "id": "c47d12ec",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
@@ -1583,7 +1583,7 @@
       "status": "TBD"
     },
     {
-      "id": "6fec8b04",
+      "id": "62d98435",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
@@ -1593,7 +1593,7 @@
       "status": "TBD"
     },
     {
-      "id": "bd532420",
+      "id": "8d575c8c",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
@@ -1603,7 +1603,7 @@
       "status": "TBD"
     },
     {
-      "id": "bd532420",
+      "id": "6b4832de",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
@@ -1613,7 +1613,7 @@
       "status": "TBD"
     },
     {
-      "id": "03e8b4be",
+      "id": "cc7b2566",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
@@ -1623,7 +1623,7 @@
       "status": "TBD"
     },
     {
-      "id": "07386ab5",
+      "id": "377553e7",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
@@ -1633,7 +1633,7 @@
       "status": "TBD"
     },
     {
-      "id": "5c46fc0a",
+      "id": "26bb30f3",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
@@ -1643,7 +1643,7 @@
       "status": "TBD"
     },
     {
-      "id": "5d1d62de",
+      "id": "6ff82ad4",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
@@ -1653,7 +1653,7 @@
       "status": "TBD"
     },
     {
-      "id": "ff6670c0",
+      "id": "84ea2c5e",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
@@ -1663,7 +1663,7 @@
       "status": "TBD"
     },
     {
-      "id": "16394d97",
+      "id": "eee56f54",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
@@ -1673,7 +1673,7 @@
       "status": "TBD"
     },
     {
-      "id": "6f1f6fc8",
+      "id": "b9c20f92",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
@@ -1683,7 +1683,7 @@
       "status": "TBD"
     },
     {
-      "id": "c5a3113e",
+      "id": "02e6b7d4",
       "home": null,
       "away": null,
       "league": "World Cup 2026",

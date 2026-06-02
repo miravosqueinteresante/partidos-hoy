@@ -1,6 +1,3 @@
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA256
-
 # Security Policy for Partidos Hoy WordPress Plugin
 # https://github.com/miravosqueinteresante/partidos-hoy
 

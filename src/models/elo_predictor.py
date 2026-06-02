@@ -90,8 +90,9 @@ class EloPredictor:
             home = match["home_team"]
             away = match["away_team"]
             if pd.isna(home) or pd.isna(away) or not home or not away:
+                fixture_id = match.get("id", "")
                 matches_list.append({
-                    "id": hashlib.md5(f"tbd-{match.get('date', '')}".encode()).hexdigest()[:8],
+                    "id": hashlib.md5(f"tbd-{match.get('date', '')}-{fixture_id}".encode()).hexdigest()[:8],
                     "home": None,
                     "away": None,
                     "league": match.get("league", ""),

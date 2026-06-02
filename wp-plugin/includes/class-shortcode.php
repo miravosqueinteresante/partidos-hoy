@@ -100,6 +100,9 @@ class PH_Shortcode {
             <?php esc_html_e('Actualizado:', 'partidos-hoy'); ?>
             <?php echo esc_html($this->data_client->get_predictions()['generated_at'] ?? ''); ?>
         </p>
+        <p class="ph-disclaimer">
+            <?php esc_html_e('Predicciones generadas por ELO para fines informativos y de entretenimiento. No afiliado con FIFA ni ninguna federación de fútbol.', 'partidos-hoy'); ?>
+        </p>
         <?php
         return ob_get_clean();
     }

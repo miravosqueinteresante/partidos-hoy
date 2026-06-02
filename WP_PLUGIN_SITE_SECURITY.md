@@ -4,7 +4,7 @@
 This policy applies to the Partidos Hoy WordPress plugin (all versions).
 
 ## Reporting a Vulnerability
-Send details to: seguridad@tudominio.com
+Send details to: security@partidoshoy.futbol
 Expected response time: 24-72 hours
 
 ## What to include
