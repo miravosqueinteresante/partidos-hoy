@@ -95,13 +95,23 @@ jobs:
           git commit -m 'deploy: worldcup predictions $(date +%Y-%m-%d_%H:%M)'
           git push origin gh-pages --force
 
-      # Healthchecks.io — ping de éxito/fallo
-      # Crea una cuenta GRATIS en https://healthchecks.io y crea un check.
-      # Reemplaza YOUR_HEALTHCHECKS_UUID con el UUID de tu check.
-      - name: Ping healthchecks.io (success)
-        if: success()
-        run: curl -fsS -m 10 --retry 5 "https://hc-ping.com/YOUR_HEALTHCHECKS_UUID"
-
-      - name: Ping healthchecks.io (failure)
-        if: failure()
-        run: curl -fsS -m 10 --retry 5 "https://hc-ping.com/YOUR_HEALTHCHECKS_UUID/fail"
+      # Healthchecks.io — ping de éxito/fallo (OPCIONAL)
+      # Para activar: creá un check GRATIS en https://healthchecks.io,
+      # luego agregá el UUID como GitHub Secret llamado HC_UUID
+      # (Settings → Secrets and variables → Actions → New repository secret)
+      # Mientras no configures el secret, este paso se saltea silenciosamente.
+      - name: Ping healthchecks.io
+        if: always()
+        env:
+          HC_UUID: ${{ secrets.HC_UUID }}
+        run: |
+          if [ -z "$HC_UUID" ] || [ "$HC_UUID" = "" ]; then
+            echo "ℹ️ HC_UUID no configurado — saltando healthchecks.io"
+            exit 0
+          fi
+          STATUS=""
+          if [ "${{ job.status }}" = "success" ]; then
+            curl -fsS -m 10 --retry 5 "https://hc-ping.com/$HC_UUID" || true
+          else
+            curl -fsS -m 10 --retry 5 "https://hc-ping.com/$HC_UUID/fail" || true
+          fi
