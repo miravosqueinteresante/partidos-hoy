@@ -23,6 +23,7 @@ require_once PH_PLUGIN_DIR . 'includes/class-shortcode.php';
 require_once PH_PLUGIN_DIR . 'includes/class-admin.php';
 
 function ph_init() {
+    load_plugin_textdomain('partidos-hoy', false, dirname(plugin_basename(__FILE__)) . '/languages');
     $data_client = new PH_Data_Client();
     new PH_Shortcode($data_client);
     if (is_admin()) {

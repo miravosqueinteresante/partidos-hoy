@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-01T08:11:00.243966+00:00",
+  "generated_at": "2026-06-02T15:00:31.931321+00:00",
   "model_version": "1.0.0-elo",
   "model": "World Football Elo Ratings (eloratings.net)",
   "notes": "Predicciones basadas en Elo ratings de selecciones nacionales.",
@@ -10,6 +10,8 @@
       "away": "South Africa",
       "league": "World Cup 2026",
       "date": "2026-06-11",
+      "stage": "group",
+      "venue": "Estadio Azteca, Mexico City",
       "probabilities": {
         "home": 0.7331,
         "draw": 0.2122,
@@ -27,6 +29,8 @@
       "away": "Czechia",
       "league": "World Cup 2026",
       "date": "2026-06-11",
+      "stage": "group",
+      "venue": "Estadio Akron, Zapopan",
       "probabilities": {
         "home": 0.4728,
         "draw": 0.2943,
@@ -44,6 +48,8 @@
       "away": "Bosnia and Herzegovina",
       "league": "World Cup 2026",
       "date": "2026-06-12",
+      "stage": "group",
+      "venue": "BMO Field, Toronto",
       "probabilities": {
         "home": 0.6314,
         "draw": 0.2517,
@@ -61,6 +67,8 @@
       "away": "Paraguay",
       "league": "World Cup 2026",
       "date": "2026-06-12",
+      "stage": "group",
+      "venue": "SoFi Stadium, Inglewood",
       "probabilities": {
         "home": 0.3625,
         "draw": 0.275,
@@ -78,6 +86,8 @@
       "away": "Scotland",
       "league": "World Cup 2026",
       "date": "2026-06-13",
+      "stage": "group",
+      "venue": "Gillette Stadium, Foxborough",
       "probabilities": {
         "home": 0.2364,
         "draw": 0.2405,
@@ -90,19 +100,21 @@
       "model": "elo"
     },
     {
-      "id": "a8da6cfc",
+      "id": "1ec641fb",
       "home": "Australia",
       "away": "Türkiye",
       "league": "World Cup 2026",
       "date": "2026-06-13",
+      "stage": "group",
+      "venue": "BC Place, Vancouver",
       "probabilities": {
-        "home": 0.6892,
-        "draw": 0.2312,
-        "away": 0.0796
+        "home": 0.3375,
+        "draw": 0.2682,
+        "away": 0.3943
       },
       "expected_goals": {
-        "home": 1.95,
-        "away": 0.43
+        "home": 1.11,
+        "away": 1.25
       },
       "model": "elo"
     },
@@ -112,6 +124,8 @@
       "away": "Morocco",
       "league": "World Cup 2026",
       "date": "2026-06-13",
+      "stage": "group",
+      "venue": "MetLife Stadium, East Rutherford",
       "probabilities": {
         "home": 0.6096,
         "draw": 0.2585,
@@ -129,6 +143,8 @@
       "away": "Switzerland",
       "league": "World Cup 2026",
       "date": "2026-06-13",
+      "stage": "group",
+      "venue": "Levi's Stadium, Santa Clara",
       "probabilities": {
         "home": 0.0864,
         "draw": 0.1822,
@@ -141,36 +157,40 @@
       "model": "elo"
     },
     {
-      "id": "283da27e",
+      "id": "2a74e308",
       "home": "Côte d'Ivoire",
       "away": "Ecuador",
       "league": "World Cup 2026",
       "date": "2026-06-14",
+      "stage": "group",
+      "venue": "Lincoln Financial Field, Philadelphia",
       "probabilities": {
-        "home": 0.1027,
-        "draw": 0.1912,
-        "away": 0.7061
+        "home": 0.2187,
+        "draw": 0.2352,
+        "away": 0.5461
       },
       "expected_goals": {
-        "home": 0.45,
-        "away": 1.96
+        "home": 0.78,
+        "away": 1.6
       },
       "model": "elo"
     },
     {
-      "id": "bd9eb89d",
+      "id": "25510436",
       "home": "Germany",
       "away": "Curaçao",
       "league": "World Cup 2026",
       "date": "2026-06-14",
+      "stage": "group",
+      "venue": "NRG Stadium, Houston",
       "probabilities": {
-        "home": 0.7593,
-        "draw": 0.1913,
-        "away": 0.0494
+        "home": 0.7782,
+        "draw": 0.1729,
+        "away": 0.0488
       },
       "expected_goals": {
-        "home": 2.09,
-        "away": 0.31
+        "home": 2.12,
+        "away": 0.29
       },
       "model": "elo"
     },
@@ -180,6 +200,8 @@
       "away": "Japan",
       "league": "World Cup 2026",
       "date": "2026-06-14",
+      "stage": "group",
+      "venue": "AT&T Stadium, Arlington",
       "probabilities": {
         "home": 0.5063,
         "draw": 0.2863,
@@ -197,6 +219,8 @@
       "away": "Tunisia",
       "league": "World Cup 2026",
       "date": "2026-06-14",
+      "stage": "group",
+      "venue": "Estadio BBVA, Guadalupe",
       "probabilities": {
         "home": 0.5344,
         "draw": 0.2792,
@@ -214,6 +238,8 @@
       "away": "Uruguay",
       "league": "World Cup 2026",
       "date": "2026-06-15",
+      "stage": "group",
+      "venue": "Hard Rock Stadium, Miami Gardens",
       "probabilities": {
         "home": 0.1672,
         "draw": 0.2185,
@@ -231,6 +257,8 @@
       "away": "Cabo Verde",
       "league": "World Cup 2026",
       "date": "2026-06-15",
+      "stage": "group",
+      "venue": "Mercedes-Benz Stadium, Atlanta",
       "probabilities": {
         "home": 0.804,
         "draw": 0.1477,
@@ -248,6 +276,8 @@
       "away": "New Zealand",
       "league": "World Cup 2026",
       "date": "2026-06-15",
+      "stage": "group",
+      "venue": "SoFi Stadium, Inglewood",
       "probabilities": {
         "home": 0.6203,
         "draw": 0.2552,
@@ -265,6 +295,8 @@
       "away": "Egypt",
       "league": "World Cup 2026",
       "date": "2026-06-15",
+      "stage": "group",
+      "venue": "Lumen Field, Seattle",
       "probabilities": {
         "home": 0.6113,
         "draw": 0.258,
@@ -282,6 +314,8 @@
       "away": "Senegal",
       "league": "World Cup 2026",
       "date": "2026-06-16",
+      "stage": "group",
+      "venue": "MetLife Stadium, East Rutherford",
       "probabilities": {
         "home": 0.648,
         "draw": 0.2462,
@@ -299,6 +333,8 @@
       "away": "Norway",
       "league": "World Cup 2026",
       "date": "2026-06-16",
+      "stage": "group",
+      "venue": "Gillette Stadium, Foxborough",
       "probabilities": {
         "home": 0.1832,
         "draw": 0.224,
@@ -316,6 +352,8 @@
       "away": "Algeria",
       "league": "World Cup 2026",
       "date": "2026-06-16",
+      "stage": "group",
+      "venue": "Arrowhead Stadium, Kansas City",
       "probabilities": {
         "home": 0.7426,
         "draw": 0.2074,
@@ -333,6 +371,8 @@
       "away": "Jordan",
       "league": "World Cup 2026",
       "date": "2026-06-16",
+      "stage": "group",
+      "venue": "Levi's Stadium, Santa Clara",
       "probabilities": {
         "home": 0.5892,
         "draw": 0.2645,
@@ -350,6 +390,8 @@
       "away": "Panama",
       "league": "World Cup 2026",
       "date": "2026-06-17",
+      "stage": "group",
+      "venue": "Toronto Stadium, Toronto",
       "probabilities": {
         "home": 0.2433,
         "draw": 0.2425,
@@ -367,6 +409,8 @@
       "away": "Croatia",
       "league": "World Cup 2026",
       "date": "2026-06-17",
+      "stage": "group",
+      "venue": "AT&T Stadium, Arlington",
       "probabilities": {
         "home": 0.5412,
         "draw": 0.2775,
@@ -384,6 +428,8 @@
       "away": "Congo DR",
       "league": "World Cup 2026",
       "date": "2026-06-17",
+      "stage": "group",
+      "venue": "NRG Stadium, Houston",
       "probabilities": {
         "home": 0.8509,
         "draw": 0.1013,
@@ -401,6 +447,8 @@
       "away": "Colombia",
       "league": "World Cup 2026",
       "date": "2026-06-17",
+      "stage": "group",
+      "venue": "Estadio Azteca, Mexico City",
       "probabilities": {
         "home": 0.2279,
         "draw": 0.238,
@@ -418,6 +466,8 @@
       "away": "South Africa",
       "league": "World Cup 2026",
       "date": "2026-06-18",
+      "stage": "group",
+      "venue": "Mercedes-Benz Stadium, Atlanta",
       "probabilities": {
         "home": 0.6488,
         "draw": 0.246,
@@ -435,6 +485,8 @@
       "away": "Bosnia and Herzegovina",
       "league": "World Cup 2026",
       "date": "2026-06-18",
+      "stage": "group",
+      "venue": "SoFi Stadium, Inglewood",
       "probabilities": {
         "home": 0.7063,
         "draw": 0.2243,
@@ -452,6 +504,8 @@
       "away": "Qatar",
       "league": "World Cup 2026",
       "date": "2026-06-18",
+      "stage": "group",
+      "venue": "BC Place, Vancouver",
       "probabilities": {
         "home": 0.7383,
         "draw": 0.2097,
@@ -469,6 +523,8 @@
       "away": "Korea Republic",
       "league": "World Cup 2026",
       "date": "2026-06-18",
+      "stage": "group",
+      "venue": "Estadio Akron, Zapopan",
       "probabilities": {
         "home": 0.5621,
         "draw": 0.272,
@@ -486,6 +542,8 @@
       "away": "Haiti",
       "league": "World Cup 2026",
       "date": "2026-06-19",
+      "stage": "group",
+      "venue": "Lincoln Financial Field, Philadelphia",
       "probabilities": {
         "home": 0.7682,
         "draw": 0.1827,
@@ -503,6 +561,8 @@
       "away": "Morocco",
       "league": "World Cup 2026",
       "date": "2026-06-19",
+      "stage": "group",
+      "venue": "Gillette Stadium, Foxborough",
       "probabilities": {
         "home": 0.4054,
         "draw": 0.287,
@@ -515,19 +575,21 @@
       "model": "elo"
     },
     {
-      "id": "28ce6cea",
+      "id": "a299bd5d",
       "home": "Türkiye",
       "away": "Paraguay",
       "league": "World Cup 2026",
       "date": "2026-06-19",
+      "stage": "group",
+      "venue": "Levi's Stadium, Santa Clara",
       "probabilities": {
-        "home": 0.1624,
-        "draw": 0.2167,
-        "away": 0.6209
+        "home": 0.5205,
+        "draw": 0.2828,
+        "away": 0.1968
       },
       "expected_goals": {
-        "home": 0.62,
-        "away": 1.77
+        "home": 1.58,
+        "away": 0.77
       },
       "model": "elo"
     },
@@ -537,6 +599,8 @@
       "away": "Australia",
       "league": "World Cup 2026",
       "date": "2026-06-19",
+      "stage": "group",
+      "venue": "Lumen Field, Seattle",
       "probabilities": {
         "home": 0.414,
         "draw": 0.2895,
@@ -549,36 +613,40 @@
       "model": "elo"
     },
     {
-      "id": "fc809d9d",
+      "id": "4a183095",
       "home": "Germany",
       "away": "Côte d'Ivoire",
       "league": "World Cup 2026",
       "date": "2026-06-20",
+      "stage": "group",
+      "venue": "BMO Field, Toronto",
       "probabilities": {
-        "home": 0.7593,
-        "draw": 0.1913,
-        "away": 0.0494
+        "home": 0.6721,
+        "draw": 0.2377,
+        "away": 0.0901
       },
       "expected_goals": {
-        "home": 2.09,
-        "away": 0.31
+        "home": 1.92,
+        "away": 0.46
       },
       "model": "elo"
     },
     {
-      "id": "f4965042",
+      "id": "055f5aad",
       "home": "Ecuador",
       "away": "Curaçao",
       "league": "World Cup 2026",
       "date": "2026-06-20",
+      "stage": "group",
+      "venue": "Arrowhead Stadium, Kansas City",
       "probabilities": {
-        "home": 0.7622,
-        "draw": 0.1885,
-        "away": 0.0493
+        "home": 0.781,
+        "draw": 0.1702,
+        "away": 0.0488
       },
       "expected_goals": {
-        "home": 2.09,
-        "away": 0.31
+        "home": 2.12,
+        "away": 0.29
       },
       "model": "elo"
     },
@@ -588,6 +656,8 @@
       "away": "Sweden",
       "league": "World Cup 2026",
       "date": "2026-06-20",
+      "stage": "group",
+      "venue": "NRG Stadium, Houston",
       "probabilities": {
         "home": 0.6673,
         "draw": 0.2395,
@@ -605,6 +675,8 @@
       "away": "Japan",
       "league": "World Cup 2026",
       "date": "2026-06-20",
+      "stage": "group",
+      "venue": "Estadio BBVA, Guadalupe",
       "probabilities": {
         "home": 0.2097,
         "draw": 0.2325,
@@ -622,6 +694,8 @@
       "away": "Cabo Verde",
       "league": "World Cup 2026",
       "date": "2026-06-21",
+      "stage": "group",
+      "venue": "Hard Rock Stadium, Miami Gardens",
       "probabilities": {
         "home": 0.7139,
         "draw": 0.221,
@@ -639,6 +713,8 @@
       "away": "Saudi Arabia",
       "league": "World Cup 2026",
       "date": "2026-06-21",
+      "stage": "group",
+      "venue": "Mercedes-Benz Stadium, Atlanta",
       "probabilities": {
         "home": 0.8065,
         "draw": 0.1452,
@@ -656,6 +732,8 @@
       "away": "IR Iran",
       "league": "World Cup 2026",
       "date": "2026-06-21",
+      "stage": "group",
+      "venue": "SoFi Stadium, Inglewood",
       "probabilities": {
         "home": 0.5537,
         "draw": 0.2742,
@@ -673,6 +751,8 @@
       "away": "Egypt",
       "league": "World Cup 2026",
       "date": "2026-06-21",
+      "stage": "group",
+      "venue": "BC Place, Vancouver",
       "probabilities": {
         "home": 0.3496,
         "draw": 0.2715,
@@ -690,6 +770,8 @@
       "away": "Senegal",
       "league": "World Cup 2026",
       "date": "2026-06-22",
+      "stage": "group",
+      "venue": "MetLife Stadium, East Rutherford",
       "probabilities": {
         "home": 0.497,
         "draw": 0.2885,
@@ -707,6 +789,8 @@
       "away": "Iraq",
       "league": "World Cup 2026",
       "date": "2026-06-22",
+      "stage": "group",
+      "venue": "Lincoln Financial Field, Philadelphia",
       "probabilities": {
         "home": 0.773,
         "draw": 0.178,
@@ -724,6 +808,8 @@
       "away": "Austria",
       "league": "World Cup 2026",
       "date": "2026-06-22",
+      "stage": "group",
+      "venue": "AT&T Stadium, Arlington",
       "probabilities": {
         "home": 0.6961,
         "draw": 0.2285,
@@ -741,6 +827,8 @@
       "away": "Algeria",
       "league": "World Cup 2026",
       "date": "2026-06-22",
+      "stage": "group",
+      "venue": "Levi's Stadium, Santa Clara",
       "probabilities": {
         "home": 0.4002,
         "draw": 0.2855,
@@ -758,6 +846,8 @@
       "away": "Ghana",
       "league": "World Cup 2026",
       "date": "2026-06-23",
+      "stage": "group",
+      "venue": "Gillette Stadium, Foxborough",
       "probabilities": {
         "home": 0.785,
         "draw": 0.1663,
@@ -775,6 +865,8 @@
       "away": "Croatia",
       "league": "World Cup 2026",
       "date": "2026-06-23",
+      "stage": "group",
+      "venue": "Toronto Stadium, Toronto",
       "probabilities": {
         "home": 0.2727,
         "draw": 0.2507,
@@ -792,6 +884,8 @@
       "away": "Uzbekistan",
       "league": "World Cup 2026",
       "date": "2026-06-23",
+      "stage": "group",
+      "venue": "NRG Stadium, Houston",
       "probabilities": {
         "home": 0.6775,
         "draw": 0.2357,
@@ -809,6 +903,8 @@
       "away": "Congo DR",
       "league": "World Cup 2026",
       "date": "2026-06-23",
+      "stage": "group",
+      "venue": "Estadio Akron, Zapopan",
       "probabilities": {
         "home": 0.8487,
         "draw": 0.1034,
@@ -826,6 +922,8 @@
       "away": "Brazil",
       "league": "World Cup 2026",
       "date": "2026-06-24",
+      "stage": "group",
+      "venue": "Hard Rock Stadium, Miami Gardens",
       "probabilities": {
         "home": 0.2538,
         "draw": 0.2455,
@@ -843,6 +941,8 @@
       "away": "Haiti",
       "league": "World Cup 2026",
       "date": "2026-06-24",
+      "stage": "group",
+      "venue": "Mercedes-Benz Stadium, Atlanta",
       "probabilities": {
         "home": 0.6985,
         "draw": 0.2275,
@@ -860,6 +960,8 @@
       "away": "Canada",
       "league": "World Cup 2026",
       "date": "2026-06-24",
+      "stage": "group",
+      "venue": "BC Place, Vancouver",
       "probabilities": {
         "home": 0.5602,
         "draw": 0.2725,
@@ -877,6 +979,8 @@
       "away": "Qatar",
       "league": "World Cup 2026",
       "date": "2026-06-24",
+      "stage": "group",
+      "venue": "Lumen Field, Seattle",
       "probabilities": {
         "home": 0.6113,
         "draw": 0.258,
@@ -894,6 +998,8 @@
       "away": "Mexico",
       "league": "World Cup 2026",
       "date": "2026-06-24",
+      "stage": "group",
+      "venue": "Estadio Azteca, Mexico City",
       "probabilities": {
         "home": 0.33,
         "draw": 0.2662,
@@ -911,6 +1017,8 @@
       "away": "Korea Republic",
       "league": "World Cup 2026",
       "date": "2026-06-24",
+      "stage": "group",
+      "venue": "Estadio BBVA, Guadalupe",
       "probabilities": {
         "home": 0.2355,
         "draw": 0.2402,
@@ -923,19 +1031,21 @@
       "model": "elo"
     },
     {
-      "id": "4366c565",
+      "id": "73418941",
       "home": "Curaçao",
       "away": "Côte d'Ivoire",
       "league": "World Cup 2026",
       "date": "2026-06-25",
+      "stage": "group",
+      "venue": "Lincoln Financial Field, Philadelphia",
       "probabilities": {
-        "home": 0.448,
-        "draw": 0.3,
-        "away": 0.252
+        "home": 0.2321,
+        "draw": 0.2392,
+        "away": 0.5287
       },
       "expected_goals": {
-        "home": 1.42,
-        "away": 0.93
+        "home": 0.82,
+        "away": 1.56
       },
       "model": "elo"
     },
@@ -945,6 +1055,8 @@
       "away": "Germany",
       "league": "World Cup 2026",
       "date": "2026-06-25",
+      "stage": "group",
+      "venue": "MetLife Stadium, East Rutherford",
       "probabilities": {
         "home": 0.4589,
         "draw": 0.2975,
@@ -962,6 +1074,8 @@
       "away": "Sweden",
       "league": "World Cup 2026",
       "date": "2026-06-25",
+      "stage": "group",
+      "venue": "AT&T Stadium, Arlington",
       "probabilities": {
         "home": 0.6267,
         "draw": 0.2532,
@@ -979,6 +1093,8 @@
       "away": "Netherlands",
       "league": "World Cup 2026",
       "date": "2026-06-25",
+      "stage": "group",
+      "venue": "Arrowhead Stadium, Kansas City",
       "probabilities": {
         "home": 0.1679,
         "draw": 0.2188,
@@ -991,19 +1107,21 @@
       "model": "elo"
     },
     {
-      "id": "60ab5a81",
+      "id": "8b27a275",
       "home": "Türkiye",
       "away": "USA",
       "league": "World Cup 2026",
       "date": "2026-06-25",
+      "stage": "group",
+      "venue": "SoFi Stadium, Inglewood",
       "probabilities": {
-        "home": 0.2407,
-        "draw": 0.2417,
-        "away": 0.5176
+        "home": 0.6121,
+        "draw": 0.2577,
+        "away": 0.1301
       },
       "expected_goals": {
-        "home": 0.84,
-        "away": 1.54
+        "home": 1.79,
+        "away": 0.58
       },
       "model": "elo"
     },
@@ -1013,6 +1131,8 @@
       "away": "Australia",
       "league": "World Cup 2026",
       "date": "2026-06-25",
+      "stage": "group",
+      "venue": "Levi's Stadium, Santa Clara",
       "probabilities": {
         "home": 0.5094,
         "draw": 0.2855,
@@ -1030,6 +1150,8 @@
       "away": "France",
       "league": "World Cup 2026",
       "date": "2026-06-26",
+      "stage": "group",
+      "venue": "Gillette Stadium, Foxborough",
       "probabilities": {
         "home": 0.2984,
         "draw": 0.2577,
@@ -1047,6 +1169,8 @@
       "away": "Iraq",
       "league": "World Cup 2026",
       "date": "2026-06-26",
+      "stage": "group",
+      "venue": "BMO Field, Toronto",
       "probabilities": {
         "home": 0.6781,
         "draw": 0.2355,
@@ -1064,6 +1188,8 @@
       "away": "IR Iran",
       "league": "World Cup 2026",
       "date": "2026-06-26",
+      "stage": "group",
+      "venue": "Lumen Field, Seattle",
       "probabilities": {
         "home": 0.3941,
         "draw": 0.2838,
@@ -1081,6 +1207,8 @@
       "away": "Belgium",
       "league": "World Cup 2026",
       "date": "2026-06-26",
+      "stage": "group",
+      "venue": "BC Place, Vancouver",
       "probabilities": {
         "home": 0.2001,
         "draw": 0.2295,
@@ -1098,6 +1226,8 @@
       "away": "Saudi Arabia",
       "league": "World Cup 2026",
       "date": "2026-06-26",
+      "stage": "group",
+      "venue": "NRG Stadium, Houston",
       "probabilities": {
         "home": 0.4589,
         "draw": 0.2975,
@@ -1115,6 +1245,8 @@
       "away": "Spain",
       "league": "World Cup 2026",
       "date": "2026-06-26",
+      "stage": "group",
+      "venue": "Estadio Akron, Zapopan",
       "probabilities": {
         "home": 0.2072,
         "draw": 0.2317,
@@ -1132,6 +1264,8 @@
       "away": "England",
       "league": "World Cup 2026",
       "date": "2026-06-27",
+      "stage": "group",
+      "venue": "MetLife Stadium, East Rutherford",
       "probabilities": {
         "home": 0.1962,
         "draw": 0.2283,
@@ -1149,6 +1283,8 @@
       "away": "Ghana",
       "league": "World Cup 2026",
       "date": "2026-06-27",
+      "stage": "group",
+      "venue": "Lincoln Financial Field, Philadelphia",
       "probabilities": {
         "home": 0.7599,
         "draw": 0.1908,
@@ -1166,6 +1302,8 @@
       "away": "Austria",
       "league": "World Cup 2026",
       "date": "2026-06-27",
+      "stage": "group",
+      "venue": "Arrowhead Stadium, Kansas City",
       "probabilities": {
         "home": 0.3771,
         "draw": 0.279,
@@ -1183,6 +1321,8 @@
       "away": "Argentina",
       "league": "World Cup 2026",
       "date": "2026-06-27",
+      "stage": "group",
+      "venue": "AT&T Stadium, Arlington",
       "probabilities": {
         "home": 0.1061,
         "draw": 0.193,
@@ -1200,6 +1340,8 @@
       "away": "Portugal",
       "league": "World Cup 2026",
       "date": "2026-06-27",
+      "stage": "group",
+      "venue": "Hard Rock Stadium, Miami Gardens",
       "probabilities": {
         "home": 0.441,
         "draw": 0.2978,
@@ -1217,6 +1359,8 @@
       "away": "Uzbekistan",
       "league": "World Cup 2026",
       "date": "2026-06-27",
+      "stage": "group",
+      "venue": "Mercedes-Benz Stadium, Atlanta",
       "probabilities": {
         "home": 0.0679,
         "draw": 0.17,
@@ -1229,548 +1373,324 @@
       "model": "elo"
     },
     {
-      "id": "daf1cfed",
+      "id": "a16dca5c",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
       "date": "2026-06-28",
-      "probabilities": {
-        "home": 0.448,
-        "draw": 0.3,
-        "away": 0.252
-      },
-      "expected_goals": {
-        "home": 1.42,
-        "away": 0.93
-      },
-      "model": "elo"
+      "stage": "round_of_32",
+      "venue": "TBD",
+      "status": "TBD"
     },
     {
-      "id": "daf1cfed",
+      "id": "a0cdc9e2",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
       "date": "2026-06-28",
-      "probabilities": {
-        "home": 0.448,
-        "draw": 0.3,
-        "away": 0.252
-      },
-      "expected_goals": {
-        "home": 1.42,
-        "away": 0.93
-      },
-      "model": "elo"
+      "stage": "round_of_32",
+      "venue": "TBD",
+      "status": "TBD"
     },
     {
-      "id": "daf1cfed",
+      "id": "033bbce8",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
       "date": "2026-06-28",
-      "probabilities": {
-        "home": 0.448,
-        "draw": 0.3,
-        "away": 0.252
-      },
-      "expected_goals": {
-        "home": 1.42,
-        "away": 0.93
-      },
-      "model": "elo"
+      "stage": "round_of_32",
+      "venue": "TBD",
+      "status": "TBD"
     },
     {
-      "id": "ce7609fa",
+      "id": "265f609b",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
       "date": "2026-06-29",
-      "probabilities": {
-        "home": 0.448,
-        "draw": 0.3,
-        "away": 0.252
-      },
-      "expected_goals": {
-        "home": 1.42,
-        "away": 0.93
-      },
-      "model": "elo"
+      "stage": "round_of_32",
+      "venue": "TBD",
+      "status": "TBD"
     },
     {
-      "id": "ce7609fa",
+      "id": "c167ff17",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
       "date": "2026-06-29",
-      "probabilities": {
-        "home": 0.448,
-        "draw": 0.3,
-        "away": 0.252
-      },
-      "expected_goals": {
-        "home": 1.42,
-        "away": 0.93
-      },
-      "model": "elo"
+      "stage": "round_of_32",
+      "venue": "TBD",
+      "status": "TBD"
     },
     {
-      "id": "ce7609fa",
+      "id": "e7a1d94e",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
       "date": "2026-06-29",
-      "probabilities": {
-        "home": 0.448,
-        "draw": 0.3,
-        "away": 0.252
-      },
-      "expected_goals": {
-        "home": 1.42,
-        "away": 0.93
-      },
-      "model": "elo"
+      "stage": "round_of_32",
+      "venue": "TBD",
+      "status": "TBD"
     },
     {
-      "id": "7e16e7d4",
+      "id": "dcb0d987",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
       "date": "2026-06-30",
-      "probabilities": {
-        "home": 0.448,
-        "draw": 0.3,
-        "away": 0.252
-      },
-      "expected_goals": {
-        "home": 1.42,
-        "away": 0.93
-      },
-      "model": "elo"
+      "stage": "round_of_32",
+      "venue": "TBD",
+      "status": "TBD"
     },
     {
-      "id": "7e16e7d4",
+      "id": "efba34b6",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
       "date": "2026-06-30",
-      "probabilities": {
-        "home": 0.448,
-        "draw": 0.3,
-        "away": 0.252
-      },
-      "expected_goals": {
-        "home": 1.42,
-        "away": 0.93
-      },
-      "model": "elo"
+      "stage": "round_of_32",
+      "venue": "TBD",
+      "status": "TBD"
     },
     {
-      "id": "7e16e7d4",
+      "id": "ea1948df",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
       "date": "2026-06-30",
-      "probabilities": {
-        "home": 0.448,
-        "draw": 0.3,
-        "away": 0.252
-      },
-      "expected_goals": {
-        "home": 1.42,
-        "away": 0.93
-      },
-      "model": "elo"
+      "stage": "round_of_32",
+      "venue": "TBD",
+      "status": "TBD"
     },
     {
-      "id": "e0ad6b02",
+      "id": "67dcc974",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
       "date": "2026-07-01",
-      "probabilities": {
-        "home": 0.448,
-        "draw": 0.3,
-        "away": 0.252
-      },
-      "expected_goals": {
-        "home": 1.42,
-        "away": 0.93
-      },
-      "model": "elo"
+      "stage": "round_of_32",
+      "venue": "TBD",
+      "status": "TBD"
     },
     {
-      "id": "e0ad6b02",
+      "id": "0167fd0a",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
       "date": "2026-07-01",
-      "probabilities": {
-        "home": 0.448,
-        "draw": 0.3,
-        "away": 0.252
-      },
-      "expected_goals": {
-        "home": 1.42,
-        "away": 0.93
-      },
-      "model": "elo"
+      "stage": "round_of_32",
+      "venue": "TBD",
+      "status": "TBD"
     },
     {
-      "id": "e0ad6b02",
+      "id": "823b0e01",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
       "date": "2026-07-01",
-      "probabilities": {
-        "home": 0.448,
-        "draw": 0.3,
-        "away": 0.252
-      },
-      "expected_goals": {
-        "home": 1.42,
-        "away": 0.93
-      },
-      "model": "elo"
+      "stage": "round_of_32",
+      "venue": "TBD",
+      "status": "TBD"
     },
     {
-      "id": "db0ee146",
+      "id": "17d2f0e6",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
       "date": "2026-07-02",
-      "probabilities": {
-        "home": 0.448,
-        "draw": 0.3,
-        "away": 0.252
-      },
-      "expected_goals": {
-        "home": 1.42,
-        "away": 0.93
-      },
-      "model": "elo"
+      "stage": "round_of_32",
+      "venue": "TBD",
+      "status": "TBD"
     },
     {
-      "id": "db0ee146",
+      "id": "894e2957",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
       "date": "2026-07-02",
-      "probabilities": {
-        "home": 0.448,
-        "draw": 0.3,
-        "away": 0.252
-      },
-      "expected_goals": {
-        "home": 1.42,
-        "away": 0.93
-      },
-      "model": "elo"
+      "stage": "round_of_32",
+      "venue": "TBD",
+      "status": "TBD"
     },
     {
-      "id": "db0ee146",
+      "id": "6d745344",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
       "date": "2026-07-02",
-      "probabilities": {
-        "home": 0.448,
-        "draw": 0.3,
-        "away": 0.252
-      },
-      "expected_goals": {
-        "home": 1.42,
-        "away": 0.93
-      },
-      "model": "elo"
+      "stage": "round_of_32",
+      "venue": "TBD",
+      "status": "TBD"
     },
     {
-      "id": "fc45a423",
+      "id": "46f54dfd",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
       "date": "2026-07-03",
-      "probabilities": {
-        "home": 0.448,
-        "draw": 0.3,
-        "away": 0.252
-      },
-      "expected_goals": {
-        "home": 1.42,
-        "away": 0.93
-      },
-      "model": "elo"
+      "stage": "round_of_32",
+      "venue": "TBD",
+      "status": "TBD"
     },
     {
-      "id": "a57060c7",
+      "id": "5593200b",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
       "date": "2026-07-04",
-      "probabilities": {
-        "home": 0.448,
-        "draw": 0.3,
-        "away": 0.252
-      },
-      "expected_goals": {
-        "home": 1.42,
-        "away": 0.93
-      },
-      "model": "elo"
+      "stage": "round_of_16",
+      "venue": "TBD",
+      "status": "TBD"
     },
     {
-      "id": "a57060c7",
+      "id": "1bbd239b",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
       "date": "2026-07-04",
-      "probabilities": {
-        "home": 0.448,
-        "draw": 0.3,
-        "away": 0.252
-      },
-      "expected_goals": {
-        "home": 1.42,
-        "away": 0.93
-      },
-      "model": "elo"
+      "stage": "round_of_16",
+      "venue": "TBD",
+      "status": "TBD"
     },
     {
-      "id": "a15f1f4a",
+      "id": "45914123",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
       "date": "2026-07-05",
-      "probabilities": {
-        "home": 0.448,
-        "draw": 0.3,
-        "away": 0.252
-      },
-      "expected_goals": {
-        "home": 1.42,
-        "away": 0.93
-      },
-      "model": "elo"
+      "stage": "round_of_16",
+      "venue": "TBD",
+      "status": "TBD"
     },
     {
-      "id": "a15f1f4a",
+      "id": "3b5c6e2a",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
       "date": "2026-07-05",
-      "probabilities": {
-        "home": 0.448,
-        "draw": 0.3,
-        "away": 0.252
-      },
-      "expected_goals": {
-        "home": 1.42,
-        "away": 0.93
-      },
-      "model": "elo"
+      "stage": "round_of_16",
+      "venue": "TBD",
+      "status": "TBD"
     },
     {
-      "id": "ac28a97f",
+      "id": "c47d12ec",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
       "date": "2026-07-06",
-      "probabilities": {
-        "home": 0.448,
-        "draw": 0.3,
-        "away": 0.252
-      },
-      "expected_goals": {
-        "home": 1.42,
-        "away": 0.93
-      },
-      "model": "elo"
+      "stage": "round_of_16",
+      "venue": "TBD",
+      "status": "TBD"
     },
     {
-      "id": "ac28a97f",
+      "id": "62d98435",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
       "date": "2026-07-06",
-      "probabilities": {
-        "home": 0.448,
-        "draw": 0.3,
-        "away": 0.252
-      },
-      "expected_goals": {
-        "home": 1.42,
-        "away": 0.93
-      },
-      "model": "elo"
+      "stage": "round_of_16",
+      "venue": "TBD",
+      "status": "TBD"
     },
     {
-      "id": "e1c169bf",
+      "id": "8d575c8c",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
       "date": "2026-07-07",
-      "probabilities": {
-        "home": 0.448,
-        "draw": 0.3,
-        "away": 0.252
-      },
-      "expected_goals": {
-        "home": 1.42,
-        "away": 0.93
-      },
-      "model": "elo"
+      "stage": "round_of_16",
+      "venue": "TBD",
+      "status": "TBD"
     },
     {
-      "id": "e1c169bf",
+      "id": "6b4832de",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
       "date": "2026-07-07",
-      "probabilities": {
-        "home": 0.448,
-        "draw": 0.3,
-        "away": 0.252
-      },
-      "expected_goals": {
-        "home": 1.42,
-        "away": 0.93
-      },
-      "model": "elo"
+      "stage": "round_of_16",
+      "venue": "TBD",
+      "status": "TBD"
     },
     {
-      "id": "a45a5600",
+      "id": "cc7b2566",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
       "date": "2026-07-09",
-      "probabilities": {
-        "home": 0.448,
-        "draw": 0.3,
-        "away": 0.252
-      },
-      "expected_goals": {
-        "home": 1.42,
-        "away": 0.93
-      },
-      "model": "elo"
+      "stage": "quarter_final",
+      "venue": "TBD",
+      "status": "TBD"
     },
     {
-      "id": "9425d838",
+      "id": "377553e7",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
       "date": "2026-07-10",
-      "probabilities": {
-        "home": 0.448,
-        "draw": 0.3,
-        "away": 0.252
-      },
-      "expected_goals": {
-        "home": 1.42,
-        "away": 0.93
-      },
-      "model": "elo"
+      "stage": "quarter_final",
+      "venue": "TBD",
+      "status": "TBD"
     },
     {
-      "id": "aa625773",
+      "id": "26bb30f3",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
       "date": "2026-07-11",
-      "probabilities": {
-        "home": 0.448,
-        "draw": 0.3,
-        "away": 0.252
-      },
-      "expected_goals": {
-        "home": 1.42,
-        "away": 0.93
-      },
-      "model": "elo"
+      "stage": "quarter_final",
+      "venue": "TBD",
+      "status": "TBD"
     },
     {
-      "id": "7c960d7d",
+      "id": "6ff82ad4",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
       "date": "2026-07-12",
-      "probabilities": {
-        "home": 0.448,
-        "draw": 0.3,
-        "away": 0.252
-      },
-      "expected_goals": {
-        "home": 1.42,
-        "away": 0.93
-      },
-      "model": "elo"
+      "stage": "quarter_final",
+      "venue": "TBD",
+      "status": "TBD"
     },
     {
-      "id": "132df035",
+      "id": "84ea2c5e",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
       "date": "2026-07-14",
-      "probabilities": {
-        "home": 0.448,
-        "draw": 0.3,
-        "away": 0.252
-      },
-      "expected_goals": {
-        "home": 1.42,
-        "away": 0.93
-      },
-      "model": "elo"
+      "stage": "semi_final",
+      "venue": "TBD",
+      "status": "TBD"
     },
     {
-      "id": "cf90950e",
+      "id": "eee56f54",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
       "date": "2026-07-15",
-      "probabilities": {
-        "home": 0.448,
-        "draw": 0.3,
-        "away": 0.252
-      },
-      "expected_goals": {
-        "home": 1.42,
-        "away": 0.93
-      },
-      "model": "elo"
+      "stage": "semi_final",
+      "venue": "TBD",
+      "status": "TBD"
     },
     {
-      "id": "20f6e880",
+      "id": "b9c20f92",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
       "date": "2026-07-18",
-      "probabilities": {
-        "home": 0.448,
-        "draw": 0.3,
-        "away": 0.252
-      },
-      "expected_goals": {
-        "home": 1.42,
-        "away": 0.93
-      },
-      "model": "elo"
+      "stage": "bronze_final",
+      "venue": "TBD",
+      "status": "TBD"
     },
     {
-      "id": "be5f111f",
+      "id": "02e6b7d4",
       "home": null,
       "away": null,
       "league": "World Cup 2026",
       "date": "2026-07-19",
-      "probabilities": {
-        "home": 0.448,
-        "draw": 0.3,
-        "away": 0.252
-      },
-      "expected_goals": {
-        "home": 1.42,
-        "away": 0.93
-      },
-      "model": "elo"
+      "stage": "final",
+      "venue": "TBD",
+      "status": "TBD"
     }
   ]
 }
