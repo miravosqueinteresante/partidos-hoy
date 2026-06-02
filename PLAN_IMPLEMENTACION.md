@@ -794,6 +794,7 @@ We consider security research conducted under this policy as:
 | 21 | **Search/pagination desde $_GET** | ✅ | v1.1 — lee search y ph_page de la URL |
 | 22 | **News: 3 queries por partido** | ✅ | v1.1 — home prep + away prep + matchup |
 | 23 | **Botón Compartir en tarjetas** | ✅ | v1.1 — WhatsApp, X, copy link (native share fallback) |
+| 24 | **Traducción nombres equipos a español** | ✅ | v1.1 — ph_translate_team() en PHP, cubre 2026 e histórico |
 
 **Código legacy eliminado** (existía en el plan original pero NO en producción):
 - API-Football client, FBref scraper, football-data.org client

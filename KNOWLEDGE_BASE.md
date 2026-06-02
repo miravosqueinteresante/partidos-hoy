@@ -467,4 +467,22 @@ Agregado un botón "Compartir" en el footer de cada tarjeta, en la misma línea 
 
 ---
 
-*Documento actualizado el 2 de junio de 2026. Últimos cambios: botón compartir en footer, normalización de nombres de equipos en histórico, texto condensado de goleadores, paginación con ph_page, 3 queries por partido en news sentiment.*
+## 17. Traducción de Nombres de Equipos a Español
+
+Para que el plugin muestre los nombres en español (ej: Türkiye → Turquía, Netherlands → Países Bajos, Korea Republic → Corea del Sur), se implementó `ph_translate_team()` en `partidos-hoy.php:35`.
+
+### 17.1 Funcionamiento
+
+- Mapa PHP con ~80 traducciones inglés → español
+- Cubre las 48 selecciones del Mundial 2026 + equipos históricos (Yugoslavia, URSS, Checoslovaquia, etc.)
+- Se aplica en todo display: tarjetas grid, tarjeta individual, JSON-LD, OG tags, y respuesta AJAX de datos históricos
+- Las `data-*` attributes para AJAX (data-home, data-away) conservan los nombres originales en inglés para que el lookup histórico funcione correctamente
+
+### 17.2 Archivos modificados
+
+- `partidos-hoy.php` — define `ph_translate_team()` + traducción en respuesta AJAX
+- `class-shortcode.php` — usa `ph_translate_team()` en todos los displays de nombres de equipos
+
+---
+
+*Documento actualizado el 2 de junio de 2026. Últimos cambios: traducción a español de nombres de equipos, botón compartir en footer, normalización de nombres de equipos en histórico, texto condensado de goleadores, paginación con ph_page, 3 queries por partido en news sentiment.*
