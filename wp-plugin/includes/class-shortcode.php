@@ -80,6 +80,8 @@ class PH_Shortcode {
                 $venue = isset($match['venue']) ? $match['venue'] : '';
                 $home_team = isset($match['home']) ? $match['home'] : '';
                 $away_team = isset($match['away']) ? $match['away'] : '';
+                $home_team_display = ph_translate_team($home_team);
+                $away_team_display = ph_translate_team($away_team);
                 $home_prob = isset($match['probabilities']['home']) ? $match['probabilities']['home'] : 0;
                 $draw_prob = isset($match['probabilities']['draw']) ? $match['probabilities']['draw'] : 0;
                 $away_prob = isset($match['probabilities']['away']) ? $match['probabilities']['away'] : 0;
@@ -96,9 +98,9 @@ class PH_Shortcode {
                 </div>
                 <?php endif; ?>
                 <div class="ph-card-header">
-                    <span class="ph-team ph-home"><?php echo $this->get_flag($home_team) . esc_html($home_team); ?></span>
+                    <span class="ph-team ph-home"><?php echo $this->get_flag($home_team) . esc_html($home_team_display); ?></span>
                     <span class="ph-vs">vs</span>
-                    <span class="ph-team ph-away"><?php echo $this->get_flag($away_team) . esc_html($away_team); ?></span>
+                    <span class="ph-team ph-away"><?php echo $this->get_flag($away_team) . esc_html($away_team_display); ?></span>
                 </div>
                 
                 <div class="ph-card-bars">
@@ -161,17 +163,17 @@ class PH_Shortcode {
             {
                 "@context": "https://schema.org",
                 "@type": "SportsEvent",
-                "name": "<?php echo esc_js($home_team); ?> vs <?php echo esc_js($away_team); ?>",
+                "name": "<?php echo esc_js($home_team_display); ?> vs <?php echo esc_js($away_team_display); ?>",
                 "startDate": "<?php echo esc_js($date_str); ?>",
                 "location": {
                     "@type": "Place",
                     "name": "<?php echo esc_js($venue ?: 'TBD'); ?>"
                 },
                 "competitor": [
-                    { "@type": "SportsTeam", "name": "<?php echo esc_js($home_team); ?>" },
-                    { "@type": "SportsTeam", "name": "<?php echo esc_js($away_team); ?>" }
+                    { "@type": "SportsTeam", "name": "<?php echo esc_js($home_team_display); ?>" },
+                    { "@type": "SportsTeam", "name": "<?php echo esc_js($away_team_display); ?>" }
                 ],
-                "description": "<?php echo esc_js(sprintf(__('Predicción ELO: %s %s, Empate %s, %s %s', 'partidos-hoy'), $home_team, $this->format_prob($home_prob), $this->format_prob($draw_prob), $away_team, $this->format_prob($away_prob))); ?>"
+                "description": "<?php echo esc_js(sprintf(__('Predicción ELO: %s %s, Empate %s, %s %s', 'partidos-hoy'), $home_team_display, $this->format_prob($home_prob), $this->format_prob($draw_prob), $away_team_display, $this->format_prob($away_prob))); ?>"
             }
             </script>
             <?php endforeach; ?>
@@ -229,6 +231,8 @@ class PH_Shortcode {
         $probs = $match['probabilities'];
         $home_team = isset($match['home']) ? $match['home'] : '';
         $away_team = isset($match['away']) ? $match['away'] : '';
+        $home_team_display = ph_translate_team($home_team);
+        $away_team_display = ph_translate_team($away_team);
         $home_prob = isset($probs['home']) ? $probs['home'] : 0;
         $draw_prob = isset($probs['draw']) ? $probs['draw'] : 0;
         $away_prob = isset($probs['away']) ? $probs['away'] : 0;
@@ -249,9 +253,9 @@ class PH_Shortcode {
             </div>
             <?php endif; ?>
             <div class="ph-card-header">
-                <span class="ph-team ph-home"><?php echo $this->get_flag($home_team) . esc_html($home_team); ?></span>
+                <span class="ph-team ph-home"><?php echo $this->get_flag($home_team) . esc_html($home_team_display); ?></span>
                 <span class="ph-vs">vs</span>
-                <span class="ph-team ph-away"><?php echo $this->get_flag($away_team) . esc_html($away_team); ?></span>
+                <span class="ph-team ph-away"><?php echo $this->get_flag($away_team) . esc_html($away_team_display); ?></span>
             </div>
             
             <div class="ph-card-bars">
@@ -314,17 +318,17 @@ class PH_Shortcode {
         {
             "@context": "https://schema.org",
             "@type": "SportsEvent",
-            "name": "<?php echo esc_js($home_team); ?> vs <?php echo esc_js($away_team); ?>",
+            "name": "<?php echo esc_js($home_team_display); ?> vs <?php echo esc_js($away_team_display); ?>",
             "startDate": "<?php echo esc_js($date_str); ?>",
             "location": {
                 "@type": "Place",
                 "name": "<?php echo esc_js($venue ?: 'TBD'); ?>"
             },
             "competitor": [
-                { "@type": "SportsTeam", "name": "<?php echo esc_js($home_team); ?>" },
-                { "@type": "SportsTeam", "name": "<?php echo esc_js($away_team); ?>" }
+                { "@type": "SportsTeam", "name": "<?php echo esc_js($home_team_display); ?>" },
+                { "@type": "SportsTeam", "name": "<?php echo esc_js($away_team_display); ?>" }
             ],
-            "description": "<?php echo esc_js(sprintf(__('Predicción ELO: %s %s, Empate %s, %s %s', 'partidos-hoy'), $home_team, $this->format_prob($home_prob), $this->format_prob($draw_prob), $away_team, $this->format_prob($away_prob))); ?>"
+            "description": "<?php echo esc_js(sprintf(__('Predicción ELO: %s %s, Empate %s, %s %s', 'partidos-hoy'), $home_team_display, $this->format_prob($home_prob), $this->format_prob($draw_prob), $away_team_display, $this->format_prob($away_prob))); ?>"
         }
         </script>
         <?php
@@ -374,8 +378,10 @@ class PH_Shortcode {
                 $home = isset($atts['home']) ? $atts['home'] : '';
                 $away = isset($atts['away']) ? $atts['away'] : '';
                 if ($home && $away) {
-                    $og_title = sprintf(__('%s vs %s - Predicción Partidos Hoy', 'partidos-hoy'), $home, $away);
-                    $og_description = sprintf(__('Pronóstico ELO para %s vs %s. Probabilidades, análisis y más.', 'partidos-hoy'), $home, $away);
+                    $home_display = ph_translate_team($home);
+                    $away_display = ph_translate_team($away);
+                    $og_title = sprintf(__('%s vs %s - Predicción Partidos Hoy', 'partidos-hoy'), $home_display, $away_display);
+                    $og_description = sprintf(__('Pronóstico ELO para %s vs %s. Probabilidades, análisis y más.', 'partidos-hoy'), $home_display, $away_display);
                 }
             }
         }
