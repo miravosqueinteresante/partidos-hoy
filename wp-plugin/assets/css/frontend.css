@@ -153,7 +153,7 @@
 .ph-bar-away  { background: linear-gradient(90deg, #b91c1c, var(--ph-color-away)); }
 
 /* =============================================
-   Card Footer (xG)
+   Card Footer (xG + Share)
    ============================================= */
 .ph-card-footer {
     margin-top: auto;
@@ -163,7 +163,7 @@
     font-size: 0.8rem;
     color: var(--ph-text-muted);
     border-top: 1px solid rgba(0, 0, 0, 0.06);
-    padding: 14px 20px;
+    padding: 10px 20px;
     letter-spacing: 0.01em;
 }
 
@@ -366,11 +366,9 @@
 }
 
 /* =============================================
-   Share
+   Share (inside footer)
    ============================================= */
 .ph-share {
-    border-top: 1px solid rgba(0, 0, 0, 0.06);
-    padding: 10px 20px;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -380,9 +378,9 @@
 .ph-share-btn {
     background: none;
     border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    padding: 6px 14px;
-    font-size: 0.75rem;
+    border-radius: 6px;
+    padding: 4px 12px;
+    font-size: 0.72rem;
     font-weight: 600;
     color: var(--ph-text-muted);
     cursor: pointer;
@@ -397,15 +395,15 @@
 
 .ph-share-fallback {
     display: none;
-    gap: 6px;
+    gap: 4px;
 }
 
 .ph-share-link {
     display: inline-flex;
     align-items: center;
-    padding: 5px 12px;
-    border-radius: 6px;
-    font-size: 0.72rem;
+    padding: 4px 10px;
+    border-radius: 5px;
+    font-size: 0.7rem;
     font-weight: 600;
     text-decoration: none;
     cursor: pointer;

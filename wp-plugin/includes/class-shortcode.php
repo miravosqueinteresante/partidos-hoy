@@ -123,14 +123,13 @@ class PH_Shortcode {
                     <div class="ph-xg">
                         xG: <?php echo isset($match['expected_goals']) ? esc_html($match['expected_goals']['home'] . ' - ' . $match['expected_goals']['away']) : 'N/A'; ?>
                     </div>
-                </div>
-
-                <div class="ph-share">
-                    <button type="button" class="ph-share-btn" data-home="<?php echo esc_attr($home_team); ?>" data-away="<?php echo esc_attr($away_team); ?>"><?php esc_html_e('Compartir', 'partidos-hoy'); ?></button>
-                    <div class="ph-share-fallback">
-                        <a href="#" class="ph-share-link ph-share-wa" data-action="whatsapp" target="_blank" rel="noopener">WhatsApp</a>
-                        <a href="#" class="ph-share-link ph-share-x" data-action="x" target="_blank" rel="noopener">X</a>
-                        <button type="button" class="ph-share-link ph-share-copy" data-action="copy"><?php esc_html_e('Copiar link', 'partidos-hoy'); ?></button>
+                    <div class="ph-share">
+                        <button type="button" class="ph-share-btn" data-home="<?php echo esc_attr($home_team); ?>" data-away="<?php echo esc_attr($away_team); ?>"><?php esc_html_e('Compartir', 'partidos-hoy'); ?></button>
+                        <div class="ph-share-fallback">
+                            <a href="#" class="ph-share-link ph-share-wa" data-action="whatsapp" target="_blank" rel="noopener">WhatsApp</a>
+                            <a href="#" class="ph-share-link ph-share-x" data-action="x" target="_blank" rel="noopener">X</a>
+                            <button type="button" class="ph-share-link ph-share-copy" data-action="copy"><?php esc_html_e('Copiar link', 'partidos-hoy'); ?></button>
+                        </div>
                     </div>
                 </div>
 
@@ -277,14 +276,13 @@ class PH_Shortcode {
                 <div class="ph-xg">
                     xG: <?php echo isset($match['expected_goals']) ? esc_html($match['expected_goals']['home'] . ' - ' . $match['expected_goals']['away']) : 'N/A'; ?>
                 </div>
-            </div>
-
-            <div class="ph-share">
-                <button type="button" class="ph-share-btn" data-home="<?php echo esc_attr($home_team); ?>" data-away="<?php echo esc_attr($away_team); ?>"><?php esc_html_e('Compartir', 'partidos-hoy'); ?></button>
-                <div class="ph-share-fallback">
-                    <a href="#" class="ph-share-link ph-share-wa" data-action="whatsapp" target="_blank" rel="noopener">WhatsApp</a>
-                    <a href="#" class="ph-share-link ph-share-x" data-action="x" target="_blank" rel="noopener">X</a>
-                    <button type="button" class="ph-share-link ph-share-copy" data-action="copy"><?php esc_html_e('Copiar link', 'partidos-hoy'); ?></button>
+                <div class="ph-share">
+                    <button type="button" class="ph-share-btn" data-home="<?php echo esc_attr($home_team); ?>" data-away="<?php echo esc_attr($away_team); ?>"><?php esc_html_e('Compartir', 'partidos-hoy'); ?></button>
+                    <div class="ph-share-fallback">
+                        <a href="#" class="ph-share-link ph-share-wa" data-action="whatsapp" target="_blank" rel="noopener">WhatsApp</a>
+                        <a href="#" class="ph-share-link ph-share-x" data-action="x" target="_blank" rel="noopener">X</a>
+                        <button type="button" class="ph-share-link ph-share-copy" data-action="copy"><?php esc_html_e('Copiar link', 'partidos-hoy'); ?></button>
+                    </div>
                 </div>
             </div>
 
