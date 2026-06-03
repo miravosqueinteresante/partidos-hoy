@@ -51,14 +51,14 @@ class PH_Admin {
         $results = array();
         if (isset($_POST['ph_results']) && is_array($_POST['ph_results'])) {
             foreach ($_POST['ph_results'] as $key => $data) {
-                $key = sanitize_text_field($key);
-                if (!preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}_[a-z_ ]+$/', $key)) {
+                $id = absint($key);
+                if ($id <= 0) {
                     continue;
                 }
                 $home_goals = isset($data['home_goals']) && $data['home_goals'] !== '' ? absint($data['home_goals']) : null;
                 $away_goals = isset($data['away_goals']) && $data['away_goals'] !== '' ? absint($data['away_goals']) : null;
                 if ($home_goals !== null && $away_goals !== null) {
-                    $results[$key] = array(
+                    $results[$id] = array(
                         'home_goals' => $home_goals,
                         'away_goals' => $away_goals,
                     );
@@ -207,15 +207,14 @@ class PH_Admin {
                             <?php foreach ($group_matches as $match):
                                 $home = $match['home'] ?? '';
                                 $away = $match['away'] ?? '';
-                                $date = isset($match['date']) ? substr($match['date'], 0, 10) : '';
-                                $key = strtolower($date . '_' . $home . '_' . $away);
+                                $mid = isset($match['id']) ? intval($match['id']) : 0;
                                 $probs = $match['probabilities'] ?? array();
                                 $max_key = !empty($probs) ? array_search(max($probs), $probs) : '';
                                 $max_label = array('home' => $home, 'draw' => __('Empate', 'partidos-hoy'), 'away' => $away);
                                 $max_pct = isset($probs[$max_key]) ? round(floatval($probs[$max_key]) * 100) : 0;
                                 $flag_home = $this->get_flag_static($home);
-                                $has_result = isset($results[$key]);
-                                $existing = $has_result ? $results[$key] : null;
+                                $has_result = $mid > 0 && isset($results[$mid]);
+                                $existing = $has_result ? $results[$mid] : null;
                             ?>
                             <tr class="<?php echo $has_result ? 'ph-row-complete' : ''; ?>">
                                 <td class="ph-col-match">
@@ -228,12 +227,12 @@ class PH_Admin {
                                 </td>
                                 <td class="ph-col-scores">
                                     <input type="number" min="0" max="50" class="ph-score-input"
-                                           name="ph_results[<?php echo esc_attr($key); ?>][home_goals]"
+                                           name="ph_results[<?php echo $mid; ?>][home_goals]"
                                            value="<?php echo $has_result ? esc_attr($existing['home_goals']) : ''; ?>"
                                            placeholder="<?php esc_attr_e('Local', 'partidos-hoy'); ?>" />
                                     <span class="ph-score-sep">-</span>
                                     <input type="number" min="0" max="50" class="ph-score-input"
-                                           name="ph_results[<?php echo esc_attr($key); ?>][away_goals]"
+                                           name="ph_results[<?php echo $mid; ?>][away_goals]"
                                            value="<?php echo $has_result ? esc_attr($existing['away_goals']) : ''; ?>"
                                            placeholder="<?php esc_attr_e('Visit', 'partidos-hoy'); ?>" />
                                 </td>
@@ -245,7 +244,7 @@ class PH_Admin {
                                     <?php endif; ?>
                                 </td>
                             </tr>
-                            <?php endforeach; ?>
+                                <?php endforeach; ?>
                         </tbody>
                     </table>
                     <p class="submit">

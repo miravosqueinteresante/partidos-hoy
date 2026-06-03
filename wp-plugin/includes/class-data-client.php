@@ -160,8 +160,8 @@ class PH_Data_Client {
     public function save_results(array $results): bool {
         $clean = array();
         foreach ($results as $key => $data) {
-            $key_sanitized = sanitize_text_field(strtolower($key));
-            if (!preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}_[a-z_ ]+$/', $key_sanitized)) {
+            $match_id = absint($key);
+            if ($match_id <= 0) {
                 continue;
             }
             if (!isset($data['home_goals']) || !isset($data['away_goals']) || $data['home_goals'] === '' || $data['away_goals'] === '') {
@@ -170,7 +170,7 @@ class PH_Data_Client {
             if (!is_numeric($data['home_goals']) || !is_numeric($data['away_goals'])) {
                 continue;
             }
-            $clean[$key_sanitized] = array(
+            $clean[$match_id] = array(
                 'home_goals' => absint($data['home_goals']),
                 'away_goals' => absint($data['away_goals']),
             );
@@ -207,11 +207,11 @@ class PH_Data_Client {
             }
             $home = trim($match['home'] ?? '');
             $away = trim($match['away'] ?? '');
+            $mid = isset($match['id']) ? intval($match['id']) : 0;
             $date = isset($match['date']) ? substr($match['date'], 0, 10) : '';
             $group = isset($match['group']) ? strtoupper($match['group']) : 'KO';
-            $key = strtolower($date . '_' . $home . '_' . $away);
 
-            if (!isset($results[$key])) {
+            if ($mid <= 0 || !isset($results[$mid])) {
                 continue;
             }
 
@@ -224,8 +224,8 @@ class PH_Data_Client {
             }
             $predicted = $max_keys[0];
 
-            $home_goals = $results[$key]['home_goals'];
-            $away_goals = $results[$key]['away_goals'];
+        $home_goals = $results[$mid]['home_goals'];
+        $away_goals = $results[$mid]['away_goals'];
             $actual = $home_goals > $away_goals ? 'home' : ($away_goals > $home_goals ? 'away' : 'draw');
             $correct = ($predicted === $actual);
 
