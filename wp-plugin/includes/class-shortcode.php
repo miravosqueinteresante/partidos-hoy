@@ -122,8 +122,29 @@ class PH_Shortcode {
                 </div>
 
                 <div class="ph-card-footer">
-                    <div class="ph-xg">
-                        xG: <?php echo isset($match['expected_goals']) ? esc_html($match['expected_goals']['home'] . ' - ' . $match['expected_goals']['away']) : 'N/A'; ?>
+                    <div class="ph-footer-left">
+                        <div class="ph-xg">
+                            xG: <?php echo isset($match['expected_goals']) ? esc_html($match['expected_goals']['home'] . ' - ' . $match['expected_goals']['away']) : 'N/A'; ?>
+                        </div>
+                        <?php if (isset($match['value_pct'])): ?>
+                        <div class="ph-value-badge" title="Diferencia ELO vs Polymarket">
+                            <?php
+                            $best_val = 0;
+                            $best_label = '';
+                            foreach (['home' => $home_team_display, 'draw' => __('Empate', 'partidos-hoy'), 'away' => $away_team_display] as $key => $label) {
+                                if (isset($match['value_pct'][$key]) && abs($match['value_pct'][$key]) > abs($best_val)) {
+                                    $best_val = $match['value_pct'][$key];
+                                    $best_label = $label;
+                                }
+                            }
+                            if (abs($best_val) >= 15):
+                                $dir = $best_val > 0 ? '▲' : '▼';
+                                $cls = $best_val > 0 ? 'ph-value-over' : 'ph-value-under';
+                            ?>
+                            <span class="ph-value-chip <?php echo $cls; ?>"><?php echo $dir . ' ' . esc_html($best_label) . ' ' . abs($best_val) . '%'; ?></span>
+                            <?php endif; ?>
+                        </div>
+                        <?php endif; ?>
                     </div>
                     <div class="ph-share">
                         <button type="button" class="ph-share-btn" data-home="<?php echo esc_attr($home_team); ?>" data-away="<?php echo esc_attr($away_team); ?>"><?php esc_html_e('Compartir', 'partidos-hoy'); ?></button>
@@ -277,8 +298,29 @@ class PH_Shortcode {
             </div>
 
             <div class="ph-card-footer">
-                <div class="ph-xg">
-                    xG: <?php echo isset($match['expected_goals']) ? esc_html($match['expected_goals']['home'] . ' - ' . $match['expected_goals']['away']) : 'N/A'; ?>
+                <div class="ph-footer-left">
+                    <div class="ph-xg">
+                        xG: <?php echo isset($match['expected_goals']) ? esc_html($match['expected_goals']['home'] . ' - ' . $match['expected_goals']['away']) : 'N/A'; ?>
+                    </div>
+                    <?php if (isset($match['value_pct'])): ?>
+                    <div class="ph-value-badge" title="Diferencia ELO vs Polymarket">
+                        <?php
+                        $best_val = 0;
+                        $best_label = '';
+                        foreach (['home' => $home_team_display, 'draw' => __('Empate', 'partidos-hoy'), 'away' => $away_team_display] as $key => $label) {
+                            if (isset($match['value_pct'][$key]) && abs($match['value_pct'][$key]) > abs($best_val)) {
+                                $best_val = $match['value_pct'][$key];
+                                $best_label = $label;
+                            }
+                        }
+                        if (abs($best_val) >= 15):
+                            $dir = $best_val > 0 ? '▲' : '▼';
+                            $cls = $best_val > 0 ? 'ph-value-over' : 'ph-value-under';
+                        ?>
+                        <span class="ph-value-chip <?php echo $cls; ?>"><?php echo $dir . ' ' . esc_html($best_label) . ' ' . abs($best_val) . '%'; ?></span>
+                        <?php endif; ?>
+                    </div>
+                    <?php endif; ?>
                 </div>
                 <div class="ph-share">
                     <button type="button" class="ph-share-btn" data-home="<?php echo esc_attr($home_team); ?>" data-away="<?php echo esc_attr($away_team); ?>"><?php esc_html_e('Compartir', 'partidos-hoy'); ?></button>

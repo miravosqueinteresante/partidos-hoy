@@ -1,6 +1,8 @@
 name: World Cup 2026 - Live Predictions
 
 on:
+  push:
+    branches: [main]
   schedule:
     - cron: "0 0,6,12,18 * 6 *"
     - cron: "0 0,6,12,18 * 7 *"
@@ -31,26 +33,21 @@ jobs:
         run: |
           python -m pytest tests/ -v --tb=short
 
-      - name: Generate predictions JSON (ELO-based)
+      - name: Generate predictions JSON with Polymarket value comparison
         run: |
+          python scripts/polymarket_value.py
           python -c "
           import json
-          import pandas as pd
-          from src.models.elo_predictor import EloPredictor
-
-          with open('data/fixtures_wc2026.json', encoding='utf-8') as f:
-              fixtures = json.load(f)
-          df = pd.DataFrame(fixtures)
-          predictor = EloPredictor('data/team_ratings.json')
-          output = predictor.generate(df)
-          with open('predictions/latest.json', 'w', encoding='utf-8') as f:
-              f.write(output)
-          parsed = json.loads(output)
-          print(f'World Cup predictions generated: {len(parsed[\"matches\"])} matches')
-          print(f'Model: {parsed[\"model\"]}')
+          with open('predictions/latest.json') as f:
+              parsed = json.load(f)
+          total_matches = len(parsed['matches'])
           total_preds = sum(1 for m in parsed['matches'] if m.get('model') == 'elo')
           total_tbd = sum(1 for m in parsed['matches'] if m.get('status') == 'TBD')
+          matched = sum(1 for m in parsed['matches'] if m.get('polymarket'))
+          print(f'World Cup predictions generated: {total_matches} matches')
+          print(f'Model: {parsed[\"model\"]}')
           print(f'Predictions: {total_preds}, TBD (knockout): {total_tbd}')
+          print(f'Polymarket comparison: {matched} matches')
           for m in parsed['matches'][:5]:
               if 'probabilities' in m:
                   p = m['probabilities']
