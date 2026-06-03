@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-03 04:24:47 UTC",
+  "generated_at": "2026-06-03 04:40:02 UTC",
   "model": "World Football Elo Ratings (eloratings.net)",
   "model_version": "1.0.0-elo",
   "notes": "Predicciones basadas en Elo ratings. Polymarket odds via gamma-api.polymarket.com.",
@@ -173,8 +173,16 @@
         "away": 1.25
       },
       "model": "elo",
-      "polymarket": null,
-      "value_pct": null
+      "polymarket": {
+        "home": 0.195,
+        "draw": 0.265,
+        "away": 0.545
+      },
+      "value_pct": {
+        "home": 73.1,
+        "draw": 1.2,
+        "away": -27.7
+      }
     },
     {
       "id": 7,
@@ -288,12 +296,12 @@
       "polymarket": {
         "home": 0.9405,
         "draw": 0.043,
-        "away": 0.018
+        "away": 0.0185
       },
       "value_pct": {
         "home": -17.3,
         "draw": 302.1,
-        "away": 171.1
+        "away": 163.8
       }
     },
     {
@@ -585,8 +593,16 @@
         "away": 0.63
       },
       "model": "elo",
-      "polymarket": null,
-      "value_pct": null
+      "polymarket": {
+        "home": 0.735,
+        "draw": 0.175,
+        "away": 0.095
+      },
+      "value_pct": {
+        "home": -19.8,
+        "draw": 51.1,
+        "away": 54.0
+      }
     },
     {
       "id": 21,
@@ -940,12 +956,12 @@
       "polymarket": {
         "home": 0.555,
         "draw": 0.245,
-        "away": 0.21
+        "away": 0.205
       },
       "value_pct": {
         "home": -25.4,
         "draw": 18.2,
-        "away": 41.2
+        "away": 44.6
       }
     },
     {
@@ -1057,8 +1073,16 @@
         "away": 1.63
       },
       "model": "elo",
-      "polymarket": null,
-      "value_pct": null
+      "polymarket": {
+        "home": 0.185,
+        "draw": 0.28,
+        "away": 0.545
+      },
+      "value_pct": {
+        "home": 13.4,
+        "draw": -17.0,
+        "away": 2.3
+      }
     },
     {
       "id": 37,
@@ -1651,12 +1675,12 @@
       "model": "elo",
       "polymarket": {
         "home": 0.185,
-        "draw": 0.245,
+        "draw": 0.24,
         "away": 0.595
       },
       "value_pct": {
         "home": 148.1,
-        "draw": 21.4,
+        "draw": 24.0,
         "away": -59.1
       }
     },
@@ -2100,13 +2124,13 @@
       },
       "model": "elo",
       "polymarket": {
-        "home": 0.29,
-        "draw": 0.28,
+        "home": 0.295,
+        "draw": 0.275,
         "away": 0.46
       },
       "value_pct": {
-        "home": 52.1,
-        "draw": 6.4,
+        "home": 49.5,
+        "draw": 8.3,
         "away": -43.2
       }
     },
@@ -2132,12 +2156,12 @@
       "polymarket": {
         "home": 0.38,
         "draw": 0.295,
-        "away": 0.34
+        "away": 0.345
       },
       "value_pct": {
         "home": -82.1,
         "draw": -42.4,
-        "away": 124.1
+        "away": 120.9
       }
     },
     {
@@ -3365,7 +3389,7 @@
       "K:the Democratic Republic of Congo": {
         "group": "K",
         "team": "the Democratic Republic of Congo",
-        "polymarket_price": 0.0445
+        "polymarket_price": 0.045
       },
       "K:Portugal": {
         "group": "K",

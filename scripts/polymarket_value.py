@@ -151,18 +151,18 @@ def extract_group_markets(events):
     return result
 
 def find_match(fixture, match_map):
-    home = TEAM_MAP_TO_POLY.get(fixture["home_team"], fixture["home_team"])
-    away = TEAM_MAP_TO_POLY.get(fixture["away_team"], fixture["away_team"])
-    fixture_date = fixture["date"]
+    home_raw = fixture.get("home_team")
+    away_raw = fixture.get("away_team")
+    if not home_raw or not away_raw:
+        return None
+    home = TEAM_MAP_TO_POLY.get(home_raw, home_raw)
+    away = TEAM_MAP_TO_POLY.get(away_raw, away_raw)
+    h = strip_accent(home).lower()
+    a = strip_accent(away).lower()
     candidates = []
     for slug, data in match_map.items():
-        slug_date = "-".join(slug.split("-")[-3:])
-        if slug_date != fixture_date:
-            continue
         dh = strip_accent(data["home_name"]).lower()
         da = strip_accent(data["away_name"]).lower()
-        h = strip_accent(home).lower()
-        a = strip_accent(away).lower()
         if (dh == h and da == a) or (dh == a and da == h):
             candidates.append((slug, data))
     if not candidates:
@@ -170,7 +170,7 @@ def find_match(fixture, match_map):
     if len(candidates) == 1:
         return candidates[0][1]
     for slug, data in candidates:
-        if strip_accent(data["home_name"]).lower() == strip_accent(home).lower():
+        if strip_accent(data["home_name"]).lower() == h:
             return data
     return candidates[0][1]
 
