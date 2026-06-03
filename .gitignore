@@ -12,3 +12,5 @@ mlruns/
 dist/
 build/
 wp-plugin/data/historical_wc_data.json
+KNOWLEDGE_BASE.md
+PLAN_IMPLEMENTACION.md
