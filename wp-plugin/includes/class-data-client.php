@@ -164,17 +164,16 @@ class PH_Data_Client {
             if (!preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}_[a-z_ ]+$/', $key_sanitized)) {
                 continue;
             }
-            if (!isset($data['home_goals']) || !isset($data['away_goals'])) {
+            if (!isset($data['home_goals']) || !isset($data['away_goals']) || $data['home_goals'] === '' || $data['away_goals'] === '') {
                 continue;
             }
-            $home = absint($data['home_goals']);
-            $away = absint($data['away_goals']);
-            if ($data['home_goals'] !== false && $data['away_goals'] !== false) {
-                $clean[$key_sanitized] = array(
-                    'home_goals' => $home,
-                    'away_goals' => $away,
-                );
+            if (!is_numeric($data['home_goals']) || !is_numeric($data['away_goals'])) {
+                continue;
             }
+            $clean[$key_sanitized] = array(
+                'home_goals' => absint($data['home_goals']),
+                'away_goals' => absint($data['away_goals']),
+            );
         }
         $existing = $this->get_match_results();
         $merged = array_merge($existing, $clean);
