@@ -16,3 +16,125 @@
     background: #fff;
     margin: 12px 0;
 }
+
+/* === Admin Results === */
+
+.ph-admin-stats {
+    background: #f0f6fc;
+    border: 1px solid #c3d9ff;
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin: 12px 0;
+}
+
+.ph-accuracy-main {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 8px 0;
+}
+
+.ph-accuracy-groups {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 8px 0;
+}
+
+.ph-group-stat {
+    background: #e3f2fd;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+}
+
+.ph-last-match {
+    margin: 8px 0 0;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.ph-admin-tabs {
+    margin: 16px 0 12px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+}
+
+.ph-tab {
+    display: inline-block;
+    padding: 8px 14px;
+    text-decoration: none;
+    color: #555;
+    background: #f1f1f1;
+    border: 1px solid #ccc;
+    border-bottom: none;
+    border-radius: 4px 4px 0 0;
+    font-size: 0.85rem;
+}
+
+.ph-tab:hover {
+    background: #e5e5e5;
+    color: #1a1a1a;
+}
+
+.ph-tab-active {
+    background: #fff;
+    color: #1a1a1a;
+    border-bottom: 1px solid #fff;
+    margin-bottom: -1px;
+    font-weight: 700;
+}
+
+.ph-results-table {
+    margin: 12px 0;
+}
+
+.ph-results-table th {
+    font-weight: 600;
+}
+
+.ph-row-complete {
+    background: #f0f8f0 !important;
+}
+
+.ph-col-prediction {
+    white-space: nowrap;
+}
+
+.ph-col-scores {
+    white-space: nowrap;
+}
+
+.ph-score-input {
+    width: 50px !important;
+    text-align: center;
+}
+
+.ph-score-sep {
+    margin: 0 4px;
+    font-weight: 700;
+}
+
+.ph-col-status {
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+@media (max-width: 782px) {
+    .ph-accuracy-groups {
+        flex-direction: column;
+        gap: 4px;
+    }
+    .ph-admin-tabs {
+        gap: 4px;
+    }
+    .ph-tab {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+    }
+    .ph-score-input {
+        width: 40px !important;
+    }
+}
