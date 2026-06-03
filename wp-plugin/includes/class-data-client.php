@@ -151,4 +151,33 @@ class PH_Data_Client {
     public function clear_cache() {
         delete_transient($this->cache_key);
     }
+
+    public function get_match_results(): array {
+        $results = get_option('ph_match_results', array());
+        return is_array($results) ? $results : array();
+    }
+
+    public function save_results(array $results): bool {
+        $clean = array();
+        foreach ($results as $key => $data) {
+            $key_sanitized = sanitize_text_field(strtolower($key));
+            if (!preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}_[a-z_ ]+$/', $key_sanitized)) {
+                continue;
+            }
+            if (!isset($data['home_goals']) || !isset($data['away_goals'])) {
+                continue;
+            }
+            $home = absint($data['home_goals']);
+            $away = absint($data['away_goals']);
+            if ($data['home_goals'] !== false && $data['away_goals'] !== false) {
+                $clean[$key_sanitized] = array(
+                    'home_goals' => $home,
+                    'away_goals' => $away,
+                );
+            }
+        }
+        $existing = $this->get_match_results();
+        $merged = array_merge($existing, $clean);
+        return update_option('ph_match_results', $merged);
+    }
 }
