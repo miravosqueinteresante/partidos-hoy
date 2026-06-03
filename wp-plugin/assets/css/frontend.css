@@ -522,3 +522,95 @@
     color: var(--ph-text-main);
     letter-spacing: 0.01em;
 }
+
+/* === Post-Match Results === */
+
+.ph-result-badge {
+    display: inline-block;
+    background: #e8f5e9;
+    color: #2e7d32;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-left: 8px;
+    vertical-align: middle;
+}
+
+.ph-score-display {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #1a1a2e;
+    margin: 0 12px;
+    letter-spacing: 0.05em;
+}
+
+.ph-accuracy-bar {
+    text-align: center;
+    padding: 10px 16px;
+    margin-bottom: 16px;
+    background: #f0f4ff;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #1a1a2e;
+}
+
+.ph-comparison-accordion {
+    border-top: 1px solid #e0e0e0;
+}
+
+.ph-comparison-content {
+    padding: 12px 16px;
+    font-size: 0.85rem;
+    line-height: 1.7;
+}
+
+.ph-comparison-prediction {
+    margin-bottom: 8px;
+}
+
+.ph-comparison-prediction strong,
+.ph-comparison-result strong {
+    display: inline-block;
+    margin-right: 6px;
+    color: #555;
+}
+
+.ph-comp-item {
+    padding: 2px 6px;
+    border-radius: 3px;
+}
+
+.ph-comp-actual {
+    background: #fff3e0;
+    font-weight: 700;
+    border-bottom: 2px solid #ff9800;
+}
+
+.ph-comp-sep {
+    color: #ccc;
+    margin: 0 4px;
+}
+
+.ph-comp-correct {
+    color: #2e7d32;
+    font-weight: 700;
+}
+
+.ph-comp-wrong {
+    color: #c62828;
+    font-weight: 700;
+}
+
+.ph-comp-uncertain {
+    color: #757575;
+    font-style: italic;
+}
+
+@media (max-width: 600px) {
+    .ph-score-display {
+        font-size: 1.1rem;
+        margin: 0 8px;
+    }
+}
