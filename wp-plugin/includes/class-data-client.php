@@ -179,4 +179,91 @@ class PH_Data_Client {
         $merged = array_merge($existing, $clean);
         return update_option('ph_match_results', $merged);
     }
+
+    public function calculate_accuracy(array $predictions): array {
+        $results = $this->get_match_results();
+        if (empty($results)) {
+            return array(
+                'total' => 0,
+                'correct' => 0,
+                'pct' => 0.0,
+                'groups' => array(),
+                'last_match' => null,
+            );
+        }
+
+        $stats = array(
+            'total' => 0,
+            'correct' => 0,
+            'groups' => array(),
+            'last_match' => null,
+        );
+
+        $last_date = '';
+
+        foreach ($predictions as $match) {
+            if (empty($match['probabilities'])) {
+                continue;
+            }
+            $home = $match['home'] ?? '';
+            $away = $match['away'] ?? '';
+            $date = isset($match['date']) ? substr($match['date'], 0, 10) : '';
+            $group = isset($match['group']) ? strtoupper($match['group']) : 'KO';
+            $key = strtolower($date . '_' . $home . '_' . $away);
+
+            if (!isset($results[$key])) {
+                continue;
+            }
+
+            $probs = $match['probabilities'];
+            $max_prob = max($probs);
+            $max_keys = array_keys($probs, $max_prob);
+
+            if (count($max_keys) > 1) {
+                continue;
+            }
+            $predicted = $max_keys[0];
+
+            $home_goals = $results[$key]['home_goals'];
+            $away_goals = $results[$key]['away_goals'];
+            $actual = $home_goals > $away_goals ? 'home' : ($away_goals > $home_goals ? 'away' : 'draw');
+            $correct = ($predicted === $actual);
+
+            $stats['total']++;
+            if ($correct) {
+                $stats['correct']++;
+            }
+
+            if (!isset($stats['groups'][$group])) {
+                $stats['groups'][$group] = array('total' => 0, 'correct' => 0);
+            }
+            $stats['groups'][$group]['total']++;
+            if ($correct) {
+                $stats['groups'][$group]['correct']++;
+            }
+
+            if ($date > $last_date) {
+                $last_date = $date;
+                $stats['last_match'] = array(
+                    'home' => $home,
+                    'away' => $away,
+                    'home_goals' => $home_goals,
+                    'away_goals' => $away_goals,
+                    'correct' => $correct,
+                );
+            }
+        }
+
+        $stats['pct'] = $stats['total'] > 0
+            ? round(($stats['correct'] / $stats['total']) * 100, 1)
+            : 0.0;
+
+        foreach ($stats['groups'] as $g => $data) {
+            $stats['groups'][$g]['pct'] = $data['total'] > 0
+                ? round(($data['correct'] / $data['total']) * 100, 1)
+                : 0.0;
+        }
+
+        return $stats;
+    }
 }
