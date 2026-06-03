@@ -37,6 +37,8 @@ class PH_Shortcode {
         }
 
         $matches = $this->data_client->get_matches_by_league($atts['league']);
+        $saved_results = $this->data_client->get_match_results();
+        $accuracy = $this->data_client->calculate_accuracy($matches);
 
         if (!empty($atts['group'])) {
             $matches = $this->data_client->get_matches_by_group($atts['group'], $matches);
@@ -72,6 +74,16 @@ class PH_Shortcode {
                 <button type="submit" class="ph-search-btn"><?php esc_html_e('Buscar', 'partidos-hoy'); ?></button>
             </form>
         </div>
+        <?php if ($accuracy['total'] > 0): ?>
+        <div class="ph-accuracy-bar">
+            <?php printf(
+                esc_html__('📊 Precisión de predicciones: %d/%d (%s%%)', 'partidos-hoy'),
+                $accuracy['correct'],
+                $accuracy['total'],
+                $accuracy['pct']
+            ); ?>
+        </div>
+        <?php endif; ?>
         <div class="ph-grid">
             <?php foreach ($matches_page as $match): ?>
             <?php
@@ -87,6 +99,10 @@ class PH_Shortcode {
                 $away_prob = isset($match['probabilities']['away']) ? $match['probabilities']['away'] : 0;
             ?>
             <div class="ph-card">
+                <?php
+                $result = $this->get_match_result($match, $saved_results);
+                $has_result = $result !== null;
+                ?>
                 <?php if ($formatted_date || $venue): ?>
                 <div class="ph-card-banner">
                     <?php if ($formatted_date): ?>
@@ -95,12 +111,21 @@ class PH_Shortcode {
                     <?php if ($venue && $venue !== 'TBD'): ?>
                         <span class="ph-banner-venue">📍 <?php echo esc_html($venue); ?></span>
                     <?php endif; ?>
+                    <?php if ($has_result): ?>
+                        <span class="ph-result-badge">✅ <?php esc_html_e('Finalizado', 'partidos-hoy'); ?></span>
+                    <?php endif; ?>
                 </div>
                 <?php endif; ?>
                 <div class="ph-card-header">
-                    <span class="ph-team ph-home"><?php echo $this->get_flag($home_team) . esc_html($home_team_display); ?></span>
-                    <span class="ph-vs">vs</span>
-                    <span class="ph-team ph-away"><?php echo $this->get_flag($away_team) . esc_html($away_team_display); ?></span>
+                    <?php if ($has_result): ?>
+                        <span class="ph-team ph-home"><?php echo $this->get_flag($home_team) . esc_html($home_team_display); ?></span>
+                        <span class="ph-score-display"><?php echo intval($result['home_goals']) . ' - ' . intval($result['away_goals']); ?></span>
+                        <span class="ph-team ph-away"><?php echo $this->get_flag($away_team) . esc_html($away_team_display); ?></span>
+                    <?php else: ?>
+                        <span class="ph-team ph-home"><?php echo $this->get_flag($home_team) . esc_html($home_team_display); ?></span>
+                        <span class="ph-vs">vs</span>
+                        <span class="ph-team ph-away"><?php echo $this->get_flag($away_team) . esc_html($away_team_display); ?></span>
+                    <?php endif; ?>
                 </div>
                 
                 <div class="ph-card-bars">
@@ -178,6 +203,9 @@ class PH_Shortcode {
                         <p class="ph-historical-loading"><?php esc_html_e('Cargando datos históricos...', 'partidos-hoy'); ?></p>
                     </div>
                 </details>
+                <?php if ($has_result): ?>
+                    <?php echo $this->render_comparison_accordion($match, $result); ?>
+                <?php endif; ?>
             </div>
 
             <script type="application/ld+json">
@@ -242,6 +270,7 @@ class PH_Shortcode {
         }
 
         $match = $this->data_client->get_single_match($atts['home'], $atts['away']);
+        $saved_results = $this->data_client->get_match_results();
         if (!$match) {
             return '<p>' . esc_html__('Partido no encontrado.', 'partidos-hoy') . '</p>';
         }
@@ -263,6 +292,10 @@ class PH_Shortcode {
         ob_start();
         ?>
         <div class="ph-single-card">
+            <?php
+            $result = $this->get_match_result($match, $saved_results);
+            $has_result = $result !== null;
+            ?>
             <?php if ($formatted_date || ($venue && $venue !== 'TBD')): ?>
             <div class="ph-card-banner">
                 <?php if ($formatted_date): ?>
@@ -271,12 +304,21 @@ class PH_Shortcode {
                 <?php if ($venue && $venue !== 'TBD'): ?>
                     <span class="ph-banner-venue">📍 <?php echo esc_html($venue); ?></span>
                 <?php endif; ?>
+                <?php if ($has_result): ?>
+                    <span class="ph-result-badge">✅ <?php esc_html_e('Finalizado', 'partidos-hoy'); ?></span>
+                <?php endif; ?>
             </div>
             <?php endif; ?>
             <div class="ph-card-header">
-                <span class="ph-team ph-home"><?php echo $this->get_flag($home_team) . esc_html($home_team_display); ?></span>
-                <span class="ph-vs">vs</span>
-                <span class="ph-team ph-away"><?php echo $this->get_flag($away_team) . esc_html($away_team_display); ?></span>
+                <?php if ($has_result): ?>
+                    <span class="ph-team ph-home"><?php echo $this->get_flag($home_team) . esc_html($home_team_display); ?></span>
+                    <span class="ph-score-display"><?php echo intval($result['home_goals']) . ' - ' . intval($result['away_goals']); ?></span>
+                    <span class="ph-team ph-away"><?php echo $this->get_flag($away_team) . esc_html($away_team_display); ?></span>
+                <?php else: ?>
+                    <span class="ph-team ph-home"><?php echo $this->get_flag($home_team) . esc_html($home_team_display); ?></span>
+                    <span class="ph-vs">vs</span>
+                    <span class="ph-team ph-away"><?php echo $this->get_flag($away_team) . esc_html($away_team_display); ?></span>
+                <?php endif; ?>
             </div>
             
             <div class="ph-card-bars">
@@ -354,6 +396,9 @@ class PH_Shortcode {
                     <p class="ph-historical-loading"><?php esc_html_e('Cargando datos históricos...', 'partidos-hoy'); ?></p>
                 </div>
             </details>
+            <?php if ($has_result): ?>
+                <?php echo $this->render_comparison_accordion($match, $result); ?>
+            <?php endif; ?>
         </div>
 
         <script type="application/ld+json">
@@ -404,6 +449,78 @@ class PH_Shortcode {
             'Portugal' => '🇵🇹', 'Congo DR' => '🇨🇩', 'Uzbekistan' => '🇺🇿', 'Colombia' => '🇨🇴'
         );
         return isset($flags[$team_name]) ? $flags[$team_name] . ' ' : '';
+    }
+
+    private function get_match_result(array $match, array $saved_results) {
+        $mid = isset($match['id']) ? intval($match['id']) : 0;
+        return ($mid > 0 && isset($saved_results[$mid])) ? $saved_results[$mid] : null;
+    }
+
+    private function render_comparison_accordion(array $match, array $result) {
+        $home = $match['home'] ?? '';
+        $away = $match['away'] ?? '';
+        $probs = $match['probabilities'] ?? array();
+
+        $home_goals = intval($result['home_goals']);
+        $away_goals = intval($result['away_goals']);
+
+        $max_prob = !empty($probs) ? max($probs) : 0;
+        $max_keys = !empty($probs) ? array_keys($probs, $max_prob) : array();
+        $predicted = (count($max_keys) === 1) ? $max_keys[0] : 'uncertain';
+
+        $actual = $home_goals > $away_goals ? 'home' : ($away_goals > $home_goals ? 'away' : 'draw');
+
+        if ($predicted === 'uncertain') {
+            $correct = null;
+        } else {
+            $correct = ($predicted === $actual);
+        }
+
+        $labels = array(
+            'home' => ph_translate_team($home),
+            'draw' => __('Empate', 'partidos-hoy'),
+            'away' => ph_translate_team($away),
+        );
+
+        ob_start();
+        ?>
+        <details class="ph-comparison-accordion">
+            <summary>📊 <?php esc_html_e('Resultado vs Predicción', 'partidos-hoy'); ?></summary>
+            <div class="ph-comparison-content">
+                <div class="ph-comparison-prediction">
+                    <strong><?php esc_html_e('Predicción:', 'partidos-hoy'); ?></strong>
+                    <?php foreach (array('home', 'draw', 'away') as $key):
+                        $pct = isset($probs[$key]) ? round(floatval($probs[$key]) * 100) : 0;
+                        $flag = $key === 'home' ? $this->get_flag($home) : ($key === 'away' ? $this->get_flag($away) : '');
+                    ?>
+                        <span class="ph-comp-item <?php echo $key === $actual ? 'ph-comp-actual' : ''; ?>">
+                            <?php echo $flag . esc_html($labels[$key]) . ' ' . $pct . '%'; ?>
+                        </span>
+                        <?php if ($key !== 'away'): ?>
+                            <span class="ph-comp-sep">|</span>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
+                <div class="ph-comparison-result">
+                    <strong><?php esc_html_e('Resultado:', 'partidos-hoy'); ?></strong>
+                    <?php printf('%d - %d', $home_goals, $away_goals); ?>
+                    →
+                    <?php if ($correct === true): ?>
+                        <span class="ph-comp-correct">✅ <?php esc_html_e('Acertado', 'partidos-hoy'); ?>
+                            (<?php printf(esc_html__('se pronosticó %s', 'partidos-hoy'), esc_html($labels[$predicted])); ?>)
+                        </span>
+                    <?php elseif ($correct === false): ?>
+                        <span class="ph-comp-wrong">❌ <?php esc_html_e('Falló', 'partidos-hoy'); ?>
+                            (<?php printf(esc_html__('se pronosticó %s', 'partidos-hoy'), esc_html($labels[$predicted])); ?>)
+                        </span>
+                    <?php else: ?>
+                        <span class="ph-comp-uncertain">🤷 <?php esc_html_e('Incierto (probabilidades empatadas)', 'partidos-hoy'); ?></span>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </details>
+        <?php
+        return ob_get_clean();
     }
 
     public function add_og_meta_tags() {
