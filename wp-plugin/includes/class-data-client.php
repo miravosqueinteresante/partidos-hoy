@@ -205,8 +205,8 @@ class PH_Data_Client {
             if (empty($match['probabilities'])) {
                 continue;
             }
-            $home = $match['home'] ?? '';
-            $away = $match['away'] ?? '';
+            $home = trim($match['home'] ?? '');
+            $away = trim($match['away'] ?? '');
             $date = isset($match['date']) ? substr($match['date'], 0, 10) : '';
             $group = isset($match['group']) ? strtoupper($match['group']) : 'KO';
             $key = strtolower($date . '_' . $home . '_' . $away);
@@ -242,7 +242,7 @@ class PH_Data_Client {
                 $stats['groups'][$group]['correct']++;
             }
 
-            if ($date > $last_date) {
+            if ($date >= $last_date) {
                 $last_date = $date;
                 $stats['last_match'] = array(
                     'home' => $home,
