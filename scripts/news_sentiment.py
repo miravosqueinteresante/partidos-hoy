@@ -50,7 +50,7 @@ def generate_summary_with_groq(home, away, context, sources):
 
     prompt = f"""Eres un analista deportivo experto. Basándote en estas noticias recientes sobre {home} vs {away} en el Mundial 2026, genera un resumen de exactamente 3 oraciones en español sobre:
 - Novedades de cada selección (plantel, concentración, amistosos)
-- Jugadores convocados o lesionados
+- Jugadores importantes y lesionados
 - Preparación y expectativas
 No menciones resultados del partido si aún no se jugó.
 
@@ -137,9 +137,9 @@ def get_news_sentiment(home_team, away_team):
 
     try:
         queries = [
-            f"{home_team} World Cup 2026 squad preparation",
-            f"{away_team} World Cup 2026 squad preparation",
-            f"{home_team} vs {away_team} World Cup 2026",
+            f"{home_team} World Cup 2026 squad news 2026",
+            f"{away_team} World Cup 2026 squad news 2026",
+            f"{home_team} vs {away_team} World Cup 2026 preview",
         ]
 
         sources = []
@@ -185,11 +185,15 @@ def update_predictions_with_news(latest_json_path, max_new_matches=None, date_fr
     Guarda un cache en data/news_cache.json para evitar re-procesar partidos.
     """
     cache_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data', 'news_cache.json')
+    processed_ids = set()
     if os.path.exists(cache_path):
-        with open(cache_path, 'r', encoding='utf-8') as f:
-            processed_ids = set(json.load(f))
-    else:
-        processed_ids = set()
+        cache_age = time.time() - os.path.getmtime(cache_path)
+        if cache_age < 86400:
+            with open(cache_path, 'r', encoding='utf-8') as f:
+                processed_ids = set(json.load(f))
+            logging.info(f"📦 Cache cargado ({len(processed_ids)} IDs, {int(cache_age/3600)}h de antigüedad)")
+        else:
+            logging.info(f"♻️ Cache expirado ({int(cache_age/3600)}h > 24h). Reprocesando todos los partidos...")
 
     with open(latest_json_path, 'r', encoding='utf-8') as f:
         data = json.load(f)

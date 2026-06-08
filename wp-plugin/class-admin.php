@@ -34,7 +34,7 @@ class PH_Admin {
         if ($hook !== 'settings_page_partidos-hoy') {
             return;
         }
-        wp_enqueue_style('ph-admin', PH_PLUGIN_URL . 'assets/css/admin.css', array(), PH_VERSION);
+        wp_enqueue_style('ph-admin', PH_PLUGIN_URL . 'admin.css', array(), PH_VERSION);
     }
 
     public function handle_save_results() {
@@ -294,6 +294,51 @@ class PH_Admin {
                 </table>
                 <?php submit_button(); ?>
             </form>
+
+            <hr />
+            <h2><?php esc_html_e('Shortcodes disponibles', 'partidos-hoy'); ?></h2>
+            <table class="wp-list-table widefat fixed striped">
+                <thead>
+                    <tr>
+                        <th style="width:22%"><?php esc_html_e('Shortcode', 'partidos-hoy'); ?></th>
+                        <th style="width:30%"><?php esc_html_e('Descripción', 'partidos-hoy'); ?></th>
+                        <th><?php esc_html_e('Parámetros y ejemplos', 'partidos-hoy'); ?></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>[partidos-hoy]</code></td>
+                        <td><?php esc_html_e('Grilla completa de tarjetas de predicción con filtros y paginación.', 'partidos-hoy'); ?></td>
+                        <td>
+                            <strong><?php esc_html_e('Parámetros:', 'partidos-hoy'); ?></strong><br>
+                            <code>league</code> — <?php esc_html_e('liga (default: todas)', 'partidos-hoy'); ?><br>
+                            <code>limit</code> — <?php esc_html_e('tarjetas por página (default: 20)', 'partidos-hoy'); ?><br>
+                            <code>group</code> — <?php esc_html_e('filtrar por grupo (A-H)', 'partidos-hoy'); ?><br>
+                            <code>date</code> — <?php esc_html_e('filtrar por fecha (YYYY-MM-DD)', 'partidos-hoy'); ?><br>
+                            <code>team</code> — <?php esc_html_e('filtrar por equipo (inglés)', 'partidos-hoy'); ?><br>
+                            <code>search</code> — <?php esc_html_e('búsqueda por texto', 'partidos-hoy'); ?><br>
+                            <code>page</code> — <?php esc_html_e('página inicial (default: 1)', 'partidos-hoy'); ?><br><br>
+                            <strong><?php esc_html_e('Ejemplos:', 'partidos-hoy'); ?></strong><br>
+                            <code>[partidos-hoy]</code> — <?php esc_html_e('todas las tarjetas', 'partidos-hoy'); ?><br>
+                            <code>[partidos-hoy group="A"]</code> — <?php esc_html_e('solo Grupo A', 'partidos-hoy'); ?><br>
+                            <code>[partidos-hoy team="Argentina"]</code> — <?php esc_html_e('partidos de Argentina', 'partidos-hoy'); ?><br>
+                            <code>[partidos-hoy date="2026-06-11" limit="10"]</code> — <?php esc_html_e('partidos del 11/6, 10 por página', 'partidos-hoy'); ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>[predicciones_partido]</code></td>
+                        <td><?php esc_html_e('Tarjeta individual para un partido específico. Ideal para páginas dedicadas con OG meta tags.', 'partidos-hoy'); ?></td>
+                        <td>
+                            <strong><?php esc_html_e('Parámetros:', 'partidos-hoy'); ?></strong><br>
+                            <code>home</code> — <?php esc_html_e('equipo local (obligatorio, en inglés)', 'partidos-hoy'); ?><br>
+                            <code>away</code> — <?php esc_html_e('equipo visitante (obligatorio, en inglés)', 'partidos-hoy'); ?><br><br>
+                            <strong><?php esc_html_e('Ejemplos:', 'partidos-hoy'); ?></strong><br>
+                            <code>[predicciones_partido home="Argentina" away="Brazil"]</code> — <?php esc_html_e('tarjeta Argentina vs Brasil', 'partidos-hoy'); ?><br>
+                            <code>[predicciones_partido home="Mexico" away="USA"]</code> — <?php esc_html_e('tarjeta México vs USA', 'partidos-hoy'); ?>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
 
             <hr />
             <h2><?php esc_html_e('Caché', 'partidos-hoy'); ?></h2>

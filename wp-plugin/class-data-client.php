@@ -124,8 +124,12 @@ class PH_Data_Client {
             $matches = isset($data['matches']) ? $data['matches'] : array();
         }
         return array_values(array_filter($matches, function($m) use ($team) {
-            return (isset($m['home']) && strcasecmp($m['home'], $team) === 0) ||
-                   (isset($m['away']) && strcasecmp($m['away'], $team) === 0);
+            $home_en = isset($m['home']) ? $m['home'] : '';
+            $away_en = isset($m['away']) ? $m['away'] : '';
+            return strcasecmp($home_en, $team) === 0 ||
+                   strcasecmp($away_en, $team) === 0 ||
+                   strcasecmp(ph_translate_team($home_en), $team) === 0 ||
+                   strcasecmp(ph_translate_team($away_en), $team) === 0;
         }));
     }
 
@@ -139,8 +143,14 @@ class PH_Data_Client {
             return $matches;
         }
         return array_values(array_filter($matches, function($m) use ($query) {
-            return (isset($m['home']) && stripos($m['home'], $query) !== false) ||
-                   (isset($m['away']) && stripos($m['away'], $query) !== false);
+            $home_en = isset($m['home']) ? $m['home'] : '';
+            $away_en = isset($m['away']) ? $m['away'] : '';
+            $home_es = ph_translate_team($home_en);
+            $away_es = ph_translate_team($away_en);
+            return stripos($home_en, $query) !== false ||
+                   stripos($away_en, $query) !== false ||
+                   stripos($home_es, $query) !== false ||
+                   stripos($away_es, $query) !== false;
         }));
     }
 

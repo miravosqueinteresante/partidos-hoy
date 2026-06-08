@@ -14,8 +14,7 @@ class PH_Shortcode {
     }
 
     public function enqueue_styles() {
-        wp_enqueue_style('ph-frontend', PH_PLUGIN_URL . 'assets/css/frontend.css',
-                          array(), PH_VERSION);
+        wp_enqueue_style('ph-frontend', PH_PLUGIN_URL . 'frontend.css', array(), PH_VERSION);
     }
 
     public function render($atts) {
@@ -40,16 +39,17 @@ class PH_Shortcode {
         $saved_results = $this->data_client->get_match_results();
         $accuracy = $this->data_client->calculate_accuracy($matches);
 
-        if (!empty($atts['group'])) {
+        $is_searching = !empty($atts['search']);
+        if (!empty($atts['group']) && !$is_searching) {
             $matches = $this->data_client->get_matches_by_group($atts['group'], $matches);
         }
-        if (!empty($atts['date'])) {
+        if (!empty($atts['date']) && !$is_searching) {
             $matches = $this->data_client->get_matches_by_date($atts['date'], $matches);
         }
-        if (!empty($atts['team'])) {
+        if (!empty($atts['team']) && !$is_searching) {
             $matches = $this->data_client->get_matches_by_team($atts['team'], $matches);
         }
-        if (!empty($atts['search'])) {
+        if ($is_searching) {
             $matches = $this->data_client->search_matches($atts['search'], $matches);
         }
 

@@ -18,9 +18,9 @@ define('PH_VERSION', '1.0.0');
 define('PH_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('PH_PLUGIN_URL', plugin_dir_url(__FILE__));
 
-require_once PH_PLUGIN_DIR . 'includes/class-data-client.php';
-require_once PH_PLUGIN_DIR . 'includes/class-shortcode.php';
-require_once PH_PLUGIN_DIR . 'includes/class-admin.php';
+require_once PH_PLUGIN_DIR . 'class-data-client.php';
+require_once PH_PLUGIN_DIR . 'class-shortcode.php';
+require_once PH_PLUGIN_DIR . 'class-admin.php';
 
 function ph_init() {
     load_plugin_textdomain('partidos-hoy', false, dirname(plugin_basename(__FILE__)) . '/languages');
@@ -169,7 +169,7 @@ function ph_ajax_historical() {
     $all_matches = get_transient($cache_key);
 
     if (false === $all_matches) {
-        $json_path = PH_PLUGIN_DIR . 'data/historical_wc_data.json';
+        $json_path = PH_PLUGIN_DIR . 'historical_wc_data.json';
         if (!file_exists($json_path)) {
             wp_send_json_error(array('message' => 'Datos históricos no disponibles'));
         }
