@@ -186,6 +186,7 @@ def update_predictions_with_news(latest_json_path, max_new_matches=None, date_fr
     """
     cache_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data', 'news_cache.json')
     processed_ids = set()
+    cache_expired = False
     if os.path.exists(cache_path):
         cache_age = time.time() - os.path.getmtime(cache_path)
         if cache_age < 86400:
@@ -193,23 +194,38 @@ def update_predictions_with_news(latest_json_path, max_new_matches=None, date_fr
                 processed_ids = set(json.load(f))
             logging.info(f"📦 Cache cargado ({len(processed_ids)} IDs, {int(cache_age/3600)}h de antigüedad)")
         else:
+            cache_expired = True
             logging.info(f"♻️ Cache expirado ({int(cache_age/3600)}h > 24h). Reprocesando todos los partidos...")
 
     with open(latest_json_path, 'r', encoding='utf-8') as f:
         data = json.load(f)
 
     matches = data.get("matches", [])
+
+    if cache_expired:
+        for m in matches:
+            m.pop("news_sentiment", None)
+            m.pop("news_sources", None)
+        logging.info("🧹 news_sentiment eliminado de todos los partidos por cache expirado")
+
     valid_matches = [
         m for m in matches
-        if m.get("home") and m.get("away") and not m.get("news_sentiment")
+        if m.get("home") and m.get("away")
         and m.get("id") not in processed_ids
     ]
 
     if date_from:
         valid_matches = [m for m in valid_matches if m.get("date", "") >= date_from]
 
+    import random
+    seed = int(time.time())
+    rng = random.Random(seed)
+    rng.shuffle(valid_matches)
+
     if max_new_matches:
         valid_matches = valid_matches[:max_new_matches]
+
+    valid_matches.sort(key=lambda m: m.get("date", ""))
 
     updated_count = 0
     for i, match in enumerate(valid_matches):
