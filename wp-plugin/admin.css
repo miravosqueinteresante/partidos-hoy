@@ -1,29 +1,37 @@
+:root {
+    --ph-green: #22c957;
+    --ph-green-dark: #169d42;
+    --ph-red: #f05252;
+    --ph-yellow: #f4c34d;
+    --ph-blue: #48a7ff;
+    --ph-radius: 8px;
+}
+
 .ph-admin-wrap {
     max-width: 800px;
 }
 
 .ph-admin-section {
     margin-bottom: 24px;
-    padding: 16px;
+    padding: 20px;
     background: #fff;
-    border: 1px solid #ccd0d4;
-    border-radius: 4px;
+    border: 1px solid #dcdcde;
+    border-radius: var(--ph-radius);
 }
 
 .ph-notice {
-    padding: 10px 12px;
-    border-left: 4px solid #46b450;
-    background: #fff;
+    padding: 12px 14px;
+    border-left: 4px solid var(--ph-green);
+    background: #f0f8f0;
+    color: #1d2327;
     margin: 12px 0;
 }
 
-/* === Admin Results === */
-
 .ph-admin-stats {
-    background: #f0f6fc;
-    border: 1px solid #c3d9ff;
+    background: #f0f8f0;
+    border: 1px solid #c3e6cb;
     border-radius: 6px;
-    padding: 12px 16px;
+    padding: 14px 18px;
     margin: 12px 0;
 }
 
@@ -31,6 +39,7 @@
     font-size: 1.1rem;
     font-weight: 700;
     margin: 8px 0;
+    color: #1d2327;
 }
 
 .ph-accuracy-groups {
@@ -41,10 +50,12 @@
 }
 
 .ph-group-stat {
-    background: #e3f2fd;
+    background: #e8f5e9;
+    color: #2e7d32;
     padding: 4px 10px;
     border-radius: 4px;
     font-size: 0.85rem;
+    font-weight: 600;
 }
 
 .ph-last-match {
@@ -55,7 +66,7 @@
 
 .ph-admin-tabs {
     margin: 16px 0 12px;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #c3c4c7;
     padding-bottom: 0;
     display: flex;
     flex-wrap: wrap;
@@ -67,8 +78,8 @@
     padding: 8px 14px;
     text-decoration: none;
     color: #555;
-    background: #f1f1f1;
-    border: 1px solid #ccc;
+    background: #f0f0f1;
+    border: 1px solid #c3c4c7;
     border-bottom: none;
     border-radius: 4px 4px 0 0;
     font-size: 0.85rem;
@@ -76,12 +87,12 @@
 
 .ph-tab:hover {
     background: #e5e5e5;
-    color: #1a1a1a;
+    color: #1d2327;
 }
 
 .ph-tab-active {
     background: #fff;
-    color: #1a1a1a;
+    color: #1d2327;
     border-bottom: 1px solid #fff;
     margin-bottom: -1px;
     font-weight: 700;
@@ -89,37 +100,62 @@
 
 .ph-results-table {
     margin: 12px 0;
+    width: 100%;
+    border-collapse: collapse;
 }
 
 .ph-results-table th {
     font-weight: 600;
+    text-align: left;
+    padding: 8px 6px;
+    border-bottom: 1px solid #c3c4c7;
+    color: #555;
+}
+
+.ph-results-table td {
+    padding: 8px 6px;
+    border-bottom: 1px solid #e5e5e5;
+    color: #1d2327;
 }
 
 .ph-row-complete {
     background: #f0f8f0 !important;
 }
 
-.ph-col-prediction {
+.ph-results-table .ph-col-prediction {
+    white-space: nowrap;
+    color: #1d2327;
+}
+
+.ph-results-table .ph-col-scores {
     white-space: nowrap;
 }
 
-.ph-col-scores {
-    white-space: nowrap;
-}
-
-.ph-score-input {
+.ph-results-table .ph-score-input {
     width: 50px !important;
     text-align: center;
+    color: #1d2327;
+    background: #fff;
 }
 
-.ph-score-sep {
+.ph-results-table .ph-score-input::placeholder {
+    color: #8c8f94;
+}
+
+.ph-results-table .ph-score-sep {
     margin: 0 4px;
     font-weight: 700;
+    color: #555;
 }
 
-.ph-col-status {
+.ph-results-table .ph-col-match {
+    color: #1d2327;
+}
+
+.ph-results-table .ph-col-status {
     text-align: center;
     font-size: 1.1rem;
+    color: #1d2327;
 }
 
 @media (max-width: 782px) {
