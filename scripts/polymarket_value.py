@@ -253,6 +253,22 @@ def main():
 
         matches_out.append(match_entry)
 
+    # Preserve news_sentiment from previous run so it accumulates across pipeline runs
+    if os.path.exists(OUTPUT_PATH):
+        try:
+            with open(OUTPUT_PATH, 'r', encoding='utf-8') as f:
+                old_data = json.load(f)
+            old_by_id = {m.get("id"): m for m in old_data.get("matches", []) if m.get("id")}
+            for m in matches_out:
+                mid = m.get("id")
+                if mid is not None and mid in old_by_id:
+                    old = old_by_id[mid]
+                    if old.get("news_sentiment"):
+                        m["news_sentiment"] = old["news_sentiment"]
+                        m["news_sources"] = old.get("news_sources", [])
+        except Exception as e:
+            print(f"Warning: could not preserve news_sentiment: {e}")
+
     tournament_out = {}
     for poly_name, poly_price in sorted(tournament_poly.items()):
         cleaned = strip_accent(poly_name)

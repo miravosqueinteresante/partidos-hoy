@@ -212,20 +212,16 @@ def update_predictions_with_news(latest_json_path, max_new_matches=None, date_fr
         m for m in matches
         if m.get("home") and m.get("away")
         and m.get("id") not in processed_ids
+        and not m.get("news_sentiment")
     ]
 
     if date_from:
         valid_matches = [m for m in valid_matches if m.get("date", "") >= date_from]
 
-    import random
-    seed = int(time.time())
-    rng = random.Random(seed)
-    rng.shuffle(valid_matches)
+    valid_matches.sort(key=lambda m: m.get("date", ""))
 
     if max_new_matches:
         valid_matches = valid_matches[:max_new_matches]
-
-    valid_matches.sort(key=lambda m: m.get("date", ""))
 
     updated_count = 0
     for i, match in enumerate(valid_matches):
