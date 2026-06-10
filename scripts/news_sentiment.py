@@ -115,6 +115,32 @@ def tavily_search(client, query, max_results=5):
     return []
 
 
+def generate_fallback_summary(home_team, away_team, context_parts):
+    titles = []
+    for part in context_parts:
+        if ". " in part:
+            after_bracket = part.split("] ", 1)[1] if "] " in part else part
+            title = after_bracket.split(". ")[0].strip()
+            if title and len(title) > 10 and title not in titles:
+                titles.append(title)
+    if titles:
+        home_title = ""
+        away_title = ""
+        for t in titles[:4]:
+            if home_team.lower() in t.lower() and not home_title:
+                home_title = t
+            elif away_team.lower() in t.lower() and not away_title:
+                away_title = t
+        parts = []
+        if home_title:
+            parts.append(home_title[:120])
+        if away_title:
+            parts.append(away_title[:120])
+        if parts:
+            return "Últimas noticias: " + ". ".join(parts) + "."
+    return None
+
+
 def get_news_sentiment(home_team, away_team):
     """
     Busca noticias con Tavily usando 3 queries complementarias:
@@ -170,8 +196,11 @@ def get_news_sentiment(home_team, away_team):
         if groq_result:
             return groq_result
 
-        summary = f"Noticias sobre {home_team} vs {away_team}: {context[:500]}..."
-        return {"news_sentiment": summary, "news_sources": sources[:5] if sources else []}
+        summary = generate_fallback_summary(home_team, away_team, context_parts)
+        if summary:
+            return {"news_sentiment": summary, "news_sources": sources[:3] if sources else []}
+
+        return None
 
     except Exception as e:
         logging.error(f"Error buscando noticias con Tavily: {e}")
