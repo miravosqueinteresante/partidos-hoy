@@ -19,9 +19,36 @@ class PH_Data_Client {
     public function get_predictions() {
         $cached = get_transient($this->cache_key);
         if ($cached !== false && !empty($cached['matches'])) {
+            $auto_check = get_transient($this->cache_key . '_check');
+            if ($auto_check === false || $auto_check < time() - 900) {
+                set_transient($this->cache_key . '_check', time(), 3600);
+                $remote_ts = $this->fetch_generated_at();
+                if ($remote_ts && (!isset($cached['generated_at']) || $remote_ts !== $cached['generated_at'])) {
+                    delete_transient($this->cache_key);
+                    return $this->fetch_predictions();
+                }
+            }
             return $cached;
         }
         return $this->fetch_predictions();
+    }
+
+    private function fetch_generated_at() {
+        $urls = array($this->predictions_url, $this->fallback_url);
+        foreach ($urls as $url) {
+            $response = wp_remote_get($url, array(
+                'timeout' => 8,
+                'headers' => array('Range' => 'bytes=0-500'),
+            ));
+            if (is_wp_error($response)) continue;
+            $code = wp_remote_retrieve_response_code($response);
+            if (!in_array($code, array(200, 206))) continue;
+            $body = wp_remote_retrieve_body($response);
+            if (preg_match('/"generated_at"\s*:\s*"([^"]+)"/', $body, $m)) {
+                return $m[1];
+            }
+        }
+        return null;
     }
 
     private function fetch_predictions() {
