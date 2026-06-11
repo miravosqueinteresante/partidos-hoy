@@ -65,13 +65,11 @@ jobs:
                   print(f'  TBD ({m[\"stage\"]}) - {m[\"date\"]}')
           "
 
-      - name: Enrich predictions with news sentiment (Tavily + Groq)
+      - name: Enrich predictions with news sentiment (DuckDuckGo + Groq)
         env:
-          TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
         run: |
-          echo "=== API Keys ==="
-          if [ -n "$TAVILY_API_KEY" ]; then echo "TAVILY_API_KEY: SET"; else echo "TAVILY_API_KEY: NOT SET"; fi
+          echo "=== Diagnostic ==="
           if [ -n "$GROQ_API_KEY" ]; then echo "GROQ_API_KEY: SET"; else echo "GROQ_API_KEY: NOT SET"; fi
           if [ -f predictions/latest.json ]; then
             head -3 predictions/latest.json | grep generated_at

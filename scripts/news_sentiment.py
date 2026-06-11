@@ -1,10 +1,10 @@
 """
 news_sentiment.py — Módulo de Análisis de Sentimiento de Noticias
-Usa Tavily (búsqueda web, 1000 searches/mes gratis) + Groq (resúmenes con Llama 3.3 70B, 30 req/min gratis)
+Usa DuckDuckGo (búsqueda web gratuita, sin API key) + Groq (resúmenes con Llama 3.3 70B, 30 req/min gratis)
 para investigar noticias recientes de cada partido y generar un resumen.
 
 Seguridad:
-- La API key se lee de variable de entorno TAVILY_API_KEY
+- La API key de Groq se lee de variable de entorno GROQ_API_KEY
 - En local: se carga desde .env (gitignored)
 - En GitHub Actions: se carga desde GitHub Secrets
 """
@@ -106,13 +106,14 @@ Reglas estrictas:
     return None
 
 
-def tavily_search(client, query, max_results=5):
+def ddg_search(query, max_results=6):
     try:
-        result = client.search(query=query, max_results=max_results, search_depth="basic")
-        if result and 'results' in result:
-            return result['results']
+        from duckduckgo_search import DDGS
+        with DDGS() as ddgs:
+            results = list(ddgs.text(query, max_results=max_results))
+        return results
     except Exception as e:
-        logging.warning(f"Tavily falló para query '{query}': {e}")
+        logging.warning(f"DuckDuckGo falló para query '{query}': {e}")
     return []
 
 
@@ -142,38 +143,29 @@ def generate_fallback_summary(home_team, away_team, context_parts):
     return None
 
 
-def get_news_sentiment(home_team, away_team):
+def get_news_sentiment(home_team, away_team, max_retries=2):
     """
-    Busca noticias con Tavily usando 3 queries complementarias:
-    1. Equipo local + Mundial 2026 (preparación, plantel)
-    2. Equipo visitante + Mundial 2026
-    3. El enfrentamiento específico
+    Busca noticias con DuckDuckGo usando una query combinada.
+    Luego resume con Groq (Llama 3.3 70B) o fallback estructurado.
     """
     try:
-        from tavily import TavilyClient
+        from duckduckgo_search import DDGS
     except ImportError:
-        logging.error("Librería tavily-python no instalada. Ejecuta: pip install tavily-python")
+        logging.error("duckduckgo_search no instalada. Ejecuta: pip install duckduckgo-search")
         return None
-
-    tavily_key = os.environ.get("TAVILY_API_KEY")
-    if not tavily_key:
-        logging.error("TAVILY_API_KEY no encontrada en variables de entorno.")
-        return None
-
-    client = TavilyClient(api_key=tavily_key)
 
     try:
-        query = f"{home_team} vs {away_team} World Cup 2026 squad preparation news"
+        query = f"{home_team} vs {away_team} World Cup 2026"
 
         sources = []
         context_parts = []
         seen_urls = set()
 
-        results = tavily_search(client, query, max_results=6)
+        results = ddg_search(query, max_results=6)
         for r in results:
-            url = r.get('url', '')
+            url = r.get('href', '')
             title = r.get('title', '')
-            content = r.get('content', '')[:600]
+            content = r.get('body', '')[:600]
             if url and url not in seen_urls and 'example.com' not in url:
                 seen_urls.add(url)
                 sources.append(url)
