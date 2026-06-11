@@ -32,9 +32,9 @@ jobs:
       - name: Download previous predictions and cache
         run: |
           mkdir -p predictions data
-          curl -sL -o predictions/latest.json \
+          curl -sLf -o predictions/latest.json \
             "https://raw.githubusercontent.com/miravosqueinteresante/partidos-hoy/gh-pages/latest.json" || true
-          curl -sL -o data/news_cache.json \
+          curl -sLf -o data/news_cache.json \
             "https://raw.githubusercontent.com/miravosqueinteresante/partidos-hoy/gh-pages/data/news_cache.json" || true
 
       - name: Run tests
@@ -102,8 +102,8 @@ jobs:
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
           git checkout --orphan gh-pages 2>/dev/null || git checkout gh-pages
           cp -r predictions/latest.json .
-          cp -r data/news_cache.json data/ 2>/dev/null || true
-          git add latest.json data/news_cache.json 2>/dev/null || git add latest.json
+          git add latest.json
+          git add -f data/news_cache.json 2>/dev/null || true
           git diff --cached --quiet || git commit -m 'deploy: worldcup predictions $(date +%Y-%m-%d_%H:%M)'
           git push origin gh-pages --force
 
