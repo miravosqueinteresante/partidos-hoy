@@ -265,7 +265,8 @@ def main():
                     old = old_by_id[mid]
                     if old.get("news_sentiment"):
                         m["news_sentiment"] = old["news_sentiment"]
-                        m["news_sources"] = old.get("news_sources", [])
+                        old_sources = old.get("news_sources", [])
+                        m["news_sources"] = [s for s in old_sources if 'example.com' not in s]
         except Exception as e:
             print(f"Warning: could not preserve news_sentiment: {e}")
 

@@ -281,6 +281,14 @@ def update_predictions_with_news(latest_json_path, max_new_matches=None, date_fr
 
     matches = data.get("matches", [])
 
+    # Clean hallucinated URLs from previous Groq responses
+    for m in matches:
+        if m.get("news_sources"):
+            m["news_sources"] = [s for s in m["news_sources"] if 'example.com' not in s]
+        if m.get("news_sources") == []:
+            m.pop("news_sentiment", None)
+            m.pop("news_sources", None)
+
     if cache_expired:
         for m in matches:
             m.pop("news_sentiment", None)
