@@ -70,6 +70,12 @@ jobs:
           TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
         run: |
+          echo "=== API Keys ==="
+          if [ -n "$TAVILY_API_KEY" ]; then echo "TAVILY_API_KEY: SET"; else echo "TAVILY_API_KEY: NOT SET"; fi
+          if [ -n "$GROQ_API_KEY" ]; then echo "GROQ_API_KEY: SET"; else echo "GROQ_API_KEY: NOT SET"; fi
+          if [ -f predictions/latest.json ]; then
+            head -3 predictions/latest.json | grep generated_at
+          fi
           # Calcular date_from según la fecha actual (UTC)
           CURRENT_DATE=$(date -u +%Y-%m-%d)
           if [[ "$CURRENT_DATE" < "2026-06-14" ]]; then
@@ -87,6 +93,8 @@ jobs:
           fi
           echo "Fecha de inicio: $DATE_FROM"
           python -m scripts.news_sentiment 8 "$DATE_FROM"
+          echo "=== Post-Enrichment ==="
+          grep -c '"news_sentiment"' predictions/latest.json && echo "matches have news" || echo "no news_sentiment found"
           echo "News sentiment enrichment complete"
 
       - name: Deploy to gh-pages
