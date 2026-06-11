@@ -78,8 +78,8 @@ jobs:
         run: |
           # Diagnostics: check API keys (without revealing them)
           echo "=== API Key Diagnostics ==="
-          if [ -n "$TAVILY_API_KEY" ]; then echo "TAVILY_API_KEY: ✅ SET (length ${#TAVILY_API_KEY})"; else echo "TAVILY_API_KEY: ❌ NOT SET"; fi
-          if [ -n "$GROQ_API_KEY" ]; then echo "GROQ_API_KEY: ✅ SET (length ${#GROQ_API_KEY})"; else echo "GROQ_API_KEY: ❌ NOT SET"; fi
+          if [ -n "$TAVILY_API_KEY" ]; then echo "TAVILY_API_KEY: SET (length ${#TAVILY_API_KEY})"; else echo "TAVILY_API_KEY: NOT SET"; fi
+          if [ -n "$GROQ_API_KEY" ]; then echo "GROQ_API_KEY: SET (length ${#GROQ_API_KEY})"; else echo "GROQ_API_KEY: NOT SET"; fi
           echo "=== Cache files available ==="
           ls -la data/news_cache.json 2>/dev/null || echo "data/news_cache.json: not found"
           ls -la predictions/latest.json 2>/dev/null || echo "predictions/latest.json: not found"
