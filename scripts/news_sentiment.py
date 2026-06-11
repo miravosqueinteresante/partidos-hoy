@@ -15,6 +15,7 @@ import logging
 import sys
 import re
 import time
+from datetime import datetime
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -162,29 +163,22 @@ def get_news_sentiment(home_team, away_team):
     client = TavilyClient(api_key=tavily_key)
 
     try:
-        queries = [
-            f"{home_team} World Cup 2026 squad news 2026",
-            f"{away_team} World Cup 2026 squad news 2026",
-            f"{home_team} vs {away_team} World Cup 2026 preview",
-        ]
+        query = f"{home_team} vs {away_team} World Cup 2026 squad preparation news"
 
         sources = []
         context_parts = []
         seen_urls = set()
 
-        for q in queries:
-            results = tavily_search(client, q, max_results=4)
-            for r in results:
-                url = r.get('url', '')
-                title = r.get('title', '')
-                content = r.get('content', '')[:600]
-                if url and url not in seen_urls and 'example.com' not in url:
-                    seen_urls.add(url)
-                    sources.append(url)
-                    if title and content:
-                        context_parts.append(f"[{home_team if queries.index(q) < 2 else 'Partido'}] {title}. {content}")
-
-            time.sleep(0.3)
+        results = tavily_search(client, query, max_results=6)
+        for r in results:
+            url = r.get('url', '')
+            title = r.get('title', '')
+            content = r.get('content', '')[:600]
+            if url and url not in seen_urls and 'example.com' not in url:
+                seen_urls.add(url)
+                sources.append(url)
+                if title and content:
+                    context_parts.append(f"[Partido] {title}. {content}")
 
         if not context_parts:
             logging.warning(f"No se encontraron resultados para {home_team} vs {away_team}")
@@ -217,14 +211,20 @@ def update_predictions_with_news(latest_json_path, max_new_matches=None, date_fr
     processed_ids = set()
     cache_expired = False
     if os.path.exists(cache_path):
-        cache_age = time.time() - os.path.getmtime(cache_path)
-        if cache_age < 86400:
+        try:
             with open(cache_path, 'r', encoding='utf-8') as f:
-                processed_ids = set(json.load(f))
-            logging.info(f"📦 Cache cargado ({len(processed_ids)} IDs, {int(cache_age/3600)}h de antigüedad)")
-        else:
-            cache_expired = True
-            logging.info(f"♻️ Cache expirado ({int(cache_age/3600)}h > 24h). Reprocesando todos los partidos...")
+                cache_data = json.load(f)
+            cached_at = cache_data.get("cached_at", "2000-01-01T00:00:00")
+            cache_ts = datetime.strptime(cached_at, "%Y-%m-%dT%H:%M:%S").timestamp()
+            cache_age = time.time() - cache_ts
+            if cache_age < 86400:
+                processed_ids = set(cache_data.get("processed_ids", []))
+                logging.info(f"📦 Cache cargado ({len(processed_ids)} IDs, {int(cache_age/3600)}h de antigüedad)")
+            else:
+                cache_expired = True
+                logging.info(f"♻️ Cache expirado ({int(cache_age/3600)}h > 24h). Reprocesando todos los partidos...")
+        except (json.JSONDecodeError, ValueError, KeyError) as e:
+            logging.warning(f"⚠️ Cache corrupto ({e}), empezando fresco")
 
     with open(latest_json_path, 'r', encoding='utf-8') as f:
         data = json.load(f)
@@ -276,7 +276,7 @@ def update_predictions_with_news(latest_json_path, max_new_matches=None, date_fr
             processed_ids.add(match_id)
             os.makedirs(os.path.dirname(cache_path), exist_ok=True)
             with open(cache_path, 'w', encoding='utf-8') as f:
-                json.dump(list(processed_ids), f)
+                json.dump({"cached_at": datetime.now().strftime("%Y-%m-%dT%H:%M:%S"), "processed_ids": list(processed_ids)}, f)
 
     with open(latest_json_path, 'w', encoding='utf-8') as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
