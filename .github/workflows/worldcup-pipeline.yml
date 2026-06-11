@@ -29,20 +29,6 @@ jobs:
         run: |
           pip install -r requirements.txt
 
-      - name: Download previous predictions and cache (for news_sentiment accumulation)
-        run: |
-          mkdir -p predictions data
-          echo "=== Downloading previous latest.json from gh-pages ==="
-          curl -sL -o predictions/latest.json \
-            "https://raw.githubusercontent.com/miravosqueinteresante/partidos-hoy/gh-pages/latest.json" && \
-            echo "OK: previous latest.json restored" || \
-            rm -f predictions/latest.json && echo "WARN: no previous latest.json, starting fresh"
-          echo "=== Downloading previous news cache from gh-pages ==="
-          curl -sL -o data/news_cache.json \
-            "https://raw.githubusercontent.com/miravosqueinteresante/partidos-hoy/gh-pages/data/news_cache.json" && \
-            echo "OK: previous cache restored" || \
-            echo "WARN: no previous cache, starting fresh"
-
       - name: Run tests
         run: |
           python -m pytest tests/ -v --tb=short
@@ -76,24 +62,6 @@ jobs:
           TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
         run: |
-          # Diagnostics: check API keys (without revealing them)
-          echo "=== API Key Diagnostics ==="
-          if [ -n "$TAVILY_API_KEY" ]; then echo "TAVILY_API_KEY: SET (length ${#TAVILY_API_KEY})"; else echo "TAVILY_API_KEY: NOT SET"; fi
-          if [ -n "$GROQ_API_KEY" ]; then echo "GROQ_API_KEY: SET (length ${#GROQ_API_KEY})"; else echo "GROQ_API_KEY: NOT SET"; fi
-          echo "=== Cache files available ==="
-          ls -la data/news_cache.json 2>/dev/null || echo "data/news_cache.json: not found"
-          ls -la predictions/latest.json 2>/dev/null || echo "predictions/latest.json: not found"
-          if [ -f predictions/latest.json ]; then
-            echo "News in JSON before enrichment:"
-            python3 -c "
-import json
-d = json.load(open('predictions/latest.json'))
-ns = sum(1 for m in d.get('matches',[]) if m.get('news_sentiment'))
-print(f'  {ns}/{len(d.get(\"matches\",[]))} matches have news_sentiment')
-print(f'  generated_at: {d.get(\"generated_at\",\"?\")}')
-"
-          fi
-
           # Calcular date_from según la fecha actual (UTC)
           CURRENT_DATE=$(date -u +%Y-%m-%d)
           if [[ "$CURRENT_DATE" < "2026-06-14" ]]; then
@@ -111,15 +79,6 @@ print(f'  generated_at: {d.get(\"generated_at\",\"?\")}')
           fi
           echo "Fecha de inicio: $DATE_FROM"
           python -m scripts.news_sentiment 8 "$DATE_FROM"
-
-          # Post-enrichment diagnostics
-          echo "=== Post-Enrichment Results ==="
-          python3 -c "
-import json
-d = json.load(open('predictions/latest.json'))
-ns = sum(1 for m in d.get('matches',[]) if m.get('news_sentiment'))
-print(f'News: {ns}/{len(d.get(\"matches\",[]))} matches have news_sentiment')
-"
           echo "News sentiment enrichment complete"
 
       - name: Deploy to gh-pages
@@ -129,9 +88,8 @@ print(f'News: {ns}/{len(d.get(\"matches\",[]))} matches have news_sentiment')
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
           git checkout --orphan gh-pages 2>/dev/null || git checkout gh-pages
           cp -r predictions/latest.json .
-          cp -r data/news_cache.json data/ 2>/dev/null || true
-          git add latest.json data/news_cache.json 2>/dev/null || git add latest.json
-          git diff --cached --quiet || git commit -m 'deploy: worldcup predictions $(date +%Y-%m-%d_%H:%M)'
+          git add latest.json
+          git commit -m 'deploy: worldcup predictions $(date +%Y-%m-%d_%H:%M)'
           git push origin gh-pages --force
 
       # Healthchecks.io — ping de éxito/fallo (OPCIONAL)
