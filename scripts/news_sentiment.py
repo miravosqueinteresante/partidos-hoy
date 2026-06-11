@@ -96,7 +96,7 @@ Reglas estrictas:
 
         if "news_sentiment" in result:
             news_sentiment = result["news_sentiment"]
-            news_sources = result.get("news_sources", sources[:2])
+            news_sources = sources[:2]
             logging.info(f"✅ Resumen generado con Groq para {home} vs {away}")
             return {"news_sentiment": news_sentiment, "news_sources": news_sources}
 
