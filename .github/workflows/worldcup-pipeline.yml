@@ -34,12 +34,12 @@ jobs:
           mkdir -p predictions data
           echo "=== Downloading previous latest.json from gh-pages ==="
           curl -sL -o predictions/latest.json \
-            "https://raw.githubusercontent.com/${{ github.repository }}/gh-pages/latest.json" && \
+            "https://raw.githubusercontent.com/miravosqueinteresante/partidos-hoy/gh-pages/latest.json" && \
             echo "OK: previous latest.json restored" || \
             rm -f predictions/latest.json && echo "WARN: no previous latest.json, starting fresh"
           echo "=== Downloading previous news cache from gh-pages ==="
           curl -sL -o data/news_cache.json \
-            "https://raw.githubusercontent.com/${{ github.repository }}/gh-pages/data/news_cache.json" && \
+            "https://raw.githubusercontent.com/miravosqueinteresante/partidos-hoy/gh-pages/data/news_cache.json" && \
             echo "OK: previous cache restored" || \
             echo "WARN: no previous cache, starting fresh"
 
