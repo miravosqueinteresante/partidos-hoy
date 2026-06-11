@@ -107,11 +107,75 @@ Reglas estrictas:
 
 
 def ddg_search(query, max_results=6):
+    """
+    Busca en DuckDuckGo usando requests + BeautifulSoup (incluido en la mayoría de entornos).
+    Si BeautifulSoup no está, usa regex simple.
+    """
     try:
-        from duckduckgo_search import DDGS
-        with DDGS() as ddgs:
-            results = list(ddgs.text(query, max_results=max_results))
+        import requests
+        from urllib.parse import urlencode, urlparse, parse_qs
+
+        headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                          "(KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36",
+            "Accept": "text/html,application/xhtml+xml",
+        }
+
+        resp = requests.get(
+            "https://html.duckduckgo.com/html/",
+            params={"q": query},
+            headers=headers,
+            timeout=12,
+        )
+        resp.raise_for_status()
+
+        # Parse results - try BeautifulSoup first, fall back to regex
+        results = []
+        try:
+            from bs4 import BeautifulSoup
+            soup = BeautifulSoup(resp.text, "html.parser")
+            for article in soup.select(".result"):
+                title_el = article.select_one(".result__a")
+                snippet_el = article.select_one(".result__snippet")
+                if title_el:
+                    href = title_el.get("href", "")
+                    # DDG uses redirect URLs, extract actual URL
+                    if "uddg=" in href:
+                        from urllib.parse import parse_qs, urlparse
+                        parsed = urlparse(href)
+                        qs = parse_qs(parsed.query)
+                        href = qs.get("uddg", [href])[0]
+                    title = title_el.get_text(strip=True)
+                    body = snippet_el.get_text(strip=True) if snippet_el else ""
+                    if href and title:
+                        results.append({"href": href, "title": title, "body": body})
+        except ImportError:
+            # Fallback: simple regex extraction
+            import re
+            blocks = re.findall(
+                r'<a rel="nofollow" class="result__a" href="([^"]+)".*?>(.*?)</a>',
+                resp.text, re.DOTALL
+            )
+            for href, title_html in blocks[:max_results]:
+                title = re.sub(r'<[^>]+>', '', title_html).strip()
+                if href and title:
+                    results.append({"href": href, "title": title, "body": ""})
+            # Also extract snippets
+            snippets = re.findall(
+                r'<a class="result__snippet"[^>]*href="([^"]+)".*?>(.*?)</a>',
+                resp.text, re.DOTALL
+            )
+            snippet_map = {}
+            for href, body_html in snippets:
+                body = re.sub(r'<[^>]+>', '', body_html).strip()
+                snippet_map[href] = body
+            for r in results:
+                r["body"] = snippet_map.get(r["href"], "")
+
+        results = results[:max_results]
+        logging.info(f"DDG: {len(results)} resultados para '{query[:50]}...'")
         return results
+
     except Exception as e:
         logging.warning(f"DuckDuckGo falló para query '{query}': {e}")
     return []
@@ -148,12 +212,6 @@ def get_news_sentiment(home_team, away_team, max_retries=2):
     Busca noticias con DuckDuckGo usando una query combinada.
     Luego resume con Groq (Llama 3.3 70B) o fallback estructurado.
     """
-    try:
-        from duckduckgo_search import DDGS
-    except ImportError:
-        logging.error("duckduckgo_search no instalada. Ejecuta: pip install duckduckgo-search")
-        return None
-
     try:
         query = f"{home_team} vs {away_team} World Cup 2026"
 
