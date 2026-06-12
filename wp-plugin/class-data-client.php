@@ -116,6 +116,8 @@ class PH_Data_Client {
         if (empty($matches['matches'])) {
             return null;
         }
+        $home_team = ph_translate_team($home_team);
+        $away_team = ph_translate_team($away_team);
         foreach ($matches['matches'] as $match) {
             if (strcasecmp($match['home'], $home_team) === 0 &&
                 strcasecmp($match['away'], $away_team) === 0) {
