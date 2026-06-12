@@ -118,9 +118,12 @@ class PH_Data_Client {
         }
         $home_team = ph_translate_team($home_team);
         $away_team = ph_translate_team($away_team);
+        $home_variants = ph_get_team_variants($home_team);
+        $away_variants = ph_get_team_variants($away_team);
         foreach ($matches['matches'] as $match) {
-            if (strcasecmp($match['home'], $home_team) === 0 &&
-                strcasecmp($match['away'], $away_team) === 0) {
+            $mh_v = ph_get_team_variants($match['home']);
+            $ma_v = ph_get_team_variants($match['away']);
+            if (array_intersect($home_variants, $mh_v) && array_intersect($away_variants, $ma_v)) {
                 return $match;
             }
         }
@@ -193,7 +196,11 @@ class PH_Data_Client {
 
     public function get_match_results(): array {
         $results = get_option('ph_match_results', array());
-        return is_array($results) ? $results : array();
+        if (!is_array($results) || isset($results[0])) {
+            delete_option('ph_match_results');
+            return array();
+        }
+        return $results;
     }
 
     public function save_results(array $results): bool {
@@ -215,8 +222,10 @@ class PH_Data_Client {
             );
         }
         $existing = $this->get_match_results();
-        $merged = array_merge($existing, $clean);
-        return update_option('ph_match_results', $merged);
+        foreach ($clean as $id => $data) {
+            $existing[$id] = $data;
+        }
+        return update_option('ph_match_results', $existing);
     }
 
     public function calculate_accuracy(array $predictions): array {
