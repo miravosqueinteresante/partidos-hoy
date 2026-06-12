@@ -74,14 +74,12 @@ class PH_Admin {
                 if ($id <= 0) {
                     continue;
                 }
-                $home_goals = isset($data['home_goals']) && $data['home_goals'] !== '' ? absint($data['home_goals']) : null;
-                $away_goals = isset($data['away_goals']) && $data['away_goals'] !== '' ? absint($data['away_goals']) : null;
-                if ($home_goals !== null && $away_goals !== null) {
-                    $results[$id] = array(
-                        'home_goals' => $home_goals,
-                        'away_goals' => $away_goals,
-                    );
-                }
+                $home_goals = isset($data['home_goals']) && $data['home_goals'] !== '' ? absint($data['home_goals']) : 0;
+                $away_goals = isset($data['away_goals']) && $data['away_goals'] !== '' ? absint($data['away_goals']) : 0;
+                $results[$id] = array(
+                    'home_goals' => $home_goals,
+                    'away_goals' => $away_goals,
+                );
             }
         }
 
