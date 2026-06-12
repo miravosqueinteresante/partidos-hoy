@@ -11,6 +11,7 @@ class PH_Admin {
         add_action('admin_menu', array($this, 'add_admin_menu'));
         add_action('admin_init', array($this, 'register_settings'));
         add_action('admin_init', array($this, 'handle_save_results'));
+        add_action('admin_init', array($this, 'handle_clear_results'));
         add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_styles'));
     }
 
@@ -35,6 +36,24 @@ class PH_Admin {
             return;
         }
         wp_enqueue_style('ph-admin', PH_PLUGIN_URL . 'admin.css', array(), PH_VERSION);
+    }
+
+    public function handle_clear_results() {
+        if (!isset($_POST['ph_action']) || $_POST['ph_action'] !== 'clear_results') {
+            return;
+        }
+        if (!isset($_POST['ph_clear_nonce']) || !wp_verify_nonce($_POST['ph_clear_nonce'], 'ph_clear_results')) {
+            return;
+        }
+        if (!current_user_can('manage_options')) {
+            return;
+        }
+        delete_option('ph_match_results');
+        add_action('admin_notices', function() {
+            echo '<div class="notice notice-success"><p>' .
+                 esc_html__('Todos los resultados fueron eliminados. Podés cargarlos de nuevo desde cero.', 'partidos-hoy') .
+                 '</p></div>';
+        });
     }
 
     public function handle_save_results() {
@@ -171,6 +190,14 @@ class PH_Admin {
                 <?php else: ?>
                     <p><?php esc_html_e('No hay resultados cargados todavía. Los resultados aparecerán aquí a medida que los ingreses.', 'partidos-hoy'); ?></p>
                 <?php endif; ?>
+                <form method="post" action="" style="margin-top:12px">
+                    <?php wp_nonce_field('ph_clear_results', 'ph_clear_nonce'); ?>
+                    <input type="hidden" name="ph_action" value="clear_results" />
+                    <button type="submit" class="button button-secondary"
+                        onclick="return confirm('<?php esc_attr_e('¿Borrar todos los resultados cargados? Esta acción no se puede deshacer.', 'partidos-hoy'); ?>')">
+                        <?php esc_html_e('Borrar todos los resultados', 'partidos-hoy'); ?>
+                    </button>
+                </form>
             </div>
 
             <hr />
