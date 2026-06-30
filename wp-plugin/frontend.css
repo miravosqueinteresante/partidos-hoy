@@ -1,23 +1,23 @@
-/* wp-plugin/frontend.css */
+/* wp-plugin/frontend.css — dark theme matching partidoshoy.futbol */
 :root {
-    --ph-bg-card: rgba(255, 255, 255, 0.95);
-    --ph-border-card: rgba(0, 0, 0, 0.08);
-    --ph-shadow-card: 0 2px 12px 0 rgba(31, 38, 135, 0.08);
-    --ph-text-main: #1e293b;
-    --ph-text-muted: #64748b;
-    --ph-text-light: #94a3b8;
+    --ph-bg-card: rgba(15, 28, 41, 0.88);
+    --ph-border-card: rgba(196, 214, 228, 0.12);
+    --ph-shadow-card: 0 20px 50px rgba(0, 0, 0, 0.28);
+    --ph-text-main: #f5f8fb;
+    --ph-text-muted: #a8b6c4;
+    --ph-text-light: #728294;
 
-    --ph-color-home: #3b82f6;
-    --ph-color-draw: #94a3b8;
-    --ph-color-away: #ef4444;
-    --ph-color-home-bg: #eff6ff;
-    --ph-color-draw-bg: #f8fafc;
-    --ph-color-away-bg: #fef2f2;
+    --ph-color-home: #22c957;
+    --ph-color-draw: #f4c34d;
+    --ph-color-away: #f05252;
+    --ph-color-home-bg: rgba(34, 201, 87, 0.10);
+    --ph-color-draw-bg: rgba(244, 195, 77, 0.10);
+    --ph-color-away-bg: rgba(240, 82, 82, 0.10);
+
+    --ph-font: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --ph-radius-card: 16px;
 }
 
-/* =============================================
-   Grid Layout
-   ============================================= */
 .ph-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -33,26 +33,25 @@
     .ph-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
-/* =============================================
-   Card Shell
-   ============================================= */
 .ph-card,
 .ph-single-card {
     background: var(--ph-bg-card);
     border: 1px solid var(--ph-border-card);
-    border-radius: 16px;
+    border-radius: var(--ph-radius-card);
     box-shadow: var(--ph-shadow-card);
     color: var(--ph-text-main);
     display: flex;
     flex-direction: column;
     overflow: hidden;
     transition: transform 0.25s ease, box-shadow 0.25s ease;
+    font-family: var(--ph-font);
+    backdrop-filter: blur(4px);
 }
 
 .ph-card:hover,
 .ph-single-card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 28px 0 rgba(31, 38, 135, 0.14);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
 }
 
 .ph-single-card {
@@ -60,27 +59,21 @@
     margin: 28px auto;
 }
 
-/* =============================================
-   Banner (date + venue)
-   ============================================= */
 .ph-card-banner {
-    background: #1e3a5f;
+    background: #132231;
     padding: 10px 20px;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 20px;
     font-size: 0.78rem;
-    color: rgba(255, 255, 255, 0.92);
+    color: #a8b6c4;
     font-weight: 500;
     letter-spacing: 0.03em;
     flex-wrap: wrap;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(196, 214, 228, 0.08);
 }
 
-/* =============================================
-   Card Header (teams)
-   ============================================= */
 .ph-card-header {
     display: flex;
     align-items: center;
@@ -98,6 +91,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     text-align: center;
+    color: #f5f8fb;
 }
 
 .ph-team.ph-home { text-align: right; padding-right: 8px; }
@@ -113,9 +107,6 @@
     flex: 0 0 auto;
 }
 
-/* =============================================
-   Probability Bars
-   ============================================= */
 .ph-card-bars {
     display: flex;
     flex-direction: column;
@@ -125,7 +116,7 @@
 
 .ph-bar-container {
     height: 34px;
-    background: rgba(0, 0, 0, 0.04);
+    background: rgba(0, 0, 0, 0.25);
     border-radius: 8px;
     overflow: hidden;
     position: relative;
@@ -136,10 +127,10 @@
     display: flex;
     align-items: center;
     padding: 0 14px;
-    color: white;
+    color: #fff;
     font-weight: 700;
     font-size: 0.85rem;
-    font-family: "Courier New", monospace;
+    font-family: 'Courier New', monospace;
     transition: width 0.9s cubic-bezier(0.22, 1, 0.36, 1);
     border-radius: 8px;
     letter-spacing: 0.02em;
@@ -148,13 +139,10 @@
     justify-content: flex-start;
 }
 
-.ph-bar-home  { background: linear-gradient(90deg, #1d4ed8, var(--ph-color-home)); }
-.ph-bar-draw  { background: linear-gradient(90deg, #64748b, var(--ph-color-draw)); }
-.ph-bar-away  { background: linear-gradient(90deg, #b91c1c, var(--ph-color-away)); }
+.ph-bar-home  { background: linear-gradient(90deg, #16a848, #22c957); }
+.ph-bar-draw  { background: linear-gradient(90deg, #d9a128, #f4c34d); }
+.ph-bar-away  { background: linear-gradient(90deg, #d03131, #f05252); }
 
-/* =============================================
-   Card Footer (xG + Share)
-   ============================================= */
 .ph-card-footer {
     margin-top: auto;
     display: flex;
@@ -162,7 +150,7 @@
     align-items: center;
     font-size: 0.8rem;
     color: var(--ph-text-muted);
-    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    border-top: 1px solid rgba(196, 214, 228, 0.1);
     padding: 10px 20px;
     letter-spacing: 0.01em;
 }
@@ -193,22 +181,19 @@
 }
 
 .ph-value-over {
-    background: rgba(34, 197, 94, 0.12);
-    color: #16a34a;
-    border: 1px solid rgba(34, 197, 94, 0.25);
+    background: rgba(34, 201, 87, 0.15);
+    color: #22c957;
+    border: 1px solid rgba(34, 201, 87, 0.3);
 }
 
 .ph-value-under {
-    background: rgba(239, 68, 68, 0.1);
-    color: #dc2626;
-    border: 1px solid rgba(239, 68, 68, 0.2);
+    background: rgba(240, 82, 82, 0.12);
+    color: #f05252;
+    border: 1px solid rgba(240, 82, 82, 0.25);
 }
 
-/* =============================================
-   News Accordion
-   ============================================= */
 .ph-news-accordion {
-    border-top: 1px solid rgba(0, 0, 0, 0.07);
+    border-top: 1px solid rgba(196, 214, 228, 0.1);
     margin-top: 0;
 }
 
@@ -231,7 +216,7 @@
 .ph-news-accordion summary:hover { color: var(--ph-text-main); }
 
 .ph-news-accordion summary::after {
-    content: '▾';
+    content: '\25BE';
     margin-left: auto;
     transition: transform 0.2s ease;
     font-size: 0.85rem;
@@ -249,7 +234,7 @@
     font-size: 0.82rem;
     line-height: 1.65;
     color: var(--ph-text-main);
-    border-left: 3px solid var(--ph-color-home);
+    border-left: 3px solid #22c957;
     padding-left: 12px;
     margin: 0 0 14px;
 }
@@ -266,27 +251,24 @@
     gap: 5px;
     font-size: 0.72rem;
     font-weight: 600;
-    background: rgba(59, 130, 246, 0.07);
-    border: 1px solid rgba(59, 130, 246, 0.2);
+    background: rgba(72, 167, 255, 0.08);
+    border: 1px solid rgba(72, 167, 255, 0.2);
     padding: 5px 12px;
     border-radius: 20px;
     text-decoration: none;
-    color: #2563eb;
+    color: #48a7ff;
     transition: all 0.2s ease;
     letter-spacing: 0.01em;
 }
 
-.ph-source-chip::before { content: '🔗'; font-size: 0.68rem; }
+.ph-source-chip::before { content: '\1F517'; font-size: 0.68rem; }
 
 .ph-source-chip:hover {
-    background: rgba(59, 130, 246, 0.14);
-    border-color: rgba(59, 130, 246, 0.4);
+    background: rgba(72, 167, 255, 0.16);
+    border-color: rgba(72, 167, 255, 0.4);
     transform: translateY(-1px);
 }
 
-/* =============================================
-   Footer + Utilities
-   ============================================= */
 .ph-footer-info {
     text-align: center;
     font-size: 0.78rem;
@@ -300,9 +282,6 @@
     to   { opacity: 1; transform: translateY(0); }
 }
 
-/* =============================================
-   Search
-   ============================================= */
 .ph-search-container {
     margin: 20px 0;
 }
@@ -316,28 +295,34 @@
 .ph-search-input {
     flex: 1;
     padding: 10px 14px;
-    border: 1px solid var(--ph-border-card);
+    border: 1px solid rgba(196, 214, 228, 0.15);
     border-radius: 8px;
     font-size: 0.9rem;
-    background: var(--ph-bg-card);
-    color: var(--ph-text-main);
+    font-family: var(--ph-font);
+    background: rgba(15, 28, 41, 0.88);
+    color: #f5f8fb;
     outline: none;
     transition: border-color 0.2s ease;
 }
 
+.ph-search-input::placeholder {
+    color: #728294;
+}
+
 .ph-search-input:focus {
-    border-color: var(--ph-color-home);
+    border-color: #22c957;
 }
 
 .ph-search-btn {
     padding: 10px 18px;
-    background: var(--ph-color-home);
-    color: #fff;
+    background: #22c957;
+    color: #061017;
     border: none;
     border-radius: 8px;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
     font-size: 0.85rem;
+    font-family: var(--ph-font);
     transition: opacity 0.2s ease;
 }
 
@@ -345,9 +330,6 @@
     opacity: 0.85;
 }
 
-/* =============================================
-   Pagination
-   ============================================= */
 .ph-pagination {
     display: flex;
     flex-direction: column;
@@ -375,34 +357,32 @@
     min-width: 36px;
     height: 36px;
     padding: 0 10px;
-    border: 1px solid var(--ph-border-card);
+    border: 1px solid rgba(196, 214, 228, 0.12);
     border-radius: 8px;
-    background: var(--ph-bg-card);
-    color: var(--ph-text-main);
+    background: rgba(15, 28, 41, 0.88);
+    color: #f5f8fb;
     font-size: 0.85rem;
     font-weight: 600;
+    font-family: var(--ph-font);
     text-decoration: none;
     transition: all 0.2s ease;
 }
 
 .ph-page-link:hover {
-    border-color: var(--ph-color-home);
-    color: var(--ph-color-home);
+    border-color: #22c957;
+    color: #22c957;
 }
 
 .ph-page-active {
-    background: var(--ph-color-home);
-    border-color: var(--ph-color-home);
-    color: #fff;
+    background: #22c957;
+    border-color: #22c957;
+    color: #061017;
 }
 
 .ph-page-active:hover {
-    color: #fff;
+    color: #061017;
 }
 
-/* =============================================
-   Share (inside footer)
-   ============================================= */
 .ph-share {
     display: flex;
     flex-direction: column;
@@ -412,20 +392,21 @@
 
 .ph-share-btn {
     background: none;
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(196, 214, 228, 0.15);
     border-radius: 6px;
     padding: 4px 12px;
     font-size: 0.72rem;
     font-weight: 600;
     color: var(--ph-text-muted);
     cursor: pointer;
+    font-family: var(--ph-font);
     letter-spacing: 0.02em;
     transition: all 0.2s ease;
 }
 
 .ph-share-btn:hover {
-    border-color: var(--ph-color-home);
-    color: var(--ph-color-home);
+    border-color: #22c957;
+    color: #22c957;
 }
 
 .ph-share-fallback {
@@ -444,6 +425,7 @@
     cursor: pointer;
     border: none;
     letter-spacing: 0.01em;
+    font-family: var(--ph-font);
     transition: all 0.2s ease;
 }
 
@@ -460,16 +442,13 @@
 .ph-share-x:hover { opacity: 0.8; }
 
 .ph-share-copy {
-    background: rgba(0, 0, 0, 0.06);
-    color: var(--ph-text-main);
+    background: rgba(255, 255, 255, 0.08);
+    color: #f5f8fb;
 }
-.ph-share-copy:hover { background: rgba(0, 0, 0, 0.12); }
+.ph-share-copy:hover { background: rgba(255, 255, 255, 0.14); }
 
-/* =============================================
-   Historical Accordion
-   ============================================= */
 .ph-historical-accordion {
-    border-top: 1px solid rgba(0, 0, 0, 0.07);
+    border-top: 1px solid rgba(196, 214, 228, 0.1);
     margin-top: 0;
 }
 
@@ -494,7 +473,7 @@
 }
 
 .ph-historical-accordion summary::after {
-    content: '▾';
+    content: '\25BE';
     margin-left: auto;
     transition: transform 0.2s ease;
     font-size: 0.85rem;
@@ -523,12 +502,10 @@
     letter-spacing: 0.01em;
 }
 
-/* === Post-Match Results === */
-
 .ph-result-badge {
     display: inline-block;
-    background: #e8f5e9;
-    color: #2e7d32;
+    background: rgba(34, 201, 87, 0.15);
+    color: #22c957;
     font-size: 0.75rem;
     font-weight: 700;
     padding: 2px 8px;
@@ -540,7 +517,7 @@
 .ph-score-display {
     font-size: 1.3rem;
     font-weight: 800;
-    color: #1a1a2e;
+    color: #f5f8fb;
     margin: 0 12px;
     letter-spacing: 0.05em;
 }
@@ -549,15 +526,49 @@
     text-align: center;
     padding: 10px 16px;
     margin-bottom: 16px;
-    background: #f0f4ff;
+    background: rgba(34, 201, 87, 0.08);
     border-radius: 8px;
     font-size: 0.95rem;
     font-weight: 600;
-    color: #1a1a2e;
+    color: #f5f8fb;
+    border: 1px solid rgba(34, 201, 87, 0.15);
 }
 
 .ph-comparison-accordion {
-    border-top: 1px solid #e0e0e0;
+    border-top: 1px solid rgba(196, 214, 228, 0.1);
+    margin-top: 0;
+}
+
+.ph-comparison-accordion summary {
+    list-style: none;
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+    color: var(--ph-text-muted);
+    outline: none;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    letter-spacing: 0.03em;
+    padding: 14px 20px;
+    transition: color 0.2s ease;
+}
+
+.ph-comparison-accordion summary:hover {
+    color: var(--ph-text-main);
+}
+
+.ph-comparison-accordion summary::after {
+    content: '\25BE';
+    margin-left: auto;
+    transition: transform 0.2s ease;
+    font-size: 0.85rem;
+    color: var(--ph-text-light);
+}
+
+.ph-comparison-accordion[open] summary::after {
+    transform: rotate(-180deg);
 }
 
 .ph-comparison-content {
@@ -574,7 +585,7 @@
 .ph-comparison-result strong {
     display: inline-block;
     margin-right: 6px;
-    color: #555;
+    color: #a8b6c4;
 }
 
 .ph-comp-item {
@@ -583,28 +594,28 @@
 }
 
 .ph-comp-actual {
-    background: #fff3e0;
+    background: rgba(244, 195, 77, 0.12);
     font-weight: 700;
-    border-bottom: 2px solid #ff9800;
+    border-bottom: 2px solid #f4c34d;
 }
 
 .ph-comp-sep {
-    color: #ccc;
+    color: #4a5a6a;
     margin: 0 4px;
 }
 
 .ph-comp-correct {
-    color: #2e7d32;
+    color: #22c957;
     font-weight: 700;
 }
 
 .ph-comp-wrong {
-    color: #c62828;
+    color: #f05252;
     font-weight: 700;
 }
 
 .ph-comp-uncertain {
-    color: #757575;
+    color: #728294;
     font-style: italic;
 }
 
@@ -613,4 +624,18 @@
         font-size: 1.1rem;
         margin: 0 8px;
     }
+}
+
+/* Stage badge */
+.ph-stage-badge {
+    display: inline-block;
+    background: rgba(34, 201, 87, 0.12);
+    color: #22c957;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-right: 8px;
 }

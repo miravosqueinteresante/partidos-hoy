@@ -66,9 +66,10 @@ class PH_Data_Client {
     }
 
     private function try_fetch_url($url) {
-        if (preg_match('/^[\/~]|^\/|^[A-Z]:/i', $url) || strpos($url, 'localhost') !== false) {
+        $is_local = strpos($url, 'localhost') !== false;
+        if ($is_local) {
             $local_path = preg_replace('/^~\//', dirname(__FILE__) . '/../../', $url);
-            if (file_exists($local_path)) {
+            if (file_exists($local_path) && is_readable($local_path)) {
                 $body = file_get_contents($local_path);
                 $data = json_decode($body, true);
                 if (json_last_error() === JSON_ERROR_NONE && isset($data['matches'])) {
@@ -103,12 +104,15 @@ class PH_Data_Client {
         if (empty($data) || empty($data['matches'])) {
             return array();
         }
+        $all = $data['matches'];
         if (empty($league_name)) {
-            return $data['matches'];
+            return array_values(array_filter($all, function($m) {
+                return !empty($m['home']) && !empty($m['away']);
+            }));
         }
-        return array_filter($data['matches'], function($m) use ($league_name) {
-            return strcasecmp($m['league'], $league_name) === 0;
-        });
+        return array_values(array_filter($all, function($m) use ($league_name) {
+            return !empty($m['home']) && !empty($m['away']) && strcasecmp($m['league'], $league_name) === 0;
+        }));
     }
 
     public function get_single_match($home_team, $away_team) {
@@ -136,7 +140,19 @@ class PH_Data_Client {
             $matches = isset($data['matches']) ? $data['matches'] : array();
         }
         return array_values(array_filter($matches, function($m) use ($group) {
-            return isset($m['group']) && strcasecmp($m['group'], $group) === 0;
+            $stage = isset($m['stage']) ? $m['stage'] : '';
+            $g = isset($m['group']) ? strtoupper($m['group']) : ($stage && $stage !== 'group' ? 'KO' : '');
+            return strcasecmp($g, $group) === 0;
+        }));
+    }
+
+    public function get_matches_by_stage($stage, $matches = null) {
+        if ($matches === null) {
+            $data = $this->get_predictions();
+            $matches = isset($data['matches']) ? $data['matches'] : array();
+        }
+        return array_values(array_filter($matches, function($m) use ($stage) {
+            return isset($m['stage']) && strcasecmp($m['stage'], $stage) === 0;
         }));
     }
 
@@ -192,15 +208,34 @@ class PH_Data_Client {
 
     public function clear_cache() {
         delete_transient($this->cache_key);
+        delete_transient($this->cache_key . '_check');
+        delete_transient('ph_historical_all');
     }
 
     public function get_match_results(): array {
         $results = get_option('ph_match_results', array());
-        if (!is_array($results) || isset($results[0])) {
+        if (!is_array($results)) {
             delete_option('ph_match_results');
             return array();
         }
-        return $results;
+        $clean = array();
+        foreach ($results as $key => $value) {
+            $id = is_numeric($key) ? intval($key) : 0;
+            if ($id <= 0) {
+                continue;
+            }
+            if (!is_array($value) || !isset($value['home_goals'], $value['away_goals'])) {
+                continue;
+            }
+            $clean[$id] = array(
+                'home_goals' => absint($value['home_goals']),
+                'away_goals' => absint($value['away_goals']),
+            );
+        }
+        if (count($clean) !== count($results)) {
+            update_option('ph_match_results', $clean);
+        }
+        return $clean;
     }
 
     public function save_results(array $results): bool {
@@ -259,6 +294,9 @@ class PH_Data_Client {
             $date = isset($match['date']) ? substr($match['date'], 0, 10) : '';
             $group = isset($match['group']) ? strtoupper($match['group']) : 'KO';
 
+            if (empty($home) || empty($away)) {
+                continue;
+            }
             if ($mid <= 0 || !isset($results[$mid])) {
                 continue;
             }

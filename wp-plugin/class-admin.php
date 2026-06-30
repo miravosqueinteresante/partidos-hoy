@@ -12,6 +12,7 @@ class PH_Admin {
         add_action('admin_init', array($this, 'register_settings'));
         add_action('admin_init', array($this, 'handle_save_results'));
         add_action('admin_init', array($this, 'handle_clear_results'));
+        add_action('admin_init', array($this, 'handle_cache_clear'));
         add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_styles'));
     }
 
@@ -74,11 +75,14 @@ class PH_Admin {
                 if ($id <= 0) {
                     continue;
                 }
-                $home_goals = isset($data['home_goals']) && $data['home_goals'] !== '' ? absint($data['home_goals']) : 0;
-                $away_goals = isset($data['away_goals']) && $data['away_goals'] !== '' ? absint($data['away_goals']) : 0;
+                $home_raw = $data['home_goals'] ?? '';
+                $away_raw = $data['away_goals'] ?? '';
+                if ($home_raw === '' || $away_raw === '') {
+                    continue;
+                }
                 $results[$id] = array(
-                    'home_goals' => $home_goals,
-                    'away_goals' => $away_goals,
+                    'home_goals' => absint($home_raw),
+                    'away_goals' => absint($away_raw),
                 );
             }
         }
@@ -101,31 +105,18 @@ class PH_Admin {
 
     private function get_matches_by_group($matches, $group) {
         return array_values(array_filter($matches, function($m) use ($group) {
-            $g = isset($m['group']) ? strtoupper($m['group']) : 'KO';
+            $stage = isset($m['stage']) ? $m['stage'] : '';
+            $g = isset($m['group']) ? strtoupper($m['group']) : ($stage && $stage !== 'group' ? 'KO' : '');
             return $g === $group;
         }));
     }
 
     private function get_group_labels() {
-        return array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'KO');
+        return array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'KO');
     }
 
     private function get_flag_static($team_name) {
-        $flags = array(
-            'Mexico' => '🇲🇽', 'South Africa' => '🇿🇦', 'Korea Republic' => '🇰🇷', 'Czechia' => '🇨🇿',
-            'Canada' => '🇨🇦', 'Bosnia and Herzegovina' => '🇧🇦', 'USA' => '🇺🇸', 'Paraguay' => '🇵🇾',
-            'Haiti' => '🇭🇹', 'Scotland' => '🏴󠁧󠁢󠁳󠁣󠁴󠁿', 'Australia' => '🇦🇺', 'Türkiye' => '🇹🇷',
-            'Brazil' => '🇧🇷', 'Morocco' => '🇲🇦', 'Qatar' => '🇶🇦', 'Switzerland' => '🇨🇭',
-            "Côte d'Ivoire" => '🇨🇮', 'Ecuador' => '🇪🇨', 'Germany' => '🇩🇪', 'Curaçao' => '🇨🇼',
-            'Netherlands' => '🇳🇱', 'Japan' => '🇯🇵', 'Sweden' => '🇸🇪', 'Tunisia' => '🇹🇳',
-            'Saudi Arabia' => '🇸🇦', 'Uruguay' => '🇺🇾', 'Spain' => '🇪🇸', 'Cabo Verde' => '🇨🇻',
-            'IR Iran' => '🇮🇷', 'New Zealand' => '🇳🇿', 'Belgium' => '🇧🇪', 'Egypt' => '🇪🇬',
-            'France' => '🇫🇷', 'Senegal' => '🇸🇳', 'Iraq' => '🇮🇶', 'Norway' => '🇳🇴',
-            'Argentina' => '🇦🇷', 'Algeria' => '🇩🇿', 'Austria' => '🇦🇹', 'Jordan' => '🇯🇴',
-            'Ghana' => '🇬🇭', 'Panama' => '🇵🇦', 'England' => '🏴󠁧󠁢󠁥󠁮󠁧󠁿', 'Croatia' => '🇭🇷',
-            'Portugal' => '🇵🇹', 'Congo DR' => '🇨🇩', 'Uzbekistan' => '🇺🇿', 'Colombia' => '🇨🇴',
-        );
-        return isset($flags[$team_name]) ? $flags[$team_name] . ' ' : '';
+        return ph_get_flag($team_name);
     }
 
     public function render_admin_page() {
@@ -134,10 +125,24 @@ class PH_Admin {
         }
 
         $results = $this->data_client->get_match_results();
-        $accuracy = $this->data_client->calculate_accuracy(
-            isset($this->predictions['matches']) ? $this->predictions['matches'] : array()
-        );
         $matches = isset($this->predictions['matches']) ? $this->predictions['matches'] : array();
+
+        $valid_ids = array();
+        foreach ($matches as $m) {
+            if (isset($m['id'])) {
+                $valid_ids[] = intval($m['id']);
+            }
+        }
+        if (!empty($valid_ids) && !empty($results)) {
+            $valid_set = array_flip($valid_ids);
+            $pruned = array_intersect_key($results, $valid_set);
+            if (count($pruned) !== count($results)) {
+                update_option('ph_match_results', $pruned);
+                $results = $pruned;
+            }
+        }
+
+        $accuracy = $this->data_client->calculate_accuracy($matches);
 
         $selected_group = isset($_GET['ph_group']) && in_array(strtoupper($_GET['ph_group']), $this->get_group_labels())
             ? strtoupper($_GET['ph_group'])
@@ -148,7 +153,7 @@ class PH_Admin {
             <p><em><?php esc_html_e('For informational and entertainment purposes only.', 'partidos-hoy'); ?></em></p>
 
             <div class="ph-admin-stats">
-                <h2><?php esc_html_e('📊 Precisión de predicciones', 'partidos-hoy'); ?></h2>
+                <h2><?php echo '📊 '; esc_html_e('Precisión de predicciones', 'partidos-hoy'); ?></h2>
                 <?php if ($accuracy['total'] > 0): ?>
                     <p class="ph-accuracy-main">
                         <?php
@@ -198,6 +203,8 @@ class PH_Admin {
                 </form>
             </div>
 
+            <?php $this->render_health_check(); ?>
+
             <hr />
 
             <h2><?php esc_html_e('Resultados', 'partidos-hoy'); ?></h2>
@@ -243,9 +250,17 @@ class PH_Admin {
                             ?>
                             <tr class="<?php echo $has_result ? 'ph-row-complete' : ''; ?>">
                                 <td class="ph-col-match">
-                                    <?php echo esc_html(ph_translate_team($home)); ?>
-                                    vs
-                                    <?php echo esc_html(ph_translate_team($away)); ?>
+                                    <?php
+                                    $stage_name = isset($match['stage']) && $match['stage'] !== 'group' ? ph_translate_stage($match['stage']) : '';
+                                    if ($stage_name): ?>
+                                        <span class="ph-stage-badge"><?php echo esc_html($stage_name); ?></span>
+                                    <?php endif;
+                                    $home_disp = $home ? ph_translate_team($home) : __('Por definir', 'partidos-hoy');
+                                    $away_disp = $away ? ph_translate_team($away) : __('Por definir', 'partidos-hoy');
+                                    echo esc_html($home_disp);
+                                    ?> vs <?php
+                                    echo esc_html($away_disp);
+                                    ?>
                                 </td>
                                 <td class="ph-col-prediction">
                                     <?php echo $flag_home . ' ' . esc_html($max_label[$max_key] ?? '') . ' ' . $max_pct . '%'; ?>
@@ -338,7 +353,8 @@ class PH_Admin {
                             <strong><?php esc_html_e('Parámetros:', 'partidos-hoy'); ?></strong><br>
                             <code>league</code> — <?php esc_html_e('liga (default: todas)', 'partidos-hoy'); ?><br>
                             <code>limit</code> — <?php esc_html_e('tarjetas por página (default: 20)', 'partidos-hoy'); ?><br>
-                            <code>group</code> — <?php esc_html_e('filtrar por grupo (A-H)', 'partidos-hoy'); ?><br>
+                            <code>group</code> — <?php esc_html_e('filtrar por grupo (A-L, KO)', 'partidos-hoy'); ?><br>
+                            <code>stage</code> — <?php esc_html_e('filtrar por fase (round_of_32, round_of_16, quarter_final, semi_final, bronze_final, final)', 'partidos-hoy'); ?><br>
                             <code>date</code> — <?php esc_html_e('filtrar por fecha (YYYY-MM-DD)', 'partidos-hoy'); ?><br>
                             <code>team</code> — <?php esc_html_e('filtrar por equipo (inglés)', 'partidos-hoy'); ?><br>
                             <code>search</code> — <?php esc_html_e('búsqueda por texto', 'partidos-hoy'); ?><br>
@@ -346,6 +362,8 @@ class PH_Admin {
                             <strong><?php esc_html_e('Ejemplos:', 'partidos-hoy'); ?></strong><br>
                             <code>[partidos-hoy]</code> — <?php esc_html_e('todas las tarjetas', 'partidos-hoy'); ?><br>
                             <code>[partidos-hoy group="A"]</code> — <?php esc_html_e('solo Grupo A', 'partidos-hoy'); ?><br>
+                            <code>[partidos-hoy group="KO"]</code> — <?php esc_html_e('toda la fase knockout', 'partidos-hoy'); ?><br>
+                            <code>[partidos-hoy stage="round_of_16"]</code> — <?php esc_html_e('solo Octavos de Final', 'partidos-hoy'); ?><br>
                             <code>[partidos-hoy team="Argentina"]</code> — <?php esc_html_e('partidos de Argentina', 'partidos-hoy'); ?><br>
                             <code>[partidos-hoy date="2026-06-11" limit="10"]</code> — <?php esc_html_e('partidos del 11/6, 10 por página', 'partidos-hoy'); ?>
                         </td>
@@ -372,24 +390,84 @@ class PH_Admin {
                 <input type="hidden" name="ph_action" value="clear_cache" />
                 <button type="submit" class="button"><?php esc_html_e('Limpiar caché', 'partidos-hoy'); ?></button>
             </form>
-            <?php $this->handle_cache_clear(); ?>
         </div>
         <?php
     }
 
-    private function handle_cache_clear() {
+    public function handle_cache_clear() {
         if (!isset($_POST['ph_action']) || $_POST['ph_action'] !== 'clear_cache') {
             return;
         }
         if (!isset($_POST['ph_nonce']) || !wp_verify_nonce($_POST['ph_nonce'], 'ph_clear_cache')) {
+            add_action('admin_notices', function() {
+                echo '<div class="notice notice-error"><p>' .
+                     esc_html__('Error de seguridad: nonce inválido.', 'partidos-hoy') .
+                     '</p></div>';
+            });
             return;
         }
         if (!current_user_can('manage_options')) {
             return;
         }
         $this->data_client->clear_cache();
-        echo '<div class="notice notice-success"><p>' .
-             esc_html__('Caché limpiada correctamente.', 'partidos-hoy') .
-             '</p></div>';
+        add_action('admin_notices', function() {
+            echo '<div class="notice notice-success"><p>' .
+                 esc_html__('Caché limpiada correctamente.', 'partidos-hoy') .
+                 '</p></div>';
+        });
+    }
+
+    private function render_health_check() {
+        $predictions = $this->data_client->get_predictions();
+        $has_data = !empty($predictions) && !empty($predictions['matches']);
+        $historical_path = PH_PLUGIN_DIR . 'historical_wc_data.json';
+        $has_historical = file_exists($historical_path);
+        $historical_size = $has_historical ? size_format(filesize($historical_path)) : 'N/A';
+        $predictions_url = get_option('ph_predictions_url', '');
+        $fallback_url = get_option('ph_fallback_url', '');
+        ?>
+        <details class="ph-health-check" style="margin:16px 0;padding:12px 16px;background:#f8f9fa;border:1px solid #dcdcde;border-radius:6px;">
+            <summary style="cursor:pointer;font-weight:700;font-size:0.9rem;">
+                ⚙️ <?php esc_html_e('Estado del sistema', 'partidos-hoy'); ?>
+            </summary>
+            <table class="widefat fixed" style="margin-top:12px;">
+                <tbody>
+                    <tr>
+                        <td style="width:200px;font-weight:600;"><?php esc_html_e('Plugin versión', 'partidos-hoy'); ?></td>
+                        <td><?php echo esc_html(PH_VERSION); ?></td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight:600;"><?php esc_html_e('Datos de predicciones', 'partidos-hoy'); ?></td>
+                        <td><?php echo $has_data
+                            ? '<span style="color:#16a34a;">✅ ' . esc_html(count($predictions['matches'])) . ' partidos cargados</span>'
+                            : '<span style="color:#dc2626;">❌ ' . esc_html__('Sin datos. Verificar URL de predicciones.', 'partidos-hoy') . '</span>'; ?></td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight:600;"><?php esc_html_e('URL predicciones', 'partidos-hoy'); ?></td>
+                        <td><code><?php echo esc_html($predictions_url ?: 'Usando URL por defecto'); ?></code></td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight:600;"><?php esc_html_e('URL respaldo', 'partidos-hoy'); ?></td>
+                        <td><code><?php echo esc_html($fallback_url ?: 'Usando URL por defecto'); ?></code></td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight:600;"><?php esc_html_e('Caché activa', 'partidos-hoy'); ?></td>
+                        <td><?php echo get_transient('ph_predictions_cache') !== false
+                            ? '<span style="color:#16a34a;">✅ ' . esc_html__('Sí', 'partidos-hoy') . '</span>'
+                            : '<span style="color:#64748b;">⏳ ' . esc_html__('No (se cargará en el próximo acceso)', 'partidos-hoy') . '</span>'; ?></td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight:600;"><?php esc_html_e('Datos históricos', 'partidos-hoy'); ?></td>
+                        <td><?php echo $has_historical
+                            ? '<span style="color:#16a34a;">✅ ' . esc_html(sprintf(__('%s — 964 partidos (1930-2022)', 'partidos-hoy'), $historical_size)) . '</span>'
+                            : '<span style="color:#dc2626;">❌ ' . esc_html__('Archivo no encontrado', 'partidos-hoy') . '</span>'; ?></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="margin:8px 0 0;font-size:0.75rem;color:#64748b;">
+                <?php esc_html_e('Si los datos no se cargan, verificá que las URLs de predicción sean accesibles. La caché se refresca automáticamente cada 6 horas.', 'partidos-hoy'); ?>
+            </p>
+        </details>
+        <?php
     }
 }

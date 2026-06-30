@@ -1,14 +1,16 @@
 :root {
     --ph-green: #22c957;
-    --ph-green-dark: #169d42;
+    --ph-green-dark: #16a848;
     --ph-red: #f05252;
     --ph-yellow: #f4c34d;
     --ph-blue: #48a7ff;
     --ph-radius: 8px;
+    --ph-font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 .ph-admin-wrap {
     max-width: 800px;
+    font-family: var(--ph-font);
 }
 
 .ph-admin-section {
@@ -22,14 +24,15 @@
 .ph-notice {
     padding: 12px 14px;
     border-left: 4px solid var(--ph-green);
-    background: #f0f8f0;
+    background: #f0faf2;
     color: #1d2327;
     margin: 12px 0;
+    border-radius: 0 4px 4px 0;
 }
 
 .ph-admin-stats {
-    background: #f0f8f0;
-    border: 1px solid #c3e6cb;
+    background: #f0faf2;
+    border: 1px solid #c8e6d0;
     border-radius: 6px;
     padding: 14px 18px;
     margin: 12px 0;
@@ -119,7 +122,7 @@
 }
 
 .ph-row-complete {
-    background: #f0f8f0 !important;
+    background: #f0faf2 !important;
 }
 
 .ph-results-table .ph-col-prediction {
@@ -173,4 +176,17 @@
     .ph-score-input {
         width: 40px !important;
     }
+}
+
+.ph-stage-badge {
+    display: inline-block;
+    background: #f0f6fc;
+    color: #007cba;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-right: 6px;
 }

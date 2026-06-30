@@ -3,7 +3,7 @@
  * Plugin Name:     Partidos Hoy
  * Plugin URI:       https://github.com/miravosqueinteresante/partidos-hoy
  * Description:      Pronósticos de fútbol con ranking ELO para el torneo 2026
- * Version:          1.0.0
+ * Version:          1.0.4
  * Requires PHP:     7.4
  * Requires at least: 5.0
  * Author:           partidoshoy.futbol
@@ -14,13 +14,37 @@
 
 defined('ABSPATH') || exit;
 
-define('PH_VERSION', '1.0.3');
+define('PH_VERSION', '1.0.4');
 define('PH_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('PH_PLUGIN_URL', plugin_dir_url(__FILE__));
 
 require_once PH_PLUGIN_DIR . 'class-data-client.php';
 require_once PH_PLUGIN_DIR . 'class-shortcode.php';
 require_once PH_PLUGIN_DIR . 'class-admin.php';
+
+function ph_activate() {
+    if (version_compare(PHP_VERSION, '7.4', '<')) {
+        deactivate_plugins(plugin_basename(__FILE__));
+        wp_die('PHP 7.4 or higher required.');
+    }
+    if (empty(get_option('ph_cache_ttl'))) {
+        add_option('ph_cache_ttl', 21600);
+    }
+    if (empty(get_option('ph_predictions_url'))) {
+        add_option('ph_predictions_url', 'https://miravosqueinteresante.github.io/partidos-hoy/latest.json');
+    }
+    if (empty(get_option('ph_fallback_url'))) {
+        add_option('ph_fallback_url', 'https://raw.githubusercontent.com/miravosqueinteresante/partidos-hoy/gh-pages/latest.json');
+    }
+}
+register_activation_hook(__FILE__, 'ph_activate');
+
+function ph_deactivate() {
+    delete_transient('ph_predictions_cache');
+    delete_transient('ph_predictions_cache_check');
+    delete_transient('ph_historical_all');
+}
+register_deactivation_hook(__FILE__, 'ph_deactivate');
 
 function ph_init() {
     load_plugin_textdomain('partidos-hoy', false, dirname(plugin_basename(__FILE__)) . '/languages');
@@ -240,7 +264,43 @@ function ph_translate_team($name) {
     return isset($reverse[$name]) ? $reverse[$name] : $name;
 }
 
+function ph_translate_stage($stage) {
+    $map = array(
+        'group'         => 'Fase de Grupos',
+        'round_of_32'   => 'Dieciseisavos',
+        'round_of_16'   => 'Octavos de Final',
+        'quarter_final' => 'Cuartos de Final',
+        'semi_final'    => 'Semifinal',
+        'bronze_final'  => 'Tercer Puesto',
+        'final'         => 'Final',
+    );
+    return isset($map[$stage]) ? $map[$stage] : $stage;
+}
+
+function ph_get_flag($team_name) {
+    $flags = array(
+        'Mexico' => '🇲🇽', 'South Africa' => '🇿🇦', 'Korea Republic' => '🇰🇷', 'Czechia' => '🇨🇿',
+        'Canada' => '🇨🇦', 'Bosnia and Herzegovina' => '🇧🇦', 'USA' => '🇺🇸', 'Paraguay' => '🇵🇾',
+        'Haiti' => '🇭🇹', 'Scotland' => '🏴󠁧󠁢󠁳󠁣󠁴󠁿', 'Australia' => '🇦🇺', 'Türkiye' => '🇹🇷',
+        'Brazil' => '🇧🇷', 'Morocco' => '🇲🇦', 'Qatar' => '🇶🇦', 'Switzerland' => '🇨🇭',
+        "Côte d'Ivoire" => '🇨🇮', 'Ecuador' => '🇪🇨', 'Germany' => '🇩🇪', 'Curaçao' => '🇨🇼',
+        'Netherlands' => '🇳🇱', 'Japan' => '🇯🇵', 'Sweden' => '🇸🇪', 'Tunisia' => '🇹🇳',
+        'Saudi Arabia' => '🇸🇦', 'Uruguay' => '🇺🇾', 'Spain' => '🇪🇸', 'Cabo Verde' => '🇨🇻',
+        'IR Iran' => '🇮🇷', 'New Zealand' => '🇳🇿', 'Belgium' => '🇧🇪', 'Egypt' => '🇪🇬',
+        'France' => '🇫🇷', 'Senegal' => '🇸🇳', 'Iraq' => '🇮🇶', 'Norway' => '🇳🇴',
+        'Argentina' => '🇦🇷', 'Algeria' => '🇩🇿', 'Austria' => '🇦🇹', 'Jordan' => '🇯🇴',
+        'Ghana' => '🇬🇭', 'Panama' => '🇵🇦', 'England' => '🏴󠁧󠁢󠁥󠁮󠁧󠁿', 'Croatia' => '🇭🇷',
+        'Portugal' => '🇵🇹', 'Congo DR' => '🇨🇩', 'Uzbekistan' => '🇺🇿', 'Colombia' => '🇨🇴',
+    );
+    return isset($flags[$team_name]) ? $flags[$team_name] . ' ' : '';
+}
+
 function ph_ajax_historical() {
+    $nonce = isset($_GET['ph_nonce']) ? $_GET['ph_nonce'] : '';
+    if (!wp_verify_nonce($nonce, 'ph_historical')) {
+        wp_send_json_error(array('message' => 'Nonce inválido'));
+    }
+
     $home = isset($_GET['home']) ? sanitize_text_field($_GET['home']) : '';
     $away = isset($_GET['away']) ? sanitize_text_field($_GET['away']) : '';
     if (empty($home) || empty($away)) {

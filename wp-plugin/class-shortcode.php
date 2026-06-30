@@ -22,6 +22,7 @@ class PH_Shortcode {
             'league' => '',
             'limit' => 20,
             'group' => '',
+            'stage' => '',
             'date' => '',
             'team' => '',
             'search' => '',
@@ -42,6 +43,9 @@ class PH_Shortcode {
         $is_searching = !empty($atts['search']);
         if (!empty($atts['group']) && !$is_searching) {
             $matches = $this->data_client->get_matches_by_group($atts['group'], $matches);
+        }
+        if (!empty($atts['stage']) && !$is_searching) {
+            $matches = $this->data_client->get_matches_by_stage($atts['stage'], $matches);
         }
         if (!empty($atts['date']) && !$is_searching) {
             $matches = $this->data_client->get_matches_by_date($atts['date'], $matches);
@@ -77,7 +81,7 @@ class PH_Shortcode {
         <?php if ($accuracy['total'] > 0): ?>
         <div class="ph-accuracy-bar">
             <?php printf(
-                esc_html__('📊 Precisión de predicciones: %d/%d (%s%%)', 'partidos-hoy'),
+                '📊 ' . esc_html__('Precisión de predicciones: %d/%d (%s%%)', 'partidos-hoy'),
                 $accuracy['correct'],
                 $accuracy['total'],
                 $accuracy['pct']
@@ -92,8 +96,9 @@ class PH_Shortcode {
                 $venue = isset($match['venue']) ? $match['venue'] : '';
                 $home_team = isset($match['home']) ? $match['home'] : '';
                 $away_team = isset($match['away']) ? $match['away'] : '';
-                $home_team_display = ph_translate_team($home_team);
-                $away_team_display = ph_translate_team($away_team);
+                $home_team_display = $home_team ? ph_translate_team($home_team) : __('Por definir', 'partidos-hoy');
+                $away_team_display = $away_team ? ph_translate_team($away_team) : __('Por definir', 'partidos-hoy');
+                $stage_name = isset($match['stage']) ? $match['stage'] : '';
                 $home_prob = isset($match['probabilities']['home']) ? $match['probabilities']['home'] : 0;
                 $draw_prob = isset($match['probabilities']['draw']) ? $match['probabilities']['draw'] : 0;
                 $away_prob = isset($match['probabilities']['away']) ? $match['probabilities']['away'] : 0;
@@ -103,8 +108,11 @@ class PH_Shortcode {
                 $result = $this->get_match_result($match, $saved_results);
                 $has_result = $result !== null;
                 ?>
-                <?php if ($formatted_date || $venue): ?>
+                <?php if ($formatted_date || $venue || ($stage_name && $stage_name !== 'group')): ?>
                 <div class="ph-card-banner">
+                    <?php if ($stage_name && $stage_name !== 'group'): ?>
+                        <span class="ph-stage-badge"><?php echo esc_html(ph_translate_stage($stage_name)); ?></span>
+                    <?php endif; ?>
                     <?php if ($formatted_date): ?>
                         <span class="ph-banner-date">🗓️ <?php echo esc_html($formatted_date); ?></span>
                     <?php endif; ?>
@@ -222,7 +230,9 @@ class PH_Shortcode {
                     { "@type": "SportsTeam", "name": "<?php echo esc_js($home_team_display); ?>" },
                     { "@type": "SportsTeam", "name": "<?php echo esc_js($away_team_display); ?>" }
                 ],
-                "description": "<?php echo esc_js(sprintf(__('Predicción ELO: %s %s, Empate %s, %s %s', 'partidos-hoy'), $home_team_display, $this->format_prob($home_prob), $this->format_prob($draw_prob), $away_team_display, $this->format_prob($away_prob))); ?>"
+                "description": "<?php echo esc_js(sprintf(__('Predicción ELO: %s %s, Empate %s, %s %s', 'partidos-hoy'), $home_team_display, $this->format_prob($home_prob), $this->format_prob($draw_prob), $away_team_display, $this->format_prob($away_prob))); ?>",
+                "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+                "eventStatus": "https://schema.org/EventScheduled"
             }
             </script>
             <?php endforeach; ?>
@@ -415,7 +425,9 @@ class PH_Shortcode {
                 { "@type": "SportsTeam", "name": "<?php echo esc_js($home_team_display); ?>" },
                 { "@type": "SportsTeam", "name": "<?php echo esc_js($away_team_display); ?>" }
             ],
-            "description": "<?php echo esc_js(sprintf(__('Predicción ELO: %s %s, Empate %s, %s %s', 'partidos-hoy'), $home_team_display, $this->format_prob($home_prob), $this->format_prob($draw_prob), $away_team_display, $this->format_prob($away_prob))); ?>"
+            "description": "<?php echo esc_js(sprintf(__('Predicción ELO: %s %s, Empate %s, %s %s', 'partidos-hoy'), $home_team_display, $this->format_prob($home_prob), $this->format_prob($draw_prob), $away_team_display, $this->format_prob($away_prob))); ?>",
+            "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+            "eventStatus": "https://schema.org/EventScheduled"
         }
         </script>
         <?php
@@ -434,21 +446,7 @@ class PH_Shortcode {
     }
 
     private function get_flag($team_name) {
-        $flags = array(
-            'Mexico' => '🇲🇽', 'South Africa' => '🇿🇦', 'Korea Republic' => '🇰🇷', 'Czechia' => '🇨🇿',
-            'Canada' => '🇨🇦', 'Bosnia and Herzegovina' => '🇧🇦', 'USA' => '🇺🇸', 'Paraguay' => '🇵🇾',
-            'Haiti' => '🇭🇹', 'Scotland' => '🏴󠁧󠁢󠁳󠁣󠁴󠁿', 'Australia' => '🇦🇺', 'Türkiye' => '🇹🇷',
-            'Brazil' => '🇧🇷', 'Morocco' => '🇲🇦', 'Qatar' => '🇶🇦', 'Switzerland' => '🇨🇭',
-            "Côte d'Ivoire" => '🇨🇮', 'Ecuador' => '🇪🇨', 'Germany' => '🇩🇪', 'Curaçao' => '🇨🇼',
-            'Netherlands' => '🇳🇱', 'Japan' => '🇯🇵', 'Sweden' => '🇸🇪', 'Tunisia' => '🇹🇳',
-            'Saudi Arabia' => '🇸🇦', 'Uruguay' => '🇺🇾', 'Spain' => '🇪🇸', 'Cabo Verde' => '🇨🇻',
-            'IR Iran' => '🇮🇷', 'New Zealand' => '🇳🇿', 'Belgium' => '🇧🇪', 'Egypt' => '🇪🇬',
-            'France' => '🇫🇷', 'Senegal' => '🇸🇳', 'Iraq' => '🇮🇶', 'Norway' => '🇳🇴',
-            'Argentina' => '🇦🇷', 'Algeria' => '🇩🇿', 'Austria' => '🇦🇹', 'Jordan' => '🇯🇴',
-            'Ghana' => '🇬🇭', 'Panama' => '🇵🇦', 'England' => '🏴󠁧󠁢󠁥󠁮󠁧󠁿', 'Croatia' => '🇭🇷',
-            'Portugal' => '🇵🇹', 'Congo DR' => '🇨🇩', 'Uzbekistan' => '🇺🇿', 'Colombia' => '🇨🇴'
-        );
-        return isset($flags[$team_name]) ? $flags[$team_name] . ' ' : '';
+        return ph_get_flag($team_name);
     }
 
     private function get_match_result(array $match, array $saved_results) {
@@ -524,9 +522,14 @@ class PH_Shortcode {
     }
 
     public function add_og_meta_tags() {
+        if ($this->seo_plugin_active()) {
+            return;
+        }
+
         $post = get_queried_object();
         $og_title = '';
         $og_description = '';
+        $og_image = '';
 
         if ($post instanceof WP_Post) {
             $content = $post->post_content;
@@ -541,6 +544,7 @@ class PH_Shortcode {
                     $away_display = ph_translate_team($away);
                     $og_title = sprintf(__('%s vs %s - Predicción Partidos Hoy', 'partidos-hoy'), $home_display, $away_display);
                     $og_description = sprintf(__('Pronóstico ELO para %s vs %s. Probabilidades, análisis y más.', 'partidos-hoy'), $home_display, $away_display);
+                    $og_image = get_the_post_thumbnail_url($post, 'large') ?: '';
                 }
             }
         }
@@ -549,16 +553,35 @@ class PH_Shortcode {
             $og_title = get_bloginfo('name');
             $og_description = get_bloginfo('description');
         }
+
+        if (empty($og_image)) {
+            $og_image = get_site_icon_url() ?: '';
+        }
         ?>
         <meta property="og:title" content="<?php echo esc_attr($og_title); ?>" />
         <meta property="og:description" content="<?php echo esc_attr($og_description); ?>" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="<?php echo esc_url(get_permalink()); ?>" />
         <meta property="og:site_name" content="<?php echo esc_attr(get_bloginfo('name')); ?>" />
+        <?php if ($og_image): ?>
+        <meta property="og:image" content="<?php echo esc_url($og_image); ?>" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <?php endif; ?>
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="<?php echo esc_attr($og_title); ?>" />
         <meta name="twitter:description" content="<?php echo esc_attr($og_description); ?>" />
         <?php
+    }
+
+    private function seo_plugin_active() {
+        if (defined('RANK_MATH_VERSION')) return true;
+        if (defined('WPSEO_VERSION')) return true;
+        if (defined('AIOSEOP_VERSION')) return true;
+        if (defined('SEOPRESS_VERSION')) return true;
+        if (class_exists('The_Seo_Framework\The_Seo_Framework')) return true;
+        if (defined('SQ_VERSION')) return true;
+        return false;
     }
 
     private function output_historical_js() {
@@ -576,7 +599,7 @@ class PH_Shortcode {
                 if (!home || !away) return;
 
                 var ajaxUrl = '<?php echo esc_js(admin_url('admin-ajax.php')); ?>';
-                fetch(ajaxUrl + '?action=ph_historical&home=' + encodeURIComponent(home) + '&away=' + encodeURIComponent(away))
+                fetch(ajaxUrl + '?action=ph_historical&ph_nonce=' + encodeURIComponent('<?php echo esc_js(wp_create_nonce('ph_historical')); ?>') + '&home=' + encodeURIComponent(home) + '&away=' + encodeURIComponent(away))
                     .then(function(r) { return r.json(); })
                     .then(function(response) {
                         var matches = response.success ? response.data : [];
