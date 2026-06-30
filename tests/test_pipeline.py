@@ -24,8 +24,10 @@ def test_full_pipeline_from_fixtures():
     group_matches = [m for m in output["matches"] if m.get("status") != "TBD"]
     tbd_matches = [m for m in output["matches"] if m.get("status") == "TBD"]
 
-    assert len(group_matches) == 88, "Expected 72 group + 16 round_of_32 matches with teams"
-    assert len(tbd_matches) == 16, "Expected 16 knockout TBD matches (round_of_16+)"
+    print(f"DEBUG: group_matches={len(group_matches)}, tbd_matches={len(tbd_matches)}, total={len(output['matches'])}")
+
+    assert len(group_matches) == 88, f"Expected 88 matches with teams, got {len(group_matches)}"
+    assert len(tbd_matches) == 16, f"Expected 16 TBD matches, got {len(tbd_matches)}"
 
     ids = [m["id"] for m in output["matches"]]
     assert len(ids) == len(set(ids)), "All match IDs must be unique"
