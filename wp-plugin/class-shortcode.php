@@ -220,17 +220,17 @@ class PH_Shortcode {
             {
                 "@context": "https://schema.org",
                 "@type": "SportsEvent",
-                "name": "<?php echo esc_js($home_team_display); ?> vs <?php echo esc_js($away_team_display); ?>",
-                "startDate": "<?php echo esc_js($date_str); ?>",
+                "name": "<?php echo ph_esc_json($home_team_display); ?> vs <?php echo ph_esc_json($away_team_display); ?>",
+                "startDate": "<?php echo ph_esc_json($date_str); ?>",
                 "location": {
                     "@type": "Place",
-                    "name": "<?php echo esc_js($venue ?: 'TBD'); ?>"
+                    "name": "<?php echo ph_esc_json($venue ?: 'TBD'); ?>"
                 },
                 "competitor": [
-                    { "@type": "SportsTeam", "name": "<?php echo esc_js($home_team_display); ?>" },
-                    { "@type": "SportsTeam", "name": "<?php echo esc_js($away_team_display); ?>" }
+                    { "@type": "SportsTeam", "name": "<?php echo ph_esc_json($home_team_display); ?>" },
+                    { "@type": "SportsTeam", "name": "<?php echo ph_esc_json($away_team_display); ?>" }
                 ],
-                "description": "<?php echo esc_js(sprintf(__('Predicción ELO: %s %s, Empate %s, %s %s', 'partidos-hoy'), $home_team_display, $this->format_prob($home_prob), $this->format_prob($draw_prob), $away_team_display, $this->format_prob($away_prob))); ?>",
+                "description": "<?php echo ph_esc_json(sprintf(__('Predicción ELO: %s %s, Empate %s, %s %s', 'partidos-hoy'), $home_team_display, $this->format_prob($home_prob), $this->format_prob($draw_prob), $away_team_display, $this->format_prob($away_prob))); ?>",
                 "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
                 "eventStatus": "https://schema.org/EventScheduled"
             }
@@ -415,17 +415,17 @@ class PH_Shortcode {
         {
             "@context": "https://schema.org",
             "@type": "SportsEvent",
-            "name": "<?php echo esc_js($home_team_display); ?> vs <?php echo esc_js($away_team_display); ?>",
-            "startDate": "<?php echo esc_js($date_str); ?>",
+            "name": "<?php echo ph_esc_json($home_team_display); ?> vs <?php echo ph_esc_json($away_team_display); ?>",
+            "startDate": "<?php echo ph_esc_json($date_str); ?>",
             "location": {
                 "@type": "Place",
-                "name": "<?php echo esc_js($venue ?: 'TBD'); ?>"
+                "name": "<?php echo ph_esc_json($venue ?: 'TBD'); ?>"
             },
             "competitor": [
-                { "@type": "SportsTeam", "name": "<?php echo esc_js($home_team_display); ?>" },
-                { "@type": "SportsTeam", "name": "<?php echo esc_js($away_team_display); ?>" }
+                { "@type": "SportsTeam", "name": "<?php echo ph_esc_json($home_team_display); ?>" },
+                { "@type": "SportsTeam", "name": "<?php echo ph_esc_json($away_team_display); ?>" }
             ],
-            "description": "<?php echo esc_js(sprintf(__('Predicción ELO: %s %s, Empate %s, %s %s', 'partidos-hoy'), $home_team_display, $this->format_prob($home_prob), $this->format_prob($draw_prob), $away_team_display, $this->format_prob($away_prob))); ?>",
+            "description": "<?php echo ph_esc_json(sprintf(__('Predicción ELO: %s %s, Empate %s, %s %s', 'partidos-hoy'), $home_team_display, $this->format_prob($home_prob), $this->format_prob($draw_prob), $away_team_display, $this->format_prob($away_prob))); ?>",
             "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
             "eventStatus": "https://schema.org/EventScheduled"
         }

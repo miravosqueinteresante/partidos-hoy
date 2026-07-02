@@ -264,6 +264,15 @@ function ph_translate_team($name) {
     return isset($reverse[$name]) ? $reverse[$name] : $name;
 }
 
+function ph_esc_json($str) {
+    $escaped = str_replace(
+        array('\\', '"', "\n", "\r", "\t"),
+        array('\\\\', '\\"', '\\n', '\\r', '\\t'),
+        $str
+    );
+    return $escaped;
+}
+
 function ph_translate_stage($stage) {
     $map = array(
         'group'         => 'Fase de Grupos',
