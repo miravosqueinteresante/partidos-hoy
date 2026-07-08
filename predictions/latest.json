@@ -2694,8 +2694,8 @@
                     },
                     {
                         "id":  97,
-                        "home":  null,
-                        "away":  null,
+                        "home":  "France",
+                        "away":  "Morocco",
                         "league":  "World Cup 2026",
                         "date":  "2026-07-09",
                         "stage":  "quarter_final",
@@ -2716,8 +2716,8 @@
                     },
                     {
                         "id":  98,
-                        "home":  null,
-                        "away":  null,
+                        "home":  "Spain",
+                        "away":  "Belgium",
                         "league":  "World Cup 2026",
                         "date":  "2026-07-10",
                         "stage":  "quarter_final",
@@ -2738,8 +2738,8 @@
                     },
                     {
                         "id":  99,
-                        "home":  null,
-                        "away":  null,
+                        "home":  "Norway",
+                        "away":  "England",
                         "league":  "World Cup 2026",
                         "date":  "2026-07-11",
                         "stage":  "quarter_final",
@@ -2760,8 +2760,8 @@
                     },
                     {
                         "id":  100,
-                        "home":  null,
-                        "away":  null,
+                        "home":  "Argentina",
+                        "away":  "Switzerland",
                         "league":  "World Cup 2026",
                         "date":  "2026-07-12",
                         "stage":  "quarter_final",

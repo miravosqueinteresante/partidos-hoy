@@ -962,42 +962,42 @@
     {
         "id":  97,
         "date":  "2026-07-09",
-        "home_team":  null,
-        "away_team":  null,
+        "home_team":  "France",
+        "away_team":  "Morocco",
         "group":  null,
         "stage":  "quarter_final",
         "league":  "World Cup 2026",
-        "venue":  "TBD"
+        "venue":  "AT\u0026T Stadium, Arlington"
     },
     {
         "id":  98,
         "date":  "2026-07-10",
-        "home_team":  null,
-        "away_team":  null,
+        "home_team":  "Spain",
+        "away_team":  "Belgium",
         "group":  null,
         "stage":  "quarter_final",
         "league":  "World Cup 2026",
-        "venue":  "TBD"
+        "venue":  "MetLife Stadium, East Rutherford"
     },
     {
         "id":  99,
         "date":  "2026-07-11",
-        "home_team":  null,
-        "away_team":  null,
+        "home_team":  "Norway",
+        "away_team":  "England",
         "group":  null,
         "stage":  "quarter_final",
         "league":  "World Cup 2026",
-        "venue":  "TBD"
+        "venue":  "SoFi Stadium, Inglewood"
     },
     {
         "id":  100,
         "date":  "2026-07-12",
-        "home_team":  null,
-        "away_team":  null,
+        "home_team":  "Argentina",
+        "away_team":  "Switzerland",
         "group":  null,
         "stage":  "quarter_final",
         "league":  "World Cup 2026",
-        "venue":  "TBD"
+        "venue":  "Mercedes-Benz Stadium, Atlanta"
     },
     {
         "id":  101,
