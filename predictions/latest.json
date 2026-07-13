@@ -2782,8 +2782,8 @@
                     },
                     {
                         "id":  101,
-                        "home":  null,
-                        "away":  null,
+                        "home":  "France",
+                        "away":  "Spain",
                         "league":  "World Cup 2026",
                         "date":  "2026-07-14",
                         "stage":  "semi_final",
@@ -2804,8 +2804,8 @@
                     },
                     {
                         "id":  102,
-                        "home":  null,
-                        "away":  null,
+                        "home":  "England",
+                        "away":  "Argentina",
                         "league":  "World Cup 2026",
                         "date":  "2026-07-15",
                         "stage":  "semi_final",

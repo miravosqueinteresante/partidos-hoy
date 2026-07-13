@@ -1002,22 +1002,22 @@
     {
         "id":  101,
         "date":  "2026-07-14",
-        "home_team":  null,
-        "away_team":  null,
+        "home_team":  "France",
+        "away_team":  "Spain",
         "group":  null,
         "stage":  "semi_final",
         "league":  "World Cup 2026",
-        "venue":  "TBD"
+        "venue":  "AT\u0026T Stadium, Arlington"
     },
     {
         "id":  102,
         "date":  "2026-07-15",
-        "home_team":  null,
-        "away_team":  null,
+        "home_team":  "England",
+        "away_team":  "Argentina",
         "group":  null,
         "stage":  "semi_final",
         "league":  "World Cup 2026",
-        "venue":  "TBD"
+        "venue":  "MetLife Stadium, East Rutherford"
     },
     {
         "id":  103,
