@@ -1,0 +1,9 @@
+# Security Policy for Partidos Hoy WordPress Plugin
+# https://github.com/miravosqueinteresante/partidos-hoy
+
+Contact: mailto:security@partidoshoy.futbol
+Contact: https://github.com/miravosqueinteresante/partidos-hoy/security
+Expires: 2027-06-01T00:00:00.000Z
+Preferred-Languages: es, en
+Policy: https://github.com/miravosqueinteresante/partidos-hoy/security/policy
+Canonical: https://partidoshoy.futbol/.well-known/security.txt

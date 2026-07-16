@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+.env
+data/raw/
+data/processed/
+data/worldcup_fjelstul.json
+data/news_cache.json
+mlruns/
+.vscode/
+.idea/
+*.egg-info/
+dist/
+build/
+wp-plugin/data/historical_wc_data.json
+KNOWLEDGE_BASE.md
+PLAN_IMPLEMENTACION.md

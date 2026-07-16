@@ -1,0 +1,675 @@
+<?php
+defined('ABSPATH') || exit;
+
+class PH_Shortcode {
+    private $data_client;
+    private $single_match_data = null;
+
+    public function __construct($data_client) {
+        $this->data_client = $data_client;
+        add_shortcode('partidos-hoy', array($this, 'render'));
+        add_shortcode('predicciones_partido', array($this, 'render_single'));
+        add_action('wp_enqueue_scripts', array($this, 'enqueue_styles'));
+        add_action('wp_head', array($this, 'add_og_meta_tags'), 1);
+    }
+
+    public function enqueue_styles() {
+        wp_enqueue_style('ph-frontend', PH_PLUGIN_URL . 'frontend.css', array(), PH_VERSION);
+    }
+
+    public function render($atts) {
+        $atts = shortcode_atts(array(
+            'league' => '',
+            'limit' => 20,
+            'group' => '',
+            'stage' => '',
+            'date' => '',
+            'team' => '',
+            'search' => '',
+            'page' => 1,
+        ), $atts, 'partidos-hoy');
+
+        if (isset($_GET['search'])) {
+            $atts['search'] = sanitize_text_field($_GET['search']);
+        }
+        if (isset($_GET['ph_page'])) {
+            $atts['page'] = max(1, intval($_GET['ph_page']));
+        }
+
+        $matches = $this->data_client->get_matches_by_league($atts['league']);
+        $saved_results = $this->data_client->get_match_results();
+        $accuracy = $this->data_client->calculate_accuracy($matches);
+
+        $is_searching = !empty($atts['search']);
+        if (!empty($atts['group']) && !$is_searching) {
+            $matches = $this->data_client->get_matches_by_group($atts['group'], $matches);
+        }
+        if (!empty($atts['stage']) && !$is_searching) {
+            $matches = $this->data_client->get_matches_by_stage($atts['stage'], $matches);
+        }
+        if (!empty($atts['date']) && !$is_searching) {
+            $matches = $this->data_client->get_matches_by_date($atts['date'], $matches);
+        }
+        if (!empty($atts['team']) && !$is_searching) {
+            $matches = $this->data_client->get_matches_by_team($atts['team'], $matches);
+        }
+        if ($is_searching) {
+            $matches = $this->data_client->search_matches($atts['search'], $matches);
+        }
+
+        if (empty($matches)) {
+            return '<p>' . esc_html__('No hay predicciones disponibles.', 'partidos-hoy') . '</p>';
+        }
+
+        $limit = intval($atts['limit']);
+        $page = max(1, intval($atts['page']));
+        $total_matches = count($matches);
+        $total_pages = ceil($total_matches / $limit);
+        $offset = ($page - 1) * $limit;
+        $matches_page = array_slice($matches, $offset, $limit);
+
+        ob_start();
+        ?>
+        <div class="ph-search-container">
+            <form method="get" class="ph-search-form">
+                <input type="text" name="search" class="ph-search-input"
+                       placeholder="<?php esc_attr_e('Buscar equipo...', 'partidos-hoy'); ?>"
+                       value="<?php echo esc_attr($atts['search']); ?>" />
+                <button type="submit" class="ph-search-btn"><?php esc_html_e('Buscar', 'partidos-hoy'); ?></button>
+            </form>
+        </div>
+        <?php if ($accuracy['total'] > 0): ?>
+        <div class="ph-accuracy-bar">
+            <?php printf(
+                '📊 ' . esc_html__('Precisión de predicciones: %d/%d (%s%%)', 'partidos-hoy'),
+                $accuracy['correct'],
+                $accuracy['total'],
+                $accuracy['pct']
+            ); ?>
+        </div>
+        <?php endif; ?>
+        <div class="ph-grid">
+            <?php foreach ($matches_page as $match): ?>
+            <?php
+                $date_str = isset($match['date']) ? $match['date'] : '';
+                $formatted_date = $date_str ? date_i18n('d M Y', strtotime($date_str)) : '';
+                $venue = isset($match['venue']) ? $match['venue'] : '';
+                $home_team = isset($match['home']) ? $match['home'] : '';
+                $away_team = isset($match['away']) ? $match['away'] : '';
+                $home_team_display = $home_team ? ph_translate_team($home_team) : __('Por definir', 'partidos-hoy');
+                $away_team_display = $away_team ? ph_translate_team($away_team) : __('Por definir', 'partidos-hoy');
+                $stage_name = isset($match['stage']) ? $match['stage'] : '';
+                $home_prob = isset($match['probabilities']['home']) ? $match['probabilities']['home'] : 0;
+                $draw_prob = isset($match['probabilities']['draw']) ? $match['probabilities']['draw'] : 0;
+                $away_prob = isset($match['probabilities']['away']) ? $match['probabilities']['away'] : 0;
+            ?>
+            <div class="ph-card">
+                <?php
+                $result = $this->get_match_result($match, $saved_results);
+                $has_result = $result !== null;
+                ?>
+                <?php if ($formatted_date || $venue || ($stage_name && $stage_name !== 'group')): ?>
+                <div class="ph-card-banner">
+                    <?php if ($stage_name && $stage_name !== 'group'): ?>
+                        <span class="ph-stage-badge"><?php echo esc_html(ph_translate_stage($stage_name)); ?></span>
+                    <?php endif; ?>
+                    <?php if ($formatted_date): ?>
+                        <span class="ph-banner-date">🗓️ <?php echo esc_html($formatted_date); ?></span>
+                    <?php endif; ?>
+                    <?php if ($venue && $venue !== 'TBD'): ?>
+                        <span class="ph-banner-venue">📍 <?php echo esc_html($venue); ?></span>
+                    <?php endif; ?>
+                    <?php if ($has_result): ?>
+                        <span class="ph-result-badge">✅ <?php esc_html_e('Finalizado', 'partidos-hoy'); ?></span>
+                    <?php endif; ?>
+                </div>
+                <?php endif; ?>
+                <div class="ph-card-header">
+                    <?php if ($has_result): ?>
+                        <span class="ph-team ph-home"><?php echo $this->get_flag($home_team) . esc_html($home_team_display); ?></span>
+                        <span class="ph-score-display"><?php echo intval($result['home_goals']) . ' - ' . intval($result['away_goals']); ?></span>
+                        <span class="ph-team ph-away"><?php echo $this->get_flag($away_team) . esc_html($away_team_display); ?></span>
+                    <?php else: ?>
+                        <span class="ph-team ph-home"><?php echo $this->get_flag($home_team) . esc_html($home_team_display); ?></span>
+                        <span class="ph-vs">vs</span>
+                        <span class="ph-team ph-away"><?php echo $this->get_flag($away_team) . esc_html($away_team_display); ?></span>
+                    <?php endif; ?>
+                </div>
+                
+                <div class="ph-card-bars">
+                    <div class="ph-bar-container" title="<?php esc_attr_e('Local', 'partidos-hoy'); ?>">
+                        <div class="ph-bar ph-bar-home" style="width: <?php echo $home_prob * 100; ?>%">
+                            <?php echo trim($this->get_flag($home_team)) . ' ' . $this->format_prob($home_prob); ?>
+                        </div>
+                    </div>
+                    <div class="ph-bar-container" title="<?php esc_attr_e('Empate', 'partidos-hoy'); ?>">
+                        <div class="ph-bar ph-bar-draw" style="width: <?php echo $draw_prob * 100; ?>%">
+                            🤝 <?php echo $this->format_prob($draw_prob); ?>
+                        </div>
+                    </div>
+                    <div class="ph-bar-container" title="<?php esc_attr_e('Visitante', 'partidos-hoy'); ?>">
+                        <div class="ph-bar ph-bar-away" style="width: <?php echo $away_prob * 100; ?>%">
+                            <?php echo trim($this->get_flag($away_team)) . ' ' . $this->format_prob($away_prob); ?>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ph-card-footer">
+                    <div class="ph-footer-left">
+                        <div class="ph-xg">
+                            xG: <?php echo isset($match['expected_goals']) ? esc_html($match['expected_goals']['home'] . ' - ' . $match['expected_goals']['away']) : 'N/A'; ?>
+                        </div>
+                        <?php if (isset($match['value_pct'])): ?>
+                        <div class="ph-value-badge" title="Diferencia ELO vs Polymarket">
+                            <?php
+                            $best_val = 0;
+                            $best_label = '';
+                            foreach (['home' => $home_team_display, 'draw' => __('Empate', 'partidos-hoy'), 'away' => $away_team_display] as $key => $label) {
+                                if (isset($match['value_pct'][$key]) && abs($match['value_pct'][$key]) > abs($best_val)) {
+                                    $best_val = $match['value_pct'][$key];
+                                    $best_label = $label;
+                                }
+                            }
+                            if (abs($best_val) >= 15):
+                                $dir = $best_val > 0 ? '▲' : '▼';
+                                $cls = $best_val > 0 ? 'ph-value-over' : 'ph-value-under';
+                            ?>
+                            <span class="ph-value-chip <?php echo $cls; ?>"><?php echo $dir . ' ' . esc_html($best_label) . ' ' . abs($best_val) . '%'; ?></span>
+                            <?php endif; ?>
+                        </div>
+                        <?php endif; ?>
+                    </div>
+                    <div class="ph-share">
+                        <button type="button" class="ph-share-btn" data-home="<?php echo esc_attr($home_team); ?>" data-away="<?php echo esc_attr($away_team); ?>"><?php esc_html_e('Compartir', 'partidos-hoy'); ?></button>
+                        <div class="ph-share-fallback">
+                            <a href="#" class="ph-share-link ph-share-wa" data-action="whatsapp" target="_blank" rel="noopener">WhatsApp</a>
+                            <a href="#" class="ph-share-link ph-share-x" data-action="x" target="_blank" rel="noopener">X</a>
+                            <button type="button" class="ph-share-link ph-share-copy" data-action="copy"><?php esc_html_e('Copiar link', 'partidos-hoy'); ?></button>
+                        </div>
+                    </div>
+                </div>
+
+                <?php if (!empty($match['news_sentiment'])): ?>
+                <details class="ph-news-accordion">
+                    <summary>🗞️ Análisis de Noticias</summary>
+                    <div class="ph-news-content">
+                        <p class="ph-news-text"><?php echo esc_html($match['news_sentiment']); ?></p>
+                        <?php if (!empty($match['news_sources']) && is_array($match['news_sources'])): ?>
+                            <div class="ph-news-sources">
+                                <?php foreach($match['news_sources'] as $idx => $source): ?>
+                                    <a href="<?php echo esc_url($source); ?>" target="_blank" rel="noopener noreferrer" class="ph-source-chip">Fuente <?php echo $idx + 1; ?></a>
+                                <?php endforeach; ?>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </details>
+                <?php endif; ?>
+
+                <details class="ph-historical-accordion">
+                    <summary>📊 Historial en Mundiales</summary>
+                    <div class="ph-historical-content" data-home="<?php echo esc_attr($home_team); ?>" data-away="<?php echo esc_attr($away_team); ?>">
+                        <p class="ph-historical-loading"><?php esc_html_e('Cargando datos históricos...', 'partidos-hoy'); ?></p>
+                    </div>
+                </details>
+                <?php if ($has_result): ?>
+                    <?php echo $this->render_comparison_accordion($match, $result); ?>
+                <?php endif; ?>
+            </div>
+
+            <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "SportsEvent",
+                "name": "<?php echo ph_esc_json($home_team_display); ?> vs <?php echo ph_esc_json($away_team_display); ?>",
+                "startDate": "<?php echo ph_esc_json($date_str); ?>",
+                "location": {
+                    "@type": "Place",
+                    "name": "<?php echo ph_esc_json($venue ?: 'TBD'); ?>"
+                },
+                "competitor": [
+                    { "@type": "SportsTeam", "name": "<?php echo ph_esc_json($home_team_display); ?>" },
+                    { "@type": "SportsTeam", "name": "<?php echo ph_esc_json($away_team_display); ?>" }
+                ],
+                "description": "<?php echo ph_esc_json(sprintf(__('Predicción ELO: %s %s, Empate %s, %s %s', 'partidos-hoy'), $home_team_display, $this->format_prob($home_prob), $this->format_prob($draw_prob), $away_team_display, $this->format_prob($away_prob))); ?>",
+                "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+                "eventStatus": "https://schema.org/EventScheduled"
+            }
+            </script>
+            <?php endforeach; ?>
+        </div>
+
+        <?php if ($total_pages > 1): ?>
+        <div class="ph-pagination">
+            <span class="ph-page-info">
+                <?php printf(esc_html__('Página %d de %d', 'partidos-hoy'), $page, $total_pages); ?>
+            </span>
+            <div class="ph-page-links">
+                <?php if ($page > 1): ?>
+                    <a href="<?php echo esc_url(add_query_arg('ph_page', $page - 1)); ?>" class="ph-page-link">&laquo; <?php esc_html_e('Anterior', 'partidos-hoy'); ?></a>
+                <?php endif; ?>
+                <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                    <a href="<?php echo esc_url(add_query_arg('ph_page', $i)); ?>" class="ph-page-link<?php echo $i === $page ? ' ph-page-active' : ''; ?>"><?php echo $i; ?></a>
+                <?php endfor; ?>
+                <?php if ($page < $total_pages): ?>
+                    <a href="<?php echo esc_url(add_query_arg('ph_page', $page + 1)); ?>" class="ph-page-link"><?php esc_html_e('Siguiente', 'partidos-hoy'); ?> &raquo;</a>
+                <?php endif; ?>
+            </div>
+        </div>
+        <?php endif; ?>
+
+        <p class="ph-footer-info">
+            <?php esc_html_e('Actualizado:', 'partidos-hoy'); ?>
+            <?php echo esc_html($this->data_client->get_predictions()['generated_at'] ?? ''); ?>
+        </p>
+        <p class="ph-disclaimer">
+            <?php esc_html_e('Predicciones generadas por ELO para fines informativos y de entretenimiento. No afiliado con FIFA ni ninguna federación de fútbol.', 'partidos-hoy'); ?>
+        </p>
+        <?php
+        $this->output_historical_js();
+        return ob_get_clean();
+    }
+
+    public function render_single($atts) {
+        $atts = shortcode_atts(array(
+            'home' => '',
+            'away' => '',
+        ), $atts, 'predicciones_partido');
+
+        if (empty($atts['home']) || empty($atts['away'])) {
+            return '<p>' . esc_html__('Especificá home="Equipo" away="Equipo"', 'partidos-hoy') . '</p>';
+        }
+
+        $match = $this->data_client->get_single_match($atts['home'], $atts['away']);
+        $saved_results = $this->data_client->get_match_results();
+        if (!$match) {
+            return '<p>' . esc_html__('Partido no encontrado.', 'partidos-hoy') . '</p>';
+        }
+
+        $date_str = isset($match['date']) ? $match['date'] : '';
+        $formatted_date = $date_str ? date_i18n('d M Y', strtotime($date_str)) : '';
+        $venue = isset($match['venue']) ? $match['venue'] : '';
+        $probs = $match['probabilities'];
+        $home_team = isset($match['home']) ? $match['home'] : '';
+        $away_team = isset($match['away']) ? $match['away'] : '';
+        $home_team_display = ph_translate_team($home_team);
+        $away_team_display = ph_translate_team($away_team);
+        $home_prob = isset($probs['home']) ? $probs['home'] : 0;
+        $draw_prob = isset($probs['draw']) ? $probs['draw'] : 0;
+        $away_prob = isset($probs['away']) ? $probs['away'] : 0;
+
+        $this->single_match_data = $match;
+
+        ob_start();
+        ?>
+        <div class="ph-single-card">
+            <?php
+            $result = $this->get_match_result($match, $saved_results);
+            $has_result = $result !== null;
+            ?>
+            <?php if ($formatted_date || ($venue && $venue !== 'TBD')): ?>
+            <div class="ph-card-banner">
+                <?php if ($formatted_date): ?>
+                    <span class="ph-banner-date">🗓️ <?php echo esc_html($formatted_date); ?></span>
+                <?php endif; ?>
+                <?php if ($venue && $venue !== 'TBD'): ?>
+                    <span class="ph-banner-venue">📍 <?php echo esc_html($venue); ?></span>
+                <?php endif; ?>
+                <?php if ($has_result): ?>
+                    <span class="ph-result-badge">✅ <?php esc_html_e('Finalizado', 'partidos-hoy'); ?></span>
+                <?php endif; ?>
+            </div>
+            <?php endif; ?>
+            <div class="ph-card-header">
+                <?php if ($has_result): ?>
+                    <span class="ph-team ph-home"><?php echo $this->get_flag($home_team) . esc_html($home_team_display); ?></span>
+                    <span class="ph-score-display"><?php echo intval($result['home_goals']) . ' - ' . intval($result['away_goals']); ?></span>
+                    <span class="ph-team ph-away"><?php echo $this->get_flag($away_team) . esc_html($away_team_display); ?></span>
+                <?php else: ?>
+                    <span class="ph-team ph-home"><?php echo $this->get_flag($home_team) . esc_html($home_team_display); ?></span>
+                    <span class="ph-vs">vs</span>
+                    <span class="ph-team ph-away"><?php echo $this->get_flag($away_team) . esc_html($away_team_display); ?></span>
+                <?php endif; ?>
+            </div>
+            
+            <div class="ph-card-bars">
+                <div class="ph-bar-container" title="<?php esc_attr_e('Local', 'partidos-hoy'); ?>">
+                    <div class="ph-bar ph-bar-home" style="width: <?php echo $home_prob * 100; ?>%">
+                        <?php echo trim($this->get_flag($home_team)) . ' ' . $this->format_prob($home_prob); ?>
+                    </div>
+                </div>
+                <div class="ph-bar-container" title="<?php esc_attr_e('Empate', 'partidos-hoy'); ?>">
+                    <div class="ph-bar ph-bar-draw" style="width: <?php echo $draw_prob * 100; ?>%">
+                        🤝 <?php echo $this->format_prob($draw_prob); ?>
+                    </div>
+                </div>
+                <div class="ph-bar-container" title="<?php esc_attr_e('Visitante', 'partidos-hoy'); ?>">
+                    <div class="ph-bar ph-bar-away" style="width: <?php echo $away_prob * 100; ?>%">
+                        <?php echo trim($this->get_flag($away_team)) . ' ' . $this->format_prob($away_prob); ?>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ph-card-footer">
+                <div class="ph-footer-left">
+                    <div class="ph-xg">
+                        xG: <?php echo isset($match['expected_goals']) ? esc_html($match['expected_goals']['home'] . ' - ' . $match['expected_goals']['away']) : 'N/A'; ?>
+                    </div>
+                    <?php if (isset($match['value_pct'])): ?>
+                    <div class="ph-value-badge" title="Diferencia ELO vs Polymarket">
+                        <?php
+                        $best_val = 0;
+                        $best_label = '';
+                        foreach (['home' => $home_team_display, 'draw' => __('Empate', 'partidos-hoy'), 'away' => $away_team_display] as $key => $label) {
+                            if (isset($match['value_pct'][$key]) && abs($match['value_pct'][$key]) > abs($best_val)) {
+                                $best_val = $match['value_pct'][$key];
+                                $best_label = $label;
+                            }
+                        }
+                        if (abs($best_val) >= 15):
+                            $dir = $best_val > 0 ? '▲' : '▼';
+                            $cls = $best_val > 0 ? 'ph-value-over' : 'ph-value-under';
+                        ?>
+                        <span class="ph-value-chip <?php echo $cls; ?>"><?php echo $dir . ' ' . esc_html($best_label) . ' ' . abs($best_val) . '%'; ?></span>
+                        <?php endif; ?>
+                    </div>
+                    <?php endif; ?>
+                </div>
+                <div class="ph-share">
+                    <button type="button" class="ph-share-btn" data-home="<?php echo esc_attr($home_team); ?>" data-away="<?php echo esc_attr($away_team); ?>"><?php esc_html_e('Compartir', 'partidos-hoy'); ?></button>
+                    <div class="ph-share-fallback">
+                        <a href="#" class="ph-share-link ph-share-wa" data-action="whatsapp" target="_blank" rel="noopener">WhatsApp</a>
+                        <a href="#" class="ph-share-link ph-share-x" data-action="x" target="_blank" rel="noopener">X</a>
+                        <button type="button" class="ph-share-link ph-share-copy" data-action="copy"><?php esc_html_e('Copiar link', 'partidos-hoy'); ?></button>
+                    </div>
+                </div>
+            </div>
+
+            <?php if (!empty($match['news_sentiment'])): ?>
+            <details class="ph-news-accordion">
+                <summary>🗞️ Análisis de Noticias</summary>
+                <div class="ph-news-content">
+                    <p class="ph-news-text"><?php echo esc_html($match['news_sentiment']); ?></p>
+                    <?php if (!empty($match['news_sources']) && is_array($match['news_sources'])): ?>
+                        <div class="ph-news-sources">
+                            <?php foreach($match['news_sources'] as $idx => $source): ?>
+                                <a href="<?php echo esc_url($source); ?>" target="_blank" rel="noopener noreferrer" class="ph-source-chip">Fuente <?php echo $idx + 1; ?></a>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </details>
+            <?php endif; ?>
+
+            <details class="ph-historical-accordion">
+                <summary>📊 Historial en Mundiales</summary>
+                <div class="ph-historical-content" data-home="<?php echo esc_attr($home_team); ?>" data-away="<?php echo esc_attr($away_team); ?>">
+                    <p class="ph-historical-loading"><?php esc_html_e('Cargando datos históricos...', 'partidos-hoy'); ?></p>
+                </div>
+            </details>
+            <?php if ($has_result): ?>
+                <?php echo $this->render_comparison_accordion($match, $result); ?>
+            <?php endif; ?>
+        </div>
+
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "SportsEvent",
+            "name": "<?php echo ph_esc_json($home_team_display); ?> vs <?php echo ph_esc_json($away_team_display); ?>",
+            "startDate": "<?php echo ph_esc_json($date_str); ?>",
+            "location": {
+                "@type": "Place",
+                "name": "<?php echo ph_esc_json($venue ?: 'TBD'); ?>"
+            },
+            "competitor": [
+                { "@type": "SportsTeam", "name": "<?php echo ph_esc_json($home_team_display); ?>" },
+                { "@type": "SportsTeam", "name": "<?php echo ph_esc_json($away_team_display); ?>" }
+            ],
+            "description": "<?php echo ph_esc_json(sprintf(__('Predicción ELO: %s %s, Empate %s, %s %s', 'partidos-hoy'), $home_team_display, $this->format_prob($home_prob), $this->format_prob($draw_prob), $away_team_display, $this->format_prob($away_prob))); ?>",
+            "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+            "eventStatus": "https://schema.org/EventScheduled"
+        }
+        </script>
+        <?php
+        $this->output_historical_js();
+        return ob_get_clean();
+    }
+
+    private function format_prob($prob) {
+        return round(floatval($prob) * 100) . '%';
+    }
+
+    private function get_highlight_class($probs, $key) {
+        $values = array('home' => $probs['home'], 'draw' => $probs['draw'], 'away' => $probs['away']);
+        arsort($values);
+        return (array_key_first($values) === $key) ? 'yes' : 'no';
+    }
+
+    private function get_flag($team_name) {
+        return ph_get_flag($team_name);
+    }
+
+    private function get_match_result(array $match, array $saved_results) {
+        $mid = isset($match['id']) ? intval($match['id']) : 0;
+        return ($mid > 0 && isset($saved_results[$mid])) ? $saved_results[$mid] : null;
+    }
+
+    private function render_comparison_accordion(array $match, array $result) {
+        $home = $match['home'] ?? '';
+        $away = $match['away'] ?? '';
+        $probs = $match['probabilities'] ?? array();
+
+        $home_goals = intval($result['home_goals']);
+        $away_goals = intval($result['away_goals']);
+
+        $max_prob = !empty($probs) ? max($probs) : 0;
+        $max_keys = !empty($probs) ? array_keys($probs, $max_prob) : array();
+        $predicted = (count($max_keys) === 1) ? $max_keys[0] : 'uncertain';
+
+        $actual = $home_goals > $away_goals ? 'home' : ($away_goals > $home_goals ? 'away' : 'draw');
+
+        if ($predicted === 'uncertain') {
+            $correct = null;
+        } else {
+            $correct = ($predicted === $actual);
+        }
+
+        $labels = array(
+            'home' => ph_translate_team($home),
+            'draw' => __('Empate', 'partidos-hoy'),
+            'away' => ph_translate_team($away),
+        );
+
+        ob_start();
+        ?>
+        <details class="ph-comparison-accordion">
+            <summary>📊 <?php esc_html_e('Resultado vs Predicción', 'partidos-hoy'); ?></summary>
+            <div class="ph-comparison-content">
+                <div class="ph-comparison-prediction">
+                    <strong><?php esc_html_e('Predicción:', 'partidos-hoy'); ?></strong>
+                    <?php foreach (array('home', 'draw', 'away') as $key):
+                        $pct = isset($probs[$key]) ? round(floatval($probs[$key]) * 100) : 0;
+                        $flag = $key === 'home' ? $this->get_flag($home) : ($key === 'away' ? $this->get_flag($away) : '');
+                    ?>
+                        <span class="ph-comp-item <?php echo $key === $actual ? 'ph-comp-actual' : ''; ?>">
+                            <?php echo $flag . esc_html($labels[$key]) . ' ' . $pct . '%'; ?>
+                        </span>
+                        <?php if ($key !== 'away'): ?>
+                            <span class="ph-comp-sep">|</span>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
+                <div class="ph-comparison-result">
+                    <strong><?php esc_html_e('Resultado:', 'partidos-hoy'); ?></strong>
+                    <?php printf('%d - %d', $home_goals, $away_goals); ?>
+                    →
+                    <?php if ($correct === true): ?>
+                        <span class="ph-comp-correct">✅ <?php esc_html_e('Acertado', 'partidos-hoy'); ?>
+                            (<?php printf(esc_html__('se pronosticó %s', 'partidos-hoy'), esc_html($labels[$predicted])); ?>)
+                        </span>
+                    <?php elseif ($correct === false): ?>
+                        <span class="ph-comp-wrong">❌ <?php esc_html_e('Falló', 'partidos-hoy'); ?>
+                            (<?php printf(esc_html__('se pronosticó %s', 'partidos-hoy'), esc_html($labels[$predicted])); ?>)
+                        </span>
+                    <?php else: ?>
+                        <span class="ph-comp-uncertain">🤷 <?php esc_html_e('Incierto (probabilidades empatadas)', 'partidos-hoy'); ?></span>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </details>
+        <?php
+        return ob_get_clean();
+    }
+
+    public function add_og_meta_tags() {
+        if ($this->seo_plugin_active()) {
+            return;
+        }
+
+        $post = get_queried_object();
+        $og_title = '';
+        $og_description = '';
+        $og_image = '';
+
+        if ($post instanceof WP_Post) {
+            $content = $post->post_content;
+            $pattern = get_shortcode_regex(array('predicciones_partido'));
+            if (preg_match('/' . $pattern . '/s', $content, $matches)) {
+                $shortcode_content = $matches[5];
+                $atts = shortcode_parse_atts($shortcode_content);
+                $home = isset($atts['home']) ? $atts['home'] : '';
+                $away = isset($atts['away']) ? $atts['away'] : '';
+                if ($home && $away) {
+                    $home_display = ph_translate_team($home);
+                    $away_display = ph_translate_team($away);
+                    $og_title = sprintf(__('%s vs %s - Predicción Partidos Hoy', 'partidos-hoy'), $home_display, $away_display);
+                    $og_description = sprintf(__('Pronóstico ELO para %s vs %s. Probabilidades, análisis y más.', 'partidos-hoy'), $home_display, $away_display);
+                    $og_image = get_the_post_thumbnail_url($post, 'large') ?: '';
+                }
+            }
+        }
+
+        if (empty($og_title)) {
+            $og_title = get_bloginfo('name');
+            $og_description = get_bloginfo('description');
+        }
+
+        if (empty($og_image)) {
+            $og_image = get_site_icon_url() ?: '';
+        }
+        ?>
+        <meta property="og:title" content="<?php echo esc_attr($og_title); ?>" />
+        <meta property="og:description" content="<?php echo esc_attr($og_description); ?>" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="<?php echo esc_url(get_permalink()); ?>" />
+        <meta property="og:site_name" content="<?php echo esc_attr(get_bloginfo('name')); ?>" />
+        <?php if ($og_image): ?>
+        <meta property="og:image" content="<?php echo esc_url($og_image); ?>" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <?php endif; ?>
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="<?php echo esc_attr($og_title); ?>" />
+        <meta name="twitter:description" content="<?php echo esc_attr($og_description); ?>" />
+        <?php
+    }
+
+    private function seo_plugin_active() {
+        if (defined('RANK_MATH_VERSION')) return true;
+        if (defined('WPSEO_VERSION')) return true;
+        if (defined('AIOSEOP_VERSION')) return true;
+        if (defined('SEOPRESS_VERSION')) return true;
+        if (class_exists('The_Seo_Framework\The_Seo_Framework')) return true;
+        if (defined('SQ_VERSION')) return true;
+        return false;
+    }
+
+    private function output_historical_js() {
+        static $js_loaded = false;
+        if ($js_loaded) {
+            return;
+        }
+        $js_loaded = true;
+        ?>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.ph-historical-content').forEach(function(container) {
+                var home = container.getAttribute('data-home');
+                var away = container.getAttribute('data-away');
+                if (!home || !away) return;
+
+                var ajaxUrl = '<?php echo esc_js(admin_url('admin-ajax.php')); ?>';
+                fetch(ajaxUrl + '?action=ph_historical&ph_nonce=' + encodeURIComponent('<?php echo esc_js(wp_create_nonce('ph_historical')); ?>') + '&home=' + encodeURIComponent(home) + '&away=' + encodeURIComponent(away))
+                    .then(function(r) { return r.json(); })
+                    .then(function(response) {
+                        var matches = response.success ? response.data : [];
+                        if (matches.length === 0) {
+                            container.innerHTML = '<p class="ph-historical-loading"><?php echo esc_js(__('No hay registros históricos de este enfrentamiento.', 'partidos-hoy')); ?></p>';
+                            return;
+                        }
+                        var lines = [];
+                        matches.forEach(function(m) {
+                            var score = m.home_score + '-' + m.away_score;
+                            if (m.penalty_shootout && m.score_penalties) {
+                                score += ' (pen: ' + m.score_penalties + ')';
+                            }
+                            var stage = m.stage ? m.stage.charAt(0).toUpperCase() + m.stage.slice(1) : '';
+                            var scorers = '';
+                            if (m.scorers && m.scorers.length > 0) {
+                                scorers = m.scorers.slice(0, 4).map(function(s) {
+                                    var text = s.player.replace(/^not applicable /, '');
+                                    if (s.minute) text += ' ' + s.minute + '\'';
+                                    if (s.type === 'penalty') text += ' (p)';
+                                    if (s.type === 'own_goal') text += ' (og)';
+                                    return text;
+                                }).join(', ');
+                                if (m.scorers.length > 4) scorers += '...';
+                            }
+                            var line = m.year + ' (' + stage + '): ' + m.home_team + ' ' + score + ' ' + m.away_team;
+                            if (scorers) line += ' — ' + scorers;
+                            lines.push(line);
+                        });
+                        container.innerHTML = '<div class="ph-historical-lines">' + lines.join('<br>') + '</div>';
+                    })
+                    .catch(function() {
+                        container.innerHTML = '<p class="ph-historical-loading"><?php echo esc_js(__('Error al cargar datos históricos.', 'partidos-hoy')); ?></p>';
+                    });
+            });
+
+            document.querySelectorAll('.ph-share-btn').forEach(function(btn) {
+                btn.addEventListener('click', function(e) {
+                    var home = btn.getAttribute('data-home');
+                    var away = btn.getAttribute('data-away');
+                    var text = '<?php echo esc_js(__('Predicciones', 'partidos-hoy')); ?> ' + home + ' vs ' + away;
+                    var url = window.location.href;
+
+                    if (navigator.share) {
+                        navigator.share({ title: text, text: text, url: url }).catch(function() {});
+                        return;
+                    }
+
+                    var fallback = btn.parentNode.querySelector('.ph-share-fallback');
+                    var isVisible = fallback.style.display !== 'none';
+                    fallback.style.display = isVisible ? 'none' : 'flex';
+
+                    if (!isVisible) {
+                        var wa = fallback.querySelector('.ph-share-wa');
+                        var x = fallback.querySelector('.ph-share-x');
+                        var copy = fallback.querySelector('.ph-share-copy');
+                        wa.href = 'https://wa.me/?text=' + encodeURIComponent(text + ' ' + url);
+                        x.href = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(url);
+                        copy.onclick = function(ce) {
+                            ce.preventDefault();
+                            navigator.clipboard.writeText(url).then(function() {
+                                copy.textContent = '<?php echo esc_js(__('¡Copiado!', 'partidos-hoy')); ?>';
+                                setTimeout(function() { copy.textContent = '<?php echo esc_js(__('Copiar link', 'partidos-hoy')); ?>'; }, 2000);
+                            });
+                        };
+                    }
+                });
+            });
+        });
+        </script>
+        <?php
+    }
+}

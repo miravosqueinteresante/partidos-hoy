@@ -1,0 +1,3426 @@
+{
+    "generated_at":  "2026-06-03 04:40:02 UTC",
+    "model":  "World Football Elo Ratings (eloratings.net)",
+    "model_version":  "1.0.0-elo",
+    "notes":  "Predicciones basadas en Elo ratings. Polymarket odds via gamma-api.polymarket.com.",
+    "matches":  [
+                    {
+                        "id":  1,
+                        "home":  "Mexico",
+                        "away":  "South Africa",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-11",
+                        "stage":  "group",
+                        "venue":  "Estadio Azteca, Mexico City",
+                        "group":  "A",
+                        "probabilities":  {
+                                              "home":  0.7331,
+                                              "draw":  0.2122,
+                                              "away":  0.0547
+                                          },
+                        "expected_goals":  {
+                                               "home":  2.04,
+                                               "away":  0.35
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.685,
+                                           "draw":  0.215,
+                                           "away":  0.115
+                                       },
+                        "value_pct":  {
+                                          "home":  7.0,
+                                          "draw":  -1.3,
+                                          "away":  -52.4
+                                      }
+                    },
+                    {
+                        "id":  2,
+                        "home":  "Korea Republic",
+                        "away":  "Czechia",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-11",
+                        "stage":  "group",
+                        "venue":  "Estadio Akron, Zapopan",
+                        "group":  "A",
+                        "probabilities":  {
+                                              "home":  0.4728,
+                                              "draw":  0.2943,
+                                              "away":  0.2329
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.48,
+                                               "away":  0.88
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.365,
+                                           "draw":  0.305,
+                                           "away":  0.335
+                                       },
+                        "value_pct":  {
+                                          "home":  29.5,
+                                          "draw":  -3.5,
+                                          "away":  -30.5
+                                      }
+                    },
+                    {
+                        "id":  3,
+                        "home":  "Canada",
+                        "away":  "Bosnia and Herzegovina",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-12",
+                        "stage":  "group",
+                        "venue":  "BMO Field, Toronto",
+                        "group":  "B",
+                        "probabilities":  {
+                                              "home":  0.6314,
+                                              "draw":  0.2517,
+                                              "away":  0.1169
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.83,
+                                               "away":  0.54
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.535,
+                                           "draw":  0.265,
+                                           "away":  0.205
+                                       },
+                        "value_pct":  {
+                                          "home":  18.0,
+                                          "draw":  -5.0,
+                                          "away":  -43.0
+                                      }
+                    },
+                    {
+                        "id":  4,
+                        "home":  "USA",
+                        "away":  "Paraguay",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-12",
+                        "stage":  "group",
+                        "venue":  "SoFi Stadium, Inglewood",
+                        "group":  "D",
+                        "probabilities":  {
+                                              "home":  0.3625,
+                                              "draw":  0.275,
+                                              "away":  0.3625
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.18,
+                                               "away":  1.18
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.485,
+                                           "draw":  0.275,
+                                           "away":  0.235
+                                       },
+                        "value_pct":  {
+                                          "home":  -25.3,
+                                          "draw":  0.0,
+                                          "away":  54.3
+                                      }
+                    },
+                    {
+                        "id":  5,
+                        "home":  "Haiti",
+                        "away":  "Scotland",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-13",
+                        "stage":  "group",
+                        "venue":  "Gillette Stadium, Foxborough",
+                        "group":  "C",
+                        "probabilities":  {
+                                              "home":  0.2364,
+                                              "draw":  0.2405,
+                                              "away":  0.5231
+                                          },
+                        "expected_goals":  {
+                                               "home":  0.83,
+                                               "away":  1.55
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.135,
+                                           "draw":  0.195,
+                                           "away":  0.675
+                                       },
+                        "value_pct":  {
+                                          "home":  75.1,
+                                          "draw":  23.3,
+                                          "away":  -22.5
+                                      }
+                    },
+                    {
+                        "id":  6,
+                        "home":  "Australia",
+                        "away":  "TÃ¼rkiye",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-13",
+                        "stage":  "group",
+                        "venue":  "BC Place, Vancouver",
+                        "group":  "D",
+                        "probabilities":  {
+                                              "home":  0.3375,
+                                              "draw":  0.2682,
+                                              "away":  0.3943
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.11,
+                                               "away":  1.25
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.195,
+                                           "draw":  0.265,
+                                           "away":  0.545
+                                       },
+                        "value_pct":  {
+                                          "home":  73.1,
+                                          "draw":  1.2,
+                                          "away":  -27.7
+                                      }
+                    },
+                    {
+                        "id":  7,
+                        "home":  "Brazil",
+                        "away":  "Morocco",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-13",
+                        "stage":  "group",
+                        "venue":  "MetLife Stadium, East Rutherford",
+                        "group":  "C",
+                        "probabilities":  {
+                                              "home":  0.6096,
+                                              "draw":  0.2585,
+                                              "away":  0.1319
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.78,
+                                               "away":  0.59
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.605,
+                                           "draw":  0.245,
+                                           "away":  0.165
+                                       },
+                        "value_pct":  {
+                                          "home":  0.8,
+                                          "draw":  5.5,
+                                          "away":  -20.1
+                                      }
+                    },
+                    {
+                        "id":  8,
+                        "home":  "Qatar",
+                        "away":  "Switzerland",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-13",
+                        "stage":  "group",
+                        "venue":  "Levi\u0027s Stadium, Santa Clara",
+                        "group":  "B",
+                        "probabilities":  {
+                                              "home":  0.0864,
+                                              "draw":  0.1822,
+                                              "away":  0.7313
+                                          },
+                        "expected_goals":  {
+                                               "home":  0.4,
+                                               "away":  2.01
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.0675,
+                                           "draw":  0.145,
+                                           "away":  0.795
+                                       },
+                        "value_pct":  {
+                                          "home":  28.0,
+                                          "draw":  25.7,
+                                          "away":  -8.0
+                                      }
+                    },
+                    {
+                        "id":  9,
+                        "home":  "CÃ´te d\u0027Ivoire",
+                        "away":  "Ecuador",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-14",
+                        "stage":  "group",
+                        "venue":  "Lincoln Financial Field, Philadelphia",
+                        "group":  "E",
+                        "probabilities":  {
+                                              "home":  0.2187,
+                                              "draw":  0.2352,
+                                              "away":  0.5461
+                                          },
+                        "expected_goals":  {
+                                               "home":  0.78,
+                                               "away":  1.6
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.255,
+                                           "draw":  0.335,
+                                           "away":  0.405
+                                       },
+                        "value_pct":  {
+                                          "home":  -14.2,
+                                          "draw":  -29.8,
+                                          "away":  34.8
+                                      }
+                    },
+                    {
+                        "id":  10,
+                        "home":  "Germany",
+                        "away":  "CuraÃ§ao",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-14",
+                        "stage":  "group",
+                        "venue":  "NRG Stadium, Houston",
+                        "group":  "E",
+                        "probabilities":  {
+                                              "home":  0.7782,
+                                              "draw":  0.1729,
+                                              "away":  0.0488
+                                          },
+                        "expected_goals":  {
+                                               "home":  2.12,
+                                               "away":  0.29
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.9405,
+                                           "draw":  0.043,
+                                           "away":  0.0185
+                                       },
+                        "value_pct":  {
+                                          "home":  -17.3,
+                                          "draw":  302.1,
+                                          "away":  163.8
+                                      }
+                    },
+                    {
+                        "id":  11,
+                        "home":  "Netherlands",
+                        "away":  "Japan",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-14",
+                        "stage":  "group",
+                        "venue":  "AT\u0026T Stadium, Arlington",
+                        "group":  "F",
+                        "probabilities":  {
+                                              "home":  0.5063,
+                                              "draw":  0.2863,
+                                              "away":  0.2074
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.55,
+                                               "away":  0.8
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.495,
+                                           "draw":  0.265,
+                                           "away":  0.255
+                                       },
+                        "value_pct":  {
+                                          "home":  2.3,
+                                          "draw":  8.0,
+                                          "away":  -18.7
+                                      }
+                    },
+                    {
+                        "id":  12,
+                        "home":  "Sweden",
+                        "away":  "Tunisia",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-14",
+                        "stage":  "group",
+                        "venue":  "Estadio BBVA, Guadalupe",
+                        "group":  "F",
+                        "probabilities":  {
+                                              "home":  0.5344,
+                                              "draw":  0.2792,
+                                              "away":  0.1864
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.62,
+                                               "away":  0.75
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.495,
+                                           "draw":  0.295,
+                                           "away":  0.225
+                                       },
+                        "value_pct":  {
+                                          "home":  8.0,
+                                          "draw":  -5.4,
+                                          "away":  -17.2
+                                      }
+                    },
+                    {
+                        "id":  13,
+                        "home":  "Saudi Arabia",
+                        "away":  "Uruguay",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-15",
+                        "stage":  "group",
+                        "venue":  "Hard Rock Stadium, Miami Gardens",
+                        "group":  "H",
+                        "probabilities":  {
+                                              "home":  0.1672,
+                                              "draw":  0.2185,
+                                              "away":  0.6143
+                                          },
+                        "expected_goals":  {
+                                               "home":  0.64,
+                                               "away":  1.75
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.125,
+                                           "draw":  0.215,
+                                           "away":  0.655
+                                       },
+                        "value_pct":  {
+                                          "home":  33.8,
+                                          "draw":  1.6,
+                                          "away":  -6.2
+                                      }
+                    },
+                    {
+                        "id":  14,
+                        "home":  "Spain",
+                        "away":  "Cabo Verde",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-15",
+                        "stage":  "group",
+                        "venue":  "Mercedes-Benz Stadium, Atlanta",
+                        "group":  "H",
+                        "probabilities":  {
+                                              "home":  0.804,
+                                              "draw":  0.1477,
+                                              "away":  0.0483
+                                          },
+                        "expected_goals":  {
+                                               "home":  2.16,
+                                               "away":  0.27
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.895,
+                                           "draw":  0.0775,
+                                           "away":  0.0345
+                                       },
+                        "value_pct":  {
+                                          "home":  -10.2,
+                                          "draw":  90.6,
+                                          "away":  40.0
+                                      }
+                    },
+                    {
+                        "id":  15,
+                        "home":  "IR Iran",
+                        "away":  "New Zealand",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-15",
+                        "stage":  "group",
+                        "venue":  "SoFi Stadium, Inglewood",
+                        "group":  "G",
+                        "probabilities":  {
+                                              "home":  0.6203,
+                                              "draw":  0.2552,
+                                              "away":  0.1245
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.81,
+                                               "away":  0.57
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.495,
+                                           "draw":  0.275,
+                                           "away":  0.225
+                                       },
+                        "value_pct":  {
+                                          "home":  25.3,
+                                          "draw":  -7.2,
+                                          "away":  -44.7
+                                      }
+                    },
+                    {
+                        "id":  16,
+                        "home":  "Belgium",
+                        "away":  "Egypt",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-15",
+                        "stage":  "group",
+                        "venue":  "Lumen Field, Seattle",
+                        "group":  "G",
+                        "probabilities":  {
+                                              "home":  0.6113,
+                                              "draw":  0.258,
+                                              "away":  0.1307
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.79,
+                                               "away":  0.58
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.595,
+                                           "draw":  0.235,
+                                           "away":  0.175
+                                       },
+                        "value_pct":  {
+                                          "home":  2.7,
+                                          "draw":  9.8,
+                                          "away":  -25.3
+                                      }
+                    },
+                    {
+                        "id":  17,
+                        "home":  "France",
+                        "away":  "Senegal",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-16",
+                        "stage":  "group",
+                        "venue":  "MetLife Stadium, East Rutherford",
+                        "group":  "I",
+                        "probabilities":  {
+                                              "home":  0.648,
+                                              "draw":  0.2462,
+                                              "away":  0.1057
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.87,
+                                               "away":  0.51
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.685,
+                                           "draw":  0.205,
+                                           "away":  0.125
+                                       },
+                        "value_pct":  {
+                                          "home":  -5.4,
+                                          "draw":  20.1,
+                                          "away":  -15.4
+                                      }
+                    },
+                    {
+                        "id":  18,
+                        "home":  "Iraq",
+                        "away":  "Norway",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-16",
+                        "stage":  "group",
+                        "venue":  "Gillette Stadium, Foxborough",
+                        "group":  "I",
+                        "probabilities":  {
+                                              "home":  0.1832,
+                                              "draw":  0.224,
+                                              "away":  0.5928
+                                          },
+                        "expected_goals":  {
+                                               "home":  0.68,
+                                               "away":  1.71
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.065,
+                                           "draw":  0.135,
+                                           "away":  0.805
+                                       },
+                        "value_pct":  {
+                                          "home":  181.8,
+                                          "draw":  65.9,
+                                          "away":  -26.4
+                                      }
+                    },
+                    {
+                        "id":  19,
+                        "home":  "Argentina",
+                        "away":  "Algeria",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-16",
+                        "stage":  "group",
+                        "venue":  "Arrowhead Stadium, Kansas City",
+                        "group":  "J",
+                        "probabilities":  {
+                                              "home":  0.7426,
+                                              "draw":  0.2074,
+                                              "away":  0.05
+                                          },
+                        "expected_goals":  {
+                                               "home":  2.06,
+                                               "away":  0.33
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.695,
+                                           "draw":  0.205,
+                                           "away":  0.105
+                                       },
+                        "value_pct":  {
+                                          "home":  6.8,
+                                          "draw":  1.2,
+                                          "away":  -52.4
+                                      }
+                    },
+                    {
+                        "id":  20,
+                        "home":  "Austria",
+                        "away":  "Jordan",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-16",
+                        "stage":  "group",
+                        "venue":  "Levi\u0027s Stadium, Santa Clara",
+                        "group":  "J",
+                        "probabilities":  {
+                                              "home":  0.5892,
+                                              "draw":  0.2645,
+                                              "away":  0.1463
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.74,
+                                               "away":  0.63
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.735,
+                                           "draw":  0.175,
+                                           "away":  0.095
+                                       },
+                        "value_pct":  {
+                                          "home":  -19.8,
+                                          "draw":  51.1,
+                                          "away":  54.0
+                                      }
+                    },
+                    {
+                        "id":  21,
+                        "home":  "Ghana",
+                        "away":  "Panama",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-17",
+                        "stage":  "group",
+                        "venue":  "Toronto Stadium, Toronto",
+                        "group":  "L",
+                        "probabilities":  {
+                                              "home":  0.2433,
+                                              "draw":  0.2425,
+                                              "away":  0.5142
+                                          },
+                        "expected_goals":  {
+                                               "home":  0.85,
+                                               "away":  1.53
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.475,
+                                           "draw":  0.275,
+                                           "away":  0.255
+                                       },
+                        "value_pct":  {
+                                          "home":  -48.8,
+                                          "draw":  -11.8,
+                                          "away":  101.6
+                                      }
+                    },
+                    {
+                        "id":  22,
+                        "home":  "England",
+                        "away":  "Croatia",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-17",
+                        "stage":  "group",
+                        "venue":  "AT\u0026T Stadium, Arlington",
+                        "group":  "L",
+                        "probabilities":  {
+                                              "home":  0.5412,
+                                              "draw":  0.2775,
+                                              "away":  0.1813
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.63,
+                                               "away":  0.73
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.565,
+                                           "draw":  0.255,
+                                           "away":  0.195
+                                       },
+                        "value_pct":  {
+                                          "home":  -4.2,
+                                          "draw":  8.8,
+                                          "away":  -7.0
+                                      }
+                    },
+                    {
+                        "id":  23,
+                        "home":  "Portugal",
+                        "away":  "Congo DR",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-17",
+                        "stage":  "group",
+                        "venue":  "NRG Stadium, Houston",
+                        "group":  "K",
+                        "probabilities":  {
+                                              "home":  0.8509,
+                                              "draw":  0.1013,
+                                              "away":  0.0479
+                                          },
+                        "expected_goals":  {
+                                               "home":  2.23,
+                                               "away":  0.22
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.775,
+                                           "draw":  0.155,
+                                           "away":  0.075
+                                       },
+                        "value_pct":  {
+                                          "home":  9.8,
+                                          "draw":  -34.6,
+                                          "away":  -36.1
+                                      }
+                    },
+                    {
+                        "id":  24,
+                        "home":  "Uzbekistan",
+                        "away":  "Colombia",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-17",
+                        "stage":  "group",
+                        "venue":  "Estadio Azteca, Mexico City",
+                        "group":  "K",
+                        "probabilities":  {
+                                              "home":  0.2279,
+                                              "draw":  0.238,
+                                              "away":  0.5341
+                                          },
+                        "expected_goals":  {
+                                               "home":  0.81,
+                                               "away":  1.57
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.105,
+                                           "draw":  0.205,
+                                           "away":  0.695
+                                       },
+                        "value_pct":  {
+                                          "home":  117.0,
+                                          "draw":  16.1,
+                                          "away":  -23.2
+                                      }
+                    },
+                    {
+                        "id":  25,
+                        "home":  "Czechia",
+                        "away":  "South Africa",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-18",
+                        "stage":  "group",
+                        "venue":  "Mercedes-Benz Stadium, Atlanta",
+                        "group":  "A",
+                        "probabilities":  {
+                                              "home":  0.6488,
+                                              "draw":  0.246,
+                                              "away":  0.1052
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.87,
+                                               "away":  0.51
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.485,
+                                           "draw":  0.295,
+                                           "away":  0.22
+                                       },
+                        "value_pct":  {
+                                          "home":  33.8,
+                                          "draw":  -16.6,
+                                          "away":  -52.2
+                                      }
+                    },
+                    {
+                        "id":  26,
+                        "home":  "Switzerland",
+                        "away":  "Bosnia and Herzegovina",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-18",
+                        "stage":  "group",
+                        "venue":  "SoFi Stadium, Inglewood",
+                        "group":  "B",
+                        "probabilities":  {
+                                              "home":  0.7063,
+                                              "draw":  0.2243,
+                                              "away":  0.0694
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.99,
+                                               "away":  0.4
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.615,
+                                           "draw":  0.235,
+                                           "away":  0.155
+                                       },
+                        "value_pct":  {
+                                          "home":  14.8,
+                                          "draw":  -4.6,
+                                          "away":  -55.2
+                                      }
+                    },
+                    {
+                        "id":  27,
+                        "home":  "Canada",
+                        "away":  "Qatar",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-18",
+                        "stage":  "group",
+                        "venue":  "BC Place, Vancouver",
+                        "group":  "B",
+                        "probabilities":  {
+                                              "home":  0.7383,
+                                              "draw":  0.2097,
+                                              "away":  0.052
+                                          },
+                        "expected_goals":  {
+                                               "home":  2.06,
+                                               "away":  0.34
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.725,
+                                           "draw":  0.185,
+                                           "away":  0.09
+                                       },
+                        "value_pct":  {
+                                          "home":  1.8,
+                                          "draw":  13.4,
+                                          "away":  -42.2
+                                      }
+                    },
+                    {
+                        "id":  28,
+                        "home":  "Mexico",
+                        "away":  "Korea Republic",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-18",
+                        "stage":  "group",
+                        "venue":  "Estadio Akron, Zapopan",
+                        "group":  "A",
+                        "probabilities":  {
+                                              "home":  0.5621,
+                                              "draw":  0.272,
+                                              "away":  0.1659
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.68,
+                                               "away":  0.69
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.525,
+                                           "draw":  0.28,
+                                           "away":  0.21
+                                       },
+                        "value_pct":  {
+                                          "home":  7.1,
+                                          "draw":  -2.9,
+                                          "away":  -21.0
+                                      }
+                    },
+                    {
+                        "id":  29,
+                        "home":  "Brazil",
+                        "away":  "Haiti",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-19",
+                        "stage":  "group",
+                        "venue":  "Lincoln Financial Field, Philadelphia",
+                        "group":  "C",
+                        "probabilities":  {
+                                              "home":  0.7682,
+                                              "draw":  0.1827,
+                                              "away":  0.0491
+                                          },
+                        "expected_goals":  {
+                                               "home":  2.1,
+                                               "away":  0.31
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.925,
+                                           "draw":  0.067,
+                                           "away":  0.0205
+                                       },
+                        "value_pct":  {
+                                          "home":  -17.0,
+                                          "draw":  172.7,
+                                          "away":  139.5
+                                      }
+                    },
+                    {
+                        "id":  30,
+                        "home":  "Scotland",
+                        "away":  "Morocco",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-19",
+                        "stage":  "group",
+                        "venue":  "Gillette Stadium, Foxborough",
+                        "group":  "C",
+                        "probabilities":  {
+                                              "home":  0.4054,
+                                              "draw":  0.287,
+                                              "away":  0.3076
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.3,
+                                               "away":  1.06
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.225,
+                                           "draw":  0.295,
+                                           "away":  0.495
+                                       },
+                        "value_pct":  {
+                                          "home":  80.2,
+                                          "draw":  -2.7,
+                                          "away":  -37.9
+                                      }
+                    },
+                    {
+                        "id":  31,
+                        "home":  "TÃ¼rkiye",
+                        "away":  "Paraguay",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-19",
+                        "stage":  "group",
+                        "venue":  "Levi\u0027s Stadium, Santa Clara",
+                        "group":  "D",
+                        "probabilities":  {
+                                              "home":  0.5205,
+                                              "draw":  0.2828,
+                                              "away":  0.1968
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.58,
+                                               "away":  0.77
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.435,
+                                           "draw":  0.305,
+                                           "away":  0.27
+                                       },
+                        "value_pct":  {
+                                          "home":  19.7,
+                                          "draw":  -7.3,
+                                          "away":  -27.1
+                                      }
+                    },
+                    {
+                        "id":  32,
+                        "home":  "USA",
+                        "away":  "Australia",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-19",
+                        "stage":  "group",
+                        "venue":  "Lumen Field, Seattle",
+                        "group":  "D",
+                        "probabilities":  {
+                                              "home":  0.414,
+                                              "draw":  0.2895,
+                                              "away":  0.2965
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.32,
+                                               "away":  1.03
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.555,
+                                           "draw":  0.245,
+                                           "away":  0.205
+                                       },
+                        "value_pct":  {
+                                          "home":  -25.4,
+                                          "draw":  18.2,
+                                          "away":  44.6
+                                      }
+                    },
+                    {
+                        "id":  33,
+                        "home":  "Germany",
+                        "away":  "CÃ´te d\u0027Ivoire",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-20",
+                        "stage":  "group",
+                        "venue":  "BMO Field, Toronto",
+                        "group":  "E",
+                        "probabilities":  {
+                                              "home":  0.6721,
+                                              "draw":  0.2377,
+                                              "away":  0.0901
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.92,
+                                               "away":  0.46
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.645,
+                                           "draw":  0.215,
+                                           "away":  0.15
+                                       },
+                        "value_pct":  {
+                                          "home":  4.2,
+                                          "draw":  10.6,
+                                          "away":  -39.9
+                                      }
+                    },
+                    {
+                        "id":  34,
+                        "home":  "Ecuador",
+                        "away":  "CuraÃ§ao",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-20",
+                        "stage":  "group",
+                        "venue":  "Arrowhead Stadium, Kansas City",
+                        "group":  "E",
+                        "probabilities":  {
+                                              "home":  0.781,
+                                              "draw":  0.1702,
+                                              "away":  0.0488
+                                          },
+                        "expected_goals":  {
+                                               "home":  2.12,
+                                               "away":  0.29
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.785,
+                                           "draw":  0.145,
+                                           "away":  0.0705
+                                       },
+                        "value_pct":  {
+                                          "home":  -0.5,
+                                          "draw":  17.4,
+                                          "away":  -30.8
+                                      }
+                    },
+                    {
+                        "id":  35,
+                        "home":  "Netherlands",
+                        "away":  "Sweden",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-20",
+                        "stage":  "group",
+                        "venue":  "NRG Stadium, Houston",
+                        "group":  "F",
+                        "probabilities":  {
+                                              "home":  0.6673,
+                                              "draw":  0.2395,
+                                              "away":  0.0932
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.91,
+                                               "away":  0.47
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.595,
+                                           "draw":  0.24,
+                                           "away":  0.175
+                                       },
+                        "value_pct":  {
+                                          "home":  12.2,
+                                          "draw":  -0.2,
+                                          "away":  -46.7
+                                      }
+                    },
+                    {
+                        "id":  36,
+                        "home":  "Tunisia",
+                        "away":  "Japan",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-20",
+                        "stage":  "group",
+                        "venue":  "Estadio BBVA, Guadalupe",
+                        "group":  "F",
+                        "probabilities":  {
+                                              "home":  0.2097,
+                                              "draw":  0.2325,
+                                              "away":  0.5578
+                                          },
+                        "expected_goals":  {
+                                               "home":  0.76,
+                                               "away":  1.63
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.185,
+                                           "draw":  0.28,
+                                           "away":  0.545
+                                       },
+                        "value_pct":  {
+                                          "home":  13.4,
+                                          "draw":  -17.0,
+                                          "away":  2.3
+                                      }
+                    },
+                    {
+                        "id":  37,
+                        "home":  "Uruguay",
+                        "away":  "Cabo Verde",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-21",
+                        "stage":  "group",
+                        "venue":  "Hard Rock Stadium, Miami Gardens",
+                        "group":  "H",
+                        "probabilities":  {
+                                              "home":  0.7139,
+                                              "draw":  0.221,
+                                              "away":  0.0651
+                                          },
+                        "expected_goals":  {
+                                               "home":  2.01,
+                                               "away":  0.38
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.675,
+                                           "draw":  0.215,
+                                           "away":  0.12
+                                       },
+                        "value_pct":  {
+                                          "home":  5.8,
+                                          "draw":  2.8,
+                                          "away":  -45.7
+                                      }
+                    },
+                    {
+                        "id":  38,
+                        "home":  "Spain",
+                        "away":  "Saudi Arabia",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-21",
+                        "stage":  "group",
+                        "venue":  "Mercedes-Benz Stadium, Atlanta",
+                        "group":  "H",
+                        "probabilities":  {
+                                              "home":  0.8065,
+                                              "draw":  0.1452,
+                                              "away":  0.0483
+                                          },
+                        "expected_goals":  {
+                                               "home":  2.16,
+                                               "away":  0.27
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.875,
+                                           "draw":  0.09,
+                                           "away":  0.04
+                                       },
+                        "value_pct":  {
+                                          "home":  -7.8,
+                                          "draw":  61.3,
+                                          "away":  20.8
+                                      }
+                    },
+                    {
+                        "id":  39,
+                        "home":  "Belgium",
+                        "away":  "IR Iran",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-21",
+                        "stage":  "group",
+                        "venue":  "SoFi Stadium, Inglewood",
+                        "group":  "G",
+                        "probabilities":  {
+                                              "home":  0.5537,
+                                              "draw":  0.2742,
+                                              "away":  0.1721
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.66,
+                                               "away":  0.7
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.69,
+                                           "draw":  0.205,
+                                           "away":  0.12
+                                       },
+                        "value_pct":  {
+                                          "home":  -19.8,
+                                          "draw":  33.8,
+                                          "away":  43.4
+                                      }
+                    },
+                    {
+                        "id":  40,
+                        "home":  "New Zealand",
+                        "away":  "Egypt",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-21",
+                        "stage":  "group",
+                        "venue":  "BC Place, Vancouver",
+                        "group":  "G",
+                        "probabilities":  {
+                                              "home":  0.3496,
+                                              "draw":  0.2715,
+                                              "away":  0.3789
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.15,
+                                               "away":  1.22
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.185,
+                                           "draw":  0.255,
+                                           "away":  0.57
+                                       },
+                        "value_pct":  {
+                                          "home":  89.0,
+                                          "draw":  6.5,
+                                          "away":  -33.5
+                                      }
+                    },
+                    {
+                        "id":  41,
+                        "home":  "Norway",
+                        "away":  "Senegal",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-22",
+                        "stage":  "group",
+                        "venue":  "MetLife Stadium, East Rutherford",
+                        "group":  "I",
+                        "probabilities":  {
+                                              "home":  0.497,
+                                              "draw":  0.2885,
+                                              "away":  0.2145
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.53,
+                                               "away":  0.82
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.465,
+                                           "draw":  0.275,
+                                           "away":  0.275
+                                       },
+                        "value_pct":  {
+                                          "home":  6.9,
+                                          "draw":  4.9,
+                                          "away":  -22.0
+                                      }
+                    },
+                    {
+                        "id":  42,
+                        "home":  "France",
+                        "away":  "Iraq",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-22",
+                        "stage":  "group",
+                        "venue":  "Lincoln Financial Field, Philadelphia",
+                        "group":  "I",
+                        "probabilities":  {
+                                              "home":  0.773,
+                                              "draw":  0.178,
+                                              "away":  0.049
+                                          },
+                        "expected_goals":  {
+                                               "home":  2.11,
+                                               "away":  0.3
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.875,
+                                           "draw":  0.095,
+                                           "away":  0.037
+                                       },
+                        "value_pct":  {
+                                          "home":  -11.7,
+                                          "draw":  87.4,
+                                          "away":  32.4
+                                      }
+                    },
+                    {
+                        "id":  43,
+                        "home":  "Argentina",
+                        "away":  "Austria",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-22",
+                        "stage":  "group",
+                        "venue":  "AT\u0026T Stadium, Arlington",
+                        "group":  "J",
+                        "probabilities":  {
+                                              "home":  0.6961,
+                                              "draw":  0.2285,
+                                              "away":  0.0754
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.97,
+                                               "away":  0.42
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.595,
+                                           "draw":  0.245,
+                                           "away":  0.165
+                                       },
+                        "value_pct":  {
+                                          "home":  17.0,
+                                          "draw":  -6.7,
+                                          "away":  -54.3
+                                      }
+                    },
+                    {
+                        "id":  44,
+                        "home":  "Jordan",
+                        "away":  "Algeria",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-22",
+                        "stage":  "group",
+                        "venue":  "Levi\u0027s Stadium, Santa Clara",
+                        "group":  "J",
+                        "probabilities":  {
+                                              "home":  0.4002,
+                                              "draw":  0.2855,
+                                              "away":  0.3143
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.29,
+                                               "away":  1.07
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.17,
+                                           "draw":  0.255,
+                                           "away":  0.585
+                                       },
+                        "value_pct":  {
+                                          "home":  135.4,
+                                          "draw":  12.0,
+                                          "away":  -46.3
+                                      }
+                    },
+                    {
+                        "id":  45,
+                        "home":  "England",
+                        "away":  "Ghana",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-23",
+                        "stage":  "group",
+                        "venue":  "Gillette Stadium, Foxborough",
+                        "group":  "L",
+                        "probabilities":  {
+                                              "home":  0.785,
+                                              "draw":  0.1663,
+                                              "away":  0.0487
+                                          },
+                        "expected_goals":  {
+                                               "home":  2.13,
+                                               "away":  0.29
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.735,
+                                           "draw":  0.17,
+                                           "away":  0.105
+                                       },
+                        "value_pct":  {
+                                          "home":  6.8,
+                                          "draw":  -2.2,
+                                          "away":  -53.6
+                                      }
+                    },
+                    {
+                        "id":  46,
+                        "home":  "Panama",
+                        "away":  "Croatia",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-23",
+                        "stage":  "group",
+                        "venue":  "Toronto Stadium, Toronto",
+                        "group":  "L",
+                        "probabilities":  {
+                                              "home":  0.2727,
+                                              "draw":  0.2507,
+                                              "away":  0.4766
+                                          },
+                        "expected_goals":  {
+                                               "home":  0.93,
+                                               "away":  1.44
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.125,
+                                           "draw":  0.225,
+                                           "away":  0.65
+                                       },
+                        "value_pct":  {
+                                          "home":  118.2,
+                                          "draw":  11.4,
+                                          "away":  -26.7
+                                      }
+                    },
+                    {
+                        "id":  47,
+                        "home":  "Portugal",
+                        "away":  "Uzbekistan",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-23",
+                        "stage":  "group",
+                        "venue":  "NRG Stadium, Houston",
+                        "group":  "K",
+                        "probabilities":  {
+                                              "home":  0.6775,
+                                              "draw":  0.2357,
+                                              "away":  0.0868
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.93,
+                                               "away":  0.45
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.795,
+                                           "draw":  0.14,
+                                           "away":  0.075
+                                       },
+                        "value_pct":  {
+                                          "home":  -14.8,
+                                          "draw":  68.4,
+                                          "away":  15.7
+                                      }
+                    },
+                    {
+                        "id":  48,
+                        "home":  "Colombia",
+                        "away":  "Congo DR",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-23",
+                        "stage":  "group",
+                        "venue":  "Estadio Akron, Zapopan",
+                        "group":  "K",
+                        "probabilities":  {
+                                              "home":  0.8487,
+                                              "draw":  0.1034,
+                                              "away":  0.0479
+                                          },
+                        "expected_goals":  {
+                                               "home":  2.23,
+                                               "away":  0.22
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.675,
+                                           "draw":  0.215,
+                                           "away":  0.115
+                                       },
+                        "value_pct":  {
+                                          "home":  25.7,
+                                          "draw":  -51.9,
+                                          "away":  -58.3
+                                      }
+                    },
+                    {
+                        "id":  49,
+                        "home":  "Scotland",
+                        "away":  "Brazil",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-24",
+                        "stage":  "group",
+                        "venue":  "Hard Rock Stadium, Miami Gardens",
+                        "group":  "C",
+                        "probabilities":  {
+                                              "home":  0.2538,
+                                              "draw":  0.2455,
+                                              "away":  0.5007
+                                          },
+                        "expected_goals":  {
+                                               "home":  0.88,
+                                               "away":  1.5
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.115,
+                                           "draw":  0.2,
+                                           "away":  0.695
+                                       },
+                        "value_pct":  {
+                                          "home":  120.7,
+                                          "draw":  22.7,
+                                          "away":  -28.0
+                                      }
+                    },
+                    {
+                        "id":  50,
+                        "home":  "Morocco",
+                        "away":  "Haiti",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-24",
+                        "stage":  "group",
+                        "venue":  "Mercedes-Benz Stadium, Atlanta",
+                        "group":  "C",
+                        "probabilities":  {
+                                              "home":  0.6985,
+                                              "draw":  0.2275,
+                                              "away":  0.074
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.97,
+                                               "away":  0.41
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.765,
+                                           "draw":  0.16,
+                                           "away":  0.085
+                                       },
+                        "value_pct":  {
+                                          "home":  -8.7,
+                                          "draw":  42.2,
+                                          "away":  -12.9
+                                      }
+                    },
+                    {
+                        "id":  51,
+                        "home":  "Switzerland",
+                        "away":  "Canada",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-24",
+                        "stage":  "group",
+                        "venue":  "BC Place, Vancouver",
+                        "group":  "B",
+                        "probabilities":  {
+                                              "home":  0.5602,
+                                              "draw":  0.2725,
+                                              "away":  0.1673
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.67,
+                                               "away":  0.69
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.465,
+                                           "draw":  0.3,
+                                           "away":  0.26
+                                       },
+                        "value_pct":  {
+                                          "home":  20.5,
+                                          "draw":  -9.2,
+                                          "away":  -35.7
+                                      }
+                    },
+                    {
+                        "id":  52,
+                        "home":  "Bosnia and Herzegovina",
+                        "away":  "Qatar",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-24",
+                        "stage":  "group",
+                        "venue":  "Lumen Field, Seattle",
+                        "group":  "B",
+                        "probabilities":  {
+                                              "home":  0.6113,
+                                              "draw":  0.258,
+                                              "away":  0.1307
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.79,
+                                               "away":  0.58
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.59,
+                                           "draw":  0.255,
+                                           "away":  0.155
+                                       },
+                        "value_pct":  {
+                                          "home":  3.6,
+                                          "draw":  1.2,
+                                          "away":  -15.7
+                                      }
+                    },
+                    {
+                        "id":  53,
+                        "home":  "Czechia",
+                        "away":  "Mexico",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-24",
+                        "stage":  "group",
+                        "venue":  "Estadio Azteca, Mexico City",
+                        "group":  "A",
+                        "probabilities":  {
+                                              "home":  0.33,
+                                              "draw":  0.2662,
+                                              "away":  0.4037
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.09,
+                                               "away":  1.28
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.19,
+                                           "draw":  0.285,
+                                           "away":  0.54
+                                       },
+                        "value_pct":  {
+                                          "home":  73.7,
+                                          "draw":  -6.6,
+                                          "away":  -25.2
+                                      }
+                    },
+                    {
+                        "id":  54,
+                        "home":  "South Africa",
+                        "away":  "Korea Republic",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-24",
+                        "stage":  "group",
+                        "venue":  "Estadio BBVA, Guadalupe",
+                        "group":  "A",
+                        "probabilities":  {
+                                              "home":  0.2355,
+                                              "draw":  0.2402,
+                                              "away":  0.5242
+                                          },
+                        "expected_goals":  {
+                                               "home":  0.83,
+                                               "away":  1.55
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.255,
+                                           "draw":  0.275,
+                                           "away":  0.495
+                                       },
+                        "value_pct":  {
+                                          "home":  -7.6,
+                                          "draw":  -12.7,
+                                          "away":  5.9
+                                      }
+                    },
+                    {
+                        "id":  55,
+                        "home":  "CuraÃ§ao",
+                        "away":  "CÃ´te d\u0027Ivoire",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-25",
+                        "stage":  "group",
+                        "venue":  "Lincoln Financial Field, Philadelphia",
+                        "group":  "E",
+                        "probabilities":  {
+                                              "home":  0.2321,
+                                              "draw":  0.2392,
+                                              "away":  0.5287
+                                          },
+                        "expected_goals":  {
+                                               "home":  0.82,
+                                               "away":  1.56
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.095,
+                                           "draw":  0.185,
+                                           "away":  0.725
+                                       },
+                        "value_pct":  {
+                                          "home":  144.3,
+                                          "draw":  29.3,
+                                          "away":  -27.1
+                                      }
+                    },
+                    {
+                        "id":  56,
+                        "home":  "Ecuador",
+                        "away":  "Germany",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-25",
+                        "stage":  "group",
+                        "venue":  "MetLife Stadium, East Rutherford",
+                        "group":  "E",
+                        "probabilities":  {
+                                              "home":  0.4589,
+                                              "draw":  0.2975,
+                                              "away":  0.2436
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.44,
+                                               "away":  0.91
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.185,
+                                           "draw":  0.24,
+                                           "away":  0.595
+                                       },
+                        "value_pct":  {
+                                          "home":  148.1,
+                                          "draw":  24.0,
+                                          "away":  -59.1
+                                      }
+                    },
+                    {
+                        "id":  57,
+                        "home":  "Japan",
+                        "away":  "Sweden",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-25",
+                        "stage":  "group",
+                        "venue":  "AT\u0026T Stadium, Arlington",
+                        "group":  "F",
+                        "probabilities":  {
+                                              "home":  0.6267,
+                                              "draw":  0.2532,
+                                              "away":  0.1201
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.82,
+                                               "away":  0.55
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.475,
+                                           "draw":  0.295,
+                                           "away":  0.255
+                                       },
+                        "value_pct":  {
+                                          "home":  31.9,
+                                          "draw":  -14.2,
+                                          "away":  -52.9
+                                      }
+                    },
+                    {
+                        "id":  58,
+                        "home":  "Tunisia",
+                        "away":  "Netherlands",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-25",
+                        "stage":  "group",
+                        "venue":  "Arrowhead Stadium, Kansas City",
+                        "group":  "F",
+                        "probabilities":  {
+                                              "home":  0.1679,
+                                              "draw":  0.2188,
+                                              "away":  0.6133
+                                          },
+                        "expected_goals":  {
+                                               "home":  0.64,
+                                               "away":  1.75
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.14,
+                                           "draw":  0.215,
+                                           "away":  0.665
+                                       },
+                        "value_pct":  {
+                                          "home":  19.9,
+                                          "draw":  1.8,
+                                          "away":  -7.8
+                                      }
+                    },
+                    {
+                        "id":  59,
+                        "home":  "TÃ¼rkiye",
+                        "away":  "USA",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-25",
+                        "stage":  "group",
+                        "venue":  "SoFi Stadium, Inglewood",
+                        "group":  "D",
+                        "probabilities":  {
+                                              "home":  0.6121,
+                                              "draw":  0.2577,
+                                              "away":  0.1301
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.79,
+                                               "away":  0.58
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.355,
+                                           "draw":  0.28,
+                                           "away":  0.385
+                                       },
+                        "value_pct":  {
+                                          "home":  72.4,
+                                          "draw":  -8.0,
+                                          "away":  -66.2
+                                      }
+                    },
+                    {
+                        "id":  60,
+                        "home":  "Paraguay",
+                        "away":  "Australia",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-25",
+                        "stage":  "group",
+                        "venue":  "Levi\u0027s Stadium, Santa Clara",
+                        "group":  "D",
+                        "probabilities":  {
+                                              "home":  0.5094,
+                                              "draw":  0.2855,
+                                              "away":  0.2051
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.56,
+                                               "away":  0.8
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.445,
+                                           "draw":  0.305,
+                                           "away":  0.265
+                                       },
+                        "value_pct":  {
+                                          "home":  14.5,
+                                          "draw":  -6.4,
+                                          "away":  -22.6
+                                      }
+                    },
+                    {
+                        "id":  61,
+                        "home":  "Norway",
+                        "away":  "France",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-26",
+                        "stage":  "group",
+                        "venue":  "Gillette Stadium, Foxborough",
+                        "group":  "I",
+                        "probabilities":  {
+                                              "home":  0.2984,
+                                              "draw":  0.2577,
+                                              "away":  0.4439
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.0,
+                                               "away":  1.37
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.21,
+                                           "draw":  0.265,
+                                           "away":  0.53
+                                       },
+                        "value_pct":  {
+                                          "home":  42.1,
+                                          "draw":  -2.8,
+                                          "away":  -16.2
+                                      }
+                    },
+                    {
+                        "id":  62,
+                        "home":  "Senegal",
+                        "away":  "Iraq",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-26",
+                        "stage":  "group",
+                        "venue":  "BMO Field, Toronto",
+                        "group":  "I",
+                        "probabilities":  {
+                                              "home":  0.6781,
+                                              "draw":  0.2355,
+                                              "away":  0.0864
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.93,
+                                               "away":  0.45
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.665,
+                                           "draw":  0.23,
+                                           "away":  0.13
+                                       },
+                        "value_pct":  {
+                                          "home":  2.0,
+                                          "draw":  2.4,
+                                          "away":  -33.5
+                                      }
+                    },
+                    {
+                        "id":  63,
+                        "home":  "Egypt",
+                        "away":  "IR Iran",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-26",
+                        "stage":  "group",
+                        "venue":  "Lumen Field, Seattle",
+                        "group":  "G",
+                        "probabilities":  {
+                                              "home":  0.3941,
+                                              "draw":  0.2838,
+                                              "away":  0.3222
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.27,
+                                               "away":  1.09
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.41,
+                                           "draw":  0.33,
+                                           "away":  0.285
+                                       },
+                        "value_pct":  {
+                                          "home":  -3.9,
+                                          "draw":  -14.0,
+                                          "away":  13.1
+                                      }
+                    },
+                    {
+                        "id":  64,
+                        "home":  "New Zealand",
+                        "away":  "Belgium",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-26",
+                        "stage":  "group",
+                        "venue":  "BC Place, Vancouver",
+                        "group":  "G",
+                        "probabilities":  {
+                                              "home":  0.2001,
+                                              "draw":  0.2295,
+                                              "away":  0.5704
+                                          },
+                        "expected_goals":  {
+                                               "home":  0.73,
+                                               "away":  1.66
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.075,
+                                           "draw":  0.16,
+                                           "away":  0.775
+                                       },
+                        "value_pct":  {
+                                          "home":  166.8,
+                                          "draw":  43.4,
+                                          "away":  -26.4
+                                      }
+                    },
+                    {
+                        "id":  65,
+                        "home":  "Cabo Verde",
+                        "away":  "Saudi Arabia",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-26",
+                        "stage":  "group",
+                        "venue":  "NRG Stadium, Houston",
+                        "group":  "H",
+                        "probabilities":  {
+                                              "home":  0.4589,
+                                              "draw":  0.2975,
+                                              "away":  0.2436
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.44,
+                                               "away":  0.91
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.395,
+                                           "draw":  0.275,
+                                           "away":  0.355
+                                       },
+                        "value_pct":  {
+                                          "home":  16.2,
+                                          "draw":  8.2,
+                                          "away":  -31.4
+                                      }
+                    },
+                    {
+                        "id":  66,
+                        "home":  "Uruguay",
+                        "away":  "Spain",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-26",
+                        "stage":  "group",
+                        "venue":  "Estadio Akron, Zapopan",
+                        "group":  "H",
+                        "probabilities":  {
+                                              "home":  0.2072,
+                                              "draw":  0.2317,
+                                              "away":  0.561
+                                          },
+                        "expected_goals":  {
+                                               "home":  0.75,
+                                               "away":  1.63
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.18,
+                                           "draw":  0.24,
+                                           "away":  0.605
+                                       },
+                        "value_pct":  {
+                                          "home":  15.1,
+                                          "draw":  -3.5,
+                                          "away":  -7.3
+                                      }
+                    },
+                    {
+                        "id":  67,
+                        "home":  "Panama",
+                        "away":  "England",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-27",
+                        "stage":  "group",
+                        "venue":  "MetLife Stadium, East Rutherford",
+                        "group":  "L",
+                        "probabilities":  {
+                                              "home":  0.1962,
+                                              "draw":  0.2283,
+                                              "away":  0.5756
+                                          },
+                        "expected_goals":  {
+                                               "home":  0.72,
+                                               "away":  1.67
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.075,
+                                           "draw":  0.15,
+                                           "away":  0.785
+                                       },
+                        "value_pct":  {
+                                          "home":  161.6,
+                                          "draw":  52.2,
+                                          "away":  -26.7
+                                      }
+                    },
+                    {
+                        "id":  68,
+                        "home":  "Croatia",
+                        "away":  "Ghana",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-27",
+                        "stage":  "group",
+                        "venue":  "Lincoln Financial Field, Philadelphia",
+                        "group":  "L",
+                        "probabilities":  {
+                                              "home":  0.7599,
+                                              "draw":  0.1908,
+                                              "away":  0.0494
+                                          },
+                        "expected_goals":  {
+                                               "home":  2.09,
+                                               "away":  0.31
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.555,
+                                           "draw":  0.275,
+                                           "away":  0.195
+                                       },
+                        "value_pct":  {
+                                          "home":  36.9,
+                                          "draw":  -30.6,
+                                          "away":  -74.7
+                                      }
+                    },
+                    {
+                        "id":  69,
+                        "home":  "Algeria",
+                        "away":  "Austria",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-27",
+                        "stage":  "group",
+                        "venue":  "Arrowhead Stadium, Kansas City",
+                        "group":  "J",
+                        "probabilities":  {
+                                              "home":  0.3771,
+                                              "draw":  0.279,
+                                              "away":  0.3439
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.22,
+                                               "away":  1.14
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.275,
+                                           "draw":  0.32,
+                                           "away":  0.425
+                                       },
+                        "value_pct":  {
+                                          "home":  37.1,
+                                          "draw":  -12.8,
+                                          "away":  -19.1
+                                      }
+                    },
+                    {
+                        "id":  70,
+                        "home":  "Jordan",
+                        "away":  "Argentina",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-27",
+                        "stage":  "group",
+                        "venue":  "AT\u0026T Stadium, Arlington",
+                        "group":  "J",
+                        "probabilities":  {
+                                              "home":  0.1061,
+                                              "draw":  0.193,
+                                              "away":  0.7009
+                                          },
+                        "expected_goals":  {
+                                               "home":  0.46,
+                                               "away":  1.95
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.06,
+                                           "draw":  0.12,
+                                           "away":  0.83
+                                       },
+                        "value_pct":  {
+                                          "home":  76.8,
+                                          "draw":  60.8,
+                                          "away":  -15.6
+                                      }
+                    },
+                    {
+                        "id":  71,
+                        "home":  "Colombia",
+                        "away":  "Portugal",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-27",
+                        "stage":  "group",
+                        "venue":  "Hard Rock Stadium, Miami Gardens",
+                        "group":  "K",
+                        "probabilities":  {
+                                              "home":  0.441,
+                                              "draw":  0.2978,
+                                              "away":  0.2612
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.4,
+                                               "away":  0.95
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.295,
+                                           "draw":  0.275,
+                                           "away":  0.46
+                                       },
+                        "value_pct":  {
+                                          "home":  49.5,
+                                          "draw":  8.3,
+                                          "away":  -43.2
+                                      }
+                    },
+                    {
+                        "id":  72,
+                        "home":  "Congo DR",
+                        "away":  "Uzbekistan",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-27",
+                        "stage":  "group",
+                        "venue":  "Mercedes-Benz Stadium, Atlanta",
+                        "group":  "K",
+                        "probabilities":  {
+                                              "home":  0.0679,
+                                              "draw":  0.17,
+                                              "away":  0.7621
+                                          },
+                        "expected_goals":  {
+                                               "home":  0.34,
+                                               "away":  2.08
+                                           },
+                        "model":  "elo",
+                        "polymarket":  {
+                                           "home":  0.38,
+                                           "draw":  0.295,
+                                           "away":  0.345
+                                       },
+                        "value_pct":  {
+                                          "home":  -82.1,
+                                          "draw":  -42.4,
+                                          "away":  120.9
+                                      }
+                    },
+                    {
+                        "id":  73,
+                        "home":  "South Africa",
+                        "away":  "Canada",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-28",
+                        "stage":  "round_of_32",
+                        "venue":  "SoFi Stadium, Inglewood",
+                        "group":  null,
+                        "probabilities":  {
+                                              "home":  0.448,
+                                              "draw":  0.3,
+                                              "away":  0.252
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.42,
+                                               "away":  0.93
+                                           },
+                        "model":  "elo",
+                        "polymarket":  null,
+                        "value_pct":  null
+                    },
+                    {
+                        "id":  74,
+                        "home":  "Netherlands",
+                        "away":  "Morocco",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-29",
+                        "stage":  "round_of_32",
+                        "venue":  "Estadio BBVA, Guadalupe",
+                        "group":  null,
+                        "probabilities":  {
+                                              "home":  0.448,
+                                              "draw":  0.3,
+                                              "away":  0.252
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.42,
+                                               "away":  0.93
+                                           },
+                        "model":  "elo",
+                        "polymarket":  null,
+                        "value_pct":  null
+                    },
+                    {
+                        "id":  75,
+                        "home":  "Brazil",
+                        "away":  "Japan",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-29",
+                        "stage":  "round_of_32",
+                        "venue":  "NRG Stadium, Houston",
+                        "group":  null,
+                        "probabilities":  {
+                                              "home":  0.448,
+                                              "draw":  0.3,
+                                              "away":  0.252
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.42,
+                                               "away":  0.93
+                                           },
+                        "model":  "elo",
+                        "polymarket":  null,
+                        "value_pct":  null
+                    },
+                    {
+                        "id":  76,
+                        "home":  "Germany",
+                        "away":  "Paraguay",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-29",
+                        "stage":  "round_of_32",
+                        "venue":  "Gillette Stadium, Foxborough",
+                        "group":  null,
+                        "probabilities":  {
+                                              "home":  0.448,
+                                              "draw":  0.3,
+                                              "away":  0.252
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.42,
+                                               "away":  0.93
+                                           },
+                        "model":  "elo",
+                        "polymarket":  null,
+                        "value_pct":  null
+                    },
+                    {
+                        "id":  77,
+                        "home":  "Mexico",
+                        "away":  "Ecuador",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-30",
+                        "stage":  "round_of_32",
+                        "venue":  "Estadio Azteca, Mexico City",
+                        "group":  null,
+                        "probabilities":  {
+                                              "home":  0.448,
+                                              "draw":  0.3,
+                                              "away":  0.252
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.42,
+                                               "away":  0.93
+                                           },
+                        "model":  "elo",
+                        "polymarket":  null,
+                        "value_pct":  null
+                    },
+                    {
+                        "id":  78,
+                        "home":  "Côte d\u0027Ivoire",
+                        "away":  "Norway",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-30",
+                        "stage":  "round_of_32",
+                        "venue":  "AT\u0026T Stadium, Arlington",
+                        "group":  null,
+                        "probabilities":  {
+                                              "home":  0.448,
+                                              "draw":  0.3,
+                                              "away":  0.252
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.42,
+                                               "away":  0.93
+                                           },
+                        "model":  "elo",
+                        "polymarket":  null,
+                        "value_pct":  null
+                    },
+                    {
+                        "id":  79,
+                        "home":  "France",
+                        "away":  "Sweden",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-06-30",
+                        "stage":  "round_of_32",
+                        "venue":  "MetLife Stadium, East Rutherford",
+                        "group":  null,
+                        "probabilities":  {
+                                              "home":  0.448,
+                                              "draw":  0.3,
+                                              "away":  0.252
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.42,
+                                               "away":  0.93
+                                           },
+                        "model":  "elo",
+                        "polymarket":  null,
+                        "value_pct":  null
+                    },
+                    {
+                        "id":  80,
+                        "home":  "England",
+                        "away":  "Congo DR",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-07-01",
+                        "stage":  "round_of_32",
+                        "venue":  "Mercedes-Benz Stadium, Atlanta",
+                        "group":  null,
+                        "probabilities":  {
+                                              "home":  0.448,
+                                              "draw":  0.3,
+                                              "away":  0.252
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.42,
+                                               "away":  0.93
+                                           },
+                        "model":  "elo",
+                        "polymarket":  null,
+                        "value_pct":  null
+                    },
+                    {
+                        "id":  81,
+                        "home":  "Belgium",
+                        "away":  "Senegal",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-07-01",
+                        "stage":  "round_of_32",
+                        "venue":  "Lumen Field, Seattle",
+                        "group":  null,
+                        "probabilities":  {
+                                              "home":  0.448,
+                                              "draw":  0.3,
+                                              "away":  0.252
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.42,
+                                               "away":  0.93
+                                           },
+                        "model":  "elo",
+                        "polymarket":  null,
+                        "value_pct":  null
+                    },
+                    {
+                        "id":  82,
+                        "home":  "USA",
+                        "away":  "Bosnia and Herzegovina",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-07-01",
+                        "stage":  "round_of_32",
+                        "venue":  "Levi\u0027s Stadium, Santa Clara",
+                        "group":  null,
+                        "probabilities":  {
+                                              "home":  0.448,
+                                              "draw":  0.3,
+                                              "away":  0.252
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.42,
+                                               "away":  0.93
+                                           },
+                        "model":  "elo",
+                        "polymarket":  null,
+                        "value_pct":  null
+                    },
+                    {
+                        "id":  83,
+                        "home":  "Spain",
+                        "away":  "Austria",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-07-02",
+                        "stage":  "round_of_32",
+                        "venue":  "SoFi Stadium, Inglewood",
+                        "group":  null,
+                        "probabilities":  {
+                                              "home":  0.448,
+                                              "draw":  0.3,
+                                              "away":  0.252
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.42,
+                                               "away":  0.93
+                                           },
+                        "model":  "elo",
+                        "polymarket":  null,
+                        "value_pct":  null
+                    },
+                    {
+                        "id":  84,
+                        "home":  "Portugal",
+                        "away":  "Croatia",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-07-02",
+                        "stage":  "round_of_32",
+                        "venue":  "BMO Field, Toronto",
+                        "group":  null,
+                        "probabilities":  {
+                                              "home":  0.448,
+                                              "draw":  0.3,
+                                              "away":  0.252
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.42,
+                                               "away":  0.93
+                                           },
+                        "model":  "elo",
+                        "polymarket":  null,
+                        "value_pct":  null
+                    },
+                    {
+                        "id":  85,
+                        "home":  "Switzerland",
+                        "away":  "Algeria",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-07-02",
+                        "stage":  "round_of_32",
+                        "venue":  "BC Place, Vancouver",
+                        "group":  null,
+                        "probabilities":  {
+                                              "home":  0.448,
+                                              "draw":  0.3,
+                                              "away":  0.252
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.42,
+                                               "away":  0.93
+                                           },
+                        "model":  "elo",
+                        "polymarket":  null,
+                        "value_pct":  null
+                    },
+                    {
+                        "id":  86,
+                        "home":  "Australia",
+                        "away":  "Egypt",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-07-03",
+                        "stage":  "round_of_32",
+                        "venue":  "AT\u0026T Stadium, Arlington",
+                        "group":  null,
+                        "probabilities":  {
+                                              "home":  0.448,
+                                              "draw":  0.3,
+                                              "away":  0.252
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.42,
+                                               "away":  0.93
+                                           },
+                        "model":  "elo",
+                        "polymarket":  null,
+                        "value_pct":  null
+                    },
+                    {
+                        "id":  87,
+                        "home":  "Argentina",
+                        "away":  "Cabo Verde",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-07-03",
+                        "stage":  "round_of_32",
+                        "venue":  "Hard Rock Stadium, Miami Gardens",
+                        "group":  null,
+                        "probabilities":  {
+                                              "home":  0.448,
+                                              "draw":  0.3,
+                                              "away":  0.252
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.42,
+                                               "away":  0.93
+                                           },
+                        "model":  "elo",
+                        "polymarket":  null,
+                        "value_pct":  null
+                    },
+                    {
+                        "id":  88,
+                        "home":  "Colombia",
+                        "away":  "Ghana",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-07-03",
+                        "stage":  "round_of_32",
+                        "venue":  "Arrowhead Stadium, Kansas City",
+                        "group":  null,
+                        "probabilities":  {
+                                              "home":  0.448,
+                                              "draw":  0.3,
+                                              "away":  0.252
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.42,
+                                               "away":  0.93
+                                           },
+                        "model":  "elo",
+                        "polymarket":  null,
+                        "value_pct":  null
+                    },
+                    {
+                        "id":  89,
+                        "home":  "Paraguay",
+                        "away":  "France",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-07-04",
+                        "stage":  "round_of_16",
+                        "venue":  "TBD",
+                        "group":  null,
+                        "probabilities":  {
+                                              "home":  0.448,
+                                              "draw":  0.3,
+                                              "away":  0.252
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.42,
+                                               "away":  0.93
+                                           },
+                        "model":  "elo",
+                        "polymarket":  null,
+                        "value_pct":  null
+                    },
+                    {
+                        "id":  90,
+                        "home":  "Canada",
+                        "away":  "Morocco",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-07-04",
+                        "stage":  "round_of_16",
+                        "venue":  "TBD",
+                        "group":  null,
+                        "probabilities":  {
+                                              "home":  0.448,
+                                              "draw":  0.3,
+                                              "away":  0.252
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.42,
+                                               "away":  0.93
+                                           },
+                        "model":  "elo",
+                        "polymarket":  null,
+                        "value_pct":  null
+                    },
+                    {
+                        "id":  91,
+                        "home":  "Brazil",
+                        "away":  "Norway",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-07-05",
+                        "stage":  "round_of_16",
+                        "venue":  "TBD",
+                        "group":  null,
+                        "probabilities":  {
+                                              "home":  0.448,
+                                              "draw":  0.3,
+                                              "away":  0.252
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.42,
+                                               "away":  0.93
+                                           },
+                        "model":  "elo",
+                        "polymarket":  null,
+                        "value_pct":  null
+                    },
+                    {
+                        "id":  92,
+                        "home":  "Mexico",
+                        "away":  "England",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-07-05",
+                        "stage":  "round_of_16",
+                        "venue":  "TBD",
+                        "group":  null,
+                        "probabilities":  {
+                                              "home":  0.448,
+                                              "draw":  0.3,
+                                              "away":  0.252
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.42,
+                                               "away":  0.93
+                                           },
+                        "model":  "elo",
+                        "polymarket":  null,
+                        "value_pct":  null
+                    },
+                    {
+                        "id":  93,
+                        "home":  "Portugal",
+                        "away":  "Spain",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-07-06",
+                        "stage":  "round_of_16",
+                        "venue":  "TBD",
+                        "group":  null,
+                        "probabilities":  {
+                                              "home":  0.448,
+                                              "draw":  0.3,
+                                              "away":  0.252
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.42,
+                                               "away":  0.93
+                                           },
+                        "model":  "elo",
+                        "polymarket":  null,
+                        "value_pct":  null
+                    },
+                    {
+                        "id":  94,
+                        "home":  "USA",
+                        "away":  "Belgium",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-07-06",
+                        "stage":  "round_of_16",
+                        "venue":  "TBD",
+                        "group":  null,
+                        "probabilities":  {
+                                              "home":  0.448,
+                                              "draw":  0.3,
+                                              "away":  0.252
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.42,
+                                               "away":  0.93
+                                           },
+                        "model":  "elo",
+                        "polymarket":  null,
+                        "value_pct":  null
+                    },
+                    {
+                        "id":  95,
+                        "home":  "Argentina",
+                        "away":  "Egypt",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-07-07",
+                        "stage":  "round_of_16",
+                        "venue":  "TBD",
+                        "group":  null,
+                        "probabilities":  {
+                                              "home":  0.448,
+                                              "draw":  0.3,
+                                              "away":  0.252
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.42,
+                                               "away":  0.93
+                                           },
+                        "model":  "elo",
+                        "polymarket":  null,
+                        "value_pct":  null
+                    },
+                    {
+                        "id":  96,
+                        "home":  "Switzerland",
+                        "away":  "Colombia",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-07-07",
+                        "stage":  "round_of_16",
+                        "venue":  "TBD",
+                        "group":  null,
+                        "probabilities":  {
+                                              "home":  0.448,
+                                              "draw":  0.3,
+                                              "away":  0.252
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.42,
+                                               "away":  0.93
+                                           },
+                        "model":  "elo",
+                        "polymarket":  null,
+                        "value_pct":  null
+                    },
+                    {
+                        "id":  97,
+                        "home":  "France",
+                        "away":  "Morocco",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-07-09",
+                        "stage":  "quarter_final",
+                        "venue":  "TBD",
+                        "group":  null,
+                        "probabilities":  {
+                                              "home":  0.448,
+                                              "draw":  0.3,
+                                              "away":  0.252
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.42,
+                                               "away":  0.93
+                                           },
+                        "model":  "elo",
+                        "polymarket":  null,
+                        "value_pct":  null
+                    },
+                    {
+                        "id":  98,
+                        "home":  "Spain",
+                        "away":  "Belgium",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-07-10",
+                        "stage":  "quarter_final",
+                        "venue":  "TBD",
+                        "group":  null,
+                        "probabilities":  {
+                                              "home":  0.448,
+                                              "draw":  0.3,
+                                              "away":  0.252
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.42,
+                                               "away":  0.93
+                                           },
+                        "model":  "elo",
+                        "polymarket":  null,
+                        "value_pct":  null
+                    },
+                    {
+                        "id":  99,
+                        "home":  "Norway",
+                        "away":  "England",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-07-11",
+                        "stage":  "quarter_final",
+                        "venue":  "TBD",
+                        "group":  null,
+                        "probabilities":  {
+                                              "home":  0.448,
+                                              "draw":  0.3,
+                                              "away":  0.252
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.42,
+                                               "away":  0.93
+                                           },
+                        "model":  "elo",
+                        "polymarket":  null,
+                        "value_pct":  null
+                    },
+                    {
+                        "id":  100,
+                        "home":  "Argentina",
+                        "away":  "Switzerland",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-07-12",
+                        "stage":  "quarter_final",
+                        "venue":  "TBD",
+                        "group":  null,
+                        "probabilities":  {
+                                              "home":  0.448,
+                                              "draw":  0.3,
+                                              "away":  0.252
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.42,
+                                               "away":  0.93
+                                           },
+                        "model":  "elo",
+                        "polymarket":  null,
+                        "value_pct":  null
+                    },
+                    {
+                        "id":  101,
+                        "home":  "France",
+                        "away":  "Spain",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-07-14",
+                        "stage":  "semi_final",
+                        "venue":  "TBD",
+                        "group":  null,
+                        "probabilities":  {
+                                              "home":  0.448,
+                                              "draw":  0.3,
+                                              "away":  0.252
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.42,
+                                               "away":  0.93
+                                           },
+                        "model":  "elo",
+                        "polymarket":  null,
+                        "value_pct":  null
+                    },
+                    {
+                        "id":  102,
+                        "home":  "England",
+                        "away":  "Argentina",
+                        "league":  "World Cup 2026",
+                        "date":  "2026-07-15",
+                        "stage":  "semi_final",
+                        "venue":  "TBD",
+                        "group":  null,
+                        "probabilities":  {
+                                              "home":  0.448,
+                                              "draw":  0.3,
+                                              "away":  0.252
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.42,
+                                               "away":  0.93
+                                           },
+                        "model":  "elo",
+                        "polymarket":  null,
+                        "value_pct":  null
+                    },
+                    {
+                        "id":  103,
+                        "home":  null,
+                        "away":  null,
+                        "league":  "World Cup 2026",
+                        "date":  "2026-07-18",
+                        "stage":  "bronze_final",
+                        "venue":  "TBD",
+                        "group":  null,
+                        "probabilities":  {
+                                              "home":  0.448,
+                                              "draw":  0.3,
+                                              "away":  0.252
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.42,
+                                               "away":  0.93
+                                           },
+                        "model":  "elo",
+                        "polymarket":  null,
+                        "value_pct":  null
+                    },
+                    {
+                        "id":  104,
+                        "home":  null,
+                        "away":  null,
+                        "league":  "World Cup 2026",
+                        "date":  "2026-07-19",
+                        "stage":  "final",
+                        "venue":  "TBD",
+                        "group":  null,
+                        "probabilities":  {
+                                              "home":  0.448,
+                                              "draw":  0.3,
+                                              "away":  0.252
+                                          },
+                        "expected_goals":  {
+                                               "home":  1.42,
+                                               "away":  0.93
+                                           },
+                        "model":  "elo",
+                        "polymarket":  null,
+                        "value_pct":  null
+                    }
+                ],
+    "polymarket":  {
+                       "tournament_winner":  {
+                                                 "Algeria":  {
+                                                                 "team":  "Algeria",
+                                                                 "elo_rating":  1743.0,
+                                                                 "polymarket_price":  0.0015,
+                                                                 "elo_probability":  0.0205,
+                                                                 "value_pct":  1264.8
+                                                             },
+                                                 "Argentina":  {
+                                                                   "team":  "Argentina",
+                                                                   "elo_rating":  2113.0,
+                                                                   "polymarket_price":  0.0875,
+                                                                   "elo_probability":  0.0248,
+                                                                   "value_pct":  -71.6
+                                                               },
+                                                 "Australia":  {
+                                                                   "team":  "Australia",
+                                                                   "elo_rating":  1775.0,
+                                                                   "polymarket_price":  0.0015,
+                                                                   "elo_probability":  0.0208,
+                                                                   "value_pct":  1289.9
+                                                               },
+                                                 "Austria":  {
+                                                                 "team":  "Austria",
+                                                                 "elo_rating":  1827.0,
+                                                                 "polymarket_price":  0.0055,
+                                                                 "elo_probability":  0.0215,
+                                                                 "value_pct":  290.2
+                                                             },
+                                                 "Belgium":  {
+                                                                 "team":  "Belgium",
+                                                                 "elo_rating":  1867.0,
+                                                                 "polymarket_price":  0.0195,
+                                                                 "elo_probability":  0.0219,
+                                                                 "value_pct":  12.5
+                                                             },
+                                                 "Bosnia and Herzegovina":  {
+                                                                                "team":  "Bosnia and Herzegovina",
+                                                                                "elo_rating":  1591.0,
+                                                                                "polymarket_price":  0.0025,
+                                                                                "elo_probability":  0.0187,
+                                                                                "value_pct":  647.5
+                                                                            },
+                                                 "Brazil":  {
+                                                                "team":  "Brazil",
+                                                                "elo_rating":  1988.0,
+                                                                "polymarket_price":  0.0835,
+                                                                "elo_probability":  0.0233,
+                                                                "value_pct":  -72.0
+                                                            },
+                                                 "Canada":  {
+                                                                "team":  "Canada",
+                                                                "elo_rating":  1784.0,
+                                                                "polymarket_price":  0.0035,
+                                                                "elo_probability":  0.021,
+                                                                "value_pct":  498.7
+                                                            },
+                                                 "Cabo Verde":  {
+                                                                    "team":  "Cabo Verde",
+                                                                    "elo_rating":  1576.0,
+                                                                    "polymarket_price":  0.0005,
+                                                                    "elo_probability":  0.0185,
+                                                                    "value_pct":  3602.1
+                                                                },
+                                                 "Colombia":  {
+                                                                  "team":  "Colombia",
+                                                                  "elo_rating":  1975.0,
+                                                                  "polymarket_price":  0.0175,
+                                                                  "elo_probability":  0.0232,
+                                                                  "value_pct":  32.6
+                                                              },
+                                                 "Congo DR":  {
+                                                                  "team":  "Congo DR",
+                                                                  "elo_rating":  1207.0,
+                                                                  "polymarket_price":  0.0005,
+                                                                  "elo_probability":  0.0142,
+                                                                  "value_pct":  2735.3
+                                                              },
+                                                 "Croatia":  {
+                                                                 "team":  "Croatia",
+                                                                 "elo_rating":  1930.0,
+                                                                 "polymarket_price":  0.0085,
+                                                                 "elo_probability":  0.0227,
+                                                                 "value_pct":  166.7
+                                                             },
+                                                 "Czechia":  {
+                                                                 "team":  "Czechia",
+                                                                 "elo_rating":  1733.0,
+                                                                 "polymarket_price":  0.0025,
+                                                                 "elo_probability":  0.0204,
+                                                                 "value_pct":  714.2
+                                                             },
+                                                 "Ecuador":  {
+                                                                 "team":  "Ecuador",
+                                                                 "elo_rating":  1935.0,
+                                                                 "polymarket_price":  0.0085,
+                                                                 "elo_probability":  0.0227,
+                                                                 "value_pct":  167.4
+                                                             },
+                                                 "Egypt":  {
+                                                               "team":  "Egypt",
+                                                               "elo_rating":  1699.0,
+                                                               "polymarket_price":  0.0025,
+                                                               "elo_probability":  0.02,
+                                                               "value_pct":  698.2
+                                                           },
+                                                 "England":  {
+                                                                 "team":  "England",
+                                                                 "elo_rating":  2020.0,
+                                                                 "polymarket_price":  0.1115,
+                                                                 "elo_probability":  0.0237,
+                                                                 "value_pct":  -78.7
+                                                             },
+                                                 "France":  {
+                                                                "team":  "France",
+                                                                "elo_rating":  2081.0,
+                                                                "polymarket_price":  0.1705,
+                                                                "elo_probability":  0.0244,
+                                                                "value_pct":  -85.7
+                                                            },
+                                                 "Germany":  {
+                                                                 "team":  "Germany",
+                                                                 "elo_rating":  1925.0,
+                                                                 "polymarket_price":  0.0565,
+                                                                 "elo_probability":  0.0226,
+                                                                 "value_pct":  -60.0
+                                                             },
+                                                 "Ghana":  {
+                                                               "team":  "Ghana",
+                                                               "elo_rating":  1503.0,
+                                                               "polymarket_price":  0.0025,
+                                                               "elo_probability":  0.0177,
+                                                               "value_pct":  606.1
+                                                           },
+                                                 "Haiti":  {
+                                                               "team":  "Haiti",
+                                                               "elo_rating":  1532.0,
+                                                               "polymarket_price":  0.0005,
+                                                               "elo_probability":  0.018,
+                                                               "value_pct":  3498.8
+                                                           },
+                                                 "Iraq":  {
+                                                              "team":  "Iraq",
+                                                              "elo_rating":  1608.0,
+                                                              "polymarket_price":  0.0005,
+                                                              "elo_probability":  0.0189,
+                                                              "value_pct":  3677.3
+                                                          },
+                                                 "CÃ´te d\u0027Ivoire":  {
+                                                                             "team":  "CÃ´te d\u0027Ivoire",
+                                                                             "elo_rating":  1676.0,
+                                                                             "polymarket_price":  0.0025,
+                                                                             "elo_probability":  0.0197,
+                                                                             "value_pct":  687.4
+                                                                         },
+                                                 "Japan":  {
+                                                               "team":  "Japan",
+                                                               "elo_rating":  1906.0,
+                                                               "polymarket_price":  0.0175,
+                                                               "elo_probability":  0.0224,
+                                                               "value_pct":  27.9
+                                                           },
+                                                 "Jordan":  {
+                                                                "team":  "Jordan",
+                                                                "elo_rating":  1685.0,
+                                                                "polymarket_price":  0.0005,
+                                                                "elo_probability":  0.0198,
+                                                                "value_pct":  3858.2
+                                                            },
+                                                 "Mexico":  {
+                                                                "team":  "Mexico",
+                                                                "elo_rating":  1868.0,
+                                                                "polymarket_price":  0.0115,
+                                                                "elo_probability":  0.0219,
+                                                                "value_pct":  90.8
+                                                            },
+                                                 "Morocco":  {
+                                                                 "team":  "Morocco",
+                                                                 "elo_rating":  1822.0,
+                                                                 "polymarket_price":  0.0155,
+                                                                 "elo_probability":  0.0214,
+                                                                 "value_pct":  38.1
+                                                             },
+                                                 "Netherlands":  {
+                                                                     "team":  "Netherlands",
+                                                                     "elo_rating":  1961.0,
+                                                                     "polymarket_price":  0.0395,
+                                                                     "elo_probability":  0.023,
+                                                                     "value_pct":  -41.7
+                                                                 },
+                                                 "New Zealand":  {
+                                                                     "team":  "New Zealand",
+                                                                     "elo_rating":  1585.0,
+                                                                     "polymarket_price":  0.0005,
+                                                                     "elo_probability":  0.0186,
+                                                                     "value_pct":  3623.3
+                                                                 },
+                                                 "Norway":  {
+                                                                "team":  "Norway",
+                                                                "elo_rating":  1912.0,
+                                                                "polymarket_price":  0.0255,
+                                                                "elo_probability":  0.0225,
+                                                                "value_pct":  -11.9
+                                                            },
+                                                 "Panama":  {
+                                                                "team":  "Panama",
+                                                                "elo_rating":  1733.0,
+                                                                "polymarket_price":  0.0005,
+                                                                "elo_probability":  0.0204,
+                                                                "value_pct":  3970.9
+                                                            },
+                                                 "Paraguay":  {
+                                                                  "team":  "Paraguay",
+                                                                  "elo_rating":  1833.0,
+                                                                  "polymarket_price":  0.0025,
+                                                                  "elo_probability":  0.0215,
+                                                                  "value_pct":  761.2
+                                                              },
+                                                 "Portugal":  {
+                                                                  "team":  "Portugal",
+                                                                  "elo_rating":  1984.0,
+                                                                  "polymarket_price":  0.0955,
+                                                                  "elo_probability":  0.0233,
+                                                                  "value_pct":  -75.6
+                                                              },
+                                                 "Qatar":  {
+                                                               "team":  "Qatar",
+                                                               "elo_rating":  1423.0,
+                                                               "polymarket_price":  0.0005,
+                                                               "elo_probability":  0.0167,
+                                                               "value_pct":  3242.7
+                                                           },
+                                                 "Saudi Arabia":  {
+                                                                      "team":  "Saudi Arabia",
+                                                                      "elo_rating":  1566.0,
+                                                                      "polymarket_price":  0.0005,
+                                                                      "elo_probability":  0.0184,
+                                                                      "value_pct":  3578.6
+                                                                  },
+                                                 "Scotland":  {
+                                                                  "team":  "Scotland",
+                                                                  "elo_rating":  1770.0,
+                                                                  "polymarket_price":  0.0025,
+                                                                  "elo_probability":  0.0208,
+                                                                  "value_pct":  731.6
+                                                              },
+                                                 "Senegal":  {
+                                                                 "team":  "Senegal",
+                                                                 "elo_rating":  1866.0,
+                                                                 "polymarket_price":  0.0065,
+                                                                 "elo_probability":  0.0219,
+                                                                 "value_pct":  237.2
+                                                             },
+                                                 "South Africa":  {
+                                                                      "team":  "South Africa",
+                                                                      "elo_rating":  1517.0,
+                                                                      "polymarket_price":  0.0005,
+                                                                      "elo_probability":  0.0178,
+                                                                      "value_pct":  3463.5
+                                                                  },
+                                                 "Spain":  {
+                                                               "team":  "Spain",
+                                                               "elo_rating":  2165.0,
+                                                               "polymarket_price":  0.1635,
+                                                               "elo_probability":  0.0254,
+                                                               "value_pct":  -84.4
+                                                           },
+                                                 "Sweden":  {
+                                                                "team":  "Sweden",
+                                                                "elo_rating":  1719.0,
+                                                                "polymarket_price":  0.0055,
+                                                                "elo_probability":  0.0202,
+                                                                "value_pct":  267.1
+                                                            },
+                                                 "Switzerland":  {
+                                                                     "team":  "Switzerland",
+                                                                     "elo_rating":  1894.0,
+                                                                     "polymarket_price":  0.0105,
+                                                                     "elo_probability":  0.0222,
+                                                                     "value_pct":  111.9
+                                                                 },
+                                                 "Tunisia":  {
+                                                                 "team":  "Tunisia",
+                                                                 "elo_rating":  1636.0,
+                                                                 "polymarket_price":  0.0005,
+                                                                 "elo_probability":  0.0192,
+                                                                 "value_pct":  3743.1
+                                                             },
+                                                 "USA":  {
+                                                             "team":  "USA",
+                                                             "elo_rating":  1733.0,
+                                                             "polymarket_price":  0.0115,
+                                                             "elo_probability":  0.0204,
+                                                             "value_pct":  77.0
+                                                         },
+                                                 "Uruguay":  {
+                                                                 "team":  "Uruguay",
+                                                                 "elo_rating":  1892.0,
+                                                                 "polymarket_price":  0.0115,
+                                                                 "elo_probability":  0.0222,
+                                                                 "value_pct":  93.2
+                                                             },
+                                                 "Uzbekistan":  {
+                                                                    "team":  "Uzbekistan",
+                                                                    "elo_rating":  1727.0,
+                                                                    "polymarket_price":  0.0005,
+                                                                    "elo_probability":  0.0203,
+                                                                    "value_pct":  3956.8
+                                                                }
+                                             },
+                       "group_winner":  {
+                                            "A:Mexico":  {
+                                                             "group":  "A",
+                                                             "team":  "Mexico",
+                                                             "polymarket_price":  0.515
+                                                         },
+                                            "A:South Korea":  {
+                                                                  "group":  "A",
+                                                                  "team":  "South Korea",
+                                                                  "polymarket_price":  0.215
+                                                              },
+                                            "A:South Africa":  {
+                                                                   "group":  "A",
+                                                                   "team":  "South Africa",
+                                                                   "polymarket_price":  0.0655
+                                                               },
+                                            "A:Czechia":  {
+                                                              "group":  "A",
+                                                              "team":  "Czechia",
+                                                              "polymarket_price":  0.215
+                                                          },
+                                            "B:Canada":  {
+                                                             "group":  "B",
+                                                             "team":  "Canada",
+                                                             "polymarket_price":  0.295
+                                                         },
+                                            "B:Qatar":  {
+                                                            "group":  "B",
+                                                            "team":  "Qatar",
+                                                            "polymarket_price":  0.025
+                                                        },
+                                            "B:Bosnia and Herzegovina":  {
+                                                                             "group":  "B",
+                                                                             "team":  "Bosnia and Herzegovina",
+                                                                             "polymarket_price":  0.115
+                                                                         },
+                                            "B:Switzerland":  {
+                                                                  "group":  "B",
+                                                                  "team":  "Switzerland",
+                                                                  "polymarket_price":  0.555
+                                                              },
+                                            "C:Scotland":  {
+                                                               "group":  "C",
+                                                               "team":  "Scotland",
+                                                               "polymarket_price":  0.0725
+                                                           },
+                                            "C:Brazil":  {
+                                                             "group":  "C",
+                                                             "team":  "Brazil",
+                                                             "polymarket_price":  0.745
+                                                         },
+                                            "C:Haiti":  {
+                                                            "group":  "C",
+                                                            "team":  "Haiti",
+                                                            "polymarket_price":  0.008
+                                                        },
+                                            "C:Morocco":  {
+                                                              "group":  "C",
+                                                              "team":  "Morocco",
+                                                              "polymarket_price":  0.18
+                                                          },
+                                            "D:Paraguay":  {
+                                                               "group":  "D",
+                                                               "team":  "Paraguay",
+                                                               "polymarket_price":  0.175
+                                                           },
+                                            "D:Turkiye":  {
+                                                              "group":  "D",
+                                                              "team":  "Turkiye",
+                                                              "polymarket_price":  0.345
+                                                          },
+                                            "D:USA":  {
+                                                          "group":  "D",
+                                                          "team":  "USA",
+                                                          "polymarket_price":  0.39
+                                                      },
+                                            "D:Australia":  {
+                                                                "group":  "D",
+                                                                "team":  "Australia",
+                                                                "polymarket_price":  0.092
+                                                            },
+                                            "E:Curacao":  {
+                                                              "group":  "E",
+                                                              "team":  "Curacao",
+                                                              "polymarket_price":  0.0065
+                                                          },
+                                            "E:Ecuador":  {
+                                                              "group":  "E",
+                                                              "team":  "Ecuador",
+                                                              "polymarket_price":  0.21
+                                                          },
+                                            "E:Germany":  {
+                                                              "group":  "E",
+                                                              "team":  "Germany",
+                                                              "polymarket_price":  0.69
+                                                          },
+                                            "E:CÃ´te d\u0027Ivoire":  {
+                                                                          "group":  "E",
+                                                                          "team":  "CÃ´te d\u0027Ivoire",
+                                                                          "polymarket_price":  0.1155
+                                                                      },
+                                            "F:Tunisia":  {
+                                                              "group":  "F",
+                                                              "team":  "Tunisia",
+                                                              "polymarket_price":  0.0605
+                                                          },
+                                            "F:Japan":  {
+                                                            "group":  "F",
+                                                            "team":  "Japan",
+                                                            "polymarket_price":  0.255
+                                                        },
+                                            "F:Netherlands":  {
+                                                                  "group":  "F",
+                                                                  "team":  "Netherlands",
+                                                                  "polymarket_price":  0.555
+                                                              },
+                                            "F:Sweden":  {
+                                                             "group":  "F",
+                                                             "team":  "Sweden",
+                                                             "polymarket_price":  0.135
+                                                         },
+                                            "G:New Zealand":  {
+                                                                  "group":  "G",
+                                                                  "team":  "New Zealand",
+                                                                  "polymarket_price":  0.034
+                                                              },
+                                            "G:Iran":  {
+                                                           "group":  "G",
+                                                           "team":  "Iran",
+                                                           "polymarket_price":  0.1055
+                                                       },
+                                            "G:Egypt":  {
+                                                            "group":  "G",
+                                                            "team":  "Egypt",
+                                                            "polymarket_price":  0.185
+                                                        },
+                                            "G:Belgium":  {
+                                                              "group":  "G",
+                                                              "team":  "Belgium",
+                                                              "polymarket_price":  0.675
+                                                          },
+                                            "H:Cabo Verde":  {
+                                                                 "group":  "H",
+                                                                 "team":  "Cabo Verde",
+                                                                 "polymarket_price":  0.0105
+                                                             },
+                                            "H:Uruguay":  {
+                                                              "group":  "H",
+                                                              "team":  "Uruguay",
+                                                              "polymarket_price":  0.175
+                                                          },
+                                            "H:Spain":  {
+                                                            "group":  "H",
+                                                            "team":  "Spain",
+                                                            "polymarket_price":  0.795
+                                                        },
+                                            "H:Saudi Arabia":  {
+                                                                   "group":  "H",
+                                                                   "team":  "Saudi Arabia",
+                                                                   "polymarket_price":  0.027
+                                                               },
+                                            "I:Senegal":  {
+                                                              "group":  "I",
+                                                              "team":  "Senegal",
+                                                              "polymarket_price":  0.095
+                                                          },
+                                            "I:Norway":  {
+                                                             "group":  "I",
+                                                             "team":  "Norway",
+                                                             "polymarket_price":  0.225
+                                                         },
+                                            "I:France":  {
+                                                             "group":  "I",
+                                                             "team":  "France",
+                                                             "polymarket_price":  0.675
+                                                         },
+                                            "I:Iraq":  {
+                                                           "group":  "I",
+                                                           "team":  "Iraq",
+                                                           "polymarket_price":  0.011
+                                                       },
+                                            "J:Algeria":  {
+                                                              "group":  "J",
+                                                              "team":  "Algeria",
+                                                              "polymarket_price":  0.0815
+                                                          },
+                                            "J:Jordan":  {
+                                                             "group":  "J",
+                                                             "team":  "Jordan",
+                                                             "polymarket_price":  0.013
+                                                         },
+                                            "J:Argentina":  {
+                                                                "group":  "J",
+                                                                "team":  "Argentina",
+                                                                "polymarket_price":  0.725
+                                                            },
+                                            "J:Austria":  {
+                                                              "group":  "J",
+                                                              "team":  "Austria",
+                                                              "polymarket_price":  0.185
+                                                          },
+                                            "K:Colombia":  {
+                                                               "group":  "K",
+                                                               "team":  "Colombia",
+                                                               "polymarket_price":  0.285
+                                                           },
+                                            "K:the Democratic Republic of Congo":  {
+                                                                                       "group":  "K",
+                                                                                       "team":  "the Democratic Republic of Congo",
+                                                                                       "polymarket_price":  0.045
+                                                                                   },
+                                            "K:Portugal":  {
+                                                               "group":  "K",
+                                                               "team":  "Portugal",
+                                                               "polymarket_price":  0.66
+                                                           },
+                                            "K:Uzbekistan":  {
+                                                                 "group":  "K",
+                                                                 "team":  "Uzbekistan",
+                                                                 "polymarket_price":  0.0255
+                                                             },
+                                            "L:England":  {
+                                                              "group":  "L",
+                                                              "team":  "England",
+                                                              "polymarket_price":  0.705
+                                                          },
+                                            "L:Ghana":  {
+                                                            "group":  "L",
+                                                            "team":  "Ghana",
+                                                            "polymarket_price":  0.0635
+                                                        },
+                                            "L:Croatia":  {
+                                                              "group":  "L",
+                                                              "team":  "Croatia",
+                                                              "polymarket_price":  0.225
+                                                          },
+                                            "L:Panama":  {
+                                                             "group":  "L",
+                                                             "team":  "Panama",
+                                                             "polymarket_price":  0.0215
+                                                         }
+                                        }
+                   }
+}
